@@ -29,43 +29,44 @@ function Banner2() {
   return (
     <div className="hero2">
       <div className="left-sidebar">
-        <div className="swiper-pagination121" />
+        {/* <div className="swiper-pagination121" /> */}
       </div>
-      <Swiper {...bannerSlider} className="swiper hero2-slider">
+      {/* <Swiper {...bannerSlider} className="swiper hero2-slider"> */}
+      <div className="swiper hero2-slider">
         <div className="swiper-wrapper">
-          <SwiperSlide className="swiper-slide">
-            <div className="hero-wrapper">
-              <div className="container">
-                <div className="row align-items-center">
-                  <div className="col-lg-6">
-                    <div className="banner-content">
-                      <h6>your pet our family</h6>
-                      <h1>
-                        Your <span>pet</span> is part of our family.
-                      </h1>
-                      <div className="btn-group">
-                        <Link legacyBehavior href="/contact">
-                          <a className="primary-btn2">Make a Reservation</a>
-                        </Link>
-                        <Link legacyBehavior href="/about">
-                          <a className="primary-btn3">About More</a>
-                        </Link>
-                      </div>
+          {/* <SwiperSlide className="swiper-slide"> */}
+          <div className="hero-wrapper">
+            <div className="container">
+              <div className="row align-items-center">
+                <div className="col-lg-6">
+                  <div className="banner-content">
+                    <h6>your pet our family</h6>
+                    <h1>
+                      Your <span>pet</span> is part of our family.
+                    </h1>
+                    <div className="btn-group">
+                      <Link legacyBehavior href="/contact">
+                        <a className="primary-btn2">Make a Reservation</a>
+                      </Link>
+                      <Link legacyBehavior href="/about">
+                        <a className="primary-btn3">About More</a>
+                      </Link>
                     </div>
                   </div>
-                  <div className="col-lg-6 d-flex justify-content-center">
-                    <div className="hero-img">
-                      <img
-                        className="img-fluid"
-                        src="assets/images/bg/hero2-img.png"
-                        alt=""
-                      />
-                    </div>
+                </div>
+                <div className="col-lg-6 d-flex justify-content-center">
+                  <div className="hero-img">
+                    <img
+                      className="img-fluid"
+                      src="assets/images/bg/hero2-img.png"
+                      alt=""
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          </SwiperSlide>
+          </div>
+          {/* </SwiperSlide>
           <SwiperSlide className="swiper-slide">
             <div className="hero-wrapper">
               <div className="container">
@@ -98,9 +99,10 @@ function Banner2() {
                 </div>
               </div>
             </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </div>
-      </Swiper>
+      </div>
+      {/* </Swiper> */}
       <div className="right-sidebar">
         <div className="social-area">
           <ul>
