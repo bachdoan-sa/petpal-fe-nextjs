@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useReducer, useRef } from "react";
-import { Dropdown } from "bootstrap";
 /*---------Using reducer mange the active or inactive menu----------*/
 const initialState = {
     activeMenu: "",
