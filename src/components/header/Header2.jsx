@@ -57,13 +57,14 @@ function Header2() {
       <div className="container-fluid d-flex justify-content-between align-items-center">
         <div className="header-logo">
           <Link legacyBehavior href="/">
-            <a>
+            {/* <a>
               <img
                 alt="image"
                 className="img-fluid"
                 src="assets/images/header2-logo.svg"
               />
-            </a>
+            </a> */}
+            <h4>Petpal</h4>
           </Link>
         </div>
         <div
@@ -74,9 +75,10 @@ function Header2() {
           <div className="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
             <div className="mobile-logo-wrap">
               <Link legacyBehavior href="/">
-                <a>
+                {/* <a>
                   <img alt="image" src="assets/images/header2-logo.svg" />
-                </a>
+                </a> */}
+                <h4>Petpal</h4>
               </Link>
             </div>
             <div className="menu-close-btn">
@@ -89,39 +91,12 @@ function Header2() {
             </div>
           </div>
           <ul className="menu-list">
-            <li className="menu-item-has-children active">
-              <Link href="#" legacyBehavior>
-                <a className="drop-down">Home</a>
+            <li>
+              <Link legacyBehavior href="/">
+                <a>
+                  Home
+                </a>
               </Link>
-              <i
-                className="bi bi-plus dropdown-icon"
-                onClick={() => dispatch({ type: "home" })}
-              />
-              <ul
-                className={
-                  state.activeMenu === "home"
-                    ? "sub-menu  d-block"
-                    : "sub-menu d-xl-block d-none"
-                }
-              >
-                <li>
-                  <Link className="active" legacyBehavior href="/">
-                    <a>Home One</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link legacyBehavior href="/index2">
-                    <a className={currentRoute === "/index2" ? "active" : ""}>
-                      Home Two
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link legacyBehavior href="/index3">
-                    <a>Home Three</a>
-                  </Link>
-                </li>
-              </ul>
             </li>
             <li>
               <Link legacyBehavior href="/about">
@@ -165,7 +140,7 @@ function Header2() {
                 </li>
               </ul>
             </li>
-            <li className="menu-item-has-children">
+            {/* <li className="menu-item-has-children">
               <Link href="#" legacyBehavior>
                 <a className="drop-down">Pages</a>
               </Link>
@@ -220,8 +195,8 @@ function Header2() {
                   </Link>
                 </li>
               </ul>
-            </li>
-            <li className="menu-item-has-children">
+            </li> */}
+            {/* <li className="menu-item-has-children">
               <Link legacyBehavior href="#">
                 <a>Shop</a>
               </Link>
@@ -257,8 +232,8 @@ function Header2() {
                   </Link>
                 </li>
               </ul>
-            </li>
-            <li className="menu-item-has-children">
+            </li> */}
+            {/* <li className="menu-item-has-children">
               <Link legacyBehavior href="#">
                 <a>Blog</a>
               </Link>
@@ -294,7 +269,7 @@ function Header2() {
                   </Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <li>
               <Link legacyBehavior href="/contact">
                 <a>Contact</a>
@@ -302,16 +277,16 @@ function Header2() {
             </li>
           </ul>
           <div className="for-mobile-menu d-lg-none d-block">
-            <div className="hotline mb-5">
+            {/* <div className="hotline mb-5">
               <div className="hotline-info">
                 <span>Click To Call</span>
                 <h6>
                   <a href="tel:+1(541)754-3010">+1 (541) 754-3010</a>
                 </h6>
               </div>
-            </div>
+            </div> */}
             <ul className="social-link mb-5">
-              <li>
+              {/* <li>
                 <Link legacyBehavior href="/">
                   <svg
                     width={14}
@@ -322,8 +297,8 @@ function Header2() {
                     <path d="M12.4147 1.51371C11.0037 0.302997 8.92573 0.534835 7.61736 1.87434L7.12993 2.38954L6.61684 1.87434C5.33413 0.534835 3.23047 0.302997 1.81948 1.51371C0.203258 2.90473 0.126295 5.37767 1.56294 6.87174L6.53988 12.0237C6.84773 12.3586 7.38647 12.3586 7.69433 12.0237L12.6713 6.87174C14.1079 5.37767 14.0309 2.90473 12.4147 1.51371Z" />
                   </svg>
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link legacyBehavior href="/">
                   <a>
                     <svg
@@ -336,7 +311,7 @@ function Header2() {
                     </svg>
                   </a>
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link legacyBehavior href="/">
                   <a>
@@ -367,7 +342,7 @@ function Header2() {
         </div>
         <div className="nav-right d-flex jsutify-content-end align-items-center">
           <ul>
-            <li className="search-btn">
+            {/* <li className="search-btn">
               <a>
                 <svg
                   width={15}
@@ -396,8 +371,8 @@ function Header2() {
                   </svg>
                 </button>
               </form>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <a href="#">
                 <svg
                   width={14}
@@ -408,8 +383,8 @@ function Header2() {
                   <path d="M12.4147 1.51371C11.0037 0.302997 8.92573 0.534835 7.61736 1.87434L7.12993 2.38954L6.61684 1.87434C5.33413 0.534835 3.23047 0.302997 1.81948 1.51371C0.203258 2.90473 0.126295 5.37767 1.56294 6.87174L6.53988 12.0237C6.84773 12.3586 7.38647 12.3586 7.69433 12.0237L12.6713 6.87174C14.1079 5.37767 14.0309 2.90473 12.4147 1.51371Z" />
                 </svg>
               </a>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link legacyBehavior href="/cart">
                 <a>
                   <svg
@@ -422,7 +397,7 @@ function Header2() {
                   </svg>
                 </a>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link legacyBehavior href="/login">
                 <a>

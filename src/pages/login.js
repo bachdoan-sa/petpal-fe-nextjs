@@ -7,8 +7,8 @@ function loginPage() {
   return (
     <>
       <Layout>
-        <Breadcrumb pageName="Login" pageTitle="Login" />
-        <div className="login-section pt-120 pb-120">
+        {/* <Breadcrumb pageName="Login" pageTitle="Login" /> */}
+        <div className="login-section pt-30 pb-120">
           <div className="container">
             <div className="row d-flex justify-content-center g-4">
               <div className="col-xl-6 col-lg-8 col-md-10">
