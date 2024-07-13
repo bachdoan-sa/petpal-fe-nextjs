@@ -5,9 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import { useMediaQuery } from 'react-responsive';
 
-import Accordion from 'react-bootstrap/Accordion';
-import AccordionContext from 'react-bootstrap/AccordionContext';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
 // import simple bar scrolling used for notification item scrolling
 import SimpleBar from 'simplebar-react';
@@ -19,47 +16,23 @@ import { DashboardMenu } from '../routes/DashboardRoutes';
 function NavbarVertical(props) {
 	const location = usePathname();
 
-	function CustomToggle({ children, eventKey, icon }) {
-		const { activeEventKey } = useContext(AccordionContext);
-		const decoratedOnClick = useAccordionButton(eventKey, () =>
-			console.log('totally custom!')
-		);
-		const isCurrentEventKey = activeEventKey === eventKey;
+	function CustomToggle({ children, icon , collapseKey}) {
 		return (
 			<li className="nav-item">
 				<Link
 					href="#"
 					className="nav-link "
-					onClick={decoratedOnClick}
 					data-bs-toggle="collapse"
-					data-bs-target="#navDashboard"
-					aria-expanded={isCurrentEventKey ? true : false}
-					aria-controls="navDashboard">
+					data-bs-target={collapseKey ? "#"+collapseKey : "#navDashboard"}
+					aria-expanded= "false"
+					aria-controls={collapseKey ? collapseKey : "navDashboard"}>
 					{icon ? <i className={`nav-icon fe fe-${icon} me-2`}></i> : ''}{' '}
 					{children}
 				</Link>
 			</li>
 		);
 	};
-	function CustomToggleLevel2({ children, eventKey, icon }) {
-		const { activeEventKey } = useContext(AccordionContext);
-		const decoratedOnClick = useAccordionButton(eventKey, () =>
-			console.log('totally custom!')
-		);
-		const isCurrentEventKey = activeEventKey === eventKey;
-		return (
-			(<Link
-				href="#"
-				className="nav-link "
-				onClick={decoratedOnClick}
-				data-bs-toggle="collapse"
-				data-bs-target="#navDashboard"
-				aria-expanded={isCurrentEventKey ? true : false}
-				aria-controls="navDashboard">
-				{children}
-			</Link>)
-		);
-	};
+	
 
 	const generateLink = (item) => {
 		return (
@@ -99,7 +72,7 @@ function NavbarVertical(props) {
 					</Link>
 				</div>
 				{/* Dashboard Menu */}
-				<Accordion defaultActiveKey="0" as="ul" className="navbar-nav flex-column">
+				<ul className="navbar-nav flex-column">
 					{DashboardMenu.map(function (menu, index) {
 						if (menu.grouptitle) {
 							return (
@@ -114,7 +87,7 @@ function NavbarVertical(props) {
 								return (
 									<Fragment key={index}>
 										{/* main menu / root menu level / root items */}
-										<CustomToggle eventKey={index} icon={menu.icon}>
+										<CustomToggle icon={menu.icon} collapseKey={"key"+menu.id.slice(0,8)}>
 											{menu.title}
 											{menu.badge ? (
 												<span className={(menu.badgecolor ? menu.badgecolor : 'badge-primary') + " ms-1 badge"}>
@@ -122,87 +95,20 @@ function NavbarVertical(props) {
 												</span>
 											) : ('')}
 										</CustomToggle>
-										<Accordion.Collapse eventKey={index} as="li" bsPrefix="nav-item">
+										<div id={"key"+menu.id.slice(0,8)} className="nav-item collapse">
 											<ul className="nav flex-column">
 												{menu.children.map(function (menuLevel1Item, menuLevel1Index) {
-													if (menuLevel1Item.children) {
-														return (
-															<li className="nav-item" key={menuLevel1Index}>
-																{/* first level menu started  */}
-																<Accordion defaultActiveKey="0" className="navbar-nav flex-column">
-																	<CustomToggleLevel2 eventKey={0}>
-																		{menuLevel1Item.title}
-																		{menuLevel1Item.badge ? (
-																			<span className={
-																				(menuLevel1Item.badgecolor ? menuLevel1Item.badgecolor : 'badge-primary') + " ms-1 badge "
-																			}>
-																				{menuLevel1Item.badge}
-																			</span>
-																		) : ('')}
-																	</CustomToggleLevel2>
-																	<Accordion.Collapse eventKey={0} bsPrefix="nav-item">
-																		<ul className="nav flex-column">
-																			{/* second level menu started  */}
-																			{menuLevel1Item.children.map(function (menuLevel2Item, menuLevel2Index) {
-																				if (menuLevel2Item.children) {
-																					return (
-																						<li className="nav-item" key={menuLevel2Index}>
-																							{/* second level accordion menu started  */}
-																							<Accordion defaultActiveKey="0" className="navbar-nav flex-column">
-																								<CustomToggleLevel2 eventKey={0}>
-																									{menuLevel2Item.title}
-																									{menuLevel2Item.badge ? (
-																										<span className={
-																											(menuLevel2Item.badgecolor ? menuLevel2Item.badgecolor : 'badge-primary')+ " ms-1 badge"}>
-																											{menuLevel2Item.badge}
-																										</span>
-																									) : ('')}
-																								</CustomToggleLevel2>
-																								<Accordion.Collapse eventKey={0} bsPrefix="nav-item">
-																									<ul className="nav flex-column">
-																										{/* third level menu started  */}
-																										{menuLevel2Item.children.map(function (menuLevel3Item, menuLevel3Index) {
-																											return (
-																												<li key={menuLevel3Index} className="nav-item">
-																													{generateLink(menuLevel3Item)}
-																												</li>
-																											);
-																										})}
-																										{/* end of third level menu  */}
-																									</ul>
-																								</Accordion.Collapse>
-																							</Accordion>
-																							{/* end of second level accordion */}
-																						</li>
-																					);
-																				} else {
-																					return (
-																						<li key={menuLevel2Index} className="nav-item">
-																							{generateLink(menuLevel2Item)}
-																						</li>
-																					);
-																				}
+													return (
+														<li className="nav-item" key={menuLevel1Index}>
+															{/* first level menu items */}
+															{generateLink(menuLevel1Item)}
+															{/* end of first level menu items */}
+														</li>
+													);
 
-																			})}
-																			{/* end of second level menu  */}
-																		</ul>
-																	</Accordion.Collapse>
-																</Accordion>
-																{/* end of first level menu */}
-															</li>
-														);
-													} else {
-														return (
-															<li className="nav-item" key={menuLevel1Index}>
-																{/* first level menu items */}
-																{generateLink(menuLevel1Item)}
-																{/* end of first level menu items */}
-															</li>
-														);
-													}
 												})}
 											</ul>
-										</Accordion.Collapse>
+										</div>
 										{/* end of main menu / menu level 1 / root items */}
 									</Fragment>
 								);
@@ -227,7 +133,7 @@ function NavbarVertical(props) {
 							}
 						}
 					})}
-				</Accordion>
+				</ul>
 				{/* end of Dashboard Menu */}
 
 			</SimpleBar>
