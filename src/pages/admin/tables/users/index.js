@@ -1,19 +1,21 @@
 'use client'
 import React from "react";
 import Layout from "../../../../admin-components/Layout.jsx";
-import Link from 'next/link';
 import { lusitana } from "../../../../fonts/fonts.ts";
 import Image from 'next/image';
-import data from '../../../../data/tabledatatest.json';
 import { CreateButton, UpdateButton, DeleteButton } from "../../../../admin-components/table/button.jsx";
 import SearchBar from "../../../../admin-components/search.jsx";
-import Pagination from "../../../../admin-components/table/pagination.tsx";
+import Pagination from "../../../../admin-components/table/pagination.jsx";
+import { getDataTestTable ,getDataTestPages } from "../../../../data/apiService.js";
+import { useSearchParams } from 'next/navigation'
 
-export default function Page() {
-    // const query = searchParams?.query || '';
-    // const currentPage = Number(searchParams?.page) || 1;
-    const totalPages = 1;// await fetchInvoicesPages(query);
-    const users = data;
+export default function Page() 
+{
+    const searchParams = useSearchParams();
+    const query = searchParams.get('query');
+    const currentPage = Number(searchParams.get('page')) || 1;
+    const totalPages = getDataTestPages();// await fetchInvoicesPages(query);
+    const users = getDataTestTable(query,currentPage);
     return (
         <Layout>
             <div className="d-flex w-100 align-items-center justify-content-between">
@@ -27,7 +29,7 @@ export default function Page() {
                 <div className="inline-block container container-fuid align-items-center d-flex justify-content-center p-0">
                     <div className="p-2 md:pt-0 w-100 bg-gray-200" style={{ borderRadius: "10px" }}> {/* cái này để đồng bộ với cái border table cho đẹp*/}
                         <div className="d-none md:block">
-                            {data?.map((invoice) => (
+                            {users.map((invoice) => (
                                 <div key={invoice.id} className="mb-2 w-100 rounded-md bg-white p-4">
                                     <div className="d-flex justify-content-between pb-4">
                                         <div className="d-flex items-center">
@@ -70,7 +72,7 @@ export default function Page() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
-                                {data?.map((invoice) => (
+                                {users.map((invoice) => (
                                     <tr key={invoice.id} className="text-sm">
                                         <td className="p-2 text-left">
                                             <div className="d-flex items-center">
