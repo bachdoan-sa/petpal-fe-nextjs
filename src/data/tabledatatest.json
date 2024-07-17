@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "customer_id": "string",
+      "image_url": "/assets/images/blog/blog-author.png",
+      "name": "Delba de Oliveira",
+      "email": "25.00",
+      "amount": "30.00",
+      "date": "30",
+      "status": "paid"
+    },
+    {
+      "id": 1,
+      "customer_id": "string1",
+      "image_url": "/assets/images/blog/blog-author.png",
+      "name": "Delba de Oliveira",
+      "email": "25.00",
+      "amount": "30.00",
+      "date": "30",
+      "status": "paid"
+    }
+  ]
+  

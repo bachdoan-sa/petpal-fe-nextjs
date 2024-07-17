@@ -3,7 +3,7 @@ import { Menu } from 'react-feather'; //Icon
 import Link from 'next/link';
 
 // import sub components
-import QuickMenu from '../layouts/QuickMenu';
+import QuickMenu from './QuickMenu';
 
 function NavbarTop (props) {
 	return (

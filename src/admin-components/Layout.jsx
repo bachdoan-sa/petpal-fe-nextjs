@@ -32,7 +32,10 @@ export default function DashboardLayout({ children }) {
 						}}
 					/>
 				</div>
-				{children}
+				<div className="container-fluid px-6 py-4">
+					{children}
+				</div>
+
 			</div>
 		</div>
 	)

@@ -1,11 +1,9 @@
 'use client'
 // import node module libraries
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext} from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import { useMediaQuery } from 'react-responsive';
-
-
 // import simple bar scrolling used for notification item scrolling
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
@@ -13,10 +11,10 @@ import 'simplebar-react/dist/simplebar.min.css';
 // import routes file
 import { DashboardMenu } from '../routes/DashboardRoutes';
 
+
 function NavbarVertical(props) {
 	const location = usePathname();
-
-	function CustomToggle({ children, icon , collapseKey}) {
+	const CustomToggle =({ children, icon , collapseKey}) =>{
 		return (
 			<li className="nav-item">
 				<Link
@@ -68,7 +66,7 @@ function NavbarVertical(props) {
 			<SimpleBar style={{ maxHeight: '100vh' }}>
 				<div className="nav-scroller">
 					<Link href="/" className="navbar-brand">
-						<img src="assets/images/header1-logo.svg" alt="" />
+						<img src={"/assets/images/header1-logo.svg"} alt=""/>
 					</Link>
 				</div>
 				{/* Dashboard Menu */}
@@ -76,18 +74,18 @@ function NavbarVertical(props) {
 					{DashboardMenu.map(function (menu, index) {
 						if (menu.grouptitle) {
 							return (
-								<div className="nav-item" key={index}>
+								<nav className="nav-item" key={index}>
 									{/* group title item */}
 									<div className="navbar-heading">{menu.title}</div>
 									{/* end of group title item */}
-								</div>
+								</nav>
 							);
 						} else {
 							if (menu.children) {
 								return (
 									<Fragment key={index}>
 										{/* main menu / root menu level / root items */}
-										<CustomToggle icon={menu.icon} collapseKey={"key"+menu.id.slice(0,8)}>
+										<CustomToggle icon={menu.icon} collapseKey={"key"+menu.id}>
 											{menu.title}
 											{menu.badge ? (
 												<span className={(menu.badgecolor ? menu.badgecolor : 'badge-primary') + " ms-1 badge"}>
@@ -95,7 +93,7 @@ function NavbarVertical(props) {
 												</span>
 											) : ('')}
 										</CustomToggle>
-										<div id={"key"+menu.id.slice(0,8)} className="nav-item collapse">
+										<nav id={"key"+menu.id} className="nav-item collapse">
 											<ul className="nav flex-column">
 												{menu.children.map(function (menuLevel1Item, menuLevel1Index) {
 													return (
@@ -108,13 +106,13 @@ function NavbarVertical(props) {
 
 												})}
 											</ul>
-										</div>
+										</nav>
 										{/* end of main menu / menu level 1 / root items */}
 									</Fragment>
 								);
 							} else {
 								return (
-									<div className="nav-item" key={index}>
+									<nav className="nav-item" key={index}>
 										{/* menu item without any childern items like Documentation and Changelog items*/}
 										<Link href={menu.link} className={`nav-link ${location === menu.link ? 'active' : ''} ${menu.title === 'Download' ? 'bg-primary text-white' : ''}`}>
 											{typeof menu.icon === 'string' ? (
@@ -128,7 +126,7 @@ function NavbarVertical(props) {
 											) : ('')}
 										</Link>
 										{/* end of menu item without any childern items */}
-									</div>
+									</nav>
 								);
 							}
 						}

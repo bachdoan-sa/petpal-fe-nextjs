@@ -2,12 +2,11 @@
 import React from "react";
 import Layout from "../../admin-components/Layout";
 import Link from 'next/link';
-import { Col, Row, Container, Image } from 'react-bootstrap';
 
 export default function admin() {
     return (
         <Layout>
-            <div className="container-fluid px-6 py-4">
+            
                 <div className="row">
                     <div className="col-12">
                         <div className="text-center mb-7">
@@ -65,7 +64,7 @@ export default function admin() {
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </Layout>
     );
 }

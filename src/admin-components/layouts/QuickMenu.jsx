@@ -76,7 +76,7 @@ function QuickMenu() {
                 <div className="ms-2" role="presentation">
                     <span className="dropdown" >
                         <button id="dropdownUser" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ borderRadius: "50%" }}>
-                            <img alt="avatar" src='assets/images/blog/blog-author.png' className="rounded-circle avatar avatar-md avatar-indicators avatar-online" />
+                            <img alt="avatar" src='/assets/images/blog/blog-author.png' className="rounded-circle avatar avatar-md avatar-indicators avatar-online" />
                         </button>
                         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser" show>
                             <li className="dropdown-item px-4 pb-0 pt-2" role="presentation">
