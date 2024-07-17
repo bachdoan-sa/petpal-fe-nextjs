@@ -28,13 +28,9 @@ function Banner2() {
   }, []);
   return (
     <div className="hero2">
-      <div className="left-sidebar">
-        {/* <div className="swiper-pagination121" /> */}
-      </div>
-      {/* <Swiper {...bannerSlider} className="swiper hero2-slider"> */}
+      <div className="left-sidebar"></div>
       <div className="swiper hero2-slider">
         <div className="swiper-wrapper">
-          {/* <SwiperSlide className="swiper-slide"> */}
           <div className="hero-wrapper">
             <div className="container">
               <div className="row align-items-center">
@@ -45,8 +41,8 @@ function Banner2() {
                       Your <span>pet</span> is part of our family.
                     </h1>
                     <div className="btn-group">
-                      <Link legacyBehavior href="/contact">
-                        <a className="primary-btn2">Make a Reservation</a>
+                      <Link legacyBehavior href="/map">
+                        <a className="primary-btn2">Find a Pet Care Center</a>
                       </Link>
                       <Link legacyBehavior href="/about">
                         <a className="primary-btn3">About More</a>
@@ -58,7 +54,7 @@ function Banner2() {
                   <div className="hero-img">
                     <img
                       className="img-fluid"
-                      src="assets/images/bg/hero2-img.png"
+                      src="assets/images/bg/banner-02.png"
                       alt=""
                     />
                   </div>
@@ -66,43 +62,9 @@ function Banner2() {
               </div>
             </div>
           </div>
-          {/* </SwiperSlide>
-          <SwiperSlide className="swiper-slide">
-            <div className="hero-wrapper">
-              <div className="container">
-                <div className="row align-items-center">
-                  <div className="col-lg-6">
-                    <div className="banner-content">
-                      <h6>your pet our family</h6>
-                      <h1>
-                        Your <span>cat</span> is part of our family.
-                      </h1>
-                      <div className="btn-group">
-                        <Link legacyBehavior href="/contact">
-                          <a className="primary-btn2">Make a Reservation</a>
-                        </Link>
-                        <Link legacyBehavior href="/about">
-                          <a className="primary-btn3">About More</a>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-6 d-flex justify-content-center">
-                    <div className="hero-img">
-                      <img
-                        className="img-fluid"
-                        src="assets/images/bg/hero2-img-cat.png"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide> */}
         </div>
       </div>
-      {/* </Swiper> */}
+
       <div className="right-sidebar">
         <div className="social-area">
           <ul>
