@@ -7,8 +7,8 @@ function signUpPage() {
   return (
     <>
       <Layout>
-        <Breadcrumb pageName="Sign-Up" pageTitle="Sign-Up" />
-        <div className="signup-section pt-120 pb-120">
+        {/* <Breadcrumb pageName="Sign-Up" pageTitle="Sign-Up" /> */}
+        <div className="signup-section pt-30 pb-120">
           <div className="container">
             <div className="row d-flex justify-content-center">
               <div className="col-xl-6 col-lg-8 col-md-10">

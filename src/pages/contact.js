@@ -5,10 +5,10 @@ import Layout from "../layout/Layout";
 function Contact() {
   return (
     <Layout>
-      <Breadcrumb pageName="Contact Us" pageTitle="Contact Us" />
+      {/* <Breadcrumb pageName="Contact Us" pageTitle="Contact Us" /> */}
       <>
         <div>
-          <div className="contact-pages pt-120 mb-120">
+          <div className="contact-pages pt-30 mb-120">
             <div className="container">
               <div className="row align-items-center g-lg-4 gy-5">
                 <div className="col-lg-5">

@@ -60,7 +60,9 @@ function loginPage() {
                         </div>
                       </div>
                     </div>
-                    <button className="account-btn">Log in</button>
+                    <Link legacyBehavior href="/profile">
+                      <button className="account-btn">Login in</button>
+                    </Link>
                   </form>
                   <div className="alternate-signup-box">
                     <h6>or signup WITH</h6>
