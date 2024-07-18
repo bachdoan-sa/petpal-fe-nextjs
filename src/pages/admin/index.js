@@ -1,4 +1,3 @@
-'use client'
 import React from "react";
 import Layout from "../../admin-components/Layout";
 import Link from 'next/link';
@@ -25,9 +24,7 @@ export default function admin() {
                             </div>
                         </Link>
                     </div>
-                </div>
-                
-            
+                </div>   
         </Layout>
     );
 }

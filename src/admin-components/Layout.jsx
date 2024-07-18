@@ -1,4 +1,3 @@
-'use client'
 // import node module libraries
 import { useState } from 'react';
 
