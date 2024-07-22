@@ -4,7 +4,8 @@ import MenuComponent from "../components/menu/Menu";
 import UserInfo from "../components/user/UserInfo";
 import PetInfo from "../components/user/PetInfo";
 
-function AccountUser() {
+function AccountUser(sessionToken) {
+  console.log(sessionToken);
   const menuItems = [
     {
       name: "Pet",
@@ -28,3 +29,7 @@ function AccountUser() {
 }
 
 export default AccountUser;
+
+export function getServerSideProps({ req, res }) {
+  return { props: { sessionToken: req.cookies.sessionToken || "" } }
+}

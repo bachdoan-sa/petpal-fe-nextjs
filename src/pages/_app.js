@@ -1,10 +1,14 @@
 import Head from "next/head";
 import { useEffect } from "react";
 import { useRouter } from "next/router.js";
+
 /*all css import*/
 import "../../styles/main.css";
-import "../../styles/theme.scss";
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  if(router.pathname.includes("/admin")){
+    import("../../styles/theme.scss");
+  }
   useEffect(() => {
     import("../../public/assets/js/bootstrap.bundle.min.js");
   });

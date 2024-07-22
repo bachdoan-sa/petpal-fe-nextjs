@@ -1,9 +1,32 @@
+
 import Link from "next/link";
 import React from "react";
-import Breadcrumb from "../components/breadcrumb/Breadcrumb";
 import Layout from "../layout/Layout";
-
+import loginRequest from "../lib/apiService";
+import authApiRequest from "../apiRequests/auth"
 function loginPage() {
+  
+  async function handleSubmit(event) {
+    event.preventDefault()
+    
+    const formData = new FormData(event.currentTarget);
+    const username = formData.get('username');
+    const password = formData.get('password');
+
+    const body = JSON.stringify({ username, password });
+    
+    try {
+      const result = await loginRequest(body);
+      //setcookie
+      const resultFromNextServer = await authApiRequest.auth(result.data.data);
+      
+    } catch (error) {
+     
+      console.error('Error fetching data:', error);
+    }
+
+    
+  }
   return (
     <>
       <Layout>
@@ -26,12 +49,12 @@ function loginPage() {
                       </Link>
                     </p>
                   </div>
-                  <form className="w-100">
+                  <form className="w-100" onSubmit={handleSubmit}>
                     <div className="row">
                       <div className="col-12">
                         <div className="form-inner">
                           <label>Enter Your Email *</label>
-                          <input type="email" placeholder="Enter Your Email" />
+                          <input type="text" name="username" placeholder="Enter Your Email" />
                         </div>
                       </div>
                       <div className="col-12">
@@ -60,9 +83,9 @@ function loginPage() {
                         </div>
                       </div>
                     </div>
-                    <Link legacyBehavior href="/profile">
-                      <button className="account-btn">Login in</button>
-                    </Link>
+                    <a>
+                      <button className="account-btn" type="submit">Login in</button>
+                    </a>
                   </form>
                   <div className="alternate-signup-box">
                     <h6>or signup WITH</h6>
