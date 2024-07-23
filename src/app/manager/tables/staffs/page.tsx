@@ -1,4 +1,4 @@
-'use client'
+
 import React, { Suspense } from "react";
 import { lusitana } from "@/src/fonts/fonts";
 
@@ -13,33 +13,33 @@ export default function ManagerManageStaffs() {
         { header: "First", accessor: "first" },
         { header: "Last", accessor: "last" },
         { header: "Handle", accessor: "handle" },
-      ];
-    
-      const data = [
+    ];
+
+    const data = [
         { first: "Mark", last: "Otto", handle: "@mdo" },
         { first: "Jacob", last: "Thornton", handle: "@fat" },
         { first: "Larry the Bird", last: "", handle: "@twitter" },
-      ];
+    ];
     // const query = searchParams?.query || '';
     // const currentPage = Number(searchParams?.page) || 1;
     const totalPages = 1;// await fetchInvoicesPages(query);
     const users = data;
     return (
         <> {/*DashboardLayot t để ra ngoài phần layout của manager rồi - bac*/}
-            {/* <div className="d-flex w-100 align-items-center justify-content-between">
+            <div className="d-flex w-100 align-items-center justify-content-between">
                 <h2 className={`${lusitana.className}`}>Staffs</h2>
             </div>
             <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
-                <Suspense>
-                <SearchBar placeholder="Search invoices..." />
+                <Suspense >
+                    <SearchBar placeholder="Search invoices..." />
                 </Suspense>
                 <CreateButton link={"#"} />
             </div>
             <div className="mt-6 d-flex flex-wrap">
                 <div className="inline-block container container-fuid align-items-center d-flex justify-content-center p-0">
-                    <div className="p-2 md:pt-0 w-100 bg-gray-200" style={{ borderRadius: "10px" }}> 
+                    <div className="p-2 md:pt-0 w-100 bg-gray-200" style={{ borderRadius: "10px" }}>
                         <div className="d-none md:block">
-                            { {data?.map((invoice) => (
+                            {/* { {data?.map((invoice) => (
                                 <div key={invoice.id} className="mb-2 w-100 rounded-md bg-white p-4">
                                     <div className="d-flex justify-content-between pb-4">
                                         <div className="d-flex items-center">
@@ -68,7 +68,7 @@ export default function ManagerManageStaffs() {
                                         </div>
                                     </div>
                                 </div>
-                            ))} }
+                            ))} } */}
                         </div>
                         <table className="table table-hover table-sm">
                             <thead>
@@ -82,7 +82,7 @@ export default function ManagerManageStaffs() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
-                                {data?.map((invoice) => (
+                                {/* {data?.map((invoice) => (
                                     <tr key={invoice.id} className="text-sm">
                                         <td className="p-2 text-left">
                                             <div className="d-flex items-center">
@@ -107,7 +107,7 @@ export default function ManagerManageStaffs() {
 
                                         </td>
                                     </tr>
-                                ))}
+                                ))} */}
                             </tbody>
                         </table>
                         <TableComponent columns={columns} data={data} />
@@ -115,8 +115,10 @@ export default function ManagerManageStaffs() {
                 </div>
             </div>
             <div className="mt-5 d-flex w-100 justify-content-center">
-                <Pagination totalPages={totalPages} />
-            </div> */}
+                <Suspense >
+                    <Pagination totalPages={totalPages} />
+                </Suspense>
+            </div>
         </>
     );
 }

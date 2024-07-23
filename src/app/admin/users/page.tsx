@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Layout from "@/src/components/admin/Layout.jsx";
 import { lusitana } from "@/src/fonts/fonts";
 import { CreateButton } from "@/src/components/admin/table/button.jsx";
@@ -24,14 +24,18 @@ export default function AdminManageUsers({
                 <h2 className={`${lusitana.className}`}>Users</h2>
             </div>
             <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
-                <SearchBar placeholder="Search invoices..." />
-                <CreateButton link={""}/>
+                <Suspense>
+                    <SearchBar placeholder="Search invoices..." />
+                </Suspense>
+                <CreateButton link={""} />
             </div>
             <div className="mt-6 d-flex flex-wrap">
                 <UserTable query={query} currentPage={currentPage} />
             </div>
             <div className="mt-5 d-flex w-100 justify-content-center">
-                <Pagination totalPages={totalPages} />
+                <Suspense>
+                    <Pagination totalPages={totalPages} />
+                </Suspense>
             </div>
         </Layout>
     );

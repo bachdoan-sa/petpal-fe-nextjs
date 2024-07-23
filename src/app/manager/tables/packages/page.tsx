@@ -14,20 +14,20 @@ export default function ManagerManagePackages() {
     const users = data;
     return (
         <>
-            {/* <div className="d-flex w-100 align-items-center justify-content-between">
+            <div className="d-flex w-100 align-items-center justify-content-between">
                 <h2 className={`${lusitana.className}`}>Users</h2>
             </div>
             <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
-                
-                <SearchBar placeholder="Search invoices..." />
-
+                <Suspense>
+                    <SearchBar placeholder="Search invoices..." />
+                </Suspense>
                 <CreateButton link={"#"} />
             </div>
             <div className="mt-6 d-flex flex-wrap">
                 <div className="inline-block container container-fuid align-items-center d-flex justify-content-center p-0">
                     <div className="p-2 md:pt-0 w-100 bg-gray-200" style={{ borderRadius: "10px" }}>
                         <div className="d-none md:block">
-                            {users?.map((invoice) => (
+                            {/* {users?.map((invoice) => (
                                 <div key={invoice.id} className="mb-2 w-100 rounded-md bg-white p-4">
                                     <div className="d-flex justify-content-between pb-4">
                                         <div className="d-flex items-center">
@@ -56,7 +56,7 @@ export default function ManagerManagePackages() {
                                         </div>
                                     </div>
                                 </div>
-                            ))}
+                            ))} */}
                         </div>
                         <table className="table table-hover table-sm">
                             <thead>
@@ -70,7 +70,7 @@ export default function ManagerManagePackages() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
-                                {{users?.map((invoice) => (
+                                {/* {{users?.map((invoice) => (
                                     <tr key={invoice.id} className="text-sm">
                                         <td className="p-2 text-left">
                                             <div className="d-flex items-center">
@@ -95,15 +95,17 @@ export default function ManagerManagePackages() {
 
                                         </td>
                                     </tr>
-                                ))} }
+                                ))} } */}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <div className="mt-5 d-flex w-100 justify-content-center">
-                <Pagination totalPages={totalPages} />
-            </div> */}
+                <Suspense>
+                    <Pagination totalPages={totalPages} />
+                </Suspense>
+            </div>
         </>
     );
 }
