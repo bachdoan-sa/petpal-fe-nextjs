@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from "react";
 import Package from '@/src/components/Management/test/Package';
 import Staff from '@/src/components/Management/test/Staff';

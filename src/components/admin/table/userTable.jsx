@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getDataTestTable } from "../../../data/apiService";
+import { getDataTestTable } from "@/src/data/apiService";
 import { DeleteButton, UpdateButton } from "./button";
 
 export default function UserTable({ query , currentPage }) {

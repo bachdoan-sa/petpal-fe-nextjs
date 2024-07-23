@@ -1,5 +1,6 @@
+'use client'
 import React, { useState } from "react";
-import TableComponent from "../table/TableComponent";
+import TableComponent from "@/src/components/table/TableComponent";
 
 function Package() {
   const [isModalOpen, setIsModalOpen] = useState(false);
