@@ -1,17 +1,17 @@
 import Link from "next/link";
 import React from "react";
-import BlogCategoryWidget from "../components/blog/BlogCategoryWidget";
-import BlogComment from "../components/blog/BlogComment";
-import BlogRecentPostWidget from "../components/blog/BlogRecentPostWidget";
-import BlogSocialWidget from "../components/blog/BlogSocialWidget";
-import BlogTagWidget from "../components/blog/BlogTagWidget";
-import SearchWidget from "../components/blog/SearchWidget";
-import Breadcrumb from "../components/breadcrumb/Breadcrumb";
-import Layout from "../layout/Layout";
+import BlogCategoryWidget from "@/src/components/blog/BlogCategoryWidget";
+import BlogComment from "@/src/components/blog/BlogComment";
+import BlogRecentPostWidget from "@/src/components/blog/BlogRecentPostWidget";
+import BlogSocialWidget from "@/src/components/blog/BlogSocialWidget";
+import BlogTagWidget from "@/src/components/blog/BlogTagWidget";
+import SearchWidget from "@/src/components/blog/SearchWidget";
+import Breadcrumb from "@/src/components/breadcrumb/Breadcrumb";
+
 
 function BlogDetailsPage() {
   return (
-    <Layout>
+    <>
       <Breadcrumb pageName="Blog Details" pageTitle="Blog Details" />
       <div className="blog-details-pages pt-120 mb-120">
         <div className="container">
@@ -203,7 +203,7 @@ function BlogDetailsPage() {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 

@@ -1,13 +1,12 @@
 import React from "react";
-import BlogStandard from "../components/blog/BlogStandard";
-import Breadcrumb from "../components/breadcrumb/Breadcrumb";
-import Layout from "../layout/Layout";
+import BlogStandard from "@/src/components/blog/BlogStandard";
+import Breadcrumb from "@/src/components/breadcrumb/Breadcrumb";
 function BlogStandardPage() {
   return (
-    <Layout>
+    <>
       <Breadcrumb pageName="Blog Standard" pageTitle="Blog Standard" />
       <BlogStandard />
-    </Layout>
+    </>
   );
 }
 
