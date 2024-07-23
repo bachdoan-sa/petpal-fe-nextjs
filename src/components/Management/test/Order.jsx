@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import TableComponent from "../table/TableComponent";
+import TableComponent from "../../table/TableComponent";
 
-function Package() {
+function Order() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   const [form, setForm] = useState({
@@ -14,18 +14,6 @@ function Package() {
     discount: "",
     image: null,
   });
-
-  const columns = [
-    { header: "Name", accessor: "first" },
-    { header: "Last", accessor: "last" },
-    { header: "Handle", accessor: "handle" },
-  ];
-
-  const data = [
-    { first: "Mark", last: "Otto", handle: "@mdo" },
-    { first: "Jacob", last: "Thornton", handle: "@fat" },
-    { first: "Larry the Bird", last: "", handle: "@twitter" },
-  ];
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -41,28 +29,25 @@ function Package() {
     e.preventDefault();
     // Handle form submission logic
   };
+
+  const columns = [
+    { header: "First", accessor: "first" },
+    { header: "Last", accessor: "last" },
+    { header: "Handle", accessor: "handle" },
+  ];
+
+  const data = [
+    { first: "Mark", last: "Otto", handle: "@mdo" },
+    { first: "Jacob", last: "Thornton", handle: "@fat" },
+    { first: "Larry the Bird", last: "", handle: "@twitter" },
+  ];
   return (
     <div
       className="container"
       style={{ maxWidth: "1270px", margin: "20px auto" }}
     >
-      <h1>Danh sách sản phẩm</h1>
-
-      <div className="mt-3">
-        <button
-          className="btn btn-outline-primary"
-          style={{
-            height: "auto",
-            width: "auto",
-            borderRadius: "6px",
-            borderStyle: "dashed",
-            marginRight: "6px",
-          }}
-          onClick={() => setIsModalOpen(true)}
-        >
-          {/* <i className="fas fa-plus" style={{ fontSize: "60px" }}></i> */}
-          Add A Dog
-        </button>
+      <div className=" d-flex justify-content-between">
+        <h1>Danh sách nhân viên</h1>
         <button
           className="btn btn-outline-primary"
           style={{
@@ -185,4 +170,4 @@ function Package() {
   );
 }
 
-export default Package;
+export default Order;
