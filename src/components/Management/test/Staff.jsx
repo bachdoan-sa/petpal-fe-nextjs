@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import TableComponent from "../table/TableComponent";
 
-function PetInfo() {
+function Staff() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   const [form, setForm] = useState({
@@ -28,100 +29,42 @@ function PetInfo() {
     e.preventDefault();
     // Handle form submission logic
   };
+
+  const columns = [
+    { header: "First", accessor: "first" },
+    { header: "Last", accessor: "last" },
+    { header: "Handle", accessor: "handle" },
+  ];
+
+  const data = [
+    { first: "Mark", last: "Otto", handle: "@mdo" },
+    { first: "Jacob", last: "Thornton", handle: "@fat" },
+    { first: "Larry the Bird", last: "", handle: "@twitter" },
+  ];
   return (
     <div
       className="container"
       style={{ maxWidth: "1270px", margin: "20px auto" }}
     >
-      <div className="d-flex justify-content-between align-items-center mt-3">
-        <h1>Danh sách thú cưng</h1>
-        <div>
-          <button
-            className="btn btn-outline-primary"
-            style={{
-              height: "auto",
-              width: "auto",
-              borderRadius: "6px",
-              marginRight: "6px",
-            }}
-            onClick={() => setIsModalOpen(true)}
-          >
-            Add A Dog
-          </button>
-          <button
-            className="btn btn-outline-primary"
-            style={{
-              height: "auto",
-              width: "auto",
-              borderRadius: "6px",
-              marginRight: "6px",
-            }}
-            onClick={() => setIsModalOpen(true)}
-          >
-            Add A Cat
-          </button>
-          <button
-            className="btn btn-outline-primary"
-            style={{
-              height: "auto",
-              width: "auto",
-              borderRadius: "6px",
-              marginRight: "6px",
-            }}
-            onClick={() => setIsModalOpen(true)}
-          >
-            Add A Bird
-          </button>
-        </div>
+     
+
+      <div className="d-flex justify-content-between">
+      <h1>Danh sách nhân viên</h1>
+        <button
+          className="btn btn-primary"
+          style={{
+            height: "auto",
+            width: "auto",
+            borderRadius: "6px",
+          }}
+          onClick={() => setIsModalOpen(true)}
+        >
+          Thêm nhân viên
+        </button>
       </div>
 
-      <div className="mt-4 d-flex justify-content-center">
-        <div className="card mb-3" style={{ maxWidth: "860px" }}>
-          <div className="row g-0">
-            <div className="col-md-4 hero-img">
-              <img
-                src="assets/images/pet-contact-1.jpg"
-                className="img-fluid rounded-start h-100 w-100"
-                alt=""
-              />
-            </div>
-            <div className="col-md-8">
-              <div className="card-header">
-                <div className="d-flex justify-content-between align-items-center">
-                  <h4 className="card-title">Name: Den</h4>
-                  <a>Edit Profile</a>
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-4"><h5>Pet type</h5></div>
-                  <div className="col-4">Age: 1 year old</div>
-                  <div className="col-4">
-                    Weight: 1 kg
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-4">
-                    Gender
-                    <br /> Male
-                  </div>
-                  <div className="col-4">
-                    Breed
-                    <br /> Chusky
-                  </div>
-                  <div className="col-4">
-                    Desexed
-                    <br />
-                    No
-                  </div>
-                </div>
-                <p className="card-text">
-                  <small className="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="mt-4">
+        <TableComponent columns={columns} data={data} />
       </div>
 
       <div
@@ -227,4 +170,4 @@ function PetInfo() {
   );
 }
 
-export default PetInfo;
+export default Staff;

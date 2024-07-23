@@ -3,17 +3,18 @@ import React from "react";
 import Breadcrumb from "../components/breadcrumb/Breadcrumb";
 import Footer1 from "../components/footer/Footer1";
 import Header1 from "../components/header/Header1";
+import Layout from "../layout/Layout";
+
 
 function errorPage() {
   return (
-    <>
-      <Header1 />
-      <Breadcrumb pageName="Error" pageTitle="Error" />
-      <div className="error-page mb-120">
+    <Layout>
+      {/* <Breadcrumb pageName="Error" pageTitle="Error" /> */}
+      <div className="error-page mt-120 mb-120">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <div className="error-wrapper">
+              {/* <div className="error-wrapper">
                 <div className="error-img">
                   <img
                     className="img-fluid"
@@ -21,7 +22,7 @@ function errorPage() {
                     alt=""
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="error-content-area">
                 <h2>Something Went Wrong</h2>
                 <p>
@@ -42,8 +43,7 @@ function errorPage() {
           </div>
         </div>
       </div>
-      <Footer1 />
-    </>
+    </Layout>
   );
 }
 
