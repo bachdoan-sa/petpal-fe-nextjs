@@ -7,7 +7,7 @@ import Pagination from "@/src/components/admin/table/pagination.jsx";
 import { getDataTestPages } from "@/src/data/apiService.js";
 import UserTable from "@/src/components/admin/table/userTable.jsx";
 
-export default function Page({
+export default function AdminManageUsers({
     searchParams,
 }: {
     searchParams?: {

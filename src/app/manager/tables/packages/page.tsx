@@ -1,34 +1,33 @@
 'use client'
-import React from "react";
-import Layout from "@/src/components/admin/Layout.jsx";
-import Link from 'next/link';
+import React, { Suspense } from "react";
 import { lusitana } from "@/src/fonts/fonts";
-import Image from 'next/image';
 import data from '@/src/data/tabledatatest.json';
 import { CreateButton, UpdateButton, DeleteButton } from "@/src/components/admin/table/button.jsx";
-import SearchBar from "@/src/components/admin/search.jsx";
-import Pagination from "@/src/components/admin/table/pagination.tsx";
+import SearchBar from "@/src/components/admin/search";
+import Pagination from "@/src/components/admin/table/pagination";
 
 
-export default function Page() {
+export default function ManagerManagePackages() {
     // const query = searchParams?.query || '';
     // const currentPage = Number(searchParams?.page) || 1;
     const totalPages = 1;// await fetchInvoicesPages(query);
     const users = data;
     return (
         <>
-            <div className="d-flex w-100 align-items-center justify-content-between">
+            {/* <div className="d-flex w-100 align-items-center justify-content-between">
                 <h2 className={`${lusitana.className}`}>Users</h2>
             </div>
             <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
+                
                 <SearchBar placeholder="Search invoices..." />
+
                 <CreateButton link={"#"} />
             </div>
             <div className="mt-6 d-flex flex-wrap">
                 <div className="inline-block container container-fuid align-items-center d-flex justify-content-center p-0">
-                    <div className="p-2 md:pt-0 w-100 bg-gray-200" style={{ borderRadius: "10px" }}> {/* cái này để đồng bộ với cái border table cho đẹp*/}
+                    <div className="p-2 md:pt-0 w-100 bg-gray-200" style={{ borderRadius: "10px" }}>
                         <div className="d-none md:block">
-                            {/* {users?.map((invoice) => (
+                            {users?.map((invoice) => (
                                 <div key={invoice.id} className="mb-2 w-100 rounded-md bg-white p-4">
                                     <div className="d-flex justify-content-between pb-4">
                                         <div className="d-flex items-center">
@@ -57,7 +56,7 @@ export default function Page() {
                                         </div>
                                     </div>
                                 </div>
-                            ))} */}
+                            ))}
                         </div>
                         <table className="table table-hover table-sm">
                             <thead>
@@ -71,7 +70,7 @@ export default function Page() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
-                                {/* {users?.map((invoice) => (
+                                {{users?.map((invoice) => (
                                     <tr key={invoice.id} className="text-sm">
                                         <td className="p-2 text-left">
                                             <div className="d-flex items-center">
@@ -96,7 +95,7 @@ export default function Page() {
 
                                         </td>
                                     </tr>
-                                ))} */}
+                                ))} }
                             </tbody>
                         </table>
                     </div>
@@ -104,7 +103,7 @@ export default function Page() {
             </div>
             <div className="mt-5 d-flex w-100 justify-content-center">
                 <Pagination totalPages={totalPages} />
-            </div>
+            </div> */}
         </>
     );
 }

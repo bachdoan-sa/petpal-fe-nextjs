@@ -22,7 +22,7 @@ function AccountUser() {
 
   return (
     <>
-      <MenuComponent menuItems={menuItems} initialComponent="Pet" />
+      <MenuComponent menuItems={menuItems} initialComponent="Pet" role={""} />
     </>
   );
 }

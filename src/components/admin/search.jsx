@@ -3,6 +3,7 @@
 import { Search } from 'react-feather';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
+import { Suspense } from 'react';
 //nguồn tham khảo: tutorial nextjs
 //hàm này có thể dùng nhiều nơi
 function SearchBar({ placeholder }) {
@@ -20,7 +21,7 @@ function SearchBar({ placeholder }) {
   //     }
   //     replace(`${pathname}?${params.toString()}`);   
   // }
-  const handleSearch = useDebouncedCallback((term) => { 
+  const handleSearch = useDebouncedCallback((term) => {
     //Code này cho delay 300ms khi nhập và có thư viện debounced hỗ trọ... nên dùng!
     console.log(term);
     const params = new URLSearchParams(searchParams);
@@ -37,14 +38,16 @@ function SearchBar({ placeholder }) {
       <label htmlFor="search" className="visually-hidden">
         Search
       </label>
-      <input
-        className="form-control rounded-lg border-gray-200 py-2 px-7 text-sm"
-        placeholder={placeholder}
-        onChange={(e) => {
-          handleSearch(e.target.value); 
-        }}
-        defaultValue={searchParams.get('query')?.toString()}
-      />
+      <Suspense>
+        <input
+          className="form-control rounded-lg border-gray-200 py-2 px-7 text-sm"
+          placeholder={placeholder}
+          onChange={(e) => {
+            handleSearch(e.target.value);
+          }}
+          defaultValue={searchParams.get('query')?.toString()}
+        />
+      </Suspense>
       <Search className="position-absolute mx-2 top-50 translate-middle-y text-gray-500 focus:text-gray-900" width={18} height={18} />
     </div>
   );
