@@ -1,5 +1,6 @@
+'use client'
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useReducer, useRef } from "react";
 /*---------Using reducer mange the active or inactive menu----------*/
 const initialState = {
