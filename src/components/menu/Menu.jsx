@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+'use client'
+import React, { useState } from 'react';
 
 const MenuComponent = ({ menuItems, initialComponent, role }) => {
   const [activeComponent, setActiveComponent] = useState(initialComponent);

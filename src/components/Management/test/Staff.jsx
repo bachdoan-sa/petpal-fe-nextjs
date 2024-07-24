@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TableComponent from "../table/TableComponent";
+import TableComponent from "@/src/components/table/TableComponent";
 
 function Staff() {
   const [isModalOpen, setIsModalOpen] = useState(false);
