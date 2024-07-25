@@ -1,6 +1,7 @@
 export async function POST(request: Request) {
     const body = await request.json()
     const sessionToken = body.sessionToken as string
+    const sessionRole = body.sessionRole as string
     const expiresAt = body.expiresAt as string
     if (!sessionToken) {
       return Response.json(
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
     return Response.json(body,   {
       status: 200,
       headers: {
-        'Set-Cookie': `sessionToken=${sessionToken}; Path=/; HttpOnly; Expires=${expiresDate}; SameSite=Lax; Secure`
+        'Set-Cookie': `sessionToken=${sessionToken}; Path=/; HttpOnly; Expires=${expiresDate}; SameSite=Lax; Secure, sessionRole=${sessionRole}; Path=/; HttpOnly; Expires=${expiresDate}; SameSite=Lax; Secure`,
       }
     })
   }
