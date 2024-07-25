@@ -1,7 +1,6 @@
 'use client'
 import Link from "next/link";
 import React, { useState } from "react";
-import Layout from "../../../../Layout/Layout";
 import loginRequest from "../../../../lib/apiService";
 import authApiRequest from '@/src/apiRequests/auth';
 import { LoginBody, LoginBodyType } from '@/src/schemaValidations/auth.schema'
