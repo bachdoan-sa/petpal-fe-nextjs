@@ -13,10 +13,10 @@ export function middleware(request: NextRequest) {
   const sessionToken = request.cookies.get('sessionToken')?.value;
   const sessionRole = request.cookies.get('sessionRole')?.value;
 
-  if (adminPaths.some((path) => pathname.startsWith('/admin')) && sessionToken && sessionRole == 'ADMIN') {
+  if (pathname.startsWith('/admin') && sessionToken && sessionRole == 'ADMIN') {
     return NextResponse.next();
   } 
-  if (managerPaths.some((path) => pathname.startsWith('/manager')) && sessionToken && sessionRole == 'MANAGER') {
+  if (pathname.startsWith('/manager') && sessionToken && sessionRole == 'MANAGER') {
     return NextResponse.next();
   } 
   // Chưa đăng nhập thì không cho vào private paths

@@ -8,32 +8,38 @@ import { useAppContext } from "@/src/app/app-provider";
 import { useRouter } from "next/navigation";
 
 function loginPage() {
+    const [loading, setLoading] = useState(false);
     const { setUser } = useAppContext();
     const router = useRouter();
+    
+
     async function handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
-        const username = formData.get('username');
-        const password = formData.get('password');
-        const body = JSON.stringify({ username, password });
-
+        const username = formData.get('username')as string;
+        const password = formData.get('password')as string;
+        // const body = JSON.stringify({ username, password });
+        const loginForm: LoginBodyType = {
+            username: username,
+            password: password
+          } 
         try {
-            const result = await loginRequest(body);
-            // const result = await authApiRequest.login(body);
+            // const result = await loginRequest(body);
+            const result = await authApiRequest.login(loginForm);
             const expires = new Date((Date.now() + (60 * 60 * 1000))).toUTCString();
             console.log(result);
             console.log(expires);
             //setcookie
             await authApiRequest.auth({
-                sessionToken: result.data.jwt,
-                sessionRole: result.data.role,
+                sessionToken: result.payload.data.token,
+                sessionRole: result.payload.data.role,
                 expiresAt: expires
             });
             setUser({
-                id: result.data.userId,
-                name: "AnDanh",
-                role: result.data.role
+                id: result.payload.data.name,
+                name: result.payload.data.name,
+                role: result.payload.data.role
             });
             router.push('/');
             router.refresh();
