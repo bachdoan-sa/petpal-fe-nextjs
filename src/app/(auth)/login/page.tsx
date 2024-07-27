@@ -6,24 +6,27 @@ import authApiRequest from '@/src/apiRequests/auth';
 import { LoginBody, LoginBodyType } from '@/src/schemaValidations/auth.schema'
 import { useAppContext } from "@/src/app/app-provider";
 import { useRouter } from "next/navigation";
-
+import { handleErrorApi } from '@/src/lib/utils'
+import { toast } from "sonner";
 function loginPage() {
     const [loading, setLoading] = useState(false);
     const { setUser } = useAppContext();
     const router = useRouter();
-    
+
 
     async function handleSubmit(event) {
         event.preventDefault();
-
+        if (loading)
+            return;
+        setLoading(true);
         const formData = new FormData(event.currentTarget);
-        const username = formData.get('username')as string;
-        const password = formData.get('password')as string;
+        const username = formData.get('username') as string;
+        const password = formData.get('password') as string;
         // const body = JSON.stringify({ username, password });
         const loginForm: LoginBodyType = {
             username: username,
             password: password
-          } 
+        }
         try {
             // const result = await loginRequest(body);
             const result = await authApiRequest.login(loginForm);
@@ -40,12 +43,16 @@ function loginPage() {
                 id: result.payload.data.name,
                 name: result.payload.data.name,
                 role: result.payload.data.role
-            });
+            }); 
             router.push('/');
             router.refresh();
-        } catch (error) {
-
-            console.error('Error fetching data:', error);
+            toast.success("Login success!");
+        } catch (error: any) {
+            console.log(error);
+            if(error.code == 'ERR_NETWORK')
+                toast.error("Lỗi đường truyền hoặc vấn đề máy chủ!");
+        } finally {
+            setLoading(false);
         }
 
 

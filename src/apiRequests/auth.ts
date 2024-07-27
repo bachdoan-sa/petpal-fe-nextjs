@@ -1,4 +1,4 @@
-import http from '@/src/lib/http'
+import http from '@/src/lib/httpAxios'
 import {
   LoginBodyType,
   LoginResType,
