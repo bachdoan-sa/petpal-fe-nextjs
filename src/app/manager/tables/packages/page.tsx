@@ -12,6 +12,8 @@ import Pagination from "@/src/components/admin/table/pagination";
 import Package from '@/src/components/manager/test/Package';
 
 export default function ManagerManagePackages() {
+
+
   // const query = searchParams?.query || '';
   // const currentPage = Number(searchParams?.page) || 1;
   const totalPages = 1; // await fetchInvoicesPages(query);
@@ -64,3 +66,4 @@ export default function ManagerManagePackages() {
     </>
   );
 }
+
