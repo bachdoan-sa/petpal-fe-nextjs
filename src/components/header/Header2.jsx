@@ -102,7 +102,7 @@ function Header2() {
                 <a>About</a>
               </Link>
             </li>
-            <li className="menu-item-has-children">
+            {/* <li className="menu-item-has-children">
               <Link legacyBehavior href="#">
                 <a>Services</a>
               </Link>
@@ -138,13 +138,13 @@ function Header2() {
                   </Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <li>
               <Link legacyBehavior href="/blog">
                 <a>Blog</a>
               </Link>
             </li>
-            <li className="menu-item-has-children">
+            {/* <li className="menu-item-has-children">
               <Link legacyBehavior href="#">
                 <a>Blog</a>
               </Link>
@@ -180,7 +180,7 @@ function Header2() {
                   </Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <li>
               <Link legacyBehavior href="/contact">
                 <a>Contact</a>
