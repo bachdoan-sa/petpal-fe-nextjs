@@ -42,7 +42,7 @@ function Banner2() {
                       Your <span>pet</span> is part of our family.
                     </h1>
                     <div className="btn-group">
-                      <Link legacyBehavior href="/petCareCenters">
+                      <Link legacyBehavior href="/pet-care-centers">
                         <a className="primary-btn2">Find a Pet Care Center</a>
                       </Link>
                       <Link legacyBehavior href="/about">

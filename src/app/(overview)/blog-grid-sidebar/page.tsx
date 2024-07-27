@@ -5,7 +5,7 @@ import Breadcrumb from "@/src/components/breadcrumb/Breadcrumb";
 function blogGridSidebarPage() {
   return (
     <>
-      <Breadcrumb pageName="Blog Grid Sidebar" pageTitle="Blog Grid Sidebar" />
+      {/* <Breadcrumb pageName="Blog Grid Sidebar" pageTitle="Blog Grid Sidebar" /> */}
       <BlogGridSidebar />
     </>
   );

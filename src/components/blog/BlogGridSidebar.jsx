@@ -10,7 +10,7 @@ import SearchWidget from "./SearchWidget";
 function BlogGridSidebar() {
   return (
     <>
-      <div className="blog-grid-pages pt-120 mb-120">
+      <div className="blog-grid-pages pt-30 mb-30">
         <div className="container">
           <div className="row g-lg-4 gy-5 justify-content-center">
             <div className="col-lg-8">

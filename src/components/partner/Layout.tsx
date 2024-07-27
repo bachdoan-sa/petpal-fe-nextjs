@@ -6,8 +6,9 @@ import { useState } from 'react';
 // import '../../styles/theme.scss';
 
 // import sub components
+
 import SideBar from './SideBar';
-import Navbar from './Navbar';
+import NavbarTop from '../admin/layouts/NavbarTop';
 
 export default function DashboardLayout({ children }) {
 	const [showMenu, setShowMenu] = useState(true);
@@ -20,12 +21,12 @@ export default function DashboardLayout({ children }) {
 			<div className="navbar-vertical navbar">
 				<SideBar
 					showMenu={showMenu}
-					onClick={(value) => setShowMenu(value)}
+					onClick={(value: boolean | ((prevState: boolean) => boolean)) => setShowMenu(value)}
 				/>
 			</div>
 			<div id="page-content">
 				<div className="header">
-					<Navbar
+					<NavbarTop
 						data={{
 							showMenu: showMenu,
 							SidebarToggleMenu: ToggleMenu

@@ -14672,6 +14672,14 @@ footer.style2 .social-area ul li:hover a i {
   color: black;
 }
 
+.step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 select#duration:focus {
   border: none;

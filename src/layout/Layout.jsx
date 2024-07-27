@@ -1,6 +1,5 @@
 import React from "react";
 import Footer1 from "../components/footer/Footer1";
-import Header1 from "../components/header/Header1";
 import Header2 from "../components/header/Header2";
 
 function Layout({ children }) {
