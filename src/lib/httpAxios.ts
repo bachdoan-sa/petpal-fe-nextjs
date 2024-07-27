@@ -8,9 +8,9 @@ type CustomOptions = Omit<RequestInit, 'method'> & {
     baseUrl?: string | undefined
 }
 
-const ENTITY_ERROR_STATUS = 422
-const AUTHENTICATION_ERROR_STATUS = 401
-
+const ENTITY_ERROR_STATUS = 422;
+const AUTHENTICATION_ERROR_STATUS = 401;
+const OK_STATUS = 200;
 type EntityErrorPayload = {
     message: string
     errors: {
@@ -97,15 +97,16 @@ const request = async <Response>(
     };
 
     try {
-
+        console.log(axiosConfig);
         const response = await axios(axiosConfig);
-        const payload: Response = await response.data;
+        console.log(response);
+        const payload: Response = await response.data.payload;
         const data = {
             status: response.status,
-            payload: response.data,
+            payload
         };
-
-        if (response.status >= 200 && response.status < 300) {
+        console.log(response);
+        if (!(response.status === OK_STATUS)) {
             if (response.status === ENTITY_ERROR_STATUS) {
                 throw new EntityError(
                     data as {
