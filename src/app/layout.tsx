@@ -5,6 +5,7 @@ import "../../styles/main.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import BootstrapClient from "../components/bootstrapClient";
 import AppProvider from "./app-provider";
+import { Toaster } from "sonner";
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +25,7 @@ export default function RootLayout({
         <AppProvider>
           {children}
         </AppProvider>
-
+        <Toaster richColors position="bottom-left"/>
       </body>
       {/* <body className={`${inter.className} antialiased`}>{children}</body> */}
     </html>

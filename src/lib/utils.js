@@ -1,3 +1,5 @@
+import { EntityError } from "./httpAxios"
+import { toast } from 'sonner';
 export const formatDateToLocal = (dateStr, locale = "vi-VN") => {
   const date = new Date(dateStr)
   const options = {
@@ -43,4 +45,22 @@ export const generatePagination = (currentPage, totalPages) => {
 }
 export const normalizePath = path => {
   return path.startsWith("/") ? path.slice(1) : path
+}
+
+export const handleErrorApi = ({ error, setError, duration = undefined }) => {
+  if (error instanceof EntityError && setError) {
+    error.payload.errors.forEach((item) => {
+      setError(item.field, {
+        type: 'server',
+        message: item.message
+      })
+    })
+  } else {
+    toast.error({
+      title: 'Lỗi',
+      description: error?.payload?.message ?? 'Lỗi không xác định',
+      variant: 'destructive',
+      duration: duration ?? 5000
+    })
+  }
 }
