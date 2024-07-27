@@ -38,3 +38,8 @@ export const getDataTestPages = () => {
     throw error;
   }
 };
+
+export const getAllPackage = async () => {
+  const response = await apiService.get('/api/Package/get-list')
+  return response.data
+}

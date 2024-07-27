@@ -102,7 +102,7 @@ function Header2() {
                 <a>About</a>
               </Link>
             </li>
-            <li className="menu-item-has-children">
+            {/* <li className="menu-item-has-children">
               <Link legacyBehavior href="#">
                 <a>Services</a>
               </Link>
@@ -138,7 +138,49 @@ function Header2() {
                   </Link>
                 </li>
               </ul>
+            </li> */}
+            <li>
+              <Link legacyBehavior href="/blog">
+                <a>Blog</a>
+              </Link>
             </li>
+            {/* <li className="menu-item-has-children">
+              <Link legacyBehavior href="#">
+                <a>Blog</a>
+              </Link>
+              <i
+                className="bi bi-plus dropdown-icon"
+                onClick={() => dispatch({ type: "blog" })}
+              />
+              <ul
+                className={
+                  state.activeMenu === "blog"
+                    ? "sub-menu  d-block"
+                    : "sub-menu d-xl-block d-none"
+                }
+              >
+                <li>
+                  <Link legacyBehavior href="/blog-grid">
+                    <a>Blog Grid</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link legacyBehavior href="/blog-grid-sidebar">
+                    <a>blog-grid-sidebar</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link legacyBehavior href="/blog-standard">
+                    <a>Blog Standard</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link legacyBehavior href="/blog-details">
+                    <a>Blog Details</a>
+                  </Link>
+                </li>
+              </ul>
+            </li> */}
             <li>
               <Link legacyBehavior href="/contact">
                 <a>Contact</a>

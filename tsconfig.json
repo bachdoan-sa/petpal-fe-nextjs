@@ -32,7 +32,7 @@
     "**/*.tsx",
     "src/page/api/auth/route.js",
     ".next/types/**/*.ts"
-, "src/app/api/auth/router.js", "src/app/api/auth/router.js"  ],
+, "src/app/api/auth/router.js", "src/app/api/auth/router.js", "src/components/partner/SideBar.jsx", "src/app/partner/page.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,11 +1,11 @@
 'use client'
 import React, { useState } from "react";
-import Package from '@/src/components/Management/test/Package';
-import Staff from '@/src/components/Management/test/Staff';
+import Package from '@/src/components/manager/test/Package';
+import Staff from '@/src/components/manager/test/Staff';
 import MenuComponent from "@/src/components/menu/Menu";
-import Order from "@/src/components/Management/test/Order";
+import Order from "@/src/components/manager/test/Order";
 import NavbarVertical from "@/src/components/admin/layouts/NavbarVertical";
-import SideBar from "@/src/components/Management/SideBar";
+import SideBar from "@/src/components/manager/SideBar";
 
 
 function Management() {

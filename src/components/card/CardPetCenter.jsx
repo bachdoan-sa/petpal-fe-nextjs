@@ -9,7 +9,7 @@ const PetCareCard = ({ imgSrc, title, description, mapLink }) => {
           <img
             src={imgSrc}
             className="img-fluid rounded-start"
-            alt={title}
+            
             style={{ height: "100%", objectFit: "cover" }}
           />
           <Link legacyBehavior href={mapLink}>
