@@ -2,6 +2,7 @@ import envConfig from '@/src/config'
 import { normalizePath } from '@/src/lib/utils'
 import { LoginResType } from '@/src/schemaValidations/auth.schema'
 import { redirect } from 'next/navigation'
+import { toast } from 'sonner'
 
 type CustomOptions = Omit<RequestInit, 'method'> & {
   baseUrl?: string | undefined
@@ -121,6 +122,7 @@ const request = async <Response>(
             await clientLogoutRequest
           } catch (error) {
           } finally {
+            toast.error("Đăng nhập bị lỗi");
             localStorage.removeItem('sessionToken')
             localStorage.removeItem('sessionTokenExpiresAt')
             clientLogoutRequest = null
