@@ -1,8 +1,19 @@
+'use client'
 import Link from "next/link";
 import React from "react";
-
+import { useAppContext } from "../../app-provider";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function signUpPage() {
+
+    const { setUser } = useAppContext();
+    const router = useRouter();
+
+    async function register() {
+        'use server'
+        
+    }
     return (
         <>
             {/* <Breadcrumb pageName="Sign-Up" pageTitle="Sign-Up" /> */}

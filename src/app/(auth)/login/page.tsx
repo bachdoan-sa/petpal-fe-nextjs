@@ -32,7 +32,7 @@ function loginPage() {
             const result = await authApiRequest.login(loginForm);
             const expires = new Date((Date.now() + (60 * 60 * 1000))).toUTCString();
             console.log(result);
-            console.log(expires);
+
             //setcookie
             await authApiRequest.auth({
                 sessionToken: result.payload.data.token,
