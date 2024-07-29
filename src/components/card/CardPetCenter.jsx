@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
 
-const PetCareCard = ({ imgSrc="", title, description, address }) => {
+const PetCareCard = ({id, imgSrc='', title, description, address }) => {
   return (
+    <Link href={`/pet-care-centers/${id}`} legacyBehavior>
     <div className="card mb-3" style={{ width: "860px" }}>
       <div className="row g-0">
         <div className="col-md-4 position-relative">
@@ -52,6 +53,7 @@ const PetCareCard = ({ imgSrc="", title, description, address }) => {
         </div>
       </Link> */}
     </div>
+    </Link>
   );
 };
 
