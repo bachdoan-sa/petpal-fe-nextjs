@@ -36,7 +36,8 @@ export const OrderListRes = z.object({
     message: z.string()
 })
 // 3.2
-export type  OrderListType = z.TypeOf<typeof OrderList>
+export type OrderType = z.TypeOf<typeof OrderSchema>;
+export type OrderListType = z.TypeOf<typeof OrderList>
 export type OrderListResType = z.TypeOf<typeof OrderListRes>
 
 // 4. Định nghĩa cấu trúc trả về theo list (có PAGINATION)
