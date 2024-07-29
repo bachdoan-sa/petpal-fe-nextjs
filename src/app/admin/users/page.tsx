@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-
 import { lusitana } from "@/src/fonts/fonts";
 import { CreateButton } from "@/src/components/admin/table/button.jsx";
 import SearchBar from "@/src/components/admin/search.jsx";

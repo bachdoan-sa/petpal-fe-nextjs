@@ -7,7 +7,7 @@ import React from 'react';
 import { generatePagination } from '@/src/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function Pagination({ totalPages }) {
+export default function Pagination({ totalPages = 1 }) {
   // NOTE: comment in this code when you get to this point in the course
   const pathname = usePathname();
   const searchParams = useSearchParams();

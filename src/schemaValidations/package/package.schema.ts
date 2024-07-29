@@ -54,6 +54,6 @@ export type PackageListPageBodyType = z.TypeOf<typeof PackageListPageBody>;
 export const PackageBykCenterListPageBody = z.object({
     page: z.number(),
     size: z.number(),
-    careCenterId: z.string()
+    careCenterId: z.string().optional()
 });
 export type PackageBykCenterListPageBodyType = z.TypeOf<typeof PackageBykCenterListPageBody>;
