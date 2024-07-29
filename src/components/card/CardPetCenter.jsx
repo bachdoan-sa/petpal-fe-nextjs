@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const PetCareCard = ({ imgSrc, title, description, address }) => {
+const PetCareCard = ({ imgSrc="", title, description, address }) => {
   return (
     <div className="card mb-3" style={{ width: "860px" }}>
       <div className="row g-0">
