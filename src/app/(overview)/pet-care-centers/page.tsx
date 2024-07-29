@@ -77,7 +77,6 @@ function petCareCenters() {
   if (loading) {
     return (
       <div style={{ textAlign: 'center', padding: '50px' }}>
-          {/* <image src={"assets/images/preloader.gif"} alt="Loading..." /> */}
           <Image height={300} width={450} src={"/assets/images/preloader.gif"} alt=""/>
       </div>
   );
@@ -127,6 +126,7 @@ function petCareCenters() {
           {careCenters.map((center, index) => (
             <div key={index} className="d-flex justify-content-center ">
               <PetCareCard
+              id={center.id}
                 // imgSrc={center.}
                 title={center.careCenterName}
                 description={center.description}

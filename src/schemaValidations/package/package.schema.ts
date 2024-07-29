@@ -33,11 +33,12 @@ export const PackageListRes = z.object({
 // 3.2
 export type PackageListResType = z.TypeOf<typeof PackageListRes>
 
+export type PackageListType = z.TypeOf<typeof PackageSchema>
 
 
 // 4. Định nghĩa cấu trúc trả về theo list (có PAGINATION)
 export const PackageListPage = z.object({
-    packages: z.array(PackageSchema),
+    list: z.array(PackageSchema),
     paging: PagingRes
 });
 export const PackageListPageRes = z.object({

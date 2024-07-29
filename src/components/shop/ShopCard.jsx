@@ -18,7 +18,7 @@ function ShopCard() {
         return (
           <div key={id} className="col-lg-4 col-md-4 col-sm-6">
             <div className="collection-card">
-              {tag == "" ? (
+              {/* {tag == "" ? (
                 ""
               ) : (
                 <div
@@ -28,7 +28,7 @@ function ShopCard() {
                 >
                   <span>{tag}</span>
                 </div>
-              )}
+              )} */}
               <div className="collection-img">
                 <img className="img-gluid" src={img} alt="" />
                 <div className="view-dt-btn">
