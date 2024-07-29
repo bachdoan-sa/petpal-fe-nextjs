@@ -24,7 +24,7 @@ function QuickMenu() {
     const Notifications = () => {
         return (
             <SimpleBar style={{ maxHeight: '300px', overflowX: 'hidden' }} autoHide={true}>
-                <ul class="list-group list-group-flush">
+                <ul className="list-group list-group-flush">
                     {NotificationList.map(function (item, index) {
                         return (
                             <li className={"list-group-item " + (index === 0 ? 'bg-light' : '')} key={index}>

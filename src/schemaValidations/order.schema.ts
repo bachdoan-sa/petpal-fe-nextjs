@@ -12,7 +12,7 @@ export const OrderSchema = z.object({
     receiveTime: z.number(),
     returnTime: z.string(),
     status: z.string().optional(),
-    userId: z.string(),
+    userId: z.string().optional(),
     petId: z.string(),
     packageId: z.string()
 });
