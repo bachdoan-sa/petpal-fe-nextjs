@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import Layout from "@/src/components/admin/Layout.jsx";
+
 import { lusitana } from "@/src/fonts/fonts";
 import { CreateButton } from "@/src/components/admin/table/button.jsx";
 import SearchBar from "@/src/components/admin/search.jsx";
@@ -19,7 +19,7 @@ export default function AdminManageUsers({
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = getDataTestPages();
     return (
-        <Layout>
+        <>
             <div className="d-flex w-100 align-items-center justify-content-between">
                 <h2 className={`${lusitana.className}`}>Users</h2>
             </div>
@@ -27,7 +27,7 @@ export default function AdminManageUsers({
                 <Suspense>
                     <SearchBar placeholder="Search invoices..." />
                 </Suspense>
-                <CreateButton link={""} />
+                <CreateButton link={"users/create"} title="Create User"/>
             </div>
             <div className="mt-6 d-flex flex-wrap">
                 <UserTable query={query} currentPage={currentPage} />
@@ -37,6 +37,6 @@ export default function AdminManageUsers({
                     <Pagination totalPages={totalPages} />
                 </Suspense>
             </div>
-        </Layout>
+        </>
     );
 }

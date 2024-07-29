@@ -1,17 +1,69 @@
 'use client'
 import Link from "next/link";
-import React from "react";
-import { useAppContext } from "../../app-provider";
+import React, { useState } from "react";
+import { useAppContext } from "@/src/app/app-provider";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { RegisterBodyType } from "@/src/schemaValidations/auth.schema";
+import authApiRequest from "@/src/apiRequests/auth";
 
 function signUpPage() {
-
+    const [loading, setLoading] = useState(false);
     const { setUser } = useAppContext();
     const router = useRouter();
 
-    async function register() {
-        'use server'
+    async function register(event) {
+        event.preventDefault();
+        if (loading)
+            return;
+        setLoading(true);
+        const formData = new FormData(event.currentTarget);
+        const first = formData.get('first-name') as string;
+        const last = formData.get('last-name') as string;
+        const password = formData.get('password') as string;
+        const confirmPassword = formData.get('confirm-password') as string;
+        const username = formData.get('username') as string;
+        const address = formData.get('address') as string;
+        const phoneNumber = formData.get('phone-number') as string;
+        const email = formData.get('email') as string;
+        // const body = JSON.stringify({ username, password });
+        const registerForm: RegisterBodyType = {
+            username: username,
+            fullname: first + " " +last,
+            email: email,
+            address: address ? address : '',
+            phoneNumber: phoneNumber ? phoneNumber : '',
+            password: password,
+            confirmPassword: confirmPassword
+        }
+        try {
+            // const result = await loginRequest(body);
+            const result = await authApiRequest.register(registerForm);
+            const expires = new Date((Date.now() + (60 * 60 * 1000))).toUTCString();
+            console.log(result);
+
+            //setcookie
+            await authApiRequest.auth({
+                sessionToken: result.payload.data.token,
+                sessionRole: result.payload.data.role,
+                expiresAt: expires
+            });
+            setUser({
+                id: result.payload.data.name,
+                name: result.payload.data.name,
+                role: result.payload.data.role
+            }); 
+            router.push('/');
+            router.refresh();
+            toast.success("Create account success!");
+        } catch (error: any) {
+            console.log(error);
+            if(error.code == 'ERR_NETWORK')
+                toast.error("Lỗi đường truyền hoặc vấn đề máy chủ!");
+        } finally {
+            setLoading(false);
+        }
+
         
     }
     return (
@@ -35,24 +87,42 @@ function signUpPage() {
                                         </Link>
                                     </p>
                                 </div>
-                                <form className="w-100">
+                                <form className="w-100" onSubmit={register}>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="form-inner">
                                                 <label>Frist Name *</label>
-                                                <input type="email" placeholder="Frist Name" />
+                                                <input type="text" placeholder="First Name" name="first-name"/>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-inner">
                                                 <label>Last Name *</label>
-                                                <input type="email" placeholder="Last Name" />
+                                                <input type="text" placeholder="Last Name" name="last-name"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div className="form-inner">
+                                                <label>Enter your username *</label>
+                                                <input type="text" placeholder="Enter your username" name="username"/>
                                             </div>
                                         </div>
                                         <div className="col-md-12">
                                             <div className="form-inner">
                                                 <label>Enter Your Email *</label>
-                                                <input type="email" placeholder="Enter Your Email" />
+                                                <input type="email" placeholder="Enter your Email" name="email"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div className="form-inner">
+                                                <label>Enter Your address *</label>
+                                                <input type="text" placeholder="Enter your address" name="address"/>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div className="form-inner">
+                                                <label>Enter Your phone number *</label>
+                                                <input type="phone" placeholder="Enter your phone" name="phone-number"/>
                                             </div>
                                         </div>
                                         <div className="col-md-12">
@@ -72,7 +142,7 @@ function signUpPage() {
                                                 <label>Confirm Password *</label>
                                                 <input
                                                     type="password"
-                                                    name="password"
+                                                    name="confirm-password"
                                                     id="password2"
                                                     placeholder="Confirm Password"
                                                 />
@@ -90,7 +160,7 @@ function signUpPage() {
                                             </div>
                                         </div>
                                     </div>
-                                    <button className="account-btn">Create Account</button>
+                                    <button className="account-btn" type="submit">Create Account</button>
                                 </form>
                                 <div className="alternate-signup-box">
                                     <h6>or signup WITH</h6>

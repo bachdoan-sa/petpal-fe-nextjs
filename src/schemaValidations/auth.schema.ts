@@ -2,9 +2,12 @@ import z from 'zod'
 
 export const RegisterBody = z
   .object({
-    name: z.string().trim().min(2).max(256),
+    username: z.string().trim().min(2).max(256),
     email: z.string().email(),
     password: z.string().min(6).max(100),
+    fullname: z.string().trim().min(2).max(256),
+    address:z.string().trim().min(2).max(256).default(()=>''),
+    phoneNumber: z.string().trim().min(2).max(256).default(()=>''),
     confirmPassword: z.string().min(6).max(100)
   })
   .strict()
