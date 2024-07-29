@@ -11,7 +11,7 @@ function LogoutLogic() {
   const { setUser } = useAppContext();
 
   const searchParams = useSearchParams();
-  const sessionToken = searchParams.get('sessionToken');
+  const sessionToken = searchParams?.get('sessionToken');
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;

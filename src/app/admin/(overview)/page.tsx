@@ -1,11 +1,10 @@
 import React from "react";
-import Layout from "../../../components/admin/Layout";
 import Link from 'next/link';
 import CardWrapper from "@/src/components/admin/dashboard/Cards";
 
 export default function admin() {
     return (
-        <Layout>
+        <>
             <div className="container">
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-4">
                     <CardWrapper />
@@ -33,7 +32,7 @@ export default function admin() {
                     </Link>
                 </div>
             </div>
-        </Layout>
+        </>
     );
 }
 
