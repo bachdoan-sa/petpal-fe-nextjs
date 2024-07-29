@@ -1,8 +1,20 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Search } from "react-feather";
 import PetCareCard from "@/src/components/card/CardPetCenter";
+import petCenterApiRequest from "@/src/apiRequests/pet-center";
+import Image from 'next/image';
+import {
+  PetCenterListPageBodyType,
+  PetCenterListPageResType,
+} from "@/src/schemaValidations/petcenter.schema";
+// import 
 
 function petCareCenters() {
+  const [loading, setLoading] = useState(true);
+  const [careCenters, setCareCenters] = useState<
+    PetCenterListPageResType["data"]["list"]
+  >([]);
   const districtOptions = [
     { value: "", label: "Quận/Huyện" },
     { value: "1", label: "Quận 1" },
@@ -41,11 +53,41 @@ function petCareCenters() {
       mapLink: "https://maps.app.goo.gl/JYEZS6agEh8Kqm4J8",
     },
   ];
+  useEffect(() => {
+    const fetchCenterData = async () => {
+      try {
+        const page: PetCenterListPageBodyType = {
+          page: 1,
+          size: 8,
+        };
+        const res = await petCenterApiRequest.getListCareCenterWithPage(page);
+        const data: PetCenterListPageResType["data"] = res.payload.data;
+
+        setCareCenters(data.list);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCenterData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', padding: '50px' }}>
+          {/* <image src={"assets/images/preloader.gif"} alt="Loading..." /> */}
+          <Image height={300} width={450} src={"/assets/images/preloader.gif"} alt=""/>
+      </div>
+  );
+  }
 
   return (
     <>
       <div className="container">
         <div className="pt-10">
+          <h1 className="my-4 text-algin-center">Pet Care Centers</h1>
           <div className="d-flex justify-content-center align-items-center">
             <div className="col-auto pl-10">
               <select
@@ -81,15 +123,15 @@ function petCareCenters() {
             </div>
           </div>
         </div>
-        <h1 className="my-4">Pet Care Centers</h1>
-        <div className="row">
-          {petCareCenters.map((center, index) => (
-            <div key={index} className="col-12">
+        <div className="row my-4 ">
+          {careCenters.map((center, index) => (
+            <div key={index} className="d-flex justify-content-center ">
               <PetCareCard
-                imgSrc={center.imgSrc}
-                title={center.title}
+                // imgSrc={center.}
+                title={center.careCenterName}
                 description={center.description}
-                mapLink={center.mapLink}
+                address={center.address}
+                // mapLink={center.mapLink}
               />
             </div>
           ))}

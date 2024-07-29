@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const PetCareCard = ({ imgSrc, title, description, mapLink }) => {
+const PetCareCard = ({ imgSrc, title, description, address }) => {
   return (
     <div className="card mb-3" style={{ width: "860px" }}>
       <div className="row g-0">
@@ -12,7 +12,7 @@ const PetCareCard = ({ imgSrc, title, description, mapLink }) => {
             
             style={{ height: "100%", objectFit: "cover" }}
           />
-          <Link legacyBehavior href={mapLink}>
+          <Link legacyBehavior href={'/'}>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -29,6 +29,7 @@ const PetCareCard = ({ imgSrc, title, description, mapLink }) => {
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
+            <p className="card-text">{address}</p>
           </div>
         </div>
       </div>
