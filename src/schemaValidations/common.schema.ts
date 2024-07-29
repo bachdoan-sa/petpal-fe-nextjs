@@ -7,3 +7,7 @@ export const MessageRes = z
   .strict()
 
 export type MessageResType = z.TypeOf<typeof MessageRes>
+
+export const IsSucceedRes = z.object({
+  isSucceed: z.boolean()
+}).strict()

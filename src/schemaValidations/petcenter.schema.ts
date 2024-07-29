@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { PagingRes, PageBodyType, PagingBody } from "./paging.schema";
+import { PagingRes, PageBodyType, PagingBody } from "./paging/paging.schema";
 
 // Các bước định nghĩa 1 response
 // 1. định nghĩa object đó
