@@ -1,52 +1,31 @@
-import {
-    PetCenterListPageResType,
-    PetCenterListPageBodyType
-} from '@/src/schemaValidations/petcenter.schema'
-import {
-    PackageBykCenterListPageBodyType,
-    PackageListPageResType
-} from '@/src/schemaValidations/package/package.schema'
-import petCenterApiRequest from '@/src/apiRequests/pet-center';
-import { array } from 'zod';
-import packageApiRequest from '@/src/apiRequests/package';
 
-export default async function AdminPetCareCenters() {
-    const page: PetCenterListPageBodyType = {
-        page: 1,
-        size: 8
-    }
-    const res = await petCenterApiRequest.getListCareCenterWithPage(page);
-    const data = res.payload.data;
-    console.log(res);
-    console.log(data);
-    const kCenterPackagesBody: PackageBykCenterListPageBodyType = {
-        page: 1,
-        size: 8,
-        careCenterId: '836e7370-e0c3-42fa-fa17-08dca6a5ed5d'
-    }
-    const packageres = await packageApiRequest.getListPackageByKCenterWithPage(kCenterPackagesBody);
-    const Packagedata = packageres.payload.data;
-    console.log(packageres);
-    console.log(Packagedata);
+import { lusitana } from '@/src/fonts/fonts';
+import { Suspense } from 'react';
+import SearchBar from '@/src/components/admin/search';
+import { CreateButton } from '@/src/components/admin/table/button';
+import KCenterTable from '@/src/components/admin/table/kcenters/kcenterTable';
+export default function AdminManageKCenter({
+    searchParams,
+}: {
+    searchParams?: {
+        query?: string;
+        page?: string;
+    };
+}) {
+    const query = searchParams?.query || '';
+    const currentPage = Number(searchParams?.page) || 1;
     return (
         <>
-            <div >
-                <p> k center list</p>
-                {data.list.map((item) => (
-                    <div key={item.id} >
-                        <p> {item.careCenterName}</p>
-                    </div>
-                ))}
+            <div className="d-flex w-100 align-items-center justify-content-between">
+                <h2 className={`${lusitana.className}`}>Care Center</h2>
             </div>
-            <div>
-                <p> k center package list</p>
-                {Packagedata?.packages?.map((item) => (
-                    <div key={item.id} >
-                        <p> {item.id}</p>
-                    </div>
-                ))}
+            <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
+                <Suspense>
+                    <SearchBar placeholder="Search Pet Care center..." />
+                </Suspense>
+                <CreateButton link={"care-centers/create"} title="Create Center" />
             </div>
+            <KCenterTable query={query} currentPage={currentPage} />
         </>
     );
-
 }

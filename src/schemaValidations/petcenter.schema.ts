@@ -9,7 +9,8 @@ export const PetCenterSchema = z.object({
     listImages: z.string(),
     address: z.string(),
     description: z.string(),
-    averageRating: z.number()
+    averageRating: z.number(),
+    status: z.string().optional().default(()=>"")
 });
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
 export const PetCenterRes = z.object({
@@ -18,7 +19,7 @@ export const PetCenterRes = z.object({
 });
 // 2.1 định nghĩa kiểu thuộc tính trả về (cái này là định nghĩa kiểu để bên ngoài lấy)
 export type PetCenterResType = z.TypeOf<typeof PetCenterRes>;
-
+export type PetCenterType = z.TypeOf<typeof PetCenterSchema>;
 
 
 // 3. Định nghĩa cấu trúc trả về theo list, đây là định nghĩa cái thông tin ở trong.
@@ -31,6 +32,7 @@ export const PetCenterListRes = z.object({
     message: z.string()
 })
 // 3.2
+export type PetCenterListType = z.TypeOf<typeof PetCenterList>;
 export type PetCenterListResType = z.TypeOf<typeof PetCenterListRes>
 
 

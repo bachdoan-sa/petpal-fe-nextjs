@@ -4,7 +4,7 @@ import { CreateButton } from "@/src/components/admin/table/button.jsx";
 import SearchBar from "@/src/components/admin/search.jsx";
 import Pagination from "@/src/components/admin/table/pagination.jsx";
 import { getDataTestPages } from "@/src/data/apiService.js";
-import UserTable from "@/src/components/admin/table/userTable.jsx";
+import UserTable from "@/src/components/admin/table/users/userTable.jsx";
 
 export default function AdminManageUsers({
     searchParams,

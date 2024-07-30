@@ -2,7 +2,7 @@
 import SearchBar from "@/src/components/admin/search.jsx";
 import { CreateButton } from "@/src/components/admin/table/button.jsx";
 import Pagination from "@/src/components/admin/table/pagination.jsx";
-import UserTable from "@/src/components/admin/table/userTable.jsx";
+import UserTable from "@/src/components/admin/table/users/userTable";
 import StaffTable from "@/src/components/manager/table/StaffTable";
 import { getDataTestPages } from "@/src/data/apiService.js";
 import { lusitana } from "@/src/fonts/fonts";
