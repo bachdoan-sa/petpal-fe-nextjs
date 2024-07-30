@@ -97,15 +97,15 @@ const request = async <Response>(
     };
 
     try {
-        console.log(axiosConfig);
+        
         const response = await axios(axiosConfig);
-        console.log(response);
+        
         const payload: Response = await response.data.payload;
         const data = {
             status: response.status,
             payload
         };
-        console.log(response);
+        
         if (!(response.status === OK_STATUS)) {
             if (response.status === ENTITY_ERROR_STATUS) {
                 throw new EntityError(

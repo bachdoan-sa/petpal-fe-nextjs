@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getDataTestTable } from "@/src/data/apiService";
-import { DeleteButton, UpdateButton } from "./button";
+import { DeleteButton, UpdateButton } from "../button";
 
 export default function UserTable({ query , currentPage }) {
     const users = getDataTestTable(query , currentPage);
