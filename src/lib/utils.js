@@ -56,11 +56,6 @@ export const handleErrorApi = ({ error, setError, duration = undefined }) => {
       })
     })
   } else {
-    toast.error({
-      title: 'Lỗi',
-      description: error?.payload?.message ?? 'Lỗi không xác định',
-      variant: 'destructive',
-      duration: duration ?? 5000
-    })
+    toast.error(error?.payload?.message ?? 'Lỗi không xác định');
   }
 }
