@@ -8,17 +8,17 @@ import ShipingAddress from "@/src/components/shop/ShipingAddress";
 function checOutPage() {
   return (
     <>
-      <Breadcrumb pageName="Check Out" pageTitle="Check Out" />
-      <div className="checkout-section pt-120 pb-120">
+      {/* <Breadcrumb pageName="Check Out" pageTitle="Check Out" /> */}
+      <div className="checkout-section pt-10 pb-10">
         <div className="container">
           <div className="row g-4">
             <div className="col-lg-7">
               <BillingDetails />
-              <ShipingAddress />
+              {/* <ShipingAddress /> */}
             </div>
             <aside className="col-lg-5">
               <OrderSummary />
-              <Payment />
+              {/* <Payment /> */}
             </aside>
           </div>
         </div>

@@ -70,10 +70,10 @@ function loginPage() {
                                 data-wow-delay=".2s"
                             >
                                 <div className="form-title">
-                                    <h3>Log In</h3>
+                                    <h3>Đăng nhập</h3>
                                     <p>
                                         New Member?{" "}
-                                        <Link legacyBehavior href="/sign-up">
+                                        <Link legacyBehavior href="/register">
                                             <a>signup here</a>
                                         </Link>
                                     </p>
@@ -117,30 +117,34 @@ function loginPage() {
                                     </a>
                                 </form>
                                 <div className="alternate-signup-box">
-                                    <h6>or signup WITH</h6>
+                                
+                                    <h6>Hoặc</h6>
                                     <div className="btn-group gap-4">
                                         <a
                                             href="#"
                                             className="eg-btn google-btn d-flex align-items-center"
                                         >
                                             <i className="bx bxl-google" />
-                                            <span>signup whit google</span>
+                                            <span>Đăng nhập bằng Google</span>
                                         </a>
-                                        <a
-                                            href="#"
-                                            className="eg-btn facebook-btn d-flex align-items-center"
-                                        >
-                                            <i className="bx bxl-facebook" />
-                                            signup whit facebook
-                                        </a>
+                                        
                                     </div>
                                 </div>
+                                
                                 <div className="form-poicy-area">
                                     <p>
                                         By clicking the "signup" button, you create a Cobiro
                                         account, and you agree to Cobiro's{" "}
                                         <a href="#">Terms &amp; Conditions</a> &amp;{" "}
                                         <a href="#">Privacy Policy.</a>
+                                    </p>
+                                </div>
+                                <div className="form-title">
+                                    <p>
+                                        Trở thành đối tác của PetPal?{" "}
+                                        <Link legacyBehavior href="/register">
+                                            <a>Đăng kí</a>
+                                        </Link>
                                     </p>
                                 </div>
                             </div>

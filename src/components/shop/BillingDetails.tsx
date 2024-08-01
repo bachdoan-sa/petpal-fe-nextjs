@@ -1,6 +1,26 @@
 import React from "react";
 
-function BillingDetails() {
+import {PetListPageBodyType, PetType} from "@/src/schemaValidations/pet.schema";
+import { cookies } from "next/headers";
+import PetApiRequest from "@/src/apiRequests/pet";
+const BillingDetails = async() => {
+  
+  const cookieStore = cookies();
+    const sessionToken = cookieStore.get('sessionToken')?.value;
+    const body:PetListPageBodyType = {
+        page: 1,
+        size: 20
+    }
+    let pets: PetType[] = [];
+    let totalPages: number = 1;
+    try {
+        const response = await PetApiRequest.getListPetForUser({ body, sessionToken });
+        totalPages = response.payload?.data?.paging?.maxPage;
+        pets = response.payload?.data?.list;
+    } catch (error: any) {
+        console.log(error);
+    }
+    
   return (
     <>
       <div className="form-wrap box--shadow mb-30">
@@ -41,12 +61,20 @@ function BillingDetails() {
             </div>
             <div className="col-12">
               <div className="form-inner">
-                <select>
-                  <option>Town / City</option>
-                  <option>Dhaka</option>
-                  <option>Saidpur</option>
-                  <option>Newyork</option>
-                </select>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+              >
+                {pets?.map((option, index) => (
+                  <option
+                    key={index}
+                    // value={option.value}
+                    // selected={option.value === ""}
+                  >
+                   {option.fullname}
+                  </option>
+                ))}
+              </select>
               </div>
             </div>
             <div className="col-12">

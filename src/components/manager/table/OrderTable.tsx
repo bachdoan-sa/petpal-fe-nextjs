@@ -20,6 +20,14 @@ export default async function orderTable({ query, currentPage }) {
     let totalPages: number = 1;
     try {
         const response = await orderApiRequest.getListOrderForManager({ body, sessionToken });
+        const data = response.payload?.data;
+        if(data == null){
+            return(<>
+                <h1>
+                    Không có order nào cả.
+                </h1>
+            </>);
+        }
         totalPages = response.payload?.data?.paging?.maxPage;
         orders = response.payload?.data?.orders;
     } catch (error: any) {

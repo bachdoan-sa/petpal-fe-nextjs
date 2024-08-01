@@ -6,6 +6,7 @@ import { PagingRes, PagingBody } from "../paging/paging.schema";
 export const PackageSchema = z.object({
     id: z.string(),
     description: z.string(),
+    title: z.string().optional(),
     duration: z.string(),
     type: z.string(),
     totalPrice: z.number(),
@@ -18,6 +19,8 @@ export const PackageRes = z.object({
 });
 // 2.1 định nghĩa kiểu thuộc tính trả về (cái này là định nghĩa kiểu để bên ngoài lấy)
 export type PackageResType = z.TypeOf<typeof PackageRes>;
+
+export type PackageType = z.TypeOf<typeof PackageSchema>
 
 
 
@@ -57,3 +60,10 @@ export const PackageBykCenterListPageBody = z.object({
     careCenterId: z.string().optional()
 });
 export type PackageBykCenterListPageBodyType = z.TypeOf<typeof PackageBykCenterListPageBody>;
+
+// 5. Định nghĩa cấu trúc request để lấy 1 package theo id
+export const GetPackageByIdSchema = z.object({
+    id: z.string()
+  });
+  export type GetPackageByIdType = z.TypeOf<typeof GetPackageByIdSchema>;
+  

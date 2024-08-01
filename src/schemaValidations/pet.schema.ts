@@ -17,6 +17,9 @@ export const PetRes = z.object({
 });
 export type PetResType = z.TypeOf<typeof PetRes>;
 
+export type PetType = z.TypeOf<typeof PetSchema>;
+
+
 
 export const PetList = z.object({
     list: z.array(PetSchema)

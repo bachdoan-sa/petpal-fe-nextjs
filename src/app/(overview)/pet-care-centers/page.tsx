@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Search } from "react-feather";
 import PetCareCard from "@/src/components/card/CardPetCenter";
 import petCenterApiRequest from "@/src/apiRequests/pet-center";
-import Image from 'next/image';
+import Image from "next/image";
 import {
   PetCenterListPageBodyType,
   PetCenterListPageResType,
 } from "@/src/schemaValidations/petcenter.schema";
-// import 
+import Breadcrumb from "@/src/components/breadcrumb/Breadcrumb";
+// import
 
 function petCareCenters() {
   const [loading, setLoading] = useState(true);
@@ -76,19 +77,26 @@ function petCareCenters() {
 
   if (loading) {
     return (
-      <div style={{ textAlign: 'center', padding: '50px' }}>
-          <Image height={300} width={450} src={"/assets/images/preloader.gif"} alt=""/>
+      <div style={{ textAlign: "center", padding: "50px" }}>
+        <Image
+          height={300}
+          width={450}
+          src={"/assets/images/preloader.gif"}
+          alt=""
+        />
       </div>
-  );
+    );
   }
 
   return (
     <>
+      <Breadcrumb pageName="" pageTitle="Pet Care Centers" />
       <div className="container">
-        <div className="pt-10">
-          <h1 className="my-4 text-algin-center">Pet Care Centers</h1>
-          <div className="d-flex justify-content-center align-items-center">
-            <div className="col-auto pl-10">
+        <div className="pt-40">
+          {/* <h1 className="my-4 text-algin-center">Pet Care Centers</h1> */}
+          <div className="multiselect-bar">
+            <h6>Tìm kiếm địa chỉ </h6>
+            <div className="multiselect-area">
               <select
                 className="form-select"
                 aria-label="Default select example"
@@ -103,8 +111,7 @@ function petCareCenters() {
                   </option>
                 ))}
               </select>
-            </div>
-            <div className="col-auto">
+
               <select
                 className="form-select"
                 aria-label="Default select example"
@@ -120,13 +127,16 @@ function petCareCenters() {
                 ))}
               </select>
             </div>
+            <div className="col-auto"></div>
           </div>
         </div>
-        <div className="row my-4 ">
+        <hr className="hr hr-blurry" />
+
+        <div className="pt-10">
           {careCenters.map((center, index) => (
             <div key={index} className="d-flex justify-content-center ">
               <PetCareCard
-              id={center.id}
+                id={center.id}
                 // imgSrc={center.}
                 title={center.careCenterName}
                 description={center.description}

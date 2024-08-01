@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import petCollection from "../../data/petCollection.json";
 function ShopCard() {
+  
   return (
     <>
       {petCollection.map((item) => {
@@ -18,7 +19,7 @@ function ShopCard() {
         return (
           <div key={id} className="col-lg-4 col-md-4 col-sm-6">
             <div className="collection-card">
-              {/* {tag == "" ? (
+              {tag == "" ? (
                 ""
               ) : (
                 <div
@@ -28,14 +29,14 @@ function ShopCard() {
                 >
                   <span>{tag}</span>
                 </div>
-              )} */}
+              )}
               <div className="collection-img">
                 <img className="img-gluid" src={img} alt="" />
                 <div className="view-dt-btn">
                   <div className="plus-icon">
                     <i className="bi bi-plus" />
                   </div>
-                  <Link legacyBehavior href="/shop-details">
+                  <Link legacyBehavior href="/shop-detail">
                     <a>View Details</a>
                   </Link>
                 </div>

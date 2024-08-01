@@ -44,13 +44,15 @@ function Breadcrumb({ pageName = "Page Name", pageTitle = "Page Title" }) {
                   className="img-fluid"
                   src="assets/images/bg/inner-banner-vec.png"
                   alt=""
+                  width={300}
                 />
               </div>
-              <img
-                className="img-fluid"
+              {/* <img
+                className=""
                 src="assets/images/bg/inner-banner-img.png"
                 alt=""
-              />
+                width={200}
+              /> */}
             </div>
           </div>
         </div>

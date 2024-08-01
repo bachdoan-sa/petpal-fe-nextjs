@@ -1,8 +1,9 @@
 import envConfig from '@/src/config'
 import { normalizePath } from '@/src/lib/utils'
 import { LoginResType } from '@/src/schemaValidations/auth.schema'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { redirect } from 'next/navigation'
+import { number } from 'zod'
 
 type CustomOptions = Omit<RequestInit, 'method'> & {
     baseUrl?: string | undefined
@@ -13,12 +14,12 @@ const AUTHENTICATION_ERROR_STATUS = 401;
 const OK_STATUS = 200;
 type EntityErrorPayload = {
     message: string
-    errors: {
-        field: string
-        message: string
-    }[]
+    errors: EntityErrorField[]
 }
-
+type EntityErrorField = {
+    field: string
+    message: string
+}
 export class HttpError extends Error {
     status: number
     payload: {
@@ -94,27 +95,33 @@ const request = async <Response>(
             ...options?.headers,
         },
         data: body,
+        // validateStatus: function(status){
+        //     return status < 500;
+        // }
     };
 
     try {
-        console.log(axiosConfig);
         const response = await axios(axiosConfig);
-        console.log(response);
+
         const payload: Response = await response.data.payload;
+        const strstatus: string = response.data.status as string;
+        const status: number = Number(strstatus.slice(0, 3));
+
         const data = {
-            status: response.status,
+            status: status,
             payload
         };
-        console.log(response);
-        if (!(response.status === OK_STATUS)) {
-            if (response.status === ENTITY_ERROR_STATUS) {
+        //code này chạy nếu axios không nhảy try catch
+        if (!(status === OK_STATUS)) {
+            if (status === ENTITY_ERROR_STATUS) {
                 throw new EntityError(
                     data as {
                         status: 422
                         payload: EntityErrorPayload
                     }
                 )
-            } else if (response.status === AUTHENTICATION_ERROR_STATUS) {
+
+            } else if (status === AUTHENTICATION_ERROR_STATUS) {
                 if (isClient()) {
                     if (!clientLogoutRequest) {
                         clientLogoutRequest = fetch('/api/auth/logout', {
@@ -154,24 +161,72 @@ const request = async <Response>(
                 localStorage.removeItem('sessionTokenExpiresAt')
             }
         }
+
         return data;
     } catch (error: any) {
-        console.error('error:', error); // Log lỗi để dễ dàng debug
-        if (axios.isAxiosError(error)) {
-            const response = error.response;
-            if (response) {
-                const data = {
-                    status: response.status,
-                    payload: response.data,
-                };
-                console.error('Axios res: ' + error);
-            } else {
-                console.error('Not Axios: ' + error);
+        //bởi vì axios sẽ nhảy trycatch nếu bị lỗi nên phải hander ở trong này.
+        const payload: Response = error.response?.data.errors;
+        const status: number = error.response?.data.status;
+        const data = {
+            status: status,
+            payload
+        };
+        if (error instanceof AxiosError) {
+
+
+            if (!(status === OK_STATUS)) {
+                if (status === ENTITY_ERROR_STATUS) {
+                    throw new EntityError(
+                        data as {
+                            status: 422
+                            payload: EntityErrorPayload
+                        }
+                    )
+
+                } else if (status === AUTHENTICATION_ERROR_STATUS) {
+                    if (isClient()) {
+                        if (!clientLogoutRequest) {
+                            clientLogoutRequest = fetch('/api/auth/logout', {
+                                method: 'POST',
+                                body: JSON.stringify({ force: true }),
+                                headers: {
+                                    ...baseHeaders
+                                } as any
+                            })
+                            try {
+                                await clientLogoutRequest;
+                            } catch (error) {
+                            } finally {
+                                localStorage.removeItem('sessionToken');
+                                localStorage.removeItem('sessionTokenExpiresAt');
+                                clientLogoutRequest = null;
+                                location.href = '/login';
+                            }
+                        }
+                    } else {
+                        const sessionToken = (options?.headers as any)?.Authorization.split(
+                            'Bearer '
+                        )[1]
+                        redirect(`/logout?sessionToken=${sessionToken}`)
+                    }
+                } else {
+                    throw new HttpError(data)
+                }
             }
-        } else {
-            console.error('Orther: ' + error);
+
+            if (isClient()) {
+                if (['auth/login', 'auth/register'].some((item) => item === normalizePath(url))) {
+                    const { token, expiresAt } = (payload as LoginResType).data
+                    localStorage.setItem('sessionToken', token)
+                    localStorage.setItem('sessionTokenExpiresAt', expiresAt)
+                } else if ('auth/logout' === normalizePath(url)) {
+                    localStorage.removeItem('sessionToken')
+                    localStorage.removeItem('sessionTokenExpiresAt')
+                }
+            }
+
         }
-        throw error;
+        return data;
     }
 };
 

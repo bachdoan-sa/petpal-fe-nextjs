@@ -1,7 +1,9 @@
+'user client'
 import React from "react";
 import MenuComponent from "@/src/components/menu/Menu";
 import UserInfo from "@/src/components/user/UserInfo";
 import PetInfo from "@/src/components/user/PetInfo";
+import BootstrapMenu from '@/src/components/header/Menu'
 
 function AccountUser() {
 
@@ -22,7 +24,7 @@ function AccountUser() {
 
   return (
     <>
-      <MenuComponent menuItems={menuItems} initialComponent="Pet" role={""} />
+      <BootstrapMenu/>
     </>
   );
 }

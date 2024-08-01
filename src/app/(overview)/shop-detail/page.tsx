@@ -13,7 +13,7 @@ function ShopDetails() {
         <div className="container">
           <ProductDetails />
           <SingleProductDescription />
-          <OthersProduct />
+          {/* <OthersProduct /> */}
         </div>
       </div>
     </>

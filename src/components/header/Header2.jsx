@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useReducer, useRef } from "react";
@@ -113,7 +113,7 @@ function Header2() {
               <ul
                 className={
                   state.activeMenu === "services"
-                    ? "sub-menu  d-block"
+                    ? "sub-menu  d-block"                                                                           
                     : "sub-menu d-xl-block d-none"
                 }
               >
@@ -215,10 +215,12 @@ function Header2() {
                 </button>
               </div>
             </form>
+           
           </div>
         </div>
         <div className="nav-right d-flex jsutify-content-end align-items-center">
           <ul>
+            {/* biểu tượng login */}
             <li>
               <Link legacyBehavior href="/login">
                 <a>
@@ -237,12 +239,6 @@ function Header2() {
               </Link>
             </li>
           </ul>
-          <div className="hotline-info">
-            <span>Call Us Now</span>
-            <h6>
-              <a href="tel:+1(541)754-3010">+1 (541) 754-3010</a>
-            </h6>
-          </div>
           <div className="sidebar-button mobile-menu-btn">
             <i
               className="bi bi-list"

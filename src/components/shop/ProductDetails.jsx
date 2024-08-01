@@ -167,10 +167,10 @@ function ProductDetails() {
             </div>
             <div className="price-tag">
               <h4>
-                $50.00 <del>$80.00</del>
+                $50.00 
               </h4>
             </div>
-            <p>
+            {/* <p>
               Donec bibendum enim ut elit porta ullamcorper. Vestibulum Nai
               wekemdini iaculis vitae nulla. Morbi mattis nec mi ac mollis.{" "}
             </p>
@@ -181,13 +181,13 @@ function ProductDetails() {
               <Link legacyBehavior href="/cart">
                 <a className="primary-btn3">Add to cart</a>
               </Link>
-            </div>
+            </div> */}
             <div className="buy-now-btn">
-              <Link legacyBehavior href="/cart">
+              <Link legacyBehavior href="/check-out">
                 <a>Buy Now</a>
               </Link>
             </div>
-            <div className="compare-wishlist-area">
+            {/* <div className="compare-wishlist-area">
               <ul>
                 <li>
                   <a href="#">
@@ -209,8 +209,8 @@ function ProductDetails() {
                   </a>
                 </li>
               </ul>
-            </div>
-            <div className="pyment-method">
+            </div> */}
+            {/* <div className="pyment-method">
               <h6>Guaranted Safe Checkout</h6>
               <ul>
                 <li>
@@ -235,7 +235,7 @@ function ProductDetails() {
                   <img src="assets/images/icon/pay.svg" alt="" />
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

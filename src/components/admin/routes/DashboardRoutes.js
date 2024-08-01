@@ -74,52 +74,12 @@ export const DashboardMenu = [
 		icon: 'monitor',
 		children: [
 			{ id: uuid(), link: '/admin/users', name: 'Users' },
-			{ id: uuid(), link: '/admin/centers', name: 'Centers' },
+			{ id: uuid(), link: '/admin/care-centers', name: 'Centers' },
 			{ id: uuid(), link: '/admin/extratables', name: 'Extratables' }
 			
 		]
 	},	
-	{
-		id: uuid(),
-		title: 'Menu Level',
-		icon: 'corner-left-down',
-		children: [
-			{ 
-				id: uuid(), 
-				link: '#', 
-				name: 'Two Level',
-			},
-			{ 
-				id: uuid(), 
-				link: '#', 
-				name: 'Three Level',
-			
-			}
-		]
-	},	
-	{
-		id: uuid(),
-		title: 'Documentation',
-		grouptitle: true
-	},
-	{
-		id: uuid(),
-		title: 'Docs',
-		icon: 'clipboard',
-		link: '/documentation'
-	},
-	{
-		id: uuid(),
-		title: 'Changelog',
-		icon: 'git-pull-request',
-		link: '/changelog'
-	},
-	{
-		id: uuid(),
-		title: 'Contact',
-		icon: 'download',
-		link: 'https://codescandy.gumroad.com/l/dashui-nextjs'
-	}
+	
 ];
 
 export default DashboardMenu;

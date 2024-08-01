@@ -15,13 +15,14 @@ function OrderSummary() {
               <h5 className="product-title">
                 <a href="#">Whiskas Cat Food Core Tuna</a>
               </h5>
-              <ProductPriceCount price={22} />
+              {/* <ProductPriceCount price={22} /> */}
+              <h4>500000đ</h4>
             </div>
             <div className="delete-btn">
               <i className="bi bi-x-lg" />
             </div>
           </li>
-          <li className="single-product d-flex justify-content-start">
+          {/* <li className="single-product d-flex justify-content-start">
             <div className="product-img">
               <img src="assets/images/bg/check-out-02.png" alt="" />
             </div>
@@ -34,8 +35,8 @@ function OrderSummary() {
             <div className="delete-btn">
               <i className="bi bi-x-lg" />
             </div>
-          </li>
-          <li className="single-product d-flex justify-content-start">
+          </li> */}
+          {/* <li className="single-product d-flex justify-content-start">
             <div className="product-img">
               <img src="assets/images/bg/check-out-03.png" alt="" />
             </div>
@@ -48,10 +49,10 @@ function OrderSummary() {
             <div className="delete-btn">
               <i className="bi bi-x-lg" />
             </div>
-          </li>
+          </li> */}
         </ul>
       </div>
-      <div className="summery-card cost-summery mb-30">
+      {/* <div className="summery-card cost-summery mb-30">
         <table className="table cost-summery-table">
           <thead>
             <tr>
@@ -74,8 +75,8 @@ function OrderSummary() {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="summery-card total-cost mb-30">
+      </div> */}
+      {/* <div className="summery-card total-cost mb-30">
         <table className="table cost-summery-table total-cost">
           <thead>
             <tr>
@@ -84,7 +85,7 @@ function OrderSummary() {
             </tr>
           </thead>
         </table>
-      </div>
+      </div> */}
     </>
   );
 }

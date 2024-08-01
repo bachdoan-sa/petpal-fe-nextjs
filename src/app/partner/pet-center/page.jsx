@@ -39,7 +39,7 @@ export default function PetCenter() {
           </button>
         </Link>
       </div>
-      <hr class="hr hr-blurry" />
+      <hr className="hr hr-blurry" />
       <div className="pt-10">
         {petCareCenters.map((center, index) => (
           <div
