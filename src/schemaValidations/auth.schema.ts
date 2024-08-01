@@ -6,9 +6,9 @@ export const RegisterBody = z
     email: z.string().email(),
     password: z.string().min(6).max(100),
     fullname: z.string().trim().min(2).max(256),
-    address:z.string().trim().min(2).max(256).default(()=>''),
-    phoneNumber: z.string().trim().min(2).max(256).default(()=>''),
-    confirmPassword: z.string().min(6).max(100)
+    address: z.string().trim().min(2).max(256).default(() => ''),
+    phoneNumber: z.string().trim().min(2).max(256).default(() => ''),
+    confirmPassword: z.string().min(6).max(100).optional()
   })
   .strict()
   .superRefine(({ confirmPassword, password }, ctx) => {
@@ -20,15 +20,24 @@ export const RegisterBody = z
       })
     }
   })
-
+export const Payment = z.object({
+  name: z.string(),
+  accountNumber: z.string(),
+  valid: z.string()
+})
+export const RegisterPartnerBody = z.object({
+  partner: RegisterBody,
+  payment: Payment
+})
 export type RegisterBodyType = z.TypeOf<typeof RegisterBody>
+export type RegisterPartnerBodyType = z.TypeOf<typeof RegisterPartnerBody>
 
 export const RegisterRes = z.object({
   data: z.object({
     token: z.string(),
     expiresAt: z.string(),
     name: z.string(),
-    role:  z.string()
+    role: z.string()
   }),
   message: z.string()
 })

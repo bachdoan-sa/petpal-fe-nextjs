@@ -3,6 +3,7 @@ import {
   LoginBodyType,
   LoginResType,
   RegisterBodyType,
+  RegisterPartnerBodyType,
   RegisterResType,
   SlideSessionResType
 } from '@/src/schemaValidations/auth.schema'
@@ -12,6 +13,8 @@ const authApiRequest = {
   login: (body: LoginBodyType) => http.post<LoginResType>('/api/Auth/login', body),
   register: (body: RegisterBodyType) =>
     http.post<RegisterResType>('/api/Auth/register', body),
+  registerPartner: (body: RegisterPartnerBodyType) =>
+    http.post<RegisterResType>('/api/Auth/register-partner', body),
   auth: (body: { sessionToken: string; sessionRole: string ; expiresAt: string }) =>
     http.post('/api/auth', body, {
       baseUrl: ''

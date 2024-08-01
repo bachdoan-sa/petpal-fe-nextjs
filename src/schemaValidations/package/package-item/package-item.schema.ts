@@ -1,15 +1,21 @@
 import { z } from "zod";
 import { PagingRes, PagingBody } from "../../paging/paging.schema";
+import { IsSucceedRes } from "../../common.schema";
 //HÀM NÀY CHƯA XONG CẦN ĐƯỢC SỬA
 // Các bước định nghĩa 1 response
 // 1. định nghĩa object đó
 export const PackageItemSchema = z.object({
-    Id: z.string(),
+    Id: z.string().optional(),
     packageId: z.string(),
     serviceId: z.string(),
     currentPrice: z.string(),
     detail: z.string(),
-    createdBy: z.number(),
+    status: z.string().optional(),
+
+    createdAt: z.date().optional(),
+    createdBy: z.string().optional(),
+    updatedAt: z.date().optional(),
+    updatedBy: z.string().optional()
 });
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
 export const PackageItemRes = z.object({
@@ -54,3 +60,23 @@ export const PackageItemListPageByPackageBody = z.object({
     packageItemId : z.string()
 });
 export type PackageItemBykCenterListPageBodyType = z.TypeOf<typeof PackageItemListPageByPackageBody>;
+
+
+//Create Model
+export const CreatePackageItemBody = PackageItemSchema;
+export type CreatePackageItemBodyType = z.TypeOf<typeof CreatePackageItemBody>;
+export const CreatePackageItemRes = z.object({
+    data: IsSucceedRes,
+    message: z.string()
+});
+export type CreatePackageItemResType = z.TypeOf<typeof CreatePackageItemRes>;
+
+
+//Update Model
+export const UpdatePackageItemBody = PackageItemSchema;
+export type UpdatePackageItemBodyType = z.TypeOf<typeof UpdatePackageItemBody>;
+export const UpdatePackageItemRes = z.object({
+    data: IsSucceedRes,
+    message: z.string()
+});
+export type UpdatePackageItemResType = z.TypeOf<typeof UpdatePackageItemRes>;
