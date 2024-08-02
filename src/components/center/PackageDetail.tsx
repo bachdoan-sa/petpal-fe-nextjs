@@ -172,7 +172,15 @@ function PackageDetailComponent({
               <span>{packageDetail?.duration}</span>
             </div>
             <div className="model-number">
-              <span>{packageDetail?.description}</span>
+              {/* <span>{packageDetail?.description}</span> */}
+              <span>
+                This food may help from a variety of different ingredients,
+                including meat, grains, vegetables, and fortified vitamins and
+                minerals. Some pet food is formulated for specific life stages,
+                such as puppy or senior, and may contain higher levels of
+                certain nutrients to support the needs of pets at those stages
+                of life.
+              </span>
             </div>
 
             <div className="price-tag">
@@ -192,7 +200,7 @@ function PackageDetailComponent({
                 </div> */}
             <div className="buy-now-btn">
               <Link legacyBehavior href="/check-out">
-                <a>Đặt nay</a>
+                <a>Đặt ngay</a>
               </Link>
             </div>
             {/* <div className="compare-wishlist-area">
