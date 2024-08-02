@@ -36,13 +36,13 @@ const BillingDetails = ({ sessionToken }: { sessionToken?: string }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="form-inner">
-                <label>Last Name</label>
-                <input readOnly value={user?.name} />
+                <label>Chào mừng:</label>
+                <span className="ms-3 text-dark" >{user?.name ?? 'Khách ẩn danh'}</span>
               </div>
             </div>
             <div className="col-12">
               <div className="form-inner">
-                <label>Your Address Now</label>
+                <label>Địa chỉ hiện tại của bạn:</label>
                 <input
                   type="text"
                   name="fname"
@@ -50,30 +50,42 @@ const BillingDetails = ({ sessionToken }: { sessionToken?: string }) => {
                 />
               </div>
             </div>
-            
+
             <div className="col-12">
               <div className="form-inner">
-                <label>Select Your Pet</label>
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                >
-                  {pets?.map((option, index) => (
-                    <option
-                      key={index}
-                    // value={option.value}
-                    // selected={option.value === ""}
-                    >
-                      {option.fullName}
-                    </option>
-                  ))}
-                </select>
+                <label>Hãy chọn thú cưng cho dịch vụ này:</label>
+                {(pets.length>0) ? (
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                  >
+                    {pets?.map((option, index) => (
+                      <option
+                        key={index}
+                      // value={option.value}
+                      // selected={option.value === ""}
+                      >
+                        {option.fullName}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <>
+                    <input
+                      type="text" 
+                      placeholder="Lựa chọn thú cưng của bạn"
+                      value="Bạn cần đăng nhập để lấy danh sách thú cưng."
+                    />
+                  </>
+                )
+                }
+
               </div>
             </div>
 
             <div className="col-12">
               <div className="form-inner">
-                <label>Additional Information</label>
+                <label>Thông tin kèm theo:</label>
                 <input
                   type="text"
                   name="fname"
