@@ -3,23 +3,32 @@ import React, { useState } from "react";
 import ProgressSteps from "../../../../components/partner/ProgressSteps";
 import FormStep1 from "../../../../components/partner/steps/FormStep1";
 import FormStep2 from "../../../../components/partner/steps/FormStep2";
+import { toast } from "sonner";
+import { boolean } from "zod";
+import petCenterApiRequest from "@/src/apiRequests/pet-center";
 
 export default function Register() {
+  const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     step1: {
-      restaurantName: "",
-      phoneNumber: "",
+      careCenterName: "",
+      address: "",
+      hotline: "",
+
       city: "",
       district: "",
       ward: "",
-      streetAddress: "",
+      street: ""
     },
     step2: {
+      username: "",
+      password: "",
       fullName: "",
-      email: "",
+      address: "",
       phoneNumber: "",
-      alternatePhoneNumber: "",
+      email: "",
+
       idNumber: "",
       issueDate: "",
       issuePlace: "",
@@ -47,8 +56,26 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = () => {
-    console.log("Submitting all data:", formData);
+  const handleSubmit = async () => {
+    toast.warning("Đang xử lí lưu trữ");
+    setLoading(true);
+    const data = new FormData();
+    data.append('CareCenter.CareCenterName', formData.step1.careCenterName);
+    data.append('CareCenter.Address', formData.step1.street);
+    data.append('CareCenter.Hotline', formData.step1.hotline);
+    data.append('Manager.Username', formData.step2.username);
+    data.append('Manager.Password', formData.step2.password);
+    data.append('Manager.FullName', formData.step2.fullName);
+    data.append('Manager.Address', formData.step2.address);
+    data.append('Manager.PhoneNumber', formData.step2.phoneNumber);
+    data.append('Manager.Email', formData.step2.email);
+    data.append('ManagerIdentity.Number', formData.step2.idNumber);
+    data.append('ManagerIdentity.CreatedAt', formData.step2.issueDate);
+    data.append('ManagerIdentity.CreatedLocation', formData.step2.issuePlace);
+    data.append('front_identity', formData.step2.frontImage);
+    data.append('back_identity', formData.step2.backImage);
+    const response = await petCenterApiRequest.createPetCenterWithManagerd(data);
+
     // Xử lý submit ở đây
   };
 
@@ -82,6 +109,8 @@ export default function Register() {
           <p>Cảm ơn bạn đã điền thông tin.</p>
         </div>
       )}
+      <button className="btn btn-primary" type="button" onClick={handleSubmit}> submit </button>
     </div>
+
   );
 }

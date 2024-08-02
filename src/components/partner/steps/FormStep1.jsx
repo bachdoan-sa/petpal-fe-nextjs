@@ -7,8 +7,8 @@ const FormStep1 = ({ onNext, formData, onInputChange }) => {
 
   const validate = () => {
     let tempErrors = {};
-    if (!formData.storeName) tempErrors.storeName = 'Tên center là bắt buộc';
-    if (!formData.phoneNumber) tempErrors.phoneNumber = 'Số điện thoại là bắt buộc';
+    if (!formData.careCenterName) tempErrors.careCenterName = 'Tên center là bắt buộc';
+    if (!formData.hotline) tempErrors.hotline = 'Số điện thoại là bắt buộc';
     if (!formData.city) tempErrors.city = 'Thành phố là bắt buộc';
     if (!formData.district) tempErrors.district = 'Quận là bắt buộc';
     if (!formData.ward) tempErrors.ward = 'Phường là bắt buộc';
@@ -36,23 +36,23 @@ const FormStep1 = ({ onNext, formData, onInputChange }) => {
         <label>* Tên Center</label>
         <input
           type="text"
-          name="storeName"
-          className={`form-control ${errors.storeName ? 'is-invalid' : ''}`}
-          value={formData.storeName}
+          name="careCenterName"
+          className={`form-control ${errors.careCenterName ? 'is-invalid' : ''}`}
+          value={formData.careCenterName}
           onChange={handleChange}
         />
-        {errors.storeName && <div className="invalid-feedback">{errors.storeName}</div>}
+        {errors.careCenterName && <div className="invalid-feedback">{errors.careCenterName}</div>}
       </div>
       <div className="form-group">
         <label>* Số điện thoại liên hệ</label>
         <input
           type="text"
-          name="phoneNumber"
-          className={`form-control ${errors.phoneNumber ? 'is-invalid' : ''}`}
-          value={formData.phoneNumber}
+          name="hotline"
+          className={`form-control ${errors.hotline ? 'is-invalid' : ''}`}
+          value={formData.hotline}
           onChange={handleChange}
         />
-        {errors.phoneNumber && <div className="invalid-feedback">{errors.phoneNumber}</div>}
+        {errors.hotline && <div className="invalid-feedback">{errors.hotline}</div>}
       </div>
       <div className="form-group">
         <label>* Thành phố</label>
