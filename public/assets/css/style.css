@@ -485,6 +485,10 @@ i.bx {
   background: #fafafa;
 }
 
+.bg--primary {
+  background: var(--primary-color3);
+}
+
 .ui-datepicker {
   width: 17em;
   padding: 0.5em 0.5em 0;
@@ -658,7 +662,7 @@ html .ui-button.ui-state-disabled:active:hover {
   max-width: 140px;
   height: 100%;
   max-height: 140px;
-  border: 0px solid var(--primary-color3);
+  border: 0px solid var(--primaprimary-color3);
   position: absolute;
   top: 50%;
   left: 50%;

@@ -1,5 +1,6 @@
 "use client";
 import packageApiRequest from "@/src/apiRequests/package";
+import Breadcrumb from "@/src/components/breadcrumb/Breadcrumb";
 import ShopCard from "@/src/components/shop/ShopCard";
 import { PackageListType } from "@/src/schemaValidations/package/package.schema";
 import Link from "next/link";
@@ -9,6 +10,7 @@ const CareCenterDetail = ({ params }: { params: { centerId: string } }) => {
   // const router = useRouter();
   // const { centerId } = router.query;
   const centerId = params.centerId;
+
   const [packages, setPackages] = useState<PackageListType[]>();
   const [loading, setLoading] = useState(true);
 
@@ -43,13 +45,14 @@ const CareCenterDetail = ({ params }: { params: { centerId: string } }) => {
 
   return (
     <div>
-      <h1>Packages for Care Center </h1>
+      <Breadcrumb pageName="" pageTitle="List package" />
       <div className="row  g-4 justify-content-center">
         {packages?.map((item) => {
           return (
             <div key={item.id} className="col-lg-4 col-md-4 col-sm-6">
-              <div className="collection-card">
-                {/* {tag == "" ? (
+              <Link legacyBehavior href={`${centerId}/package/${item.id}`}>
+                <div className="collection-card">
+                  {/* {tag == "" ? (
                 ""
               ) : (
                 <div
@@ -60,17 +63,29 @@ const CareCenterDetail = ({ params }: { params: { centerId: string } }) => {
                   <span>{tag}</span>
                 </div>
               )} */}
-                <div className="collection-img">
-                  {/* <img className="img-gluid" src={img} alt="" /> */}
-                  <div className="view-dt-btn">
-                    <div className="plus-icon">
-                      <i className="bi bi-plus" />
+                  <div className="collection-img">
+                    <img
+                      className="img-gluid"
+                      src={item.image}
+                      alt=""
+                      style={{
+                        height: "100%",
+                        objectFit: "cover",
+                        width: "100%",
+                      }}
+                    />
+                    <div className="view-dt-btn">
+                      <div className="plus-icon">
+                        <i className="bi bi-plus" />
+                      </div>
+                      {/* <Link
+                        legacyBehavior
+                        href={`${centerId}/package/${item.id}`}
+                      >
+                        <a>View Details</a>
+                      </Link> */}
                     </div>
-                    <Link legacyBehavior href={`${centerId}/package/${item.id}`}>
-                      <a>View Details</a>
-                    </Link>
-                  </div>
-                  {/* <ul className="cart-icon-list">
+                    {/* <ul className="cart-icon-list">
                     <li>
                       <a href="#">
                         <img src="assets/images/icon/Icon-cart3.svg" alt="" />
@@ -85,39 +100,40 @@ const CareCenterDetail = ({ params }: { params: { centerId: string } }) => {
                       </a>
                     </li>
                   </ul> */}
-                </div>
-                <div className="collection-content text-center">
-                  <h4>
-                    <Link legacyBehavior href="/shop-details">
-                      <a>{item.description}</a>
-                    </Link>
-                  </h4>
-                  <div className="price">
-                    <h6>${item.totalPrice}</h6>
-                    {/* <del>${regular_price}</del> */}
                   </div>
-                  <div className="review">
-                    <ul>
-                      <li>
-                        <i className="bi bi-star-fill" />
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill" />
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill" />
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill" />
-                      </li>
-                      <li>
-                        <i className="bi bi-star-fill" />
-                      </li>
-                    </ul>
-                    {/* <span>({review})</span> */}
+                  <div className="collection-content text-center">
+                    <h4>
+                      <Link legacyBehavior href={`${centerId}/package/${item.id}`}>
+                        <a>{item.title}</a>
+                      </Link>
+                    </h4>
+                    <div className="price">
+                      <h6>${item.totalPrice}</h6>
+                      {/* <del>${regular_price}</del> */}
+                    </div>
+                    <div className="review">
+                      <ul>
+                        <li>
+                          <i className="bi bi-star-fill" />
+                        </li>
+                        <li>
+                          <i className="bi bi-star-fill" />
+                        </li>
+                        <li>
+                          <i className="bi bi-star-fill" />
+                        </li>
+                        <li>
+                          <i className="bi bi-star-fill" />
+                        </li>
+                        <li>
+                          <i className="bi bi-star-fill" />
+                        </li>
+                      </ul>
+                      {/* <span>({review})</span> */}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           );
         })}

@@ -127,7 +127,6 @@ function petCareCenters() {
                 ))}
               </select>
             </div>
-            <div className="col-auto"></div>
           </div>
         </div>
         <hr className="hr hr-blurry" />
@@ -137,7 +136,7 @@ function petCareCenters() {
             <div key={index} className="d-flex justify-content-center ">
               <PetCareCard
                 id={center.id}
-                // imgSrc={center.}
+                imgSrc={center.listImages}
                 title={center.careCenterName}
                 description={center.description}
                 address={center.address}
