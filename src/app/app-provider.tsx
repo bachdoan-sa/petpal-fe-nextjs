@@ -1,5 +1,5 @@
 'use client'
-import { isClient } from '@/src/lib/http'
+import { isClient } from '@/src/lib/httpAxios'
 import { AccountResType } from '@/src/schemaValidations/account.schema'
 import {
   createContext,
@@ -21,8 +21,8 @@ const AppContext = createContext<{
   isAuthenticated: false
 })
 export const useAppContext = () => {
-  const context = useContext(AppContext)
-  return context
+  const context = useContext(AppContext);
+  return context;
 }
 export default function AppProvider({
   children
@@ -30,13 +30,13 @@ export default function AppProvider({
   children: React.ReactNode
 }) {
   const [user, setUserState] = useState<User | null>(() => {
-    // if (isClient()) {
-    //   const _user = localStorage.getItem('user')
-    //   return _user ? JSON.parse(_user) : null
-    // }
+    if (isClient()) {
+      const _user = localStorage.getItem('user')
+      return _user ? JSON.parse(_user) : null
+    }
     return null
   })
-  const isAuthenticated = Boolean(user)
+  const isAuthenticated = Boolean(user);
   const setUser = useCallback(
     (user: User | null) => {
       setUserState(user)

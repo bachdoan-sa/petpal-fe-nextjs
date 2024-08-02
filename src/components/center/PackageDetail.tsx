@@ -198,12 +198,12 @@ function PackageDetailComponent({
                     <a className="primary-btn3">Add to cart</a>
                   </Link>
                 </div> */}
-            <div className="buy-now-btn">
-              <Link legacyBehavior href="/check-out">
-                <a>Đặt ngay</a>
-              </Link>
-            </div>
-            {/* <div className="compare-wishlist-area">
+                <div className="buy-now-btn">
+                  <Link legacyBehavior href="/check-out" as={`/check-out?packageId=${packageDetail?.id}`}>
+                    <a>Buy Now</a>
+                  </Link>
+                </div>
+                {/* <div className="compare-wishlist-area">
                   <ul>
                     <li>
                       <a href="#">
