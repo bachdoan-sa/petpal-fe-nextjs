@@ -2,17 +2,21 @@
 import packageApiRequest from "@/src/apiRequests/package";
 import { PackageType } from "@/src/schemaValidations/package/package.schema";
 import React, { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from 'next/navigation';
+import Image from "next/image";
 // import ProductPriceCount from "../../../components/shop/ProductPriceCount";
 
-function OrderSummary({packageId}:{packageId:string}) {
+function OrderSummary() {
+  const searchParams = useSearchParams();
+  const productId: string = searchParams.get('packageId') ?? "";
 
-  const id = packageId;
   const [packageDetail, setPackageDetail] = useState<PackageType>();
+
   useEffect(() => {
-    if (packageId) {
+    if (productId) {
       const fetchPackageById = async () => {
         try {
-          const response = await packageApiRequest.getPackageById({id: id});
+          const response = await packageApiRequest.getPackageById({ id: productId });
           setPackageDetail(response.payload.data)
           // console.log("Package data: hahaha", packageDetail);
         } catch (error) {
@@ -22,10 +26,10 @@ function OrderSummary({packageId}:{packageId:string}) {
         }
       };
       fetchPackageById();
-      
+
     }
-    
-  }, [packageId]);
+
+  }, [productId]);
   return (
     <>
       <div className="added-product-summary mb-30">
@@ -33,7 +37,7 @@ function OrderSummary({packageId}:{packageId:string}) {
         <ul className="added-products">
           <li className="single-product d-flex justify-content-start">
             <div className="product-img">
-              <img src="assets/images/bg/check-out-01.png" alt="" />
+              <img src={packageDetail?.image ?? "/assets/images/bg/check-out-01.png"} alt="" />
             </div>
             <div className="product-info">
               <h5 className="product-title">

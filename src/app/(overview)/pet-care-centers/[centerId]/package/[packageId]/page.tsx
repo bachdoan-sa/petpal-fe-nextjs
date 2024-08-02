@@ -1,10 +1,8 @@
 'use client'
 import packageApiRequest from "@/src/apiRequests/package";
 import OthersProduct from "@/src/components/shop/OthersProduct";
-import ProductDetails from "@/src/components/shop/ProductDetails";
 import SingleProductDescription from "@/src/components/shop/SingleProductDescription";
 import React, { useEffect, useState } from "react";
-import Package from "@/src/components/manager/test/Package";
 import PackageDetailComponent from"@/src/components/center/PackageDetail";
 import { PackageType } from "@/src/schemaValidations/package/package.schema";
 

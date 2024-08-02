@@ -37,7 +37,7 @@ const BillingDetails = ({ sessionToken }: { sessionToken?: string }) => {
             <div className="col-lg-12">
               <div className="form-inner">
                 <label>Chào mừng:</label>
-                <span className="ms-3 text-dark" >{user?.name ?? 'Khách ẩn danh'}</span>
+                <span style={{fontSize:"1.25rem", fontWeight:"600"}} className="ms-3 text-dark" >{user?.name ?? 'Khách ẩn danh'}</span>
               </div>
             </div>
             <div className="col-12">
@@ -75,6 +75,8 @@ const BillingDetails = ({ sessionToken }: { sessionToken?: string }) => {
                       type="text" 
                       placeholder="Lựa chọn thú cưng của bạn"
                       value="Bạn cần đăng nhập để lấy danh sách thú cưng."
+                      readOnly 
+                      disabled
                     />
                   </>
                 )

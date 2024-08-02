@@ -1,18 +1,19 @@
 import React from "react";
-import Breadcrumb from "@/src/components/breadcrumb/Breadcrumb";
-import BillingDetails from "@/src/app/(overview)/check-out/billing-details";
+import BillingDetails from "./billing-details";
 import OrderSummary from "./order-summary";
 import Payment from "@/src/components/shop/Payment";
-import ShipingAddress from "@/src/components/shop/ShipingAddress";
 import { cookies } from "next/headers";
-import { useAppContext } from "../../app-provider";
 
 
-function checOutPage({packageId}:{packageId:string}) {
+function checOutPage({
+  params,
+}: {
+  params: { packageId: string };
+}) {
 
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value;
-
+  const packageId = params.packageId;
   return (
     <>
       {/* <Breadcrumb pageName="Check Out" pageTitle="Check Out" /> */}
