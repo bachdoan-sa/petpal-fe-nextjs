@@ -184,7 +184,7 @@ function PackageDetailComponent( {packageDetail}:{packageDetail?:PackageType}) {
                   </Link>
                 </div> */}
                 <div className="buy-now-btn">
-                  <Link legacyBehavior href="/check-out">
+                  <Link legacyBehavior href="/check-out" as={`/check-out?packageId=${packageDetail?.id}`}>
                     <a>Buy Now</a>
                   </Link>
                 </div>

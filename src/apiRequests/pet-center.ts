@@ -4,6 +4,7 @@ import {
   PetCenterListPageBodyType
 } from '@/src/schemaValidations/petcenter.schema'
 import { CommonResType, MessageResType } from '@/src/schemaValidations/common.schema'
+import { CreateBlogResType } from '../schemaValidations/blog.schema';
 
 const petCenterApiRequest = {
   getListCareCenterWithPage: (body: PetCenterListPageBodyType) => http.post<PetCenterListPageResType>('/api/CareCenter/get-list', body),
@@ -16,7 +17,7 @@ const petCenterApiRequest = {
       }
     ),
   createPetCenterWithManager: ({ body, sessionToken }: { body: FormData; sessionToken?: string }) =>
-    http.post<CommonResType>('/api/CareCenter/create-carecenter-and-manager', body,
+    http.post<CreateBlogResType>('/api/CareCenter/create-carecenter-and-manager', body,
       {
         headers: {
           Authorization: `Bearer ${sessionToken}`

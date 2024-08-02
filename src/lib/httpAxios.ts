@@ -11,6 +11,7 @@ type CustomOptions = Omit<RequestInit, 'method'> & {
 
 const ENTITY_ERROR_STATUS = 422;
 const AUTHENTICATION_ERROR_STATUS = 401;
+const SERVER_ERROR_STATUS = 500;
 const OK_STATUS = 200;
 type EntityErrorPayload = {
     message: string
@@ -209,6 +210,13 @@ const request = async <Response>(
                         )[1]
                         redirect(`/logout?sessionToken=${sessionToken}`)
                     }
+                } else if (status === SERVER_ERROR_STATUS) { 
+                    throw new HttpError(
+                        data as {
+                            status: 500
+                            payload: "Máy chủ hiện đang có vấn đề."
+                        }
+                    )
                 } else {
                     throw new HttpError(data)
                 }

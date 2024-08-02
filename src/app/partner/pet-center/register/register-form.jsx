@@ -1,17 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProgressSteps from "../../../../components/partner/ProgressSteps";
 import FormStep1 from "../../../../components/partner/steps/FormStep1";
 import FormStep2 from "../../../../components/partner/steps/FormStep2";
 import { toast } from "sonner";
 import petCenterApiRequest from "@/src/apiRequests/pet-center";
-import { isClient } from "@/src/lib/httpAxios";
+import { HttpError, isClient } from "@/src/lib/httpAxios";
 
 
-export default function RegisterForm(token) {
-    if(token == ""){
-        return null;
+export default function RegisterForm({ token }) {
+
+    if (token == "" || token == undefined) {
+        return (<>Tao chua lam author</>);
     }
+
+
     const [loading, setLoading] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
     const [formData, setFormData] = useState({
@@ -70,15 +73,33 @@ export default function RegisterForm(token) {
         data.append('Manager.Username', formData.step2.username);
         data.append('Manager.Password', formData.step2.password);
         data.append('Manager.FullName', formData.step2.fullName);
-        data.append('Manager.Address', formData.step2.address);
+        data.append('Manager.Address', formData.step2.street);
         data.append('Manager.PhoneNumber', formData.step2.phoneNumber);
         data.append('Manager.Email', formData.step2.email);
         data.append('ManagerIdentity.Number', formData.step2.idNumber);
         data.append('ManagerIdentity.CreatedAt', formData.step2.issueDate);
         data.append('ManagerIdentity.CreatedLocation', formData.step2.issuePlace);
-        data.append('front_identity', formData.step2.frontImage);
-        data.append('back_identity', formData.step2.backImage);
-        const response = await petCenterApiRequest.createPetCenterWithManager(data, token);
+        // Check if frontImage is a File object
+        if (formData.step2.frontImage instanceof File) {
+            data.append('front_identity', formData.step2.frontImage);         
+        }
+
+        // Check if backImage is a File object
+        if (formData.step2.backImage instanceof File) {
+            data.append('back_identity', formData.step2.backImage);    
+        }
+        try {
+            const response = await petCenterApiRequest.createPetCenterWithManager({ body: data, sessionToken: token });
+            console.log(response);
+        } catch (error) {
+            if (error instanceof HttpError) {
+                const errors = error?.payload
+                if (error.status === 422) {
+                    console.log(errors);
+                }
+
+            }
+        }
 
         // Xử lý submit ở đây
         setLoading(false);

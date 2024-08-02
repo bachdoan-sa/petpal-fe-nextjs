@@ -6,7 +6,7 @@ export const PetSchema = z.object({
     id: z.string().optional(),
     userId: z.string().optional(),
     petTypeId: z.string().optional(),
-    fullname: z.string(),
+    fullName: z.string(),
     description: z.string(),
     status: z.string().optional(),
 

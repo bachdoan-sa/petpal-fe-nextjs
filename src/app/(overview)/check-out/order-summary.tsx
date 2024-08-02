@@ -1,7 +1,31 @@
-import React from "react";
-import ProductPriceCount from "./ProductPriceCount";
+'use client'
+import packageApiRequest from "@/src/apiRequests/package";
+import { PackageType } from "@/src/schemaValidations/package/package.schema";
+import React, { useEffect, useState } from "react";
+// import ProductPriceCount from "../../../components/shop/ProductPriceCount";
 
-function OrderSummary() {
+function OrderSummary({packageId}:{packageId:string}) {
+
+  const id = packageId;
+  const [packageDetail, setPackageDetail] = useState<PackageType>();
+  useEffect(() => {
+    if (packageId) {
+      const fetchPackageById = async () => {
+        try {
+          const response = await packageApiRequest.getPackageById({id: id});
+          setPackageDetail(response.payload.data)
+          // console.log("Package data: hahaha", packageDetail);
+        } catch (error) {
+          console.error("Error fetching package:", error);
+        } finally {
+
+        }
+      };
+      fetchPackageById();
+      
+    }
+    
+  }, [packageId]);
   return (
     <>
       <div className="added-product-summary mb-30">
@@ -13,10 +37,10 @@ function OrderSummary() {
             </div>
             <div className="product-info">
               <h5 className="product-title">
-                <a href="#">Whiskas Cat Food Core Tuna</a>
+                <a href="#">{packageDetail?.title}</a>
               </h5>
               {/* <ProductPriceCount price={22} /> */}
-              <h4>500000đ</h4>
+              <h4>{packageDetail?.totalPrice}</h4>
             </div>
             <div className="delete-btn">
               <i className="bi bi-x-lg" />
