@@ -23,8 +23,8 @@ export default function Register() {
       idNumber: "",
       issueDate: "",
       issuePlace: "",
-      frontImage: null,
-      backImage: null,
+      frontImage: File || null,
+      backImage: File || null,
     },
     // Thêm các trạng thái cho các bước tiếp theo nếu có
   });

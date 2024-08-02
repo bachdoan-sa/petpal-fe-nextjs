@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { PagingRes, PageBodyType, PagingBody } from "./paging/paging.schema";
+import { IsSucceedRes } from "./common.schema";
 
 // Các bước định nghĩa 1 response
 // 1. định nghĩa object đó
@@ -9,7 +10,8 @@ export const PetCenterSchema = z.object({
     listImages: z.string(),
     address: z.string(),
     description: z.string(),
-    averageRating: z.number(),
+    averageRating: z.number().optional(),
+    Hotline: z.string().optional(),
     status: z.string().optional().default(()=>"")
 });
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
@@ -51,3 +53,22 @@ export type PetCenterListPageResType = z.TypeOf<typeof PetCenterListPageRes>;
 
 export const PetCenterListPageBody = PagingBody;
 export type PetCenterListPageBodyType = z.TypeOf<typeof PetCenterListPageBody>;
+
+//Create Model
+export const CreatePetCenterBody = PetCenterSchema;
+export type CreatePetCenterBodyType = z.TypeOf<typeof CreatePetCenterBody>;
+export const CreatePetCenterRes = z.object({
+    data: IsSucceedRes,
+    message: z.string()
+});
+export type CreatePetCenterResType = z.TypeOf<typeof CreatePetCenterRes>;
+
+
+//Update Model
+export const UpdatePetCenterBody = PetCenterSchema;
+export type UpdatePetCenterBodyType = z.TypeOf<typeof UpdatePetCenterBody>;
+export const UpdatePetCenterRes = z.object({
+    data: IsSucceedRes,
+    message: z.string()
+});
+export type UpdatePetCenterResType = z.TypeOf<typeof UpdatePetCenterRes>;

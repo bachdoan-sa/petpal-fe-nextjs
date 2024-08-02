@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 const FormStep2 = ({ onNext, onBack, formData, onInputChange }) => {
- 
 
   const [errors, setErrors] = useState({});
 
+  const inputFrontRef = useRef(null);
+  const inputBackRef = useRef(null);
+  
+  const [fileFront, setFileFront] = useState(null);
+  const [fileBack, setFileBack] = useState(null);
   const validate = () => {
     let tempErrors = {};
     if (!formData.fullName) tempErrors.fullName = 'Tên đầy đủ là bắt buộc';
@@ -31,7 +35,12 @@ const FormStep2 = ({ onNext, onBack, formData, onInputChange }) => {
       [name]: files[0]
     });
   };
-
+  const handleImageRemove = (name) => {
+    setFormData({
+      ...formData,
+      [name]: null
+    });
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
@@ -125,20 +134,87 @@ const FormStep2 = ({ onNext, onBack, formData, onInputChange }) => {
             <input
               type="file"
               name="frontImage"
+              accept='image/*'
+              ref={inputFrontRef}
               className={`form-control ${errors.frontImage ? 'is-invalid' : ''}`}
-              onChange={handleFileChange}
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (file) {
+                  handleFileChange
+                  setFileFront(file)
+                  field.onChange('http://localhost:3000/' + file.name)
+                }
+              }}
             />
             {errors.frontImage && <div className="invalid-feedback">{errors.frontImage}</div>}
+            {(fileFront) && (
+              <div>
+                <img
+                  src={URL.createObjectURL(fileFront)}
+                  width={128}
+                  height={128}
+                  alt='preview'
+                  className='w-32 h-32 object-cover'
+                />
+                <button type='button'
+                  className={'btn btn-danger shadow-sm d-inline-block rounded p-2 fs-6'}
+                  style={{ opacity: 0.9 }}
+                  onClick={() => {
+                    setFileFront(null)
+                    handleImageRemove('frontImage')
+                    if (inputFrontRef.current) {
+                      inputFrontRef.current.value = ''
+                    }
+                  }}
+                >
+                  Xóa hình ảnh
+                </button>
+              </div>
+            )}
           </div>
           <div>
             <label>Mặt sau</label>
             <input
               type="file"
               name="backImage"
+              accept='image/*'
+              ref={inputBackRef} //??? wtf sao cái remove méo chạy vậy
               className={`form-control ${errors.backImage ? 'is-invalid' : ''}`}
-              onChange={handleFileChange}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  handleFileChange
+                  setFileBack(file)
+                  field.onChange('http://localhost:3000/' + file.name)
+                }
+              }}
             />
             {errors.backImage && <div className="invalid-feedback">{errors.backImage}</div>}
+            {(fileBack) && (
+              <div>
+                <img
+                  src={URL.createObjectURL(fileBack)}
+                  width={128}
+                  height={128}
+                  alt='preview'
+                  className='w-32 h-32 object-cover'
+                />
+                <button
+                  type='button'
+                  className={'btn btn-danger shadow-sm d-inline-block rounded p-2 fs-6'}
+                  style={{ opacity: 0.9 }}
+                  onClick={() => {
+                    setFileBack(null)
+                    handleImageRemove('backImage')
+                    if (inputBackRef.current) {
+                      inputBackRef.current.value = ''
+                    }
+                  }}
+                >
+                  Xóa hình ảnh
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
