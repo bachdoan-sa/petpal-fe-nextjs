@@ -46,7 +46,7 @@ const CareCenterDetail = ({ params }: { params: { centerId: string } }) => {
   return (
     <div>
       <Breadcrumb pageName="" pageTitle="List package" />
-      <div className="row  g-4 justify-content-center">
+      <div className="row  g-4 justify-content-center pt-30 pb-60">
         {packages?.map((item) => {
           return (
             <div key={item.id} className="col-lg-4 col-md-4 col-sm-6">

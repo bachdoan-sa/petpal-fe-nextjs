@@ -1,6 +1,6 @@
+import PetList from "@/src/components/user/PetList";
 import Link from "next/link";
 import React from "react";
-// import PetList from "./PetList";
 
 function PetInfo() {
   return (
@@ -51,7 +51,7 @@ function PetInfo() {
           </button> */}
         </div>
       </div>
-      {/* <PetList /> */}
+      <PetList />
       <div className="mt-4 d-flex justify-content-center">
         <div className="card mb-3" style={{ maxWidth: "860px" }}>
           <div className="row g-0">
