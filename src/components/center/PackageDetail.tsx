@@ -1,76 +1,81 @@
-import Link from 'next/link';
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 import { PackageType } from "@/src/schemaValidations/package/package.schema";
 
-function PackageDetailComponent( {packageDetail}:{packageDetail?:PackageType}) {
-  console.log("haha", packageDetail)
-    return (
-        <>
-          <div className="row g-lg-4 gy-5 mb-120">
-            <div className="col-lg-7">
-              <div className="tab-content tab-content1" id="v-pills-tabContent">
-                <div
-                  className="tab-pane fade active show"
-                  id="v-pills-img1"
-                  role="tabpanel"
-                  aria-labelledby="v-pills-img1-tab"
-                >
-                  <img
-                    className="img-fluid"
-                    src="assets/images/bg/shop-big-01.png"
-                    alt=""
-                  />
-                </div>
-                <div
-                  className="tab-pane fade"
-                  id="v-pills-img2"
-                  role="tabpanel"
-                  aria-labelledby="v-pills-img2-tab"
-                >
-                  <img
-                    className="img-fluid"
-                    src="assets/images/bg/shop-big-02.png"
-                    alt=""
-                  />
-                </div>
-                <div
-                  className="tab-pane fade"
-                  id="v-pills-img3"
-                  role="tabpanel"
-                  aria-labelledby="v-pills-img3-tab"
-                >
-                  <img
-                    className="img-fluid"
-                    src="assets/images/bg/shop-big-03.png"
-                    alt=""
-                  />
-                </div>
-                <div
-                  className="tab-pane fade"
-                  id="v-pills-img4"
-                  role="tabpanel"
-                  aria-labelledby="v-pills-img4-tab"
-                >
-                  <img
-                    className="img-fluid"
-                    src="assets/images/bg/shop-big-04.png"
-                    alt=""
-                  />
-                </div>
-                <div
-                  className="tab-pane fade"
-                  id="v-pills-img5"
-                  role="tabpanel"
-                  aria-labelledby="v-pills-img5-tab"
-                >
-                  <img
-                    className="img-fluid"
-                    src="assets/images/bg/shop-big-05.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div
+function PackageDetailComponent({
+  packageDetail,
+}: {
+  packageDetail?: PackageType;
+}) {
+  console.log("haha", packageDetail);
+  return (
+    <>
+      <div className="row g-lg-4 gy-5 mb-120">
+        <div className="col-lg-7">
+          <div className="tab-content tab-content1" id="v-pills-tabContent">
+            <div
+            // className="tab-pane fade active show"
+            // id="v-pills-img1"
+            // role="tabpanel"
+            // aria-labelledby="v-pills-img1-tab"
+            >
+              <img
+                className="img-fluid"
+                src={packageDetail?.image}
+                alt=""
+                style={{ height: "100%", objectFit: "cover", width: "100%" }}
+              />
+            </div>
+            <div
+              className="tab-pane fade"
+              id="v-pills-img2"
+              role="tabpanel"
+              aria-labelledby="v-pills-img2-tab"
+            >
+              <img
+                className="img-fluid"
+                src="assets/images/bg/shop-big-02.png"
+                alt=""
+              />
+            </div>
+            <div
+              className="tab-pane fade"
+              id="v-pills-img3"
+              role="tabpanel"
+              aria-labelledby="v-pills-img3-tab"
+            >
+              <img
+                className="img-fluid"
+                src="assets/images/bg/shop-big-03.png"
+                alt=""
+              />
+            </div>
+            <div
+              className="tab-pane fade"
+              id="v-pills-img4"
+              role="tabpanel"
+              aria-labelledby="v-pills-img4-tab"
+            >
+              <img
+                className="img-fluid"
+                src="assets/images/bg/shop-big-04.png"
+                alt=""
+              />
+            </div>
+            <div
+              className="tab-pane fade"
+              id="v-pills-img5"
+              role="tabpanel"
+              aria-labelledby="v-pills-img5-tab"
+            >
+              <img
+                className="img-fluid"
+                src="assets/images/bg/shop-big-05.png"
+                alt=""
+              />
+            </div>
+          </div>
+          {/* <div
                 className="nav nav1 nav-pills"
                 id="v-pills-tab"
                 role="tablist"
@@ -136,12 +141,12 @@ function PackageDetailComponent( {packageDetail}:{packageDetail?:PackageType}) {
                 >
                   <img src="assets/images/bg/shop-sm-05.png" alt="" />
                 </button>
-              </div>
-            </div>
-            <div className="col-lg-5">
-              <div className="shop-details-content">
-                <h3>{packageDetail?.title}</h3>
-                {/* <ul className="shopuct-review2 d-flex flex-row align-items-center mb-25">
+              </div> */}
+        </div>
+        <div className="col-lg-5">
+          <div className="shop-details-content">
+            <h3>{packageDetail?.title}</h3>
+            {/* <ul className="shopuct-review2 d-flex flex-row align-items-center mb-25">
                   <li>
                     <i className="bi bi-star-fill" />
                   </li>
@@ -163,15 +168,17 @@ function PackageDetailComponent( {packageDetail}:{packageDetail?:PackageType}) {
                     </a>
                   </li>
                 </ul> */}
-                <div className="model-number">
-                  <span>{packageDetail?.duration}</span>
-                </div>
-                <div className="price-tag">
-                  <h4>
-                    {packageDetail?.totalPrice} 
-                  </h4>
-                </div>
-                {/* <p>
+            <div className="model-number">
+              <span>{packageDetail?.duration}</span>
+            </div>
+            <div className="model-number">
+              <span>{packageDetail?.description}</span>
+            </div>
+
+            <div className="price-tag">
+              <h4>{packageDetail?.totalPrice} đ</h4>
+            </div>
+            {/* <p>
                   Donec bibendum enim ut elit porta ullamcorper. Vestibulum Nai
                   wekemdini iaculis vitae nulla. Morbi mattis nec mi ac mollis.{" "}
                 </p>
@@ -183,12 +190,12 @@ function PackageDetailComponent( {packageDetail}:{packageDetail?:PackageType}) {
                     <a className="primary-btn3">Add to cart</a>
                   </Link>
                 </div> */}
-                <div className="buy-now-btn">
-                  <Link legacyBehavior href="/check-out">
-                    <a>Buy Now</a>
-                  </Link>
-                </div>
-                {/* <div className="compare-wishlist-area">
+            <div className="buy-now-btn">
+              <Link legacyBehavior href="/check-out">
+                <a>Đặt nay</a>
+              </Link>
+            </div>
+            {/* <div className="compare-wishlist-area">
                   <ul>
                     <li>
                       <a href="#">
@@ -211,7 +218,7 @@ function PackageDetailComponent( {packageDetail}:{packageDetail?:PackageType}) {
                     </li>
                   </ul>
                 </div> */}
-                {/* <div className="pyment-method">
+            {/* <div className="pyment-method">
                   <h6>Guaranted Safe Checkout</h6>
                   <ul>
                     <li>
@@ -237,11 +244,11 @@ function PackageDetailComponent( {packageDetail}:{packageDetail?:PackageType}) {
                     </li>
                   </ul>
                 </div> */}
-              </div>
-            </div>
           </div>
-        </>
-      );
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default PackageDetailComponent;

@@ -136,7 +136,7 @@ function petCareCenters() {
             <div key={index} className="d-flex justify-content-center ">
               <PetCareCard
                 id={center.id}
-                // imgSrc={center.}
+                imgSrc={center.listImages}
                 title={center.careCenterName}
                 description={center.description}
                 address={center.address}

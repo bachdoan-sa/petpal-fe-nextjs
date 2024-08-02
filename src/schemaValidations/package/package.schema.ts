@@ -6,6 +6,7 @@ import { IsSucceedRes } from "../common.schema";
 // 1. định nghĩa object đó
 export const PackageSchema = z.object({
     id: z.string().optional(),
+    image: z.string().optional(),
     description: z.string(),
     title: z.string().optional(),
     duration: z.string(),

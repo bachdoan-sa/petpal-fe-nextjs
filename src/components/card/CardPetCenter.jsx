@@ -11,7 +11,7 @@ const PetCareCard = ({id, imgSrc='', title, description, address }) => {
             src={imgSrc}
             className="img-fluid rounded-start"
             
-            style={{ height: "100%", objectFit: "cover" }}
+            style={{ height: "100%", objectFit: "cover", width: "100%" }}
           />
           <Link legacyBehavior href={'/'}>
             <a
