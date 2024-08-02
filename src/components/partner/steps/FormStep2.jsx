@@ -36,10 +36,7 @@ const FormStep2 = ({ onNext, onBack, formData, onInputChange }) => {
     });
   };
   const handleImageRemove = (name) => {
-    setFormData({
-      ...formData,
-      [name]: null
-    });
+    onInputChange(name, null);
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -141,8 +138,7 @@ const FormStep2 = ({ onNext, onBack, formData, onInputChange }) => {
                 const file = e.target.files?.[0]
                 if (file) {
                   handleFileChange
-                  setFileFront(file)
-                  field.onChange('http://localhost:3000/' + file.name)
+                  setFileFront(file)  
                 }
               }}
             />
@@ -185,7 +181,6 @@ const FormStep2 = ({ onNext, onBack, formData, onInputChange }) => {
                 if (file) {
                   handleFileChange
                   setFileBack(file)
-                  field.onChange('http://localhost:3000/' + file.name)
                 }
               }}
             />
