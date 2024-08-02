@@ -6,8 +6,15 @@ import FormStep2 from "../../../../components/partner/steps/FormStep2";
 import { toast } from "sonner";
 import { boolean } from "zod";
 import petCenterApiRequest from "@/src/apiRequests/pet-center";
+import { isClient } from "@/src/lib/httpAxios";
 
 export default function Register() {
+  const isAuthenticated =
+    isClient() && Boolean(localStorage.getItem("sessionToken"));
+  if (!isAuthenticated) return;
+  const token = localStorage.getItem("sessionToken");
+
+  console.log(token);
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -19,7 +26,7 @@ export default function Register() {
       city: "",
       district: "",
       ward: "",
-      street: ""
+      street: "",
     },
     step2: {
       username: "",
@@ -60,21 +67,21 @@ export default function Register() {
     toast.warning("Đang xử lí lưu trữ");
     setLoading(true);
     const data = new FormData();
-    data.append('CareCenter.CareCenterName', formData.step1.careCenterName);
-    data.append('CareCenter.Address', formData.step1.street);
-    data.append('CareCenter.Hotline', formData.step1.hotline);
-    data.append('Manager.Username', formData.step2.username);
-    data.append('Manager.Password', formData.step2.password);
-    data.append('Manager.FullName', formData.step2.fullName);
-    data.append('Manager.Address', formData.step2.address);
-    data.append('Manager.PhoneNumber', formData.step2.phoneNumber);
-    data.append('Manager.Email', formData.step2.email);
-    data.append('ManagerIdentity.Number', formData.step2.idNumber);
-    data.append('ManagerIdentity.CreatedAt', formData.step2.issueDate);
-    data.append('ManagerIdentity.CreatedLocation', formData.step2.issuePlace);
-    data.append('front_identity', formData.step2.frontImage);
-    data.append('back_identity', formData.step2.backImage);
-    const response = await petCenterApiRequest.createPetCenterWithManagerd(data);
+    data.append("CareCenter.CareCenterName", formData.step1.careCenterName);
+    data.append("CareCenter.Address", formData.step1.street);
+    data.append("CareCenter.Hotline", formData.step1.hotline);
+    data.append("Manager.Username", formData.step2.username);
+    data.append("Manager.Password", formData.step2.password);
+    data.append("Manager.FullName", formData.step2.fullName);
+    data.append("Manager.Address", formData.step2.address);
+    data.append("Manager.PhoneNumber", formData.step2.phoneNumber);
+    data.append("Manager.Email", formData.step2.email);
+    data.append("ManagerIdentity.Number", formData.step2.idNumber);
+    data.append("ManagerIdentity.CreatedAt", formData.step2.issueDate);
+    data.append("ManagerIdentity.CreatedLocation", formData.step2.issuePlace);
+    data.append("front_identity", formData.step2.frontImage);
+    data.append("back_identity", formData.step2.backImage);
+    const response = await petCenterApiRequest.createPetCenterWithManager(data);
 
     // Xử lý submit ở đây
   };
@@ -109,8 +116,10 @@ export default function Register() {
           <p>Cảm ơn bạn đã điền thông tin.</p>
         </div>
       )}
-      <button className="btn btn-primary" type="button" onClick={handleSubmit}> submit </button>
+      <button className="btn btn-primary" type="button" onClick={handleSubmit}>
+        {" "}
+        submit{" "}
+      </button>
     </div>
-
   );
 }

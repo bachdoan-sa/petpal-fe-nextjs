@@ -127,7 +127,6 @@ function petCareCenters() {
                 ))}
               </select>
             </div>
-            <div className="col-auto"></div>
           </div>
         </div>
         <hr className="hr hr-blurry" />

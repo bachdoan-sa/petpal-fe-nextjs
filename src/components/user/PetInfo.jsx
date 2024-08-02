@@ -1,4 +1,5 @@
-'use client'
+"use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 function PetInfo() {
@@ -37,19 +38,21 @@ function PetInfo() {
       <div className="d-flex justify-content-between align-items-center mt-3">
         <h1>Danh sách thú cưng</h1>
         <div>
-          <button
-            className="btn btn-outline-primary"
-            style={{
-              height: "auto",
-              width: "auto",
-              borderRadius: "6px",
-              marginRight: "6px",
-            }}
-            onClick={() => setIsModalOpen(true)}
-          >
-            Add A Dog
-          </button>
-          <button
+          <Link legacyBehavior href="/pet">
+            <button
+              className="btn btn-outline-primary"
+              style={{
+                height: "auto",
+                width: "auto",
+                borderRadius: "6px",
+                marginRight: "6px",
+              }}
+              // onClick={() => setIsModalOpen(true)}
+            >
+              Thêm thú cưng
+            </button>
+          </Link>
+          {/* <button
             className="btn btn-outline-primary"
             style={{
               height: "auto",
@@ -72,7 +75,7 @@ function PetInfo() {
             onClick={() => setIsModalOpen(true)}
           >
             Add A Bird
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -95,11 +98,11 @@ function PetInfo() {
               </div>
               <div className="card-body">
                 <div className="row">
-                  <div className="col-4"><h5>Pet type</h5></div>
-                  <div className="col-4">Age: 1 year old</div>
                   <div className="col-4">
-                    Weight: 1 kg
+                    <h5>Pet type</h5>
                   </div>
+                  <div className="col-4">Age: 1 year old</div>
+                  <div className="col-4">Weight: 1 kg</div>
                 </div>
                 <div className="row">
                   <div className="col-4">
