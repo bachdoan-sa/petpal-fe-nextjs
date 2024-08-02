@@ -41,7 +41,7 @@ export default async function PetList({ query, currentPage }) {
               <div className="col-md-8">
                 <div className="card-header">
                   <div className="d-flex justify-content-between align-items-center">
-                    <h4 className="card-title">Name: {pet.fullname}</h4>
+                    <h4 className="card-title">Name: {pet.fullName}</h4>
                     <a>Edit Profile</a>
                   </div>
                 </div>
