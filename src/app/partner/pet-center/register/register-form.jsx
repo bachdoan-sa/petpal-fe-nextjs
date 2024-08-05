@@ -101,7 +101,6 @@ export default function RegisterForm({ token }) {
             }
         }
 
-        // Xử lý submit ở đây
         setLoading(false);
     };
 

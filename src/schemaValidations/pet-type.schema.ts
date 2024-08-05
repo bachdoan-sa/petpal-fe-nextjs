@@ -5,8 +5,8 @@ import { IsSucceedRes } from './common.schema';
 export const PetTypeSchema = z.object({
     id: z.string().optional(),
     type: z.string(),
-    category: z.string(),
-    description: z.string(),
+    category: z.string().optional(),
+    description: z.string().optional(),
     status: z.string().optional(),
 
     createdAt: z.date().optional(),
@@ -25,15 +25,13 @@ export type PetTypeType = z.TypeOf<typeof PetTypeSchema>;
 
 
 
-export const PetTypeList = z.object({
-    list: z.array(PetTypeSchema)
-})
+export const PetTypeArray = z.array(PetTypeSchema); 
 // 3.1 Định nghĩa kiểu res ( vì template trả về là payload: data và message)
 export const PetTypeListRes = z.object({
-    data: PetTypeList,
+    data: PetTypeArray,
     message: z.string()
 })
-export type PetTypeListType = z.TypeOf<typeof PetTypeList>
+export type PetTypeListType = z.TypeOf<typeof PetTypeArray>
 export type PetTypeListResType = z.TypeOf<typeof PetTypeListRes>
 
 // 4. Định nghĩa cấu trúc trả về theo list (có PAGINATION)

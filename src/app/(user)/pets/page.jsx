@@ -1,8 +1,12 @@
 import PetList from "@/src/components/user/PetList";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
 
 function PetInfo() {
+  // const cookieStore = cookies();
+  // const sessionToken = cookieStore.get('sessionToken')?.value ?? "";
+
   return (
     <div
       className="container"
@@ -51,54 +55,9 @@ function PetInfo() {
           </button> */}
         </div>
       </div>
-      <PetList />
-      <div className="mt-4 d-flex justify-content-center">
-        <div className="card mb-3" style={{ maxWidth: "860px" }}>
-          <div className="row g-0">
-            <div className="col-md-4 hero-img">
-              <img
-                src="assets/images/pet-contact-1.jpg"
-                className="img-fluid rounded-start h-100 w-100"
-                alt=""
-              />
-            </div>
-            <div className="col-md-8">
-              <div className="card-header">
-                <div className="d-flex justify-content-between align-items-center">
-                  <h4 className="card-title">Name: Den</h4>
-                  <a>Edit Profile</a>
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-4">
-                    <h5>Pet type</h5>
-                  </div>
-                  <div className="col-4">Age: 1 year old</div>
-                  <div className="col-4">Weight: 1 kg</div>
-                </div>
-                <div className="row">
-                  <div className="col-4">
-                    Gender
-                    <br /> Male
-                  </div>
-                  <div className="col-4">
-                    Breed
-                    <br /> Chusky
-                  </div>
-                  <div className="col-4">
-                    Desexed
-                    <br />
-                    No
-                  </div>
-                </div>
-                <p className="card-text">
-                  <small className="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <hr/>
+      <div className="d-flex justify-content-center ">
+        <PetList />
       </div>
     </div>
   );

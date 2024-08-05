@@ -46,7 +46,7 @@ const UserApiRequest = {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
-    getUserInfoByToken: (sessionToken: string) =>
+    getUserInfoByToken: (sessionToken) =>
         http.get<UserResType>('/api/User/get-info',
             {
                 headers: {
