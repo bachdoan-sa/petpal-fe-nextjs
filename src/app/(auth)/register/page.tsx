@@ -48,17 +48,17 @@ function signUpPage() {
       console.log(result);
 
       //setcookie
-      await authApiRequest.auth({
-        sessionToken: result.payload.data.token,
-        sessionRole: result.payload.data.role,
-        expiresAt: expires,
-      });
-      setUser({
-        id: result.payload.data.name,
-        name: result.payload.data.name,
-        role: result.payload.data.role,
-      });
-      router.push("/");
+      // await authApiRequest.auth({
+      //   sessionToken: result.payload.data.token,
+      //   sessionRole: result.payload.data.role,
+      //   expiresAt: expires,
+      // });
+      // setUser({
+      //   id: result.payload.data.name,
+      //   name: result.payload.data.name,
+      //   role: result.payload.data.role,
+      // });
+      router.push("/login");
       router.refresh();
       toast.success("Create account success!");
     } catch (error: any) {
