@@ -56,7 +56,16 @@ export const OrderListPageBody = PagingBody;
 export type OrderListPageBodyType = z.TypeOf<typeof OrderListPageBody>;
 
 
-export const CreateOrderBody = OrderSchema;
+export const CreateOrderBody = z.object({
+    id: z.string().optional(),
+    petId: z.string(),
+    packageId: z.string(),
+    detail: z.string(),
+    fromDate: z.date(),
+    toDate: z.date(),
+    receiveTime: z.string(),
+    returnTime: z.string(),
+});
 export type CreateOrderBodyType = z.TypeOf<typeof CreateOrderBody>;
 
 export const CreateOrderRes = z.object({
