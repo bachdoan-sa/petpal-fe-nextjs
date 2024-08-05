@@ -155,7 +155,7 @@ function loginPage() {
                 <div className="form-title">
                   <p>
                     Trở thành đối tác của PetPal?{" "}
-                    <Link legacyBehavior href="/register">
+                    <Link legacyBehavior href="/register-partner">
                       <a>Đăng kí</a>
                     </Link>
                   </p>

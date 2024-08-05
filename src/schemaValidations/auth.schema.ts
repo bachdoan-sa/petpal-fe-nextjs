@@ -1,4 +1,4 @@
-import z from 'zod'
+import z from "zod";
 
 export const RegisterBody = z
   .object({
@@ -6,59 +6,69 @@ export const RegisterBody = z
     email: z.string().email(),
     password: z.string().min(6).max(100),
     fullname: z.string().trim().min(2).max(256),
-    address: z.string().trim().min(2).max(256).default(() => ''),
-    phoneNumber: z.string().trim().min(2).max(256).default(() => ''),
-    confirmPassword: z.string().min(6).max(100).optional()
+    address: z
+      .string()
+      .trim()
+      .min(2)
+      .max(256)
+      .default(() => ""),
+    phoneNumber: z
+      .string()
+      .trim()
+      .min(2)
+      .max(256)
+      .default(() => ""),
+    confirmPassword: z.string().min(6).max(100).optional(),
   })
   .strict()
   .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
       ctx.addIssue({
-        code: 'custom',
-        message: 'Mật khẩu không khớp',
-        path: ['confirmPassword']
-      })
+        code: "custom",
+        message: "Mật khẩu không khớp",
+        path: ["confirmPassword"],
+      });
     }
-  })
+  });
 export const Payment = z.object({
   name: z.string(),
   accountNumber: z.string(),
-  valid: z.string()
-})
+  expiryAt: z.string(),
+});
 export const RegisterPartnerBody = z.object({
   partner: RegisterBody,
-  payment: Payment
-})
-export type RegisterBodyType = z.TypeOf<typeof RegisterBody>
-export type RegisterPartnerBodyType = z.TypeOf<typeof RegisterPartnerBody>
+  payment: Payment,
+});
+export type RegisterBodyType = z.TypeOf<typeof RegisterBody>;
+export type RegisterPartnerBodyType = z.TypeOf<typeof RegisterPartnerBody>;
 
 export const RegisterRes = z.object({
   data: z.object({
     token: z.string(),
     expiresAt: z.string(),
     name: z.string(),
-    role: z.string()
+    role: z.string(),
   }),
-  message: z.string()
-})
+  message: z.string(),
+});
 
-export type RegisterResType = z.TypeOf<typeof RegisterRes>
+export type RegisterResType = z.TypeOf<typeof RegisterRes>;
 
 export const LoginBody = z
   .object({
     username: z.string().email(),
-    password: z.string().min(6).max(100)
+    password: z.string().min(6).max(100),
   })
-  .strict()
+  .strict();
 
-export type LoginBodyType = z.TypeOf<typeof LoginBody>
+export type LoginBodyType = z.TypeOf<typeof LoginBody>;
 
-export const LoginRes = RegisterRes
+export const LoginRes = RegisterRes;
 
-export type LoginResType = z.TypeOf<typeof LoginRes>
-export const SlideSessionBody = z.object({}).strict()
+export type LoginResType = z.TypeOf<typeof LoginRes>;
+export const SlideSessionBody = z.object({}).strict();
 
-export type SlideSessionBodyType = z.TypeOf<typeof SlideSessionBody>
-export const SlideSessionRes = RegisterRes
+export type SlideSessionBodyType = z.TypeOf<typeof SlideSessionBody>;
+export const SlideSessionRes = RegisterRes;
 
-export type SlideSessionResType = z.TypeOf<typeof SlideSessionRes>
+export type SlideSessionResType = z.TypeOf<typeof SlideSessionRes>;
