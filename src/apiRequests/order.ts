@@ -44,7 +44,13 @@ const orderApiRequest = {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
-    userCreateOrder: (body: CreateOrderBodyType) => http.post<CreateOrderResType>('/api/Order/create-order-request', body),
+    userCreateOrder: ({body,sessionToken}:{body: CreateOrderBodyType; sessionToken:string }) => 
+        http.post<CreateOrderResType>('/api/Order/create-order-request', body, 
+            {
+                headers: {
+                    Authorization: `Bearer ${sessionToken}`
+                }
+            }),
     getListOrderForManager: ({ body, sessionToken }: { body: OrderListPageBodyType; sessionToken?: string }) =>
         http.post<OrderListPageResType>("/api/Order/get-order-request", body,
             {
