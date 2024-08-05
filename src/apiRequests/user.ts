@@ -4,7 +4,8 @@ import {
     UserListPageBodyType,
     CreateUserBodyType,
     CreateUserResType,
-    UpdateUserResType
+    UpdateUserResType,
+    UserResType
 } from '@/src/schemaValidations/user.schema'
 import { CommonResType, MessageResType } from '@/src/schemaValidations/common.schema'
 import { UpdatePackageBodyType } from '../schemaValidations/package/package.schema';
@@ -31,8 +32,22 @@ const UserApiRequest = {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
+    getPendingPartnerById: ({ userId, sessionToken }: { userId: string; sessionToken?: string }) =>
+        http.get<UserResType>(`/api/User/get-pending-partner/${userId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${sessionToken}`
+                }
+            }),
     getUserById: ({ userId, sessionToken }: { userId: string; sessionToken?: string }) =>
-        http.get<UserListPageResType>(`/api/User/get-user/${userId}`,
+        http.get<UserResType>(`/api/User/get-user-by-id?userId=${userId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${sessionToken}`
+                }
+            }),
+    getUserInfoByToken: (sessionToken: string) =>
+        http.get<UserResType>('/api/User/get-info',
             {
                 headers: {
                     Authorization: `Bearer ${sessionToken}`

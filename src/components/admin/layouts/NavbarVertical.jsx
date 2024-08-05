@@ -10,16 +10,18 @@ import 'simplebar-react/dist/simplebar.min.css';
 
 // import routes file
 import { DashboardMenu } from '../routes/DashboardRoutes';
+import clsx from 'clsx';
+import { inter, lusitana } from '@/src/fonts/fonts';
 
 
 function NavbarVertical(props) {
 	const location = usePathname();
-	
+
 	const [menuList, setList] = useState();
 	useEffect(() => {
 		const initialList = DashboardMenu;
 		setList(initialList);
-	  }, []);
+	}, []);
 
 	const CustomToggle = ({ children, icon, collapseKey }) => {
 		return (
@@ -78,8 +80,12 @@ function NavbarVertical(props) {
 		<Fragment>
 			<SimpleBar style={{ maxHeight: '100vh' }}>
 				<div className="nav-scroller">
-					<Link href="/" className="navbar-brand">
-						<img src={"/assets/images/header1-logo.svg"} alt="" />
+					<Link href="/" className="navbar-brand d-flex justify-content-center">
+						<p className={clsx(
+							'btn text-xxl font-black m-0 text-white',
+							inter,
+						)}>Petpal <span className={clsx('text-xxl font-black m-0 text-orange',inter, )}> admin</span></p>
+
 					</Link>
 				</div>
 				{/* Dashboard Menu */}

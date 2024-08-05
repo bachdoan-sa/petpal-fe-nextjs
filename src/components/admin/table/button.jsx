@@ -1,4 +1,4 @@
-import { Plus, Edit3, Trash2 } from 'react-feather';
+import { Plus, Edit3, Trash2, Eye } from 'react-feather';
 import Link from 'next/link';
 
 export function CreateButton({ link, title = '' }) {
@@ -23,7 +23,17 @@ export function UpdateButton({ id, link }) {
         </Link>
     );
 }
-
+export function DetailButton({ id, link }) {
+    const url = link + id;
+    return (
+        <Link
+            href={url ? url : "#"}
+            className=" border p-1 me-1 table-button-action"
+        >
+            <Eye className="w-5" />
+        </Link>
+    );
+}
 export function DeleteButton({ id, link }) {
     return (
         <>

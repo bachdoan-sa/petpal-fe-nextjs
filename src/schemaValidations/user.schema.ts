@@ -1,9 +1,10 @@
 import z from 'zod'
 import { IsSucceedRes } from './common.schema'
 import { PagingBody, PagingRes } from './paging/paging.schema'
+import { RegisterPartnerBody } from './auth.schema'
 export const UserSchema = z.object({
   id: z.string().optional(),
-  username: z.string().optional(),
+  username: z.string(),
   fullName: z.string(),
   address: z.string().optional(),
   roomId: z.string().optional(),
@@ -11,7 +12,7 @@ export const UserSchema = z.object({
   email: z.string(),
 
   profileImage: z.string().optional(),
-  
+  status: z.string().toUpperCase().optional(),
   role: z.string().optional()
 })
 export const UserRes = z
@@ -59,7 +60,14 @@ export type UpdateMeBodyType = z.TypeOf<typeof UpdateMeBody>
 
 
 //Create Model
-export const CreateUserBody = UserSchema;
+export const CreateUserBody = z.object({ //create ko cần id
+  username: z.string(),
+  fullName: z.string(),
+  address: z.string().optional(),
+  roomId: z.string().optional(),
+  phoneNumber: z.string(),
+  email: z.string(),
+});
 export type CreateUserBodyType = z.TypeOf<typeof CreateUserBody>;
 export const CreateUserRes = z.object({
     data: IsSucceedRes,
@@ -76,3 +84,4 @@ export const UpdateUserRes = z.object({
     message: z.string()
 });
 export type UpdateUserResType = z.TypeOf<typeof UpdateUserRes>;
+
