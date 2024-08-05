@@ -24,7 +24,7 @@ const PetApiRequest = {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
-    createPet: ({ body, sessionToken }: { body: CreatePetBodyType; sessionToken?: string }) =>
+    createPet: ({ body, sessionToken }: { body: FormData; sessionToken?: string }) =>
         http.post<CreatePetResType>('/api/Pet/create-pet', body,
             {
                 headers: {
