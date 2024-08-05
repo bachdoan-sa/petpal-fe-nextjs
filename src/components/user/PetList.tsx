@@ -1,4 +1,5 @@
 import PetApiRequest from "@/src/apiRequests/pet";
+import { HttpError } from "@/src/lib/httpAxios";
 import {
   PetListPageBodyType,
   PetType,
@@ -6,7 +7,7 @@ import {
 import { cookies } from "next/headers";
 import React from "react";
 
-export default async function PetList({ query, currentPage }) {
+export default async function PetList({ query, currentPage = 1 }) {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
   const body: PetListPageBodyType = {
@@ -22,20 +23,26 @@ export default async function PetList({ query, currentPage }) {
     });
     totalPages = response.payload?.data?.paging?.maxPage;
     pets = response.payload?.data?.list;
-  } catch (error: any) {
-    console.log(error);
+  } catch (error) {
+    if (error instanceof HttpError) {
+      const errors = error?.payload;
+      if (error.status === 422) {
+        console.log(errors);
+      }
+    }
   }
+  console.log(pets);
   return (
-    <div>
+    <div className="row">
       {pets.map((pet) => (
-        <div className="mt-4 d-flex justify-content-center">
+        <div className="col-md-6" key={pet.id}>
           <div className="card mb-3" style={{ maxWidth: "860px" }}>
             <div className="row g-0">
-              <div className="col-md-4 hero-img">
+              <div className="col-md-4 position-relative ">
                 <img
-                  src="assets/images/pet-contact-1.jpg"
-                  className="img-fluid rounded-start h-100 w-100"
-                  alt=""
+                  style={{ height: "100%", objectFit: "cover", width: "100%" }}
+                  src={pet.profileImage}
+                  className="img-fluid rounded-start"
                 />
               </div>
               <div className="col-md-8">
@@ -51,16 +58,16 @@ export default async function PetList({ query, currentPage }) {
                       <h5>Pet type</h5>
                     </div>
                     <div className="col-4">Age: 1 year old</div>
-                    <div className="col-4">Weight: 1 kg</div>
+                    <div className="col-4">Weight: {pet.weight}</div>
                   </div>
                   <div className="row">
                     <div className="col-4">
                       Gender
-                      <br /> Male
+                      <br /> {pet.gender}
                     </div>
                     <div className="col-4">
                       Breed
-                      <br /> Chusky
+                      <br /> {pet.breed}
                     </div>
                     <div className="col-4">
                       Desexed
@@ -68,10 +75,9 @@ export default async function PetList({ query, currentPage }) {
                       No
                     </div>
                   </div>
+                  <hr />
                   <p className="card-text">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
+                    <small className="text-muted">{pet.description}</small>
                   </p>
                 </div>
               </div>

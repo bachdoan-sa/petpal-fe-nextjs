@@ -4,14 +4,15 @@ import {
     PetTypeListPageBodyType,
     CreatePetTypeBodyType,
     CreatePetTypeResType,
-    UpdatePetTypeResType
+    UpdatePetTypeResType,
+    PetTypeListResType
 } from '@/src/schemaValidations/pet-type.schema'
 import { MessageResType } from '@/src/schemaValidations/common.schema'
 import { UpdatePackageBodyType } from '../schemaValidations/package/package.schema';
 
 const PetTypeApiRequest = {
     getListPetTypeForUser: ({ body, sessionToken }: { body: PetTypeListPageBodyType; sessionToken?: string }) =>
-        http.post<PetTypeListPageResType>("/api/PetType/get-list", body,
+        http.post<PetTypeListResType>("/api/PetType/get-list", body,
             {
                 headers: {
                     Authorization: `Bearer ${sessionToken}`

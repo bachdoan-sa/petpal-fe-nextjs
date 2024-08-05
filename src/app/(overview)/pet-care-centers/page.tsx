@@ -133,7 +133,7 @@ function petCareCenters() {
 
         <div className="pt-10">
           {careCenters.map((center, index) => (
-            <div key={index} className="d-flex justify-content-center ">
+            <div key={index} className="d-flex justify-content-center">
               <PetCareCard
                 id={center.id}
                 imgSrc={center.listImages}

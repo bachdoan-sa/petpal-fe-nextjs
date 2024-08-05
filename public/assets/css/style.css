@@ -14677,6 +14677,10 @@ footer.style2 .social-area ul li:hover a i {
   color: black;
 }
 
+.img-cover {
+  object-fit: cover;
+}
+
 .step-circle {
   width: 30px;
   height: 30px;
