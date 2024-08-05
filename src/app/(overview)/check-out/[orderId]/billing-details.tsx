@@ -31,37 +31,27 @@ const BillingDetails = ({ sessionToken }: { sessionToken?: string }) => {
   return (
     <>
       <div className="form-wrap box--shadow mb-30">
-        <h4 className="title-25 mb-20">Billing Details</h4>
+        <h4 className="title-25 mb-20">Đăng kí dịch vụ chăm sóc</h4>
         <form>
           <div className="row">
             <div className="col-lg-12">
               <div className="form-inner">
                 <label>Chào mừng:</label>
-                <span style={{fontSize:"1.25rem", fontWeight:"600"}} className="ms-3 text-dark" >{user?.name ?? 'Khách ẩn danh'}</span>
-              </div>
-            </div>
-            <div className="col-12">
-              <div className="form-inner">
-                <label>Địa chỉ hiện tại của bạn:</label>
-                <input
-                  type="text"
-                  name="fname"
-                  placeholder="Enter your address"
-                />
+                <span style={{ fontSize: "1.25rem", fontWeight: "600" }} className="ms-3 text-dark" >{user?.name ?? 'Khách ẩn danh'}</span>
               </div>
             </div>
 
             <div className="col-12">
               <div className="form-inner">
                 <label>Hãy chọn thú cưng cho dịch vụ này:</label>
-                {(pets.length>0) ? (
+                {(pets.length > 0) ? (
                   <select
                     className="form-select"
                     aria-label="Default select example"
                   >
-                    {pets?.map((option, index) => (
+                    {pets?.map((option) => (
                       <option
-                        key={index}
+                        key={option.id}
                       // value={option.value}
                       // selected={option.value === ""}
                       >
@@ -72,10 +62,10 @@ const BillingDetails = ({ sessionToken }: { sessionToken?: string }) => {
                 ) : (
                   <>
                     <input
-                      type="text" 
+                      type="text"
                       placeholder="Lựa chọn thú cưng của bạn"
                       value="Bạn cần đăng nhập để lấy danh sách thú cưng."
-                      readOnly 
+                      readOnly
                       disabled
                     />
                   </>
@@ -84,26 +74,29 @@ const BillingDetails = ({ sessionToken }: { sessionToken?: string }) => {
 
               </div>
             </div>
+            <div className="col-12 form-inner row">
+              <label>Thông tin kèm theo:</label>
+              <div className="col-6">
+                <div className="form-inner">
+                  <input
+                    type="text"
+                    name="fname"
+                    placeholder="Your Phone Number"
+                  />
+                </div>
+              </div>
+              <div className="col-6 ">
+                <div className="form-inner">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email Address"
+                  />
+                </div>
+              </div>
 
-            <div className="col-12">
-              <div className="form-inner">
-                <label>Thông tin kèm theo:</label>
-                <input
-                  type="text"
-                  name="fname"
-                  placeholder="Your Phone Number"
-                />
-              </div>
             </div>
-            <div className="col-12">
-              <div className="form-inner">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email Address"
-                />
-              </div>
-            </div>
+
 
             <div className="col-12">
               <div className="form-inner">

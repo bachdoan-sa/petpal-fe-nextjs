@@ -6,17 +6,15 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Image from "next/image";
 // import ProductPriceCount from "../../../components/shop/ProductPriceCount";
 
-function OrderSummary() {
-  const searchParams = useSearchParams();
-  const productId: string = searchParams.get('packageId') ?? "";
+function OrderSummary({ packageId }: { packageId: string }) {
 
   const [packageDetail, setPackageDetail] = useState<PackageType>();
 
   useEffect(() => {
-    if (productId) {
+    if (packageId) {
       const fetchPackageById = async () => {
         try {
-          const response = await packageApiRequest.getPackageById({ id: productId });
+          const response = await packageApiRequest.getPackageById({ id: packageId });
           setPackageDetail(response.payload.data)
           // console.log("Package data: hahaha", packageDetail);
         } catch (error) {
@@ -29,7 +27,7 @@ function OrderSummary() {
 
     }
 
-  }, [productId]);
+  }, [packageId]);
   return (
     <>
       <div className="added-product-summary mb-30">

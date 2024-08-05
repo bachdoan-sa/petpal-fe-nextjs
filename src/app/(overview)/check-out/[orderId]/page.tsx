@@ -5,11 +5,11 @@ import Payment from "@/src/components/shop/Payment";
 import { cookies } from "next/headers";
 
 
-function checOutPage() {
+function checOutPage({ params }: { params: { orderId: string } }) {
 
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value;
-  
+
   return (
     <>
       {/* <Breadcrumb pageName="Check Out" pageTitle="Check Out" /> */}
@@ -17,11 +17,11 @@ function checOutPage() {
         <div className="container">
           <div className="row g-4">
             <div className="col-lg-7">
-              <BillingDetails sessionToken={sessionToken}/>
+              <BillingDetails sessionToken={sessionToken} />
               {/* <ShipingAddress /> */}
             </div>
             <aside className="col-lg-5">
-              <OrderSummary />
+              <OrderSummary packageId={params.orderId} />
               <Payment />
             </aside>
           </div>
