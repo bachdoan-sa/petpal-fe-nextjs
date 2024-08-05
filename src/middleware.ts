@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 
 const privatePaths = ['/profile', '/admin', '/manager', '/partner', '/staff'];
+const managePaths = ['/admin', '/manager', '/partner'];
 const authPaths = ['/login', '/register'];
 // const adminPaths = ['/admin/:part*'];
 // const managerPaths = ['/manager/:part*'];
@@ -81,6 +82,9 @@ export function middleware(request: NextRequest) {
         case 'CUSTOMER': {
           if (authPaths.some((path) => pathname.startsWith(path))) {
             return NextResponse.redirect(new URL('/profile', request.url));
+          }
+          if (managePaths.some((path) => pathname.startsWith(path))) {
+            return NextResponse.redirect(new URL('/logout', request.url));
           }
           break;
         }

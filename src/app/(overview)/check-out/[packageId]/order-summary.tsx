@@ -2,8 +2,6 @@
 import packageApiRequest from "@/src/apiRequests/package";
 import { PackageType } from "@/src/schemaValidations/package/package.schema";
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from 'next/navigation';
-import Image from "next/image";
 // import ProductPriceCount from "../../../components/shop/ProductPriceCount";
 
 function OrderSummary({ packageId }: { packageId: string }) {

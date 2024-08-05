@@ -8,6 +8,7 @@ import { useAppContext } from "@/src/app/app-provider";
 import { useRouter } from "next/navigation";
 import { handleErrorApi } from "@/src/lib/utils";
 import { toast } from "sonner";
+import { HttpError } from "@/src/lib/httpAxios";
 function loginPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -55,6 +56,11 @@ function loginPage() {
       console.log(error);
       if (error.code == "ERR_NETWORK")
         toast.error("Lỗi đường truyền hoặc vấn đề máy chủ!");
+      if (error instanceof HttpError) {
+        if(error.status == 404){
+          toast.error(error.payload.message);
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -102,9 +108,8 @@ function loginPage() {
                           placeholder="Password"
                         />
                         <i
-                          className={`bi ${
-                            showPassword ? "bi-eye" : "bi-eye-slash"
-                          }`}
+                          className={`bi ${showPassword ? "bi-eye" : "bi-eye-slash"
+                            }`}
                           id="togglePassword"
                           onClick={togglePasswordVisibility}
                           style={{ cursor: "pointer" }}
