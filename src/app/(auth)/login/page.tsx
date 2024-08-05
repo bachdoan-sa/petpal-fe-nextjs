@@ -57,7 +57,7 @@ function loginPage() {
       if (error.code == "ERR_NETWORK")
         toast.error("Lỗi đường truyền hoặc vấn đề máy chủ!");
       if (error instanceof HttpError) {
-        console.log(error.message);
+        console.log(error);
         if(error.status == 404){
           toast.error(error.payload.message);
         }
