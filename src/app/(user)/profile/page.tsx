@@ -7,24 +7,24 @@ import { UserType } from '../../../schemaValidations/user.schema';
 async function AccountUser() {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
-  let user: UserType 
-  try{
-    const response = await userApiRequest.getUserInfoByToken({sessionToken})
-    user = response.payload.data;
-  } catch(error){
-    console.log(error)
-  }
+  // let user: UserType 
+  // try{
+  //   const response = await userApiRequest.getUserInfoByToken({sessionToken})
+  //   user = response.payload.data;
+  // } catch(error){
+  //   console.log(error)
+  // }
 
   console.log()
 
-  // const user = {
-  //   fullName: "John Doe",
-  //   address: "123 Main St, Anytown, USA",
-  //   phoneNumber: "123-456-7890",
-  //   roomId: "Room 101",
-  //   profileImage: "/path/to/profileImage.jpg",
-  //   email: "john.doe@example.com"
-  // };
+  const user = {
+    fullName: "An Bình",
+    address: "Vinhome Gardpark",
+    phoneNumber: "0967671523",
+    roomId: "Room 101",
+    profileImage: "/assets/images/pet-contact-1.jpg",
+    email: "binhan@gamil.com"
+  };
   return (
     <>
       <div className="container mt-5">
@@ -32,20 +32,20 @@ async function AccountUser() {
           <div className="col-md-8">
             <div className="card">
               <div className="card-header text-center">
-                <h4>User Profile</h4>
+                <h4>Hồ sơ người dùng</h4>
               </div>
               <div className="card-body text-center">
                 <img
-                  // src={user.profileImage}
+                  src={user.profileImage}
                   alt="Profile"
                   className="img-fluid rounded-circle mb-3"
                   style={{ width: "150px", height: "150px" }}
                 />
-                {/* <h5>{user.fullName}</h5>
-                <p>{user.email}</p>
-                <p>{user.phoneNumber}</p>
-                <p>{user.address}</p>
-                <p>{user.roomId}</p> */}
+                <h5>Họ tên: {user.fullName}</h5>
+                <p>Email: {user.email}</p>
+                <p>Số điện thoại: {user.phoneNumber}</p>
+                <p>Địa chỉ: {user.address}</p>
+                <p>Số phòng: {user.roomId}</p>
               </div>
             </div>
           </div>
