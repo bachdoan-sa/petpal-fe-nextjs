@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Metadata } from "next";
 /*all css import*/
 import "../../styles/main.css";
+import "@/styles/_user.scss";
 import 'bootstrap/dist/css/bootstrap.css';
 import BootstrapClient from "../components/bootstrapClient";
 import AppProvider from "./app-provider";

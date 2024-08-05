@@ -90,7 +90,7 @@ function QuickMenu() {
                             <li className="dropdown-item"><i className="fe fe-activity me-2"></i> Activity Log</li>
                             <li className="dropdown-item text-primary"><i className="fe fe-star me-2"></i> Go Pro</li>
                             <li className="dropdown-item"><i className="fe fe-settings me-2"></i> Account Settings</li>
-                            <li className="dropdown-item"><i className="fe fe-power me-2"></i>Sign Out</li>
+                            <li className="dropdown-item"><i className="fe fe-power me-2"></i><Link href='/logout'>Sign Out</Link></li>
                         </ul>
                     </span>
                 </div>

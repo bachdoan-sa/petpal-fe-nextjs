@@ -1,4 +1,6 @@
 "use client";
+import { lusitana } from "@/src/fonts/fonts";
+import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useReducer, useRef } from "react";
@@ -65,7 +67,10 @@ function Header2() {
                 src="assets/images/header2-logo.svg"
               />
             </a> */}
-            <h4>Petpal</h4>
+            <p className={clsx(
+              'btn text-xxl font-black m-0',
+              lusitana,
+            )}>Petpal</p>
           </Link>
         </div>
         <div
@@ -79,7 +84,7 @@ function Header2() {
                 {/* <a>
                   <img alt="image" src="assets/images/header2-logo.svg" />
                 </a> */}
-                <h4>Petpal</h4>
+                <p className={lusitana}>Petpal</p>
               </Link>
             </div>
             <div className="menu-close-btn">
@@ -215,7 +220,7 @@ function Header2() {
                 </button>
               </div>
             </form>
-           
+
           </div>
         </div>
         <div className="nav-right d-flex jsutify-content-end align-items-center">

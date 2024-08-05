@@ -26,60 +26,45 @@ import { v4 as uuid } from 'uuid';
 export const DashboardMenu = [
 	{
 		id: uuid(),
-		title: 'Dashboard',
+		title: 'Bảng Thống Kê',
 		icon: 'home',
 		link: '/admin'
 	},
 	{
 		id: uuid(),
-		title: 'LAYOUTS & PAGES',
+		title: 'Thư mục quản lý',
 		grouptitle: true
 	},
 	{
 		id: uuid(),
-		title: 'Pages',
-		icon: 'layers',
-		children: [
-			{ id: uuid(), link: '/pages/profile', name: 'Profile' },
-			{ id: uuid(), link: '/pages/settings', name: 'Settings'},
-			{ id: uuid(), link: '/pages/billing', name: 'Billing' },
-			{ id: uuid(), link: '/pages/pricing', name: 'Pricing'},
-			{ id: uuid(), link: '/not-found', name: '404 Error' }
-		]
-	},	
-	{
-		id: uuid(),
-		title: 'Authentication',
-		icon: 'lock',
-		children: [
-			{ id: uuid(), link: '/authentication/sign-in', name: 'Sign In' },
-			{ id: uuid(), link: '/authentication/sign-up', name: 'Sign Up' },
-			{ id: uuid(), link: '/authentication/forget-password', name: 'Forget Password'}			
-		]
-	},
-	{
-		id: uuid(),
-		title: 'Layouts',
-		icon: 'layout',
-		link: '/layout-vertical'
-	},	
-	{
-		id: uuid(),
-		title: 'UI COMPONENTS',
-		grouptitle: true
-	},	
-	{
-		id: uuid(),
-		title: 'Tables',
+		title: 'Quản lý người dùng',
 		icon: 'monitor',
 		children: [
-			{ id: uuid(), link: '/admin/users', name: 'Users' },
-			{ id: uuid(), link: '/admin/care-centers', name: 'Centers' },
-			{ id: uuid(), link: '/admin/extratables', name: 'Extratables' }
-			
+			{ id: uuid(), link: '/admin/users', name: 'Danh sách người dùng' },
+
 		]
-	},	
-	
+	},
+	{
+		id: uuid(),
+		title: 'Quản lý đối tác',
+		icon: 'monitor',
+		children: [
+			{ id: uuid(), link: '/admin/partners', name: 'Danh sách đối tác' },
+			{ id: uuid(), link: '/admin/partners/pending-partners', name: 'Danh sách chờ duyệt' },
+
+
+		]
+	},
+	{
+		id: uuid(),
+		title: 'Quản lý trung tâm',
+		icon: 'monitor',
+		children: [
+			{ id: uuid(), link: '/admin/care-centers', name: 'Danh sách trung tâm' },
+
+		]
+	},
+
 ];
 
 export default DashboardMenu;
