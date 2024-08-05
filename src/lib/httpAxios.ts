@@ -11,6 +11,7 @@ type CustomOptions = Omit<RequestInit, 'method'> & {
 
 const ENTITY_ERROR_STATUS = 422;
 const AUTHENTICATION_ERROR_STATUS = 401;
+const AUTHENTICATION_FAIL_STATUS = 404;
 const SERVER_ERROR_STATUS = 500;
 const OK_STATUS = 200;
 type EntityErrorPayload = {
@@ -148,6 +149,13 @@ const request = async <Response>(
                     )[1]
                     redirect(`/logout?sessionToken=${sessionToken}`)
                 }
+            } else if (status == AUTHENTICATION_FAIL_STATUS) {
+                throw new HttpError(
+                    data as {
+                        status: 404
+                        payload
+                    }
+                )
             } else {
                 throw new HttpError(data)
             }
@@ -173,7 +181,6 @@ const request = async <Response>(
             payload
         };
         if (error instanceof AxiosError) {
-
 
             if (!(status === OK_STATUS)) {
                 if (status === ENTITY_ERROR_STATUS) {
@@ -210,11 +217,18 @@ const request = async <Response>(
                         )[1]
                         redirect(`/logout?sessionToken=${sessionToken}`)
                     }
-                } else if (status === SERVER_ERROR_STATUS) { 
+                } else if (status === SERVER_ERROR_STATUS) {
                     throw new HttpError(
                         data as {
                             status: 500
                             payload: "Máy chủ hiện đang có vấn đề."
+                        }
+                    )
+                } else if (status === AUTHENTICATION_FAIL_STATUS) {
+                    throw new HttpError(
+                        data as {
+                            status: 404
+                            payload: "Sai tài khoản hoặc mật khẩu, xin vui lòng nhập lại."
                         }
                     )
                 } else {
