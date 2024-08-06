@@ -103,10 +103,10 @@ export default function RegisterPartner() {
     if (loading) return;
     setLoading(true);
     const formData = new FormData(event.currentTarget);
-    if (!validateForm(formData)) {
-      setLoading(false);
-      return;
-    }
+    // if (!validateForm(formData)) {
+    //   setLoading(false);
+    //   return;
+    // }
     const first = formData.get("first-name") as string;
     const last = formData.get("last-name") as string;
     const password = formData.get("password") as string;
