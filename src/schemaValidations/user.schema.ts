@@ -50,6 +50,12 @@ export type UserListPageResType = z.TypeOf<typeof UserListPageRes>;
 export const UserListPageBody = PagingBody;
 export type UserListPageBodyType = z.TypeOf<typeof UserListPageBody>;
 
+export const UserListPageFilterRSBody = z.object({
+  listRequest: PagingBody,
+  role: z.string(),
+  status: z.string()
+});
+export type UserListPageFilterRSBodyType = z.TypeOf<typeof UserListPageFilterRSBody>;
 
 
 export const UpdateMeBody = z.object({
@@ -70,8 +76,8 @@ export const CreateUserBody = z.object({ //create ko cần id
 });
 export type CreateUserBodyType = z.TypeOf<typeof CreateUserBody>;
 export const CreateUserRes = z.object({
-    data: IsSucceedRes,
-    message: z.string()
+  data: IsSucceedRes,
+  message: z.string()
 });
 export type CreateUserResType = z.TypeOf<typeof CreateUserRes>;
 
@@ -80,8 +86,8 @@ export type CreateUserResType = z.TypeOf<typeof CreateUserRes>;
 export const UpdateUserBody = UserSchema;
 export type UpdateUserBodyType = z.TypeOf<typeof UpdateUserBody>;
 export const UpdateUserRes = z.object({
-    data: IsSucceedRes,
-    message: z.string()
+  data: IsSucceedRes,
+  message: z.string()
 });
 export type UpdateUserResType = z.TypeOf<typeof UpdateUserRes>;
 

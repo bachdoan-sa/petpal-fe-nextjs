@@ -22,7 +22,7 @@ export default function KCenterStatus({ status }: { status: string }) {
       ) : null}
       {status === 'ACTIVE' ? (
         <>
-          Paid
+          ACTIVE
           <Check className="ms-1 text-white" width={16} />
         </>
       ) : null}

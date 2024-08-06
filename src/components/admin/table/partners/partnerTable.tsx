@@ -3,21 +3,25 @@ import { DeleteButton, DetailButton, UpdateButton } from "@/src/components/admin
 import { Suspense } from "react";
 import Pagination from "../pagination";
 import userApiRequest from "@/src/apiRequests/user";
-import { UserListPageBodyType, UserType } from "@/src/schemaValidations/user.schema";
+import { UserListPageBodyType, UserListPageFilterRSBodyType, UserType } from "@/src/schemaValidations/user.schema";
 import { cookies } from "next/headers";
 import Status from "./status";
 
 export default async function PendingPartnerTable({ query, currentPage }) {
     const cookieStore = cookies();
     const sessionToken = cookieStore.get('sessionToken')?.value;
-    const body: UserListPageBodyType = {
-        page: currentPage,
-        size: 6
+    const body: UserListPageFilterRSBodyType = {
+        listRequest: {
+            page: currentPage,
+            size: 6
+        },
+        role: "PARTNER",
+        status: "ACTIVE"
     }
     let users: UserType[] = [];
     let totalPages: number = 1;
     try {
-        const response = await userApiRequest.getListPagePendingPartner({ body, sessionToken });
+        const response = await userApiRequest.getListPageUser({ body, sessionToken });
         totalPages = response.payload?.data?.paging?.maxPage;
         users = response.payload?.data?.list;
     } catch (error: any) {
@@ -53,11 +57,11 @@ export default async function PendingPartnerTable({ query, currentPage }) {
                                                 <td className="p-2 text-left">{user.email}</td>
                                                 <td className="p-2 text-left">{user.address}</td>
                                                 <td className="p-2 text-left">{user.phoneNumber}</td>
-                                                <td className="py-2 ps-0 text-left">{<Status status={user.status ?? ''} />}</td>
+                                                <td className="py-2 ps-0 text-left">{<Status status={user.status ?? 'ACTIVE' } />}</td>
                                                 <td className="p-2 d-flex justify-content-end">
 
                                                     <DetailButton link={"/admin/partners/"} id={user.id} />
-                                                    <DeleteButton link={"/admin/partners"} id={user.id} />
+                                                    <DeleteButton link={"/admin/tables/users"} id={user.id} />
 
                                                 </td>
                                             </tr>

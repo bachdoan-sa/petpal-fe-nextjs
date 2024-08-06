@@ -5,7 +5,8 @@ import {
     CreateUserBodyType,
     CreateUserResType,
     UpdateUserResType,
-    UserResType
+    UserResType,
+    UserListPageFilterRSBodyType
 } from '@/src/schemaValidations/user.schema'
 import { CommonResType, MessageResType } from '@/src/schemaValidations/common.schema'
 import { UpdatePackageBodyType } from '../schemaValidations/package/package.schema';
@@ -18,7 +19,7 @@ const UserApiRequest = {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
-    getListPageUser: ({ body, sessionToken }: { body: UserListPageBodyType; sessionToken?: string }) =>
+    getListPageUser: ({ body, sessionToken }: { body: UserListPageFilterRSBodyType; sessionToken?: string }) =>
         http.post<UserListPageResType>("/api/User/get-user", body,
             {
                 headers: {
