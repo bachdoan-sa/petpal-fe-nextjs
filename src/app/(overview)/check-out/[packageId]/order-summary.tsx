@@ -42,9 +42,9 @@ function OrderSummary({ packageId }: { packageId: string }) {
               {/* <ProductPriceCount price={22} /> */}
               <h4>{packageDetail?.totalPrice}</h4>
             </div>
-            <div className="delete-btn">
+            {/* <div className="delete-btn">
               <i className="bi bi-x-lg" />
-            </div>
+            </div> */}
           </li>
           {/* <li className="single-product d-flex justify-content-start">
             <div className="product-img">

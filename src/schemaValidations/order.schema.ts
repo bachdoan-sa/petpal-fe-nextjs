@@ -56,15 +56,31 @@ export const OrderListPageBody = PagingBody;
 export type OrderListPageBodyType = z.TypeOf<typeof OrderListPageBody>;
 
 
+export const CreateOrderForm = z.object({
+    petId: z.string({required_error:"Hãy chọn một thú cưng!"}),
+    packageId: z.string(),
+    detail: z.coerce.string()
+        .max(200, "Nội dung chỉ được tối đa 200 kí tự."),
+    fromDate: z.coerce.date()
+        .refine((data) => data > new Date(), { message: "Ngày bắt đầu không thể trong quá khứ!" }),
+    weeks: z.coerce.number({ required_error: "Thời lượng chăm sóc không được bỏ trống!" })
+        .int("Số tuần phải là số nguyên!")
+        .positive("Số tuần không được là số âm!")
+        .min(1, "Thời gian chăm sóc ít nhất là 1 tuần.")
+        .max(12, "Thời gian chăm sóc nhiều nhất là 12 tuần."),
+    receiveTime: z.coerce.string().time(),
+    returnTime: z.coerce.string().time(),
+});
+export type CreateOrderFormType = z.TypeOf<typeof CreateOrderForm>;
+
 export const CreateOrderBody = z.object({
-    id: z.string().optional(),
     petId: z.string(),
     packageId: z.string(),
-    detail: z.string(),
-    fromDate: z.date(),
-    toDate: z.date(),
-    receiveTime: z.string(),
-    returnTime: z.string(),
+    detail: z.coerce.string(),
+    fromDate: z.coerce.date(),
+    toDate: z.coerce.date(),
+    receiveTime: z.coerce.string().time(),
+    returnTime: z.coerce.string().time(),
 });
 export type CreateOrderBodyType = z.TypeOf<typeof CreateOrderBody>;
 
@@ -73,3 +89,7 @@ export const CreateOrderRes = z.object({
     message: z.string()
 });
 export type CreateOrderResType = z.TypeOf<typeof CreateOrderRes>;
+
+export const UpdateOrderFrom = z.object({
+    id: z.string(),
+})
