@@ -10,7 +10,11 @@ export const formatDateToLocal = (dateStr, locale = "vi-VN") => {
   const formatter = new Intl.DateTimeFormat(locale, options)
   return formatter.format(date)
 }
+export const formatStringToTimestamp = (timeString) => {
+  const [hours, minutes, seconds] = timeString.split(':').map(Number);
 
+  return seconds + (minutes * 60) + (hours * 60 * 60);
+}
 export const generatePagination = (currentPage, totalPages) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.

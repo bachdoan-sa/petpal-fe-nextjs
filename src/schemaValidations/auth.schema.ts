@@ -45,7 +45,7 @@ export type RegisterPartnerBodyType = z.TypeOf<typeof RegisterPartnerBody>;
 export const RegisterRes = z.object({
   data: z.object({
     token: z.string(),
-    expiresAt: z.string(),
+    expiresAt: z.string().optional(),
     name: z.string(),
     role: z.string(),
   }),
@@ -56,8 +56,8 @@ export type RegisterResType = z.TypeOf<typeof RegisterRes>;
 
 export const LoginBody = z
   .object({
-    username: z.string().email(),
-    password: z.string().min(6).max(100),
+    username: z.string({required_error:"Tài khoản không được để trống."}).max(20, "Tài khoản không dài quá 20 kí tự."),
+    password: z.string({required_error:"Mật khẩu không được để trống."}).max(20, "Mật khẩu không dài quá 20 kí tự."),
   })
   .strict();
 

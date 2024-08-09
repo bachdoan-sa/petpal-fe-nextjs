@@ -1,7 +1,5 @@
 import React from "react";
 import BillingDetails from "./billing-details";
-import OrderSummary from "./order-summary";
-import Payment from "@/src/components/shop/Payment";
 import { cookies } from "next/headers";
 
 

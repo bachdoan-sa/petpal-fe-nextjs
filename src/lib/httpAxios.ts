@@ -73,7 +73,9 @@ const request = async <Response>(
             : {
                 'Content-Type': 'application/json'
             }
+            
     if (isClient()) {
+        //yên tâm ko có thằng nào set session token trên local storage đâu. (code này chưa được dùng)
         const sessionToken = localStorage.getItem('sessionToken')
         if (sessionToken) {
             baseHeaders.Authorization = `Bearer ${sessionToken}`
@@ -104,11 +106,10 @@ const request = async <Response>(
 
     try {
         const response = await axios(axiosConfig);
-
         const payload: Response = await response.data.payload;
         const strstatus: string = response.data.status as string;
         const status: number = Number(strstatus.slice(0, 3));
-
+        
         const data = {
             status: status,
             payload
@@ -153,23 +154,23 @@ const request = async <Response>(
                 throw new HttpError(
                     data as {
                         status: 404
-                        payload
+                        payload: "ko ổn r"
                     }
                 )
             } else {
                 throw new HttpError(data)
             }
         }
-        if (isClient()) {
-            if (['auth/login', 'auth/register'].some((item) => item === normalizePath(url))) {
-                const { token, expiresAt } = (payload as LoginResType).data
-                localStorage.setItem('sessionToken', token)
-                localStorage.setItem('sessionTokenExpiresAt', expiresAt)
-            } else if ('auth/logout' === normalizePath(url)) {
-                localStorage.removeItem('sessionToken')
-                localStorage.removeItem('sessionTokenExpiresAt')
-            }
-        }
+        // if (isClient()) {
+        //     if (['auth/login', 'auth/register'].some((item) => item === normalizePath(url))) {
+        //         const { token, expiresAt } = (payload as LoginResType).data
+        //         localStorage.setItem('sessionToken', token)
+        //         // localStorage.setItem('sessionTokenExpiresAt', expiresAt)
+        //     } else if ('auth/logout' === normalizePath(url)) {
+        //         localStorage.removeItem('sessionToken')
+        //         // localStorage.removeItem('sessionTokenExpiresAt')
+        //     }
+        // }
 
         return data;
     } catch (error: any) {
@@ -206,7 +207,7 @@ const request = async <Response>(
                             } catch (error) {
                             } finally {
                                 localStorage.removeItem('sessionToken');
-                                localStorage.removeItem('sessionTokenExpiresAt');
+                                // localStorage.removeItem('sessionTokenExpiresAt');
                                 clientLogoutRequest = null;
                                 location.href = '/login';
                             }
@@ -225,6 +226,7 @@ const request = async <Response>(
                         }
                     )
                 } else if (status === AUTHENTICATION_FAIL_STATUS) {
+                    console.log("Looxi 404")
                     throw new HttpError(
                         data as {
                             status: 404
@@ -236,16 +238,17 @@ const request = async <Response>(
                 }
             }
 
-            if (isClient()) {
-                if (['auth/login', 'auth/register'].some((item) => item === normalizePath(url))) {
-                    const { token, expiresAt } = (payload as LoginResType).data
-                    localStorage.setItem('sessionToken', token)
-                    localStorage.setItem('sessionTokenExpiresAt', expiresAt)
-                } else if ('auth/logout' === normalizePath(url)) {
-                    localStorage.removeItem('sessionToken')
-                    localStorage.removeItem('sessionTokenExpiresAt')
-                }
-            }
+            // if (isClient()) {
+            //     if (['auth/login', 'auth/register'].some((item) => item === normalizePath(url))) {
+            //         // const { token, expiresAt } = (payload as LoginResType).data
+            //         const { token } = (payload as LoginResType).data
+            //         localStorage.setItem('sessionToken', token)
+            //         // localStorage.setItem('sessionTokenExpiresAt', expiresAt)
+            //     } else if ('auth/logout' === normalizePath(url)) {
+            //         localStorage.removeItem('sessionToken')
+            //         // localStorage.removeItem('sessionTokenExpiresAt')
+            //     }
+            // }
 
         }
         return data;

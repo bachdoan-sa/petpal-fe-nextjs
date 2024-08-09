@@ -1,5 +1,5 @@
 'use client'
-import React, { isValidElement, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PetListPageBodyType, PetType } from "@/src/schemaValidations/pet.schema";
 import PetApiRequest from "@/src/apiRequests/pet";
 import OrderSummary from "./order-summary";
@@ -16,6 +16,7 @@ type FormFields = z.infer<typeof CreateOrderForm>
 
 const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessionToken?: string }) => {
 
+  const [loading, setLoading] = useState(false);
   const [pets, setPets] = useState<PetType[]>([]);
   const [user, setUser] = useState<{ id, name, role }>();
 
@@ -43,9 +44,7 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
         }
       };
       fetchPets();
-
     }
-
   }, [sessionToken]);
 
   // function này để set lại biến của time vì zod nó nhận HH:mm:ss mà không nhận HH:mm :')
@@ -84,6 +83,7 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
       }
     }
   }
+
   return (
     <>
       <form className="row g-4" onSubmit={handleSubmit(onSubmit)}>
@@ -209,7 +209,7 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
             </div>
           </div>
 
-          {sessionToken ?? (<p className="text-danger font-medium text-center">Bạn cần đăng nhập để sử dụng chức năng này!</p>)}
+          {sessionToken ? null : (<p className="text-danger font-medium text-center">Bạn cần đăng nhập để sử dụng chức năng này!</p>) }
           <div className="place-order-btn d-flex justify-content-center">
 
             <button disabled={isSubmitting || (sessionToken === undefined)} type="submit" className="primary-btn1 lg-btn">

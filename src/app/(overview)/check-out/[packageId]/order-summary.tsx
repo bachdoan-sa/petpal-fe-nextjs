@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 function OrderSummary({ packageId }: { packageId: string }) {
 
   const [packageDetail, setPackageDetail] = useState<PackageType>();
-
+  
   useEffect(() => {
     if (packageId) {
       const fetchPackageById = async () => {
@@ -22,7 +22,6 @@ function OrderSummary({ packageId }: { packageId: string }) {
         }
       };
       fetchPackageById();
-
     }
 
   }, [packageId]);
@@ -40,7 +39,7 @@ function OrderSummary({ packageId }: { packageId: string }) {
                 <a href="#">{packageDetail?.title}</a>
               </h5>
               {/* <ProductPriceCount price={22} /> */}
-              <h4>{packageDetail?.totalPrice}</h4>
+              <h4>{packageDetail?.totalPrice?.toLocaleString("vi-VN")} <span>VNĐ</span> </h4>
             </div>
             {/* <div className="delete-btn">
               <i className="bi bi-x-lg" />

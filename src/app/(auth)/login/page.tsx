@@ -1,44 +1,38 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import loginRequest from "@/src/lib/apiService";
 import authApiRequest from "@/src/apiRequests/auth";
 import { LoginBody, LoginBodyType } from "@/src/schemaValidations/auth.schema";
 import { useAppContext } from "@/src/app/app-provider";
 import { useRouter } from "next/navigation";
-import { handleErrorApi } from "@/src/lib/utils";
 import { toast } from "sonner";
 import { HttpError } from "@/src/lib/httpAxios";
-function loginPage() {
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+
+function loginPage() {
+
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginBodyType>({ resolver: zodResolver(LoginBody) });
+
+  const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useAppContext();
+
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    if (loading) return;
-    setLoading(true);
-    const formData = new FormData(event.currentTarget);
-    const username = formData.get("username") as string;
-    const password = formData.get("password") as string;
-    // const body = JSON.stringify({ username, password });
-    const loginForm: LoginBodyType = {
-      username: username,
-      password: password,
-    };
+  const onSubmit: SubmitHandler<LoginBodyType> = async (loginForm: LoginBodyType) => {
+    if (isSubmitting) {
+      console.log("meon on r")
+      return;
+    }
     try {
-      // const result = await loginRequest(body);
       const result = await authApiRequest.login(loginForm);
       const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
-      console.log(result);
-
-      //setcookie
       await authApiRequest.auth({
         sessionToken: result.payload.data.token,
         sessionRole: result.payload.data.role,
@@ -54,16 +48,19 @@ function loginPage() {
       toast.success("Login success!");
     } catch (error: any) {
       console.log(error);
-      if (error.code == "ERR_NETWORK")
+      if (error.code == "ERR_NETWORK") {
         toast.error("Lỗi đường truyền hoặc vấn đề máy chủ!");
-      if (error instanceof HttpError) {
-        console.log(error);
-        if(error.status == 404){
+      }
+      else if (error instanceof HttpError) { 
+        if (error.status == 404) {
           toast.error(error.payload.message);
         }
+        if (error.status == 500) {
+          toast.error("Lỗi máy chủ không phản hồi.");
+        }
+      } else {
+        toast.error("Lỗi đăng nhập không xác định?");
       }
-    } finally {
-      setLoading(false);
     }
   }
   return (
@@ -87,34 +84,25 @@ function loginPage() {
                     </Link>
                   </p>
                 </div>
-                <form className="w-100" onSubmit={handleSubmit}>
+                <form className="w-100" onSubmit={handleSubmit(onSubmit)}>
                   <div className="row">
                     <div className="col-12">
                       <div className="form-inner">
                         <label>Enter Your Email *</label>
-                        <input
-                          type="text"
-                          name="username"
-                          placeholder="Enter Your Email"
-                        />
+                        <input {...register("username")} type="text" placeholder="Enter Your Username" />
+                        {errors.username ? (<span className="text-danger font-medium">{errors.username.message}</span>) : null}
                       </div>
                     </div>
                     <div className="col-12">
                       <div className="form-inner">
                         <label>Password *</label>
-                        <input
-                          type={showPassword ? "text" : "password"}
-                          name="password"
-                          id="password"
-                          placeholder="Password"
-                        />
-                        <i
-                          className={`bi ${showPassword ? "bi-eye" : "bi-eye-slash"
-                            }`}
+                        <input {...register("password")} type={showPassword ? "text" : "password"} id="password" placeholder="Password" />
+                        <i className={`bi ${showPassword ? "bi-eye" : "bi-eye-slash"}`}
                           id="togglePassword"
                           onClick={togglePasswordVisibility}
                           style={{ cursor: "pointer" }}
                         />
+                        {errors.password ? (<span className="text-danger font-medium">{errors.password.message}</span>) : null}
                       </div>
                     </div>
                     <div className="col-12">
@@ -132,8 +120,8 @@ function loginPage() {
                     </div>
                   </div>
                   <a>
-                    <button className="account-btn" type="submit">
-                      Login in
+                    <button disabled={isSubmitting} className="account-btn" type="submit">
+                      {isSubmitting ? "Logging..." : "Login in"}
                     </button>
                   </a>
                 </form>
