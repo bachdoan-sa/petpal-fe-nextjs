@@ -1,5 +1,5 @@
 import authApiRequest from '@/src/apiRequests/auth'
-import { HttpError } from '@/src/lib/http'
+import { HttpError } from '@/src/lib/httpAxios'
 import { cookies } from 'next/headers'
 
 export async function POST(request: Request) {
