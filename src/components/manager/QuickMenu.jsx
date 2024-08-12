@@ -8,10 +8,10 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 
 // import data files
-import NotificationList from '../../data/Notification';
+import NotificationList from '@/src/data/Notification';
 
 // import hooks
-import useMounted from '../../hooks/useMounted';
+import useMounted from '@/src/hooks/useMounted';
 
 function QuickMenu() {
 
@@ -74,11 +74,11 @@ function QuickMenu() {
                     </span>
                 </div>
                 <div className="ms-2" role="presentation">
-                    <span className="dropdown" >
+                    <div className="dropdown" >
                         <button id="dropdownUser" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ borderRadius: "50%" }}>
                             <img alt="avatar" src='/assets/images/blog/blog-author.png' className="rounded-circle avatar avatar-md avatar-indicators avatar-online" />
                         </button>
-                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser" show>
+                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser" show="true">
                             <li className="dropdown-item px-4 pb-0 pt-2" role="presentation">
                                 <span className="lh-1">
                                     <h5 className="mb-1"> John E. Grainger</h5>
@@ -90,9 +90,9 @@ function QuickMenu() {
                             <li className="dropdown-item"><i className="fe fe-activity me-2"></i> Activity Log</li>
                             <li className="dropdown-item text-primary"><i className="fe fe-star me-2"></i> Go Pro</li>
                             <li className="dropdown-item"><i className="fe fe-settings me-2"></i> Account Settings</li>
-                            <li className="dropdown-item"><i className="fe fe-power me-2"></i>Sign Out</li>
+                            <li className="dropdown-item"><i className="fe fe-power me-2"></i><Link href='/logout'>Sign Out</Link></li>
                         </ul>
-                    </span>
+                    </div>
                 </div>
             </div>
         )

@@ -20,8 +20,8 @@ export const ManagerRoutes = [
 		title: 'Tables',
 		icon: 'monitor',
 		children: [
-			{ id: uuid(), link: '/manager/tables/staffs', name: 'Staff' },
-			{ id: uuid(), link: '/manager/tables/packages', name: 'Package' },
+			{ id: uuid(), link: '/manager/staffs', name: 'Staff' },
+			{ id: uuid(), link: '/manager/packages', name: 'Package' },
 		]
 	},	
 	{

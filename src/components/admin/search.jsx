@@ -23,7 +23,6 @@ function SearchBar({ placeholder }) {
   // }
   const handleSearch = useDebouncedCallback((term) => {
     //Code này cho delay 300ms khi nhập và có thư viện debounced hỗ trọ... nên dùng!
-    console.log(term);
     const params = new URLSearchParams(searchParams);
     params.set('page', '1');
     if (term) {

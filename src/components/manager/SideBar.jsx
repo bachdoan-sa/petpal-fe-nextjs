@@ -1,6 +1,6 @@
 'use client'
 // import node module libraries
-import { Fragment, useContext} from 'react';
+import { Fragment, useContext, useEffect, useState} from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import { useMediaQuery } from 'react-responsive';
@@ -10,19 +10,27 @@ import 'simplebar-react/dist/simplebar.min.css';
 
 // import routes file
 import { ManagerRoutes } from '../../routes/ManagerRoutes';
+import clsx from 'clsx';
+import { inter } from '@/src/fonts/fonts';
 
 
 function SideBar(props) {
 	const location = usePathname();
-	const CustomToggle =({ children, icon , collapseKey}) =>{
+
+	const [menuList, setList] = useState();
+	useEffect(() => {
+		setList(ManagerRoutes);
+	}, []);
+
+	const CustomToggle = ({ children, icon, collapseKey }) => {
 		return (
 			<li className="nav-item">
 				<Link
 					href="#"
 					className="nav-link "
 					data-bs-toggle="collapse"
-					data-bs-target={collapseKey ? "#"+collapseKey : "#navDashboard"}
-					aria-expanded= "false"
+					data-bs-target={collapseKey ? "#" + collapseKey : "#navDashboard"}
+					aria-expanded="false"
 					aria-controls={collapseKey ? collapseKey : "navDashboard"}>
 					{icon ? <i className={`nav-icon fe fe-${icon} me-2`}></i> : ''}{' '}
 					{children}
@@ -30,8 +38,13 @@ function SideBar(props) {
 			</li>
 		);
 	};
-	
-
+	const CustomDropdown = ({ children, collapseKey }) => {
+		return (
+			<nav id={collapseKey} className="nav-item collapse">
+				{children}
+			</nav>
+		);
+	}
 	const generateLink = (item) => {
 		return (
 			(<Link
@@ -65,13 +78,17 @@ function SideBar(props) {
 		<Fragment>
 			<SimpleBar style={{ maxHeight: '100vh' }}>
 				<div className="nav-scroller">
-					<Link href="/" className="navbar-brand">
-						<h1 className='text-white'>PetPal</h1>
+					<Link href="/manager" type='button' className="navbar-brand d-flex justify-content-center">
+						<p className={clsx(
+							'text-xxl font-black m-0 text-white',
+							inter,
+						)}>Petpal <span className={clsx('text-xxl font-black m-0 text-orange',inter, )}> manager</span></p>
+
 					</Link>
 				</div>
 				{/* Dashboard Menu */}
 				<ul className="navbar-nav flex-column">
-					{ManagerRoutes.map(function (menu, index) {
+					{menuList?.map(function (menu, index) {
 						if (menu.grouptitle) {
 							return (
 								<nav className="nav-item" key={index}>
@@ -85,7 +102,8 @@ function SideBar(props) {
 								return (
 									<Fragment key={index}>
 										{/* main menu / root menu level / root items */}
-										<CustomToggle icon={menu.icon} collapseKey={"key"+menu.id}>
+
+										<CustomToggle icon={menu.icon} collapseKey={"key" + menu.id}>
 											{menu.title}
 											{menu.badge ? (
 												<span className={(menu.badgecolor ? menu.badgecolor : 'badge-primary') + " ms-1 badge"}>
@@ -93,7 +111,7 @@ function SideBar(props) {
 												</span>
 											) : ('')}
 										</CustomToggle>
-										<nav id={"key"+menu.id} className="nav-item collapse">
+										<CustomDropdown collapseKey={"key" + menu.id} className="nav-item collapse">
 											<ul className="nav flex-column">
 												{menu.children.map(function (menuLevel1Item, menuLevel1Index) {
 													return (
@@ -106,7 +124,7 @@ function SideBar(props) {
 
 												})}
 											</ul>
-										</nav>
+										</CustomDropdown>
 										{/* end of main menu / menu level 1 / root items */}
 									</Fragment>
 								);

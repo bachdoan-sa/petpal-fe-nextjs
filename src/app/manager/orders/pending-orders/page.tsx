@@ -1,17 +1,16 @@
 import React, { Suspense } from "react";
 import { lusitana } from "@/src/fonts/fonts";
 import { CreateButton } from "@/src/components/admin/table/button.jsx";
-import SearchBar from "@/src/components/admin/search.jsx";1
-import OrderTable from "@/src/components/manager/table/OrderTable";
+import SearchBar from "@/src/components/admin/search.jsx"; 1
+import PendingOrderTable from './orderPendingTable';
+import { cookies } from "next/headers";
 
-export default function ManagerManageOrders({
-    searchParams,
-}: {
-    searchParams?: {
-        query?: string;
-        page?: string;
-    };
-}) {
+export default function ManagerManageOrders({ searchParams }: { searchParams?: { query?: string; page?: string; }; }) {
+    const cookieStore = cookies();
+    const sessionToken = cookieStore.get('sessionToken')?.value;
+    if (sessionToken === undefined) {
+        return;
+    }
     const query = searchParams?.query || '';
     const currentPage = Number(searchParams?.page) || 1;
     return (
@@ -25,7 +24,7 @@ export default function ManagerManageOrders({
                 </Suspense>
                 <CreateButton link={"orders/create"} title="Create User" />
             </div>
-            <OrderTable query={query} currentPage={currentPage} />
+            <PendingOrderTable query={query} currentPage={currentPage} sessionToken={sessionToken} />
         </>
     );
 }

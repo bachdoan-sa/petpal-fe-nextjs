@@ -1,38 +1,44 @@
+'use client'
 import Image from "next/image";
 import { getDataTestPages, getDataTestTable } from "@/src/data/apiService";
 import { DeleteButton, UpdateButton } from "@/src/components/admin/table/button";
-import { Suspense } from "react";
-import Pagination from "../../admin/table/pagination";
+import { Suspense, useEffect, useState } from "react";
+import Pagination from "@/src/components/admin/table/pagination";
 import orderApiRequest from "@/src/apiRequests/order";
+import { formatDateToLocal } from "@/src/lib/utils";
 import { OrderListPageBodyType, OrderListType, OrderResType, OrderType } from "@/src/schemaValidations/order.schema";
-import { cookies } from "next/headers";
 import { toast } from "sonner";
-import Order from "../test/Order";
+import PackageDropdown from "../packageDropdown"
+import PetDropdown from "../petDropdown"
 
-export default async function orderTable({ query, currentPage }) {
-    const cookieStore = cookies();
-    const sessionToken = cookieStore.get('sessionToken')?.value;
+export default function PendingOrderTable({ query, currentPage, sessionToken }) {
+    const [orders, setOrders] = useState<OrderType[]>([]);
+    const [totalPages, setTotalPages] = useState(1);
     const body: OrderListPageBodyType = {
         page: currentPage,
         size: 6
     }
-    let orders: OrderType[] = [];
-    let totalPages: number = 1;
-    try {
-        const response = await orderApiRequest.getListOrderForManager({ body, sessionToken });
-        const data = response.payload?.data;
-        if(data == null){
-            return(<>
-                <h1>
-                    Không có order nào cả.
-                </h1>
-            </>);
+    useEffect(() => {
+        const fetchAPI = async () => {
+            try {
+                const response = await orderApiRequest.getListOrderForManager({ body, sessionToken });
+                const data = response.payload?.data;
+                if (data == null) {
+                    return (<>
+                        <h1>
+                            Không có order nào cả.
+                        </h1>
+                    </>);
+                }
+                setTotalPages(response.payload?.data?.paging?.maxPage)
+                setOrders(response.payload?.data?.orders)
+            } catch (error: any) {
+                console.log(error);
+            }
         }
-        totalPages = response.payload?.data?.paging?.maxPage;
-        orders = response.payload?.data?.orders;
-    } catch (error: any) {
-        console.log(error);
-    }
+        fetchAPI();
+    }, [currentPage,query])
+
     return (
         <>
             <div className="mt-6 d-flex flex-wrap">
@@ -43,10 +49,11 @@ export default async function orderTable({ query, currentPage }) {
                             <thead>
                                 <tr>
                                     <th scope="col" className="px-3 py-4 text-left bg-gray-200" style={{ border: "none" }}>Customer</th>
+                                    <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}>Tên dịch vụ</th>
                                     <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}>currentPrice</th>
-                                    <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}>fromDate</th>
-                                    <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}>toDate</th>
-                                    <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}>Status</th>
+                                    <th scope="col" className="px-2 py-4 text-left bg-gray-200 text-end" style={{ border: "none" }}>Từ ngày</th>
+                                    <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}>Đến ngày</th>
+                                    <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}>Trạng thái</th>
                                     <th scope="col" className="px-2 py-4 text-left bg-gray-200" style={{ border: "none" }}></th>
                                 </tr>
                             </thead>
@@ -54,13 +61,14 @@ export default async function orderTable({ query, currentPage }) {
                                 {orders?.map((order) => (
                                     <tr key={order.id} className="text-sm">
                                         <td className="p-2 text-left">
-                                            <div className="d-flex items-center">
-                                                <p className="table-first-td">{order.userId}</p>
+                                            <div className="d-flex items-center be-box">
+                                                <PetDropdown value={order.pet} />
                                             </div>
                                         </td>
+                                        <td className="p-2 be-box"> <PackageDropdown value={order.package} /></td>
                                         <td className="p-2 text-left">{order.currentPrice}</td>
-                                        <td className="p-2 text-left">{order.fromDate}</td>
-                                        <td className="p-2 text-left">{order.toDate}</td>
+                                        <td className="p-2 text-end">{formatDateToLocal(order.fromDate)}</td>
+                                        <td className="p-2 text-left">{formatDateToLocal(order.toDate)}</td>
                                         <td className="p-2 text-left">{order.status}</td>
                                         <td className="p-2 d-flex justify-content-end">
 

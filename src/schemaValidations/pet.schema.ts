@@ -7,16 +7,18 @@ export const PetSchema = z.object({
     userId: z.string().optional(),
     petTypeId: z.string().optional(),
     fullName: z.string(),
-    description: z.string().optional(),
-    birthday: z.string(),
-    weight: z.string(),
-    gender: z.string(),
-    breed: z.string(),
-    sterilise: z.boolean(),
-    // file: z.string().optional(),
+
+    birthday: z.string().nullable(),
+    weight: z.string().nullable(),
+    gender: z.string().nullable(),
+    breed: z.string().nullable(),
+    sterilise: z.boolean().nullable(),
+
+    // file: z.string().optional(), 
     profileImage: z.string().optional(),
 
-    // status: z.string().optional(),
+    description: z.string().optional(),
+    status: z.string().optional(),
 
     createdAt: z.date().optional(),
     createdBy: z.string().optional(),

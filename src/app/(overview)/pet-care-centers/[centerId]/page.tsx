@@ -66,7 +66,7 @@ const CareCenterDetail = ({ params }: { params: { centerId: string } }) => {
                   <div className="collection-img">
                     <img
                       className="img-gluid"
-                      src={item.image}
+                      src={item.image ?? ""}
                       alt=""
                       style={{
                         height: "100%",

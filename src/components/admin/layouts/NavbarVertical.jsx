@@ -46,7 +46,6 @@ function NavbarVertical(props) {
 			</nav>
 		);
 	}
-
 	const generateLink = (item) => {
 		return (
 			(<Link
@@ -80,9 +79,9 @@ function NavbarVertical(props) {
 		<Fragment>
 			<SimpleBar style={{ maxHeight: '100vh' }}>
 				<div className="nav-scroller">
-					<Link href="/" className="navbar-brand d-flex justify-content-center">
+					<Link href="/admin" type='button' className="navbar-brand d-flex justify-content-center">
 						<p className={clsx(
-							'btn text-xxl font-black m-0 text-white',
+							'text-xxl font-black m-0 text-white',
 							inter,
 						)}>Petpal <span className={clsx('text-xxl font-black m-0 text-orange',inter, )}> admin</span></p>
 

@@ -2,6 +2,8 @@ import { z } from "zod";
 import { IsSucceedRes } from "./common.schema";
 import { PagingRes, PagingBody } from "./paging/paging.schema";
 import { formatStringToTimestamp } from "../lib/utils";
+import { PetSchema } from "./pet.schema";
+import { PackageSchema } from "./package/package.schema";
 // Các bước định nghĩa 1 response
 // 1. định nghĩa object đó
 export const OrderSchema = z.object({
@@ -14,7 +16,9 @@ export const OrderSchema = z.object({
     status: z.string().optional(),
     userId: z.string().optional(),
     petId: z.string(),
-    packageId: z.string()
+    pet: PetSchema.optional(),
+    packageId: z.string(),
+    package: PackageSchema.optional(),
 });
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
 export const OrderRes = z.object({
