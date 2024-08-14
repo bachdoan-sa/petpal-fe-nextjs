@@ -26,7 +26,7 @@ export default function manager() {
                     </Link>
                 </div>
             </div>
-            <div className="accordion" id="accordionExample">
+            {/* <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
                     <h2 className="accordion-header" id="headingOne">
                         <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -63,8 +63,62 @@ export default function manager() {
                         </div>
                     </div>
                 </div>
+            </div> */}
+            {/* <button type="button" data-bs-toggle="modal" data-bs-target="#myModal">Launch modal</button>
+            <div
+                className="modal modal-alert bg-secondary py-5"
+                tabIndex={-1}
+                role="dialog"
+                id="myModal"
+            >
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content rounded-4 shadow">
+                        <div className="modal-body p-4 text-center">
+                            <h5 className="mb-0">Enable this setting?</h5>
+                            <p className="mb-0">
+                                You can always change your mind in your account settings.
+                            </p>
+                        </div>
+                        <div className="modal-footer flex-nowrap p-0">
+                            <button
+                                type="button"
+                                className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right"
+                            >
+                                <strong>Yes, enable</strong>
+                            </button>
+                            <button
+                                type="button"
+                                className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+                                data-bs-dismiss="modal"
+                            >
+                                No thanks
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch demo modal
+            </button>     
+            <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            ...
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </>
     );
 }

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 
-const privatePaths = ['/profile', '/admin', '/manager', '/partner', '/staff'];
+const privatePaths = ['/profile', '/admin', '/manager', '/partner'];//, '/staff'
 const managePaths = ['/admin', '/manager', '/partner'];
 const authPaths = ['/login', '/register'];
 // const adminPaths = ['/admin/:part*'];
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   const sessionToken = request.cookies.get('sessionToken')?.value;
   const sessionRole = request.cookies.get('sessionRole')?.value;
 
-  console.log(pathname + ' : ' + sessionRole);
+  //  bconsole.log(pathname + ' : ' + sessionRole);
 
   // Bảng điều hướng - Verson 2
 
@@ -74,10 +74,16 @@ export function middleware(request: NextRequest) {
           break;
         }
         case 'STAFF': {
-          if (authPaths.some((path) => pathname.startsWith(path))) {
-            return NextResponse.redirect(new URL('/staff', request.url));
-          }
-          break;
+          // if (authPaths.some((path) => pathname.startsWith(path))) {
+          //   return NextResponse.redirect(new URL('/staff', request.url));
+          // }
+          // if (!pathname.startsWith('/staff') && pathname == '/') {
+          //   return NextResponse.redirect(new URL('/staff', request.url));
+          // }
+          // if (!pathname.startsWith('/staff') && pathname != '/') {
+          //   return NextResponse.redirect(new URL('/logout', request.url));
+          // }
+          // break;
         }
         case 'CUSTOMER': {
           if (authPaths.some((path) => pathname.startsWith(path))) {
@@ -131,7 +137,7 @@ export function middleware(request: NextRequest) {
 }
 
 // cái matcher này là dùng để khai báo những role nào sẽ được chạy middleware này
-// thằng được khai báo dưới đây sẽ cho phép middleware này chạy ở tất cả page ngoại trừ cái đã được báo ở trong
+// chuỗi kí tự khai báo dưới đây sẽ cho phép middleware này chạy ở tất cả page ngoại trừ cái đã được liệt kê bên trong
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico|logout|assets).*)']
   // matcher: ['/profile', '/login', '/register','/admin/:part*','/manager/:part*','/partner/:part*' ] //version 1

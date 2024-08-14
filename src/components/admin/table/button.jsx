@@ -14,9 +14,10 @@ export function CreateButton({ link, title = '' }) {
 }
 
 export function UpdateButton({ id, link }) {
+    const url = link + id;
     return (
         <Link
-            href={link ? link : "#"}
+            href={url ? url : "#"}
             className=" border p-1 me-1 table-button-action"
         >
             <Edit3 className="w-5" />

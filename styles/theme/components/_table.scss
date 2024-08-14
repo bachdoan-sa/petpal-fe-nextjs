@@ -59,6 +59,10 @@ td {
   border-bottom: 1px solid #f4f6f8;
 }
 
+td.border-default{
+  border-bottom-color: inherit !important;
+}
+
 td {
   align-content: center;
 }

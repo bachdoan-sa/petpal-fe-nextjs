@@ -26,6 +26,15 @@ export const ManagerRoutes = [
 	},	
 	{
 		id: uuid(),
+		title: 'Quản lý yêu cầu',
+		icon: 'package',
+		children: [
+			{ id: uuid(), link: '/manager/orders', name: 'Danh sách tổng' },
+			{ id: uuid(), link: '/manager/orders/pending-orders', name: 'Danh sách chờ duyệt' },
+		]
+	},	
+	{
+		id: uuid(),
 		title: 'Setting',
 		icon: 'settings',
 		link: '/manager'

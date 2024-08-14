@@ -21,7 +21,8 @@ function LogoutLogic() {
         .logoutFromNextClientToNextServer(true, signal)
         .then((res) => {
           setUser(null);
-          router.push(`/login?redirectFrom=${pathname}`);
+          // router.push(`/login?redirectFrom=${pathname}`);
+          router.push(`/login`);
         });
     }
     return () => {

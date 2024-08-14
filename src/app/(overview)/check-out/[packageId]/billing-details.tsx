@@ -18,10 +18,11 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
 
   const [loading, setLoading] = useState(false);
   const [pets, setPets] = useState<PetType[]>([]);
+  const [selectedPet, setSelectedPet] = useState<PetType>();
   const [user, setUser] = useState<{ id, name, role }>();
 
   //2: gọi hook của form và gọi các phương thức mình cần
-  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<FormFields>({ resolver: zodResolver(CreateOrderForm) });
+  const { register, handleSubmit, setValue, getValues, formState: { errors, isSubmitting } } = useForm<FormFields>({ resolver: zodResolver(CreateOrderForm) });
 
   useEffect(() => {
     if (sessionToken) {
@@ -74,7 +75,8 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
         returnTime: data.returnTime
       }
       try {
-        await orderApiRequest.userCreateOrder({ body: createOrderBody, sessionToken: sessionToken })
+        console.log(createOrderBody);
+        await orderApiRequest.userCreateOrder({ body: createOrderBody, sessionToken: sessionToken })  
         toast.success("Tạo đơn đăng ký thành công.");
       } catch (error: any) {
         if (error instanceof HttpError) {
@@ -104,14 +106,65 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
                 <div className="form-inner">
                   <label>Hãy chọn thú cưng cho dịch vụ này:</label>
                   {(pets.length > 0) ? (
-                    <select {...register("petId")} className="form-select" aria-label="Default select example">
-                      {pets?.map((option) => (
-                        <option key={option.id} value={option.id}>
-                          {option.fullName}
-                        </option>
-                      ))}
-                    </select>
+                    <>
+                      <button type="button" className="btn btn-sm btn-outline-secondary mx-4" data-bs-toggle="modal" data-bs-target="#petListModal">
+                        Hãy chọn thú cưng
+                      </button>
+                      <div className="modal fade" id="petListModal" tabIndex={-1} role="dialog" aria-labelledby="petListModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title font-medium" id="petListModalLabel">Hãy chọn một thú cưng để sử dụng dịch vụ :D</h5>
+                              <button type="button" className="close btn btn-danger " data-bs-dismiss="modal" aria-label="Close">
+                                <p className="d-flex align-items-center font-medium m-0 text-white" aria-hidden="true">x</p>
+                              </button>
+                            </div>
+                            <div className="modal-body px-4">
+                              <div className="row">
+                                {pets?.map((pet) => (
+                                  <div className="col-md-4" key={pet.id}>
+                                    <div className="card card-optional mb-3 btn"
+                                      data-bs-dismiss="modal"
+                                      onClick={() => {
+                                        setSelectedPet(pet)
+                                        setValue("petId", pet.id ?? "")
+                                      }}>
+                                      <div className="row g-0">
+                                        <div className="col-md-4 position-relative ">
+                                          <img
+                                            style={{ height: "100%", objectFit: "cover", width: "100%" }}
+                                            src={pet.profileImage}
+                                            className="img-fluid rounded-start"
+                                          />
+                                        </div>
+                                        <div className="col-md-8">
+                                          <div className="card-header">
+                                            <div className="d-flex justify-content-between align-items-center">
+                                              <span className="">{pet.fullName}</span>
+                                            </div>
+                                          </div>
+                                          <div className="card-body">
+                                            <p className="card-text">
+                                              <small className="text-muted">{pet.description}</small>
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            <div className="modal-footer">
+                              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Hủy tác vụ</button>
+                              {/* <button type="button" className="btn btn-primary">Save changes</button> */}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Selected Pet */}
 
+                    </>
                   ) : (
                     <>
                       <input type="text" placeholder="Lựa chọn thú cưng của bạn"
@@ -120,6 +173,56 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
                       />
                     </>
                   )}
+                  {selectedPet ? (
+                    <div>
+                      <div className="card mb-3" style={{ maxWidth: "860px" }}>
+                        <div className="row g-0">
+                          <div className="col-md-4 position-relative ">
+                            <img
+                              style={{ height: "100%", objectFit: "cover", width: "100%" }}
+                              src={selectedPet.profileImage}
+                              className="img-fluid rounded-start"
+                            />
+                          </div>
+                          <div className="col-md-8">
+                            <div className="card-header">
+                              <div className="d-flex justify-content-between align-items-center">
+                                <span className="card-title text-xl m-0">{selectedPet.fullName}</span>
+                              </div>
+                            </div>
+                            <div className="card-body">
+                              <div className="row">
+                                <div className="col-4">
+                                  <h5>Pet type</h5>
+                                </div>
+                                <div className="col-4">Age: 1 year old</div>
+                                <div className="col-4">Weight: {selectedPet.weight}</div>
+                              </div>
+                              <div className="row">
+                                <div className="col-4">
+                                  Gender
+                                  <br /> {selectedPet.gender}
+                                </div>
+                                <div className="col-4">
+                                  Breed
+                                  <br /> {selectedPet.breed}
+                                </div>
+                                <div className="col-4">
+                                  Desexed
+                                  <br />
+                                  No
+                                </div>
+                              </div>
+                              <hr />
+                              <p className="card-text">
+                                <small className="text-muted">{selectedPet.description}</small>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
                   {errors.petId ? (<span className="text-danger font-medium">{errors.petId.message}</span>) : null}
                 </div>
 
@@ -209,7 +312,7 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
             </div>
           </div>
 
-          {sessionToken ? null : (<p className="text-danger font-medium text-center">Bạn cần đăng nhập để sử dụng chức năng này!</p>) }
+          {sessionToken ? null : (<p className="text-danger font-medium text-center">Bạn cần đăng nhập để sử dụng chức năng này!</p>)}
           <div className="place-order-btn d-flex justify-content-center">
 
             <button disabled={isSubmitting || (sessionToken === undefined)} type="submit" className="primary-btn1 lg-btn">

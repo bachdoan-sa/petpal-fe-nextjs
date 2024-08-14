@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import { getDataTestPages, getDataTestTable } from "@/src/data/apiService";
-import { DeleteButton, UpdateButton } from "@/src/components/admin/table/button";
+import { DeleteButton, DetailButton, UpdateButton } from "@/src/components/admin/table/button";
 import { Suspense, useEffect, useState } from "react";
 import Pagination from "@/src/components/admin/table/pagination";
 import orderApiRequest from "@/src/apiRequests/order";
@@ -14,13 +14,15 @@ import PetDropdown from "../petDropdown"
 export default function PendingOrderTable({ query, currentPage, sessionToken }) {
     const [orders, setOrders] = useState<OrderType[]>([]);
     const [totalPages, setTotalPages] = useState(1);
-    const body: OrderListPageBodyType = {
-        page: currentPage,
-        size: 6
-    }
+   
     useEffect(() => {
         const fetchAPI = async () => {
             try {
+                const body: OrderListPageBodyType = {
+                    page: currentPage,
+                    size: 6
+                }
+                // nhớ sửa lại api
                 const response = await orderApiRequest.getListOrderForManager({ body, sessionToken });
                 const data = response.payload?.data;
                 if (data == null) {
@@ -72,8 +74,8 @@ export default function PendingOrderTable({ query, currentPage, sessionToken }) 
                                         <td className="p-2 text-left">{order.status}</td>
                                         <td className="p-2 d-flex justify-content-end">
 
-                                            <UpdateButton link={"/admin/tables/orders"} id={order.id} />
-                                            <DeleteButton link={"/admin/tables/orders"} id={order.id} />
+                                            <DetailButton link={"/manager/orders/"} id={order.id} />
+                                            <DeleteButton link={"/manager/orders/"} id={order.id} />
 
                                         </td>
                                     </tr>

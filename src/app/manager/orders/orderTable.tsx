@@ -75,8 +75,8 @@ export default function orderTable({ query, currentPage, sessionToken }) {
                                         <td className="p-2 text-left">{order.status}</td>
                                         <td className="p-2 d-flex justify-content-end">
 
-                                            <UpdateButton link={"/admin/tables/orders"} id={order.id} />
-                                            <DeleteButton link={"/admin/tables/orders"} id={order.id} />
+                                            <UpdateButton link={"/manager/orders/"} id={order.id} />
+                                            <DeleteButton link={"/manager/orders/"} id={order.id} />
 
                                         </td>
                                     </tr>

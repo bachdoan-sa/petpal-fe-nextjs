@@ -63,3 +63,10 @@
     top: 0;
     bottom: 0;
 }
+
+.card.card-optional{
+    transition: all 0.3s;
+}
+.card.card-optional:hover{
+    transform: scale(1.10);
+}
