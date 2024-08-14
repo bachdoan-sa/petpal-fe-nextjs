@@ -105,6 +105,7 @@ const request = async <Response>(
     };
 
     try {
+        console.log(axiosConfig);
         const response = await axios(axiosConfig);
         const payload: Response = await response.data.payload;
         const strstatus: string = response.data.status as string;

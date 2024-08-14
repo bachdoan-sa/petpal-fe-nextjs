@@ -11,5 +11,6 @@ export type PageResType = z.TypeOf<typeof PagingRes>;
 export const PagingBody = z.object({
     page: z.number(),
     size: z.number(),
+    search: z.string().optional()
 });
 export type PageBodyType = z.TypeOf<typeof PagingBody>;

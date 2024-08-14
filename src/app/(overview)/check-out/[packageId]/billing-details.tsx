@@ -22,7 +22,7 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
   const [user, setUser] = useState<{ id, name, role }>();
 
   //2: gọi hook của form và gọi các phương thức mình cần
-  const { register, handleSubmit, setValue, getValues, formState: { errors, isSubmitting } } = useForm<FormFields>({ resolver: zodResolver(CreateOrderForm) });
+  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<FormFields>({ resolver: zodResolver(CreateOrderForm) });
 
   useEffect(() => {
     if (sessionToken) {
@@ -30,7 +30,12 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
       setUser(user ? JSON.parse(user) : undefined);
       const fetchPets = async () => {
         try {
-          const response = await PetApiRequest.getActiveListPetForUser({ packageId, sessionToken });
+          const body: PetListPageBodyType = {
+            page: 1,
+            size: 20,
+            search: ""
+          }
+          const response = await PetApiRequest.getActiveListPetForUser({ body, packageId, sessionToken });
           setPets(response.payload.data.list);
           // console.log("Package data: hahaha", packageDetail);
         } catch (error) {
