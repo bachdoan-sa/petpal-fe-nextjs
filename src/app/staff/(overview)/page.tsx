@@ -4,7 +4,7 @@ import Link from 'next/link';
 import StatRightTopIcon from "./StatRightTopIcon";
 import ActiveProjects from "./ActiveProjects";
 
-export const ProjectsStats = [
+const ProjectsStats = [
     {
         id: 1,
         title: "Projects",

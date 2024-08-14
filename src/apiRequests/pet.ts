@@ -17,6 +17,13 @@ const PetApiRequest = {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
+    getActiveListPetForUser: ({ packageId, sessionToken }: { packageId: string; sessionToken?: string }) =>
+        http.post<PetListPageResType>("/api/Pet/get-active-list", packageId,
+            {
+                headers: {
+                    Authorization: `Bearer ${sessionToken}`
+                }
+            }),
     getPetById: ({ petId, sessionToken }: { petId: string; sessionToken?: string }) =>
         http.get<PetListPageResType>(`/api/Pet/get-pet/${petId}`,
             {

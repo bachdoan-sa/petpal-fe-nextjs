@@ -30,11 +30,7 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
       setUser(user ? JSON.parse(user) : undefined);
       const fetchPets = async () => {
         try {
-          const body: PetListPageBodyType = {
-            page: 1,
-            size: 20
-          }
-          const response = await PetApiRequest.getListPetForUser({ body, sessionToken });
+          const response = await PetApiRequest.getActiveListPetForUser({ packageId, sessionToken });
           setPets(response.payload.data.list);
           // console.log("Package data: hahaha", packageDetail);
         } catch (error) {
