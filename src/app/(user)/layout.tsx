@@ -11,7 +11,7 @@ export default function AdminLayout({
     <>
       <Header2 />
       <div className="">
-        <div className="row flex-nowrap" style={{ height: '100%' }}>
+        <div className="row flex-nowrap" style={{ width: '100%' }}>
           <BootstrapMenu />
           <div className="col" style={{ height: '100%', overflowY: 'auto' }}>{children}</div>
         </div>

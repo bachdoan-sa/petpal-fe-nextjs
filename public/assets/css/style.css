@@ -206,7 +206,7 @@ i.bx {
   .mb-240 {
     margin-bottom: 200px;
   }
-}                               
+}
 
 .pt-120 {
   padding-top: 120px;
@@ -9079,7 +9079,7 @@ footer.style2 .social-area ul li:hover a i {
 =======================================*/
 .inner-page-banner {
   background: #fef5f0;
-  padding: 30px ;
+  padding: 30px;
   position: relative;
 }
 @media (max-width: 991px) {
@@ -14689,6 +14689,74 @@ footer.style2 .social-area ul li:hover a i {
   align-items: center;
   justify-content: center;
 }
+
+.nav-pills li:hover {
+  position: relative;
+  margin-left: 16px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  /* color: var(--white); */
+  /* background-color: white; */
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  direction: ltr;
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.2s;
+}
+
+.custom-card {
+  border-radius: 12px;
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card .card-body {
+  display: flex;
+  align-items: center;
+}
+
+.custom-card .time-info {
+  font-family: 'Courier New', Courier, monospace;
+  color: #333;
+  margin-right: 15px;
+}
+
+.custom-card .time {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.custom-card .date {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.custom-card .divider {
+  height: 50px;
+  width: 1px;
+  background-color: #e0e0e0;
+  margin-right: 15px;
+}
+
+.custom-card .content {
+  flex-grow: 1;
+}
+
+.custom-card .card-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.custom-card .card-text {
+  font-size: 14px;
+  color: #555;
+}
+
 
 select#duration:focus {
   border: none;

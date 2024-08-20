@@ -35,7 +35,7 @@ export default async function PetList({ query, currentPage = 1 }) {
   return (
     <div className="row">
       {pets.map((pet) => (
-        <div className="col-md-6" key={pet.id}>
+        <div className="" key={pet.id}>
           <div className="card mb-3" style={{ maxWidth: "860px" }}>
             <div className="row g-0">
               <div className="col-md-4 position-relative ">
@@ -48,30 +48,29 @@ export default async function PetList({ query, currentPage = 1 }) {
               <div className="col-md-8">
                 <div className="card-header">
                   <div className="d-flex justify-content-between align-items-center">
-                    <h4 className="card-title">Name: {pet.fullName}</h4>
+                    <h4 className="card-title fw-bold">{pet.fullName}</h4>
                     <a>Edit Profile</a>
                   </div>
                 </div>
                 <div className="card-body">
                   <div className="row">
                     <div className="col-4">
-                      <h5>Pet type</h5>
+                      <h4>Pet type</h4>
                     </div>
                     <div className="col-4">Age: 1 year old</div>
                     <div className="col-4">Weight: {pet.weight}</div>
                   </div>
                   <div className="row">
                     <div className="col-4">
-                      Gender
-                      <br /> {pet.gender}
+                      Gender: {pet.gender}
                     </div>
                     <div className="col-4">
-                      Breed
-                      <br /> {pet.breed}
+                      Breed :
+                  {pet.breed}
                     </div>
                     <div className="col-4">
                       Desexed
-                      <br />
+                      : 
                       No
                     </div>
                   </div>
