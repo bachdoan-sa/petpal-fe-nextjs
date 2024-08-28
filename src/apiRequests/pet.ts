@@ -4,7 +4,8 @@ import {
     PetListPageBodyType,
     CreatePetBodyType,
     CreatePetResType,
-    UpdatePetResType
+    UpdatePetResType,
+    PetResType
 } from '@/src/schemaValidations/pet.schema'
 import { MessageResType } from '@/src/schemaValidations/common.schema'
 import { UpdatePackageBodyType } from '../schemaValidations/package/package.schema';
@@ -25,7 +26,7 @@ const PetApiRequest = {
                 }
             }),
     getPetById: ({ petId, sessionToken }: { petId: string; sessionToken?: string }) =>
-        http.get<PetListPageResType>(`/api/Pet/get-pet/${petId}`,
+        http.get<PetResType>(`/api/Pet/get-pet/${petId}`,
             {
                 headers: {
                     Authorization: `Bearer ${sessionToken}`

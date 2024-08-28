@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { CreatePetBody, CreatePetBodyType, PetResType, PetType, UpdatePetBodyType } from "@/src/schemaValidations/pet.schema";
+import { CreatePetBody, CreatePetBodyType, PetResType, PetType, UpdatePetBody, UpdatePetBodyType } from "@/src/schemaValidations/pet.schema";
 import PetApiRequest from "@/src/apiRequests/pet";
 import { EntityError, HttpError } from "@/src/lib/httpAxios";
 import PetTypeApiRequest from "@/src/apiRequests/pet-type";
@@ -18,9 +18,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from 'next/image';
 import { useObjectUrls } from '@/src/hooks/useObjectURL';
 import LoadingIcon from "../loading-spinner/loading-spinner";
+
 type Pet = PetResType['data']
 
-function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
+function PetForm({ pet, token }: { pet?: Pet; token: string }) {
   if (token == "" || token == undefined) {
     return <>chưa có token</>;
   }
@@ -132,7 +133,7 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
       setLoading(false);
     }
   };
-  async function onSubmit(values: UpdatePetBodyType) {
+  async function onSubmit(values: CreatePetBodyType) {
     if (loading) return;
     if (pet) {
       await updatePet(values);
@@ -182,6 +183,11 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
               className="form-control"
               placeholder="Hãy nhập tên thú cưng."
             />
+            {form.formState.errors.fullName ? (
+              <span className="text-danger font-medium">
+                {form.formState.errors.fullName.message}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <label htmlFor="petTypeId" className="form-label">
@@ -205,6 +211,11 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
               </>
             )
             }
+            {form.formState.errors.petTypeId ? (
+              <span className="text-danger font-medium">
+                {form.formState.errors.petTypeId.message}
+              </span>
+            ) : null}
           </div>
           <div className="form-group mb-4">
             <label htmlFor="birthYear" className="form-label">
@@ -216,6 +227,11 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
               {...form.register("birthday")}
               placeholder=""
             />
+            {form.formState.errors.birthday ? (
+              <span className="text-danger font-medium">
+                {form.formState.errors.birthday.message}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <label htmlFor="gender" className="form-label">
@@ -228,6 +244,11 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
               <option value="MALE">Đực</option>
               <option value="FEMALE">Cái</option>
             </select>
+            {form.formState.errors.gender ? (
+              <span className="text-danger font-medium">
+                {form.formState.errors.gender.message}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <label htmlFor="breed" className="form-label">
@@ -239,6 +260,11 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
               {...form.register("breed")}
               placeholder="Hãy nhập chủng thú cưng của bạn."
             />
+            {form.formState.errors.breed ? (
+              <span className="text-danger font-medium">
+                {form.formState.errors.breed.message}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <label htmlFor="weight" className="form-label">
@@ -250,7 +276,11 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
               {...form.register("weight")}
               placeholder="Hãy nhập cân nặng (theo kilogam)"
             />
-
+            {form.formState.errors.weight ? (
+              <span className="text-danger font-medium">
+                {form.formState.errors.weight.message}
+              </span>
+            ) : null}
           </div>
           <div className="mb-4">
             <label htmlFor="neutered" className="form-label" style={{ marginRight: "10px" }}>
@@ -290,6 +320,11 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
                 }
               }}
             />
+            {form.formState.errors.profileImage ? (
+              <span className="text-danger font-medium">
+                {form.formState.errors.profileImage.message}
+              </span>
+            ) : null}
           </div>
 
           <button type="submit" className="btn btn-primary">
@@ -302,4 +337,4 @@ function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
   );
 }
 
-export default AddPetForm;
+export default PetForm;

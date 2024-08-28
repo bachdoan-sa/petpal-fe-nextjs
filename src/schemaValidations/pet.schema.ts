@@ -67,6 +67,7 @@ export type PetListPageBodyType = z.TypeOf<typeof PetListPageBody>;
 
 //Create Model
 export const CreatePetBody = z.object({
+    id: z.coerce.string().optional(), 
     userId: z.string().optional(),
     petTypeId: z.coerce.string({ required_error: "Hãy chọn loại thú cưng!" }),
     fullName: z.coerce.string({ required_error: "Tên thú cưng không được bỏ trống!" }),
@@ -93,7 +94,7 @@ export type CreatePetResType = z.TypeOf<typeof CreatePetRes>;
 
 
 //Update Model
-export const UpdatePetBody = PetSchema;
+export const UpdatePetBody = CreatePetBody;
 export type UpdatePetBodyType = z.TypeOf<typeof UpdatePetBody>;
 export const UpdatePetRes = z.object({
     data: IsSucceedRes,
