@@ -1,6 +1,7 @@
 import React from "react";
 import Home1About from "@/src/components/about/Home1About";
 import Home1Team from "@/src/components/team/Home1Team";
+import ChooseUs from "@/src/components/chooseUs/ChooseUs";
 
 
 function AboutPage() {
@@ -11,7 +12,7 @@ function AboutPage() {
             <Home1About />
             {/* <AboutService /> */}
             {/* <Home1Testimonial /> */}
-            {/* <ChooseUs /> */}
+            <ChooseUs />
             <Home1Team />
 
         </>

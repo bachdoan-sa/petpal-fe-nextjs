@@ -76,11 +76,11 @@ function loginPage() {
                 data-wow-delay=".2s"
               >
                 <div className="form-title">
-                  <h3>Đăng nhập</h3>
+                  <h3>Chào mừng trở lại!</h3>
                   <p>
-                    New Member?{" "}
+                    Bạn chưa có tài khoản?{" "}
                     <Link legacyBehavior href="/register">
-                      <a>signup here</a>
+                      <a>Đăng kí</a>
                     </Link>
                   </p>
                 </div>
@@ -88,14 +88,14 @@ function loginPage() {
                   <div className="row">
                     <div className="col-12">
                       <div className="form-inner">
-                        <label>Enter Your Email *</label>
+                        <label>Tài khoản *</label>
                         <input {...register("username")} type="text" placeholder="Enter Your Username" />
                         {errors.username ? (<span className="text-danger font-medium">{errors.username.message}</span>) : null}
                       </div>
                     </div>
                     <div className="col-12">
                       <div className="form-inner">
-                        <label>Password *</label>
+                        <label>Mật khẩu *</label>
                         <input {...register("password")} type={showPassword ? "text" : "password"} id="password" placeholder="Password" />
                         <i className={`bi ${showPassword ? "bi-eye" : "bi-eye-slash"}`}
                           id="togglePassword"
@@ -106,22 +106,16 @@ function loginPage() {
                       </div>
                     </div>
                     <div className="col-12">
-                      <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                        <div className="form-group">
-                          <input type="checkbox" id="html" />
-                          <label htmlFor="html">
-                            I agree to the <a href="#">Terms &amp; Policy</a>
-                          </label>
-                        </div>
+                      <div className="form-agreement form-inner d-flex justify-content-end ">
                         <a href="#" className="forgot-pass">
-                          Forgotten Password
+                          Quên mật khẩu?
                         </a>
                       </div>
                     </div>
                   </div>
                   <a>
                     <button disabled={isSubmitting} className="account-btn" type="submit">
-                      {isSubmitting ? "Logging..." : "Login in"}
+                      {isSubmitting ? "Đang đăng nhập" : "Đăng nhập"}
                     </button>
                   </a>
                 </form>
@@ -138,14 +132,14 @@ function loginPage() {
                   </div>
                 </div>
 
-                <div className="form-poicy-area">
+                {/* <div className="form-poicy-area">
                   <p>
                     By clicking the "signup" button, you create a Cobiro
                     account, and you agree to Cobiro's{" "}
                     <a href="#">Terms &amp; Conditions</a> &amp;{" "}
                     <a href="#">Privacy Policy.</a>
                   </p>
-                </div>
+                </div> */}
                 <div className="form-title">
                   <p>
                     Trở thành đối tác của PetPal?{" "}
