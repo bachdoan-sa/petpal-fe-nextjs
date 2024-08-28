@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { PagingRes, PagingBody } from "../paging/paging.schema";
 import { IsSucceedRes } from "../common.schema";
+import { PetSchema } from "../pet.schema";
 
 // Các bước định nghĩa 1 response
 // 1. định nghĩa object đó
@@ -12,7 +13,7 @@ export const PackageSchema = z.object({
     duration: z.string(),
     type: z.string(),
     totalPrice: z.number().optional(),
-    
+
     status: z.string().optional(),
     items: z.string().array().optional(), //Đây là array Package Item nhưng chưa dùng nên chưa import
 
@@ -73,9 +74,9 @@ export type PackageBykCenterListPageBodyType = z.TypeOf<typeof PackageBykCenterL
 // 5. Định nghĩa cấu trúc request để lấy 1 package theo id
 export const GetPackageByIdSchema = z.object({
     id: z.string()
-  });
-  export type GetPackageByIdType = z.TypeOf<typeof GetPackageByIdSchema>;
-  
+});
+export type GetPackageByIdType = z.TypeOf<typeof GetPackageByIdSchema>;
+
 
 //Create Model
 export const CreatePackageBody = PackageSchema;
@@ -95,3 +96,20 @@ export const UpdatePackageRes = z.object({
     message: z.string()
 });
 export type UpdatePackageResType = z.TypeOf<typeof UpdatePackageRes>;
+
+
+
+
+export const PackageWithPetListPage = z.object({
+    list: z.array(z.object({
+        package: PackageSchema,
+        pets: z.array(PetSchema)
+    })),
+    paging: PagingRes
+})
+
+export const PackageWithPetListPageRes = z.object({
+    data: PackageWithPetListPage,
+    message: z.string()
+})
+export type PackageWithPetListPageResType = z.TypeOf<typeof PackageWithPetListPageRes >;

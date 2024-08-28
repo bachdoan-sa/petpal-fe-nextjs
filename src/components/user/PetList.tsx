@@ -12,7 +12,7 @@ export default async function PetList({ query, currentPage = 1 }) {
   const sessionToken = cookieStore.get("sessionToken")?.value;
   const body: PetListPageBodyType = {
     page: currentPage,
-    size: 6,
+    size: 20,
   };
   let pets: PetType[] = [];
   let totalPages: number = 1;

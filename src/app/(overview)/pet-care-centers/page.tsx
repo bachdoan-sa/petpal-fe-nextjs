@@ -83,6 +83,7 @@ function petCareCenters() {
           width={450}
           src={"/assets/images/preloader.gif"}
           alt=""
+          unoptimized
         />
       </div>
     );

@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { PetType } from "@/src/schemaValidations/pet.schema";
+import React, { useEffect, useRef, useState } from "react";
+import { CreatePetBody, CreatePetBodyType, PetResType, PetType, UpdatePetBodyType } from "@/src/schemaValidations/pet.schema";
 import PetApiRequest from "@/src/apiRequests/pet";
-import { HttpError } from "@/src/lib/httpAxios";
+import { EntityError, HttpError } from "@/src/lib/httpAxios";
 import PetTypeApiRequest from "@/src/apiRequests/pet-type";
 import {
   PetTypeArray,
@@ -12,25 +12,19 @@ import {
   PetTypeListPageBodyType,
   PetTypeType,
 } from "@/src/schemaValidations/pet-type.schema";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from 'next/image';
+import { useObjectUrls } from '@/src/hooks/useObjectURL';
+import LoadingIcon from "../loading-spinner/loading-spinner";
+type Pet = PetResType['data']
 
-function AddPetForm({ token }) {
+function AddPetForm({ pet, token }: { pet?: Pet; token: string }) {
   if (token == "" || token == undefined) {
     return <>chưa có token</>;
   }
-
- 
-
-  const [petName, setPetName] = useState("");
-  const [birthYear, setBirthYear] = useState("");
-  const [breed, setBreed] = useState("");
-  const [weight, setWeight] = useState("");
-  const [neutered, setNeutered] = useState(false);
-  const [petPhoto, setPetPhoto] = useState<File | null>(null);
-  // const [photoPreview, setPhotoPreview] = useState("");
-  const [gender, setGender] = useState("MALE");
-  const [loading, setLoading] = useState(false);
   const [petTypes, setPetTypes] = useState<PetTypeListType>([]);
-
   useEffect(() => {
     const getPetType = async () => {
       try {
@@ -54,49 +48,100 @@ function AddPetForm({ token }) {
       }
     };
     getPetType();
+    console.log("Get Type");
   }, []);
 
-  console.log(petTypes);
-  // const [errors, setErrors] = useState({});
-
-  // const handlePhotoChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setPetPhoto(file);
-  //   setPhotoPreview(URL.createObjectURL(file));
-  // };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (loading) return;
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const getObjectUrl = useObjectUrls();
+  const form = useForm<CreatePetBodyType>({
+    resolver: zodResolver(CreatePetBody),
+    defaultValues: {
+      id: pet?.id ?? "",
+      fullName: pet?.fullName ?? "",
+      gender: pet?.fullName ?? "MALE",
+      petTypeId: pet?.petTypeId,
+      profileImage: pet?.profileImage ?? ""
+    }
+  })
+  const [petPhoto, setPetPhoto] = useState<File | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    return () => {
+      petPhoto && URL.revokeObjectURL(getObjectUrl(petPhoto));
+    }
+  }, [petPhoto])
+  const createPet = async (value: CreatePetBodyType) => {
     setLoading(true);
-    const data = new FormData();
-    data.append("Fullname", petName);
-    data.append("Birthday", birthYear);
-    data.append("Weight", weight);
-    data.append("Gender", gender);
-    data.append("Breed", breed);
-    data.append("Sterilise", neutered.toString());
-    data.append("file", petPhoto as Blob);
     try {
-      const response = await PetApiRequest.createPet({
-        body: data,
-        sessionToken: token,
-      });
-      console.log(response);
-    } catch (error) {
+      const formData = new FormData();
+      formData.append("Fullname", form.getValues("fullName"));
+      formData.append("PetTypeId", form.getValues("petTypeId")?.toString() ?? "");
+      formData.append("Description", form.getValues("description")?.toString() ?? "");
+      formData.append("Birthday", form.getValues("birthday")?.toString() ?? "");
+      formData.append("Weight", form.getValues("weight")?.toString() ?? "0");
+      formData.append("Gender", form.getValues("gender")?.toString() ?? "Default");
+      formData.append("Breed", form.getValues("breed")?.toString() ?? "0");
+      formData.append("Sterilise", form.getValues("sterilise")?.toString() ?? "false");
+      formData.append("file", petPhoto as Blob);
+      const updatePet = await PetApiRequest.createPet({ body: formData, sessionToken: token })
+    } catch (error: any) {
+      console.log(error)
+      if (error instanceof HttpError) {
+        if (error instanceof EntityError) {
+          const errors = error?.payload;
+          if (error.status === 422) {
+            console.log(errors);
+          }
+        }
+        if (error.status === 400) {
+          console.log(error.payload);
+        }
+      }
+
+    } finally {
+      setLoading(false);
+    }
+  };
+  const updatePet = async (value: UpdatePetBodyType) => {
+    if (value.id === undefined || value.id === "") {
+      return;
+    }
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("Fullname", form.getValues("fullName"));
+      formData.append("PetTypeId", form.getValues("petTypeId")?.toString() ?? "");
+      formData.append("Description", form.getValues("description")?.toString() ?? "");
+      formData.append("Birthday", form.getValues("birthday")?.toString() ?? "");
+      formData.append("Weight", form.getValues("weight")?.toString() ?? "0");
+      formData.append("Gender", form.getValues("gender")?.toString() ?? "Default");
+      formData.append("Breed", form.getValues("breed")?.toString() ?? "0");
+      formData.append("Sterilise", form.getValues("sterilise")?.toString() ?? "false");
+      formData.append("file", petPhoto as Blob);
+      const updatePet = await PetApiRequest.updatePet({ body: formData, sessionToken: token })
+    } catch (error: any) {
       if (error instanceof HttpError) {
         const errors = error?.payload;
         if (error.status === 422) {
           console.log(errors);
         }
       }
+    } finally {
+      setLoading(false);
     }
   };
-  console.log(gender);
-  console.log(petTypes);
-
+  async function onSubmit(values: UpdatePetBodyType) {
+    if (loading) return;
+    if (pet) {
+      await updatePet(values);
+    } else {
+      await createPet(values);
+    }
+  }
   return (
-    <form onSubmit={handleSubmit} style={{ height: "100%" }}>
+    <form onSubmit={form.handleSubmit(onSubmit)} style={{ height: "100%" }}>
       {/* <div className="container"> */}
       <div className="row h-100">
         <div className="col-6 d-flex align-items-center text-black justify-content-center">
@@ -112,8 +157,8 @@ function AddPetForm({ token }) {
                 /> */}
               {petPhoto && (
                 <div>
-                  <img
-                    src={URL.createObjectURL(petPhoto)}
+                  <Image
+                    src={getObjectUrl(petPhoto)}
                     width={128}
                     height={128}
                     alt="preview"
@@ -132,30 +177,34 @@ function AddPetForm({ token }) {
               Tên thú cưng
             </label>
             <input
+              {...form.register("fullName")}
               type="text"
               className="form-control"
-              name="petName"
-              value={petName}
-              onChange={(e) => setPetName(e.target.value)}
-              placeholder="Enter pet name"
+              placeholder="Hãy nhập tên thú cưng."
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="weight" className="form-label">
+            <label htmlFor="petTypeId" className="form-label">
               Loại thú cưng
             </label>
-            <select
-              className="form-select"
-              name="petType"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              {petTypes?.map((option, index) => (
-                <option key={index}>
-                  {option.type}
-                </option>
-              ))}
-            </select>
+            {petTypes.length > 0 ? (
+              <select
+                className="form-select"
+                {...form.register("petTypeId")}
+              >
+                {petTypes.map((option, index) => (
+                  <option key={index} value={option.id} selected={option.id === form.getValues("petTypeId")}>
+                    {option.type}
+                  </option>
+                ))}
+
+              </select>
+            ) : (
+              <>
+                <span className="form-control"> Đang lấy dữ liệu <Image width={20} height={20} alt="" src='\assets\spinner.svg' /> </span>
+              </>
+            )
+            }
           </div>
           <div className="form-group mb-4">
             <label htmlFor="birthYear" className="form-label">
@@ -164,37 +213,31 @@ function AddPetForm({ token }) {
             <input
               className={`form-control `}
               type="date"
-              name="birthYear"
-              value={birthYear}
-              onChange={(e) => setBirthYear(e.target.value)}
-              placeholder="Enter birth year"
+              {...form.register("birthday")}
+              placeholder=""
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="weight" className="form-label">
+            <label htmlFor="gender" className="form-label">
               Giới tính
             </label>
             <select
               className="form-select"
-              name="weight"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              {...form.register("gender")}
             >
-              <option value="MALE">Male</option>
-              <option value="FEMALE">Female</option>
+              <option value="MALE">Đực</option>
+              <option value="FEMALE">Cái</option>
             </select>
           </div>
           <div className="mb-4">
             <label htmlFor="breed" className="form-label">
-              Giống chó
+              Chủng loại:
             </label>
             <input
               type="text"
               className="form-control"
-              name="breed"
-              value={breed}
-              onChange={(e) => setBreed(e.target.value)}
-              placeholder="Enter breed"
+              {...form.register("breed")}
+              placeholder="Hãy nhập chủng thú cưng của bạn."
             />
           </div>
           <div className="mb-4">
@@ -204,23 +247,19 @@ function AddPetForm({ token }) {
             <input
               type="number"
               className="form-control"
-              name="weight"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-              placeholder="Enter weight"
+              {...form.register("weight")}
+              placeholder="Hãy nhập cân nặng (theo kilogam)"
             />
-            
+
           </div>
           <div className="mb-4">
-            <label htmlFor="neutered" className="form-label">
-              Đã triệt sản
-            </label>{" "}
+            <label htmlFor="neutered" className="form-label" style={{ marginRight: "10px" }}>
+              Đã bị triệt sản
+            </label>
             <input
               type="checkbox"
               className="form-check-input"
-              name="neutered"
-              checked={neutered}
-              onChange={(e) => setNeutered(e.target.checked)}
+              {...form.register("sterilise")}
             />
           </div>
           <div className="mb-4">
@@ -237,12 +276,17 @@ function AddPetForm({ token }) {
               type="file"
               name="frontImage"
               accept="image/*"
-              // ref={inputFrontRef}
+              ref={inputRef}
               className={`form-control`}
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
                   setPetPhoto(file);
+                } else {
+                  setPetPhoto(null);
+                  if (inputRef.current) {
+                    inputRef.current.value = ''
+                  }
                 }
               }}
             />

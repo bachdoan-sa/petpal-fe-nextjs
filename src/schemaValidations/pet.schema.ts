@@ -66,7 +66,24 @@ export type PetListPageBodyType = z.TypeOf<typeof PetListPageBody>;
 
 
 //Create Model
-export const CreatePetBody = PetSchema;
+export const CreatePetBody = z.object({
+    userId: z.string().optional(),
+    petTypeId: z.coerce.string({ required_error: "Hãy chọn loại thú cưng!" }),
+    fullName: z.coerce.string({ required_error: "Tên thú cưng không được bỏ trống!" }),
+
+    birthday: z.string({ required_error: "Ngày sinh không được bỏ trống" }).nullable(),
+    weight: z.string({ required_error: "Cân nặng không được bỏ trống" }).nullable(),
+    gender: z.string({ required_error: "Giới tính không được bỏ trống" }).nullable(),
+    breed: z.string({ required_error: "Giống loài không được bỏ trống" }).nullable(),
+    sterilise: z.boolean().nullable(),
+
+    // file: z.string().optional(), 
+    profileImage: z.string({ required_error: "Hình ảnh là bắt buộc." }),
+
+    description: z.string().optional()
+
+});
+
 export type CreatePetBodyType = z.TypeOf<typeof CreatePetBody>;
 export const CreatePetRes = z.object({
     data: IsSucceedRes,

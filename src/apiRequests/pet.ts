@@ -38,7 +38,7 @@ const PetApiRequest = {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
-    updatePet: ({ body, sessionToken }: { body: UpdatePackageBodyType; sessionToken?: string }) =>
+    updatePet: ({ body, sessionToken }: { body: FormData; sessionToken?: string }) =>
         http.post<UpdatePetResType>('/api/Pet/update-pet', body,
             {
                 headers: {

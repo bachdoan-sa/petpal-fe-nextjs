@@ -7,7 +7,7 @@ import { UserListPageBodyType, UserListPageFilterRSBodyType, UserType } from "@/
 import { cookies } from "next/headers";
 import Status from "./status";
 
-export default async function PendingPartnerTable({ query, currentPage }) {
+export default async function PartnerTable({ query, currentPage }) {
     const cookieStore = cookies();
     const sessionToken = cookieStore.get('sessionToken')?.value;
     const body: UserListPageFilterRSBodyType = {
@@ -84,7 +84,7 @@ export default async function PendingPartnerTable({ query, currentPage }) {
                     <div className="mt-6 d-flex flex-wrap">
                         <div className="d-inline-block container container-fuid align-items-center d-flex justify-content-center p-0">
                             <div className="p-2 md:pt-0 w-100 bg-gray-200 d-flex justify-content-center" style={{ borderRadius: "10px" }}>
-                                <h3>Hiện không có đối tác nào đang chờ duyệt!</h3>
+                                <h3>Hiện không có đối tác nào!</h3>
                             </div>
                         </div>
                     </div>

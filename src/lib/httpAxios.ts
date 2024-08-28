@@ -11,6 +11,7 @@ type CustomOptions = Omit<RequestInit, 'method'> & {
 
 const ENTITY_ERROR_STATUS = 422;
 const AUTHENTICATION_ERROR_STATUS = 401;
+const NOT_FOUND_STATUS = 400;
 const AUTHENTICATION_FAIL_STATUS = 404;
 const SERVER_ERROR_STATUS = 500;
 const OK_STATUS = 200;
@@ -73,7 +74,7 @@ const request = async <Response>(
             : {
                 'Content-Type': 'application/json'
             }
-            
+
     if (isClient()) {
         //yên tâm ko có thằng nào set session token trên local storage đâu. (code này chưa được dùng)
         const sessionToken = localStorage.getItem('sessionToken')
@@ -110,7 +111,9 @@ const request = async <Response>(
         const payload: Response = await response.data.payload;
         const strstatus: string = response.data.status as string;
         const status: number = Number(strstatus.slice(0, 3));
-        
+        console.log("response: ");
+        console.log(response);
+        console.log("----------");
         const data = {
             status: status,
             payload
@@ -125,6 +128,13 @@ const request = async <Response>(
                     }
                 )
 
+            } else if (status === NOT_FOUND_STATUS) {
+                throw new HttpError(
+                    data as {
+                        status: 400
+                        payload: "Lỗi 400"
+                    }
+                )
             } else if (status === AUTHENTICATION_ERROR_STATUS) {
                 if (isClient()) {
                     if (!clientLogoutRequest) {
@@ -183,7 +193,10 @@ const request = async <Response>(
             payload
         };
         if (error instanceof AxiosError) {
-
+            console.log("Axios API Error: ");
+            if(error.response?.status === 404){
+                console.log("API không tồn tại hoặc bị xóa");
+            }
             if (!(status === OK_STATUS)) {
                 if (status === ENTITY_ERROR_STATUS) {
                     throw new EntityError(
@@ -227,11 +240,19 @@ const request = async <Response>(
                         }
                     )
                 } else if (status === AUTHENTICATION_FAIL_STATUS) {
-                    console.log("Looxi 404")
+                    
                     throw new HttpError(
                         data as {
                             status: 404
-                            payload: "Sai tài khoản hoặc mật khẩu, xin vui lòng nhập lại."
+                            payload: "Không tìm thấy tài khoảng hoặc mật khẩu!"
+                        }
+                    )
+                } else if (status === NOT_FOUND_STATUS) {
+                    
+                    throw new HttpError(
+                        {
+                            status: 400,
+                            payload: payload
                         }
                     )
                 } else {
