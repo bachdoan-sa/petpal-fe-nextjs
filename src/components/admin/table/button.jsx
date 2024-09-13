@@ -13,7 +13,7 @@ export function CreateButton({ link, title = '' }) {
     );
 }
 
-export function UpdateButton({ id, link }) {
+export function UpdateButton({ id = "", link }) {
     const url = link + id;
     return (
         <Link

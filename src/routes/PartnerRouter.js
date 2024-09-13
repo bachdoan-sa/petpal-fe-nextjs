@@ -20,15 +20,14 @@ export const PartnerRouter = [
 	// 	icon: 'layers',
 	// 	link: '/package'
 	// },	
-	// {
-	// 	id: uuid(),
-	// 	title: 'Tables',
-	// 	icon: 'monitor',
-	// 	children: [
-	// 		{ id: uuid(), link: '/manager/tables/staffs', name: 'Staff' },
-	// 		{ id: uuid(), link: '/manager/tables/packages', name: 'Package' },
-	// 	]
-	// },	
+	{
+		id: uuid(),
+		title: 'Quản Lý',
+		icon: 'monitor',
+		children: [
+			{ id: uuid(), link: '/partner/services', name: 'Danh sách dịch vụ' },
+		]
+	},	
 	{
 		id: uuid(),
 		title: 'Setting',

@@ -82,11 +82,11 @@ function signUpPage() {
                 data-wow-delay=".2s"
               >
                 <div className="form-title">
-                  <h3>Sign Up</h3>
+                  <h3>Đăng kí thành viên</h3>
                   <p>
-                    Do you already have an account?{" "}
+                    Bạn đã có tài khoản rồi ư?{" "}
                     <Link legacyBehavior href="/login">
-                      <a>Log in here</a>
+                      <a>Đăng nhập tại đây</a>
                     </Link>
                   </p>
                 </div>
@@ -94,72 +94,72 @@ function signUpPage() {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-inner">
-                        <label>Frist Name *</label>
+                        <label>Họ *</label>
                         <input
                           type="text"
-                          placeholder="First Name"
+                          placeholder="Hãy nhập Họ của bạn"
                           name="first-name"
                         />
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-inner">
-                        <label>Last Name *</label>
+                        <label>Tên *</label>
                         <input
                           type="text"
-                          placeholder="Last Name"
+                          placeholder="Hãy nhập Tên  của bạn"
                           name="last-name"
                         />
                       </div>
                     </div>
                     <div className="col-md-12">
                       <div className="form-inner">
-                        <label>Enter your username *</label>
+                        <label>Tạo tên tài khoản *</label>
                         <input
                           type="text"
-                          placeholder="Enter your username"
+                          placeholder="Hãy tạo một tên tài khoản"
                           name="username"
                         />
                       </div>
                     </div>
                     <div className="col-md-12">
                       <div className="form-inner">
-                        <label>Enter Your Email *</label>
+                        <label>Nhập Email của bạn *</label>
                         <input
                           type="email"
-                          placeholder="Enter your Email"
+                          placeholder="Hãy nhập Email của bạn"
                           name="email"
                         />
                       </div>
                     </div>
                     <div className="col-md-12">
                       <div className="form-inner">
-                        <label>Enter Your address *</label>
+                        <label>Nhập địa chỉ của bạn *</label>
                         <input
                           type="text"
-                          placeholder="Enter your address"
+                          placeholder="Hãy nhập địa chỉ của bạn"
                           name="address"
                         />
                       </div>
                     </div>
                     <div className="col-md-12">
                       <div className="form-inner">
-                        <label>Enter Your phone number *</label>
+                        <label>Nhập số điện thoại của bạn *</label>
                         <input
                           type="phone"
-                          placeholder="Enter your phone"
+                          placeholder="Hãy nhập số điện thoại của bạn"
                           name="phone-number"
                         />
                       </div>
                     </div>
                     <div className="col-md-12">
                       <div className="form-inner">
-                        <label>Password *</label>
+                        <label>Tạo Mật khẩu *</label>
                         <input
                           type={showPassword ? "text" : "password"}
                           name="password"
                           id="password"
-                          placeholder="Create A Password"
+                          placeholder="Hãy tạo mật khẩu"
                         />
                         <i
                           className={`bi ${
@@ -173,12 +173,12 @@ function signUpPage() {
                     </div>
                     <div className="col-md-12">
                       <div className="form-inner">
-                        <label>Confirm Password *</label>
+                        <label>Nhập lại mật khẩu *</label>
                         <input
                           type={showPassword ? "text" : "password"}
                           name="confirm-password"
                           id="password2"
-                          placeholder="Confirm Password"
+                          placeholder="Hãy nhập lại mật khẩu"
                         />
                         <i
                           className={`bi ${
@@ -195,34 +195,35 @@ function signUpPage() {
                         <div className="form-group">
                           <input type="checkbox" id="html" />
                           <label htmlFor="html">
-                            I agree to the Terms &amp; Policy
+                            Tôi đồng ý với <Link href={"#"}>điều khoản</Link>  &amp; <Link href={"#"}>chính sách</Link> 
                           </label>
                         </div>
                       </div>
                     </div>
                   </div>
                   <button className="account-btn" type="submit">
-                    Create Account
+                    Tạo tài khoản
                   </button>
                 </form>
                 <div className="alternate-signup-box">
-                  <h6>or signup WITH</h6>
+                  <h6>Hoặc đăng nhập VỚI</h6>
                   <div className="btn-group gap-4">
                     <a
                       href="#"
                       className="eg-btn google-btn d-flex align-items-center"
                     >
                       <i className="bx bxl-google" />
-                      <span>signup whit google</span>
+                      <span>Tài khoản Google</span>
                     </a>
                   </div>
                 </div>
                 <div className="form-poicy-area">
                   <p>
-                    By clicking the "signup" button, you create a Cobiro
-                    account, and you agree to Cobiro's{" "}
-                    <a href="#">Terms &amp; Conditions</a> &amp;{" "}
-                    <a href="#">Privacy Policy.</a>
+                    Bằng cách nhấp vào nút "Tạo tài khoản", bạn sẽ tạo một tài khoản
+                    Petpal, và bạn đã đồng ý với những{" "}
+                    <a href="#">Điều khoản &amp; Điều kiện</a> cùng với{" "}
+                    <a href="#">Chính sách Bảo mật</a>{" "}
+                    của Petpal
                   </p>
                 </div>
               </div>

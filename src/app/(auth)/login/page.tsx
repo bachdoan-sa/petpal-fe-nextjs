@@ -27,7 +27,7 @@ function loginPage() {
 
   const onSubmit: SubmitHandler<LoginBodyType> = async (loginForm: LoginBodyType) => {
     if (isSubmitting) {
-      console.log("meon on r")
+      
       return;
     }
     try {
@@ -115,7 +115,7 @@ function loginPage() {
                   </div>
                   <a>
                     <button disabled={isSubmitting} className="account-btn" type="submit">
-                      {isSubmitting ? "Đang đăng nhập" : "Đăng nhập"}
+                      {isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
                     </button>
                   </a>
                 </form>

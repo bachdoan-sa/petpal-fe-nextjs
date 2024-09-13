@@ -10,24 +10,21 @@ import { toast } from "sonner";
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
-
+import { useAppContext } from "@/src/app/app-provider";
 //1: Định nghĩa Form Fields, Dung infer để rằng buộc chặt chẽ hơn typeOf.. Thật ra cũng chả làm gì, chat gpt bảo thì làm :))) 
 type FormFields = z.infer<typeof CreateOrderForm>
 
 const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessionToken?: string }) => {
-
+  const user = useAppContext().user;
   const [loading, setLoading] = useState(false);
   const [pets, setPets] = useState<PetType[]>([]);
   const [selectedPet, setSelectedPet] = useState<PetType>();
-  const [user, setUser] = useState<{ id, name, role }>();
 
   //2: gọi hook của form và gọi các phương thức mình cần
   const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<FormFields>({ resolver: zodResolver(CreateOrderForm) });
 
   useEffect(() => {
     if (sessionToken) {
-      const user = localStorage.getItem('user');
-      setUser(user ? JSON.parse(user) : undefined);
       const fetchPets = async () => {
         try {
           const body: PetListPageBodyType = {

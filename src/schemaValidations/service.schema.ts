@@ -7,7 +7,7 @@ export const ServiceSchema = z.object({
     
     name: z.string(),
     description: z.string(),
-    basePrice: z.number(),
+    basePrice: z.number().optional(),
     isRequired: z.boolean(),
 
     status: z.string().optional(),

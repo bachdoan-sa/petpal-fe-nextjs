@@ -16,7 +16,7 @@ import { inter, lusitana } from '@/src/fonts/fonts';
 
 function NavbarVertical(props) {
 	const location = usePathname();
-
+	const [position, setPosition] = useState();
 	const [menuList, setList] = useState();
 	useEffect(() => {
 		const initialList = DashboardMenu;
@@ -28,11 +28,11 @@ function NavbarVertical(props) {
 			<li className="nav-item">
 				<Link
 					href="#"
-					className="nav-link "
+					className={clsx("nav-link", position === collapseKey ? "" : "collapsed")} 
 					data-bs-toggle="collapse"
-					data-bs-target={collapseKey ? "#" + collapseKey : "#navDashboard"}
-					aria-expanded="false"
-					aria-controls={collapseKey ? collapseKey : "navDashboard"}>
+					data-bs-target={collapseKey ? "#key" + collapseKey : "#navDashboard"}
+					aria-expanded={"false"}
+					aria-controls={collapseKey ? "key" + collapseKey : "navDashboard"}>
 					{icon ? <i className={`nav-icon fe fe-${icon} me-2`}></i> : ''}{' '}
 					{children}
 				</Link>
@@ -41,19 +41,21 @@ function NavbarVertical(props) {
 	};
 	const CustomDropdown = ({ children, collapseKey }) => {
 		return (
-			<nav id={collapseKey} className="nav-item collapse">
+			<nav id={"key" +collapseKey} className= {clsx("nav-item collapse", position === collapseKey ? "show" : "")}>
 				{children}
 			</nav>
 		);
 	}
-	const generateLink = (item) => {
+	const generateLink = (item, local) => {
 		return (
 			(<Link
 				href={item.link}
 				className={`nav-link ${location === item.link ? 'active' : ''
 					}`}
-				onClick={(e) =>
+				onClick={(e) => {
+					setPosition(local);
 					isMobile ? props.onClick(!props.showMenu) : props.showMenu
+				}
 				}>
 
 				{item.name}
@@ -83,7 +85,7 @@ function NavbarVertical(props) {
 						<p className={clsx(
 							'text-xxl font-black m-0 text-white',
 							inter,
-						)}>Petpal <span className={clsx('text-xxl font-black m-0 text-orange',inter, )}> admin</span></p>
+						)}>Petpal <span className={clsx('text-xxl font-black m-0 text-orange', inter,)}> admin</span></p>
 
 					</Link>
 				</div>
@@ -104,7 +106,7 @@ function NavbarVertical(props) {
 									<Fragment key={index}>
 										{/* main menu / root menu level / root items */}
 
-										<CustomToggle icon={menu.icon} collapseKey={"key" + menu.id}>
+										<CustomToggle icon={menu.icon} collapseKey={ menu.id}>
 											{menu.title}
 											{menu.badge ? (
 												<span className={(menu.badgecolor ? menu.badgecolor : 'badge-primary') + " ms-1 badge"}>
@@ -112,13 +114,13 @@ function NavbarVertical(props) {
 												</span>
 											) : ('')}
 										</CustomToggle>
-										<CustomDropdown collapseKey={"key" + menu.id} className="nav-item collapse">
+										<CustomDropdown collapseKey={menu.id}>
 											<ul className="nav flex-column">
 												{menu.children.map(function (menuLevel1Item, menuLevel1Index) {
 													return (
 														<li className="nav-item" key={menuLevel1Index}>
 															{/* first level menu items */}
-															{generateLink(menuLevel1Item)}
+															{generateLink(menuLevel1Item, menu.id)}
 															{/* end of first level menu items */}
 														</li>
 													);
