@@ -1,37 +1,43 @@
+"use client";
 import PetApiRequest from "@/src/apiRequests/pet";
 import { HttpError } from "@/src/lib/httpAxios";
 import {
   PetListPageBodyType,
   PetType,
 } from "@/src/schemaValidations/pet.schema";
-import { cookies } from "next/headers";
-import React from "react";
+import { usePetStore } from "@/src/store/pet-store";
+import React, { useEffect } from "react";
 
-export default async function PetList({ query, currentPage = 1 }) {
-  const cookieStore = cookies();
-  const sessionToken = cookieStore.get("sessionToken")?.value;
+export default function PetList({ query, currentPage, sessionToken }) {
+  const { setPets, setTotalPages } = usePetStore();
+  const { pets } = usePetStore();
+  console.log(pets);
   const body: PetListPageBodyType = {
     page: currentPage,
     size: 20,
   };
-  let pets: PetType[] = [];
-  let totalPages: number = 1;
-  try {
-    const response = await PetApiRequest.getListPetForUser({
-      body,
-      sessionToken,
-    });
-    totalPages = response.payload?.data?.paging?.maxPage;
-    pets = response.payload?.data?.list;
-  } catch (error) {
-    if (error instanceof HttpError) {
-      const errors = error?.payload;
-      if (error.status === 422) {
-        console.log(errors);
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const response = await PetApiRequest.getListPetForUser({
+          body,
+          sessionToken,
+        });
+        setTotalPages(response.payload?.data?.paging?.maxPage);
+        setPets(response.payload?.data?.list);
+      } catch (error) {
+        if (error instanceof HttpError) {
+          const errors = error?.payload;
+          if (error.status === 422) {
+            console.log(errors);
+          }
+        }
       }
-    }
-  }
-  console.log(pets);
+      console.log(pets);
+    };
+    fetchApi();
+  }, [currentPage]);
+
   return (
     <div className="row">
       {pets.map((pet) => (
@@ -61,18 +67,9 @@ export default async function PetList({ query, currentPage = 1 }) {
                     <div className="col-4">Weight: {pet.weight}</div>
                   </div>
                   <div className="row">
-                    <div className="col-4">
-                      Gender: {pet.gender}
-                    </div>
-                    <div className="col-4">
-                      Breed :
-                  {pet.breed}
-                    </div>
-                    <div className="col-4">
-                      Desexed
-                      : 
-                      No
-                    </div>
+                    <div className="col-4">Gender: {pet.gender}</div>
+                    <div className="col-4">Breed :{pet.breed}</div>
+                    <div className="col-4">Desexed : No</div>
                   </div>
                   <hr />
                   <p className="card-text">

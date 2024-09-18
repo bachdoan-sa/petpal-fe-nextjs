@@ -28,7 +28,6 @@ function petCareCenters() {
     { value: "9", label: "Quận Bình Thạnh" },
     { value: "10", label: "Quận Phú Nhuận" },
     { value: "11", label: "Tp. Thủ Đức" },
-    // Thêm các option khác nếu cần
   ];
 
   const provinceOptions = [
@@ -40,20 +39,7 @@ function petCareCenters() {
     { value: "6", label: "Long An" },
   ];
 
-  const petCareCenters = [
-    {
-      imgSrc: "/path/to/image1.jpg",
-      title: "Pet Care Center 1",
-      description: "Description for Pet Care Center 1",
-      mapLink: "https://maps.app.goo.gl/o5VL5a1B3yND17J86",
-    },
-    {
-      imgSrc: "/path/to/image2.jpg",
-      title: "Pet Care Center 2",
-      description: "Description for Pet Care Center 2",
-      mapLink: "https://maps.app.goo.gl/JYEZS6agEh8Kqm4J8",
-    },
-  ];
+ 
   useEffect(() => {
     const fetchCenterData = async () => {
       try {
@@ -94,7 +80,6 @@ function petCareCenters() {
       <Breadcrumb pageName="" pageTitle="Pet Care Centers" />
       <div className="container">
         <div className="pt-40">
-          {/* <h1 className="my-4 text-algin-center">Pet Care Centers</h1> */}
           <div className="multiselect-bar">
             <h6>Tìm kiếm địa chỉ </h6>
             <div className="multiselect-area">

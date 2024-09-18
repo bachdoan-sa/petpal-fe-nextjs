@@ -5888,7 +5888,7 @@ footer .footer-items .social-icons li {
   position: relative;
 }
 footer .footer-items .social-icons li a i {
-  font-size: 1.25rem;
+  font-size: 3rem;
   color: var(--title-color1);
   transition: 0.35s;
 }
@@ -14757,6 +14757,49 @@ footer.style2 .social-area ul li:hover a i {
   color: #555;
 }
 
+
+.card {
+  border-radius: 10px;
+}
+
+.nav-tabs .nav-link.active {
+  border-color: #ff5722 #ff5722 transparent;
+  color: #ff5722;
+}
+
+.text-danger {
+  color: #ff5722 !important;
+}
+
+.btn-outline-secondary {
+  border-color: #ff5722;
+  color: #ff5722;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #ff5722;
+  color: #fff;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
 
 select#duration:focus {
   border: none;

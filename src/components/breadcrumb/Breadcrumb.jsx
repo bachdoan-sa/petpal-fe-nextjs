@@ -16,7 +16,7 @@ function Breadcrumb({ pageName = "Page Name", pageTitle = "Page Title" }) {
           <div className="col-lg-6 align-items-center">
             <div className="banner-content">
               <h1>{pageTitle}</h1>
-              <nav aria-label="breadcrumb">
+              {/* <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
                     <Link legacyBehavior href="/">
@@ -27,15 +27,15 @@ function Breadcrumb({ pageName = "Page Name", pageTitle = "Page Title" }) {
                     {pageName}
                   </li>
                 </ol>
-              </nav>
+              </nav> */}
             </div>
-            <div className="banner-img d-lg-none d-block">
+            {/* <div className="banner-img d-lg-none d-block">
               <img
                 className="img-fluid"
                 src="assets/images/bg/inner-banner-img.png"
                 alt=""
               />
-            </div>
+            </div> */}
           </div>
           <div className="col-lg-6">
             <div className="banner-img d-lg-block d-none">

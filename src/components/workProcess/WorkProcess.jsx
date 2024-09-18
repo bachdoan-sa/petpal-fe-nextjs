@@ -2,12 +2,12 @@ import React from "react";
 
 function WorkProcess() {
   return (
-    <div className="h2-working-process mb-120">
+    <div className="h2-working-process mt-50 mb-120">
       <div className="container">
         <div className="row mb-60">
           <div className="col-lg-12">
             <div className="section-title2 text-center">
-              <h2>Three Step And enjoy your day.</h2>
+              <h2>.</h2>
             </div>
           </div>
         </div>

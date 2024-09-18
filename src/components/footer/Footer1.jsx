@@ -8,7 +8,7 @@ function Footer1() {
   return (
     <footer>
       <div className="container">
-        <div className="row pt-90 pb-90 justify-content-center">
+        <div className="row pt-40 pb-60 justify-content-center">
           <div className="col-lg-3 col-sm-6 order-lg-1 order-2 d-flex justify-content-sm-start justify-content-start">
             <div className="footer-items contact ">
               <h3>Contacts</h3>
@@ -17,11 +17,8 @@ function Footer1() {
                   <img src="/assets/images/icon/phone-icon.svg" alt="" />
                 </div>
                 <div className="hotline-info">
-                  <h6 className="mb-10">
+                  <h6 className="">
                     <a href="tel:+8801761111456">+880 176 1111 456</a>
-                  </h6>
-                  <h6>
-                    <a href="tel:+8801701111000">+880 170 1111 000</a>
                   </h6>
                 </div>
               </div>
@@ -30,11 +27,8 @@ function Footer1() {
                   <img src="/assets/images/icon/envelope.svg" alt="" />
                 </div>
                 <div className="email-info">
-                  <h6 className="mb-10">
+                  <h6 className="">
                     <a href="mailto:info@example.com">info@example.com</a>
-                  </h6>
-                  <h6>
-                    <a href="mailto:info@support.com">info@support.com</a>
                   </h6>
                 </div>
               </div>
@@ -44,10 +38,10 @@ function Footer1() {
                 </div>
                 <div className="email-info">
                   <h6 className="mb-10">
-                    <a>168/170, Avenue 01, Mirpur</a>
+                    <a>212, Đường Đỗ Xuân Hợp</a>
                   </h6>
                   <h6>
-                    <a>DOHS, Bangladesh</a>
+                    <a>Tp. Thủ Đức</a>
                   </h6>
                 </div>
               </div>
@@ -56,9 +50,11 @@ function Footer1() {
           <div className="col-lg-6 d-flex align-items-center order-lg-2 order-1 justify-content-sm-center justify-content-start">
             <div className="footer-items">
               <h2>
-                want <span>to keep</span>
+                {/* want <span>to keep</span>
                 <br />
-                your pet in, <span>our center</span>?
+                your pet in, <span>our center</span>? */}
+                Petpal
+
               </h2>
               <div
                 className={
@@ -75,7 +71,7 @@ function Footer1() {
                         : "primary-btn1"
                     }
                   >
-                    Book Now
+                    Tìm kiếm trung tâm gần bạn
                   </a>
                 </Link>
               </div>
@@ -83,10 +79,11 @@ function Footer1() {
           </div>
           <div className="col-lg-3 col-sm-6 d-flex justify-content-sm-end justify-content-start order-3">
             <div className="footer-items opening-time">
-              <h3>Opening Hours</h3>
+              {/* <h3>Chăm sóc khách hàng</h3> */}
+              {/* <h3>Opening Hours</h3>
               <h6 className="mb-25">Mon - Fri: 9.00AM - 6.00PM</h6>
-              <h6 className="mb-25">Saturday: 9.00AM - 6.00PM</h6>
-              <h6>Sunday: Closed</h6>
+              <h6 className="mb-25">Saturday: 9.00AM - 6.00PM</h6> */}
+              {/* <h6>Sunday: Closed</h6> */}
               <ul className="social-icons">
                 <li>
                   <a href="https://www.facebook.com/">
@@ -116,8 +113,8 @@ function Footer1() {
           <div className="col-lg-6">
             <div className="copyright-area">
               <p>
-                © 2023 Scooby is Proudly Powered by{" "}
-                <a href="https://www.egenslab.com/"> Egens Lab.</a>
+                © 2023 {" "} Petpal
+                
               </p>
             </div>
           </div>

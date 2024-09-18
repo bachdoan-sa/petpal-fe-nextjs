@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useMemo } from "react";
 import SwiperCore, {
   Autoplay,
@@ -53,17 +53,23 @@ function Home2ChooseUs() {
         <div className="row">
           <div className="col-lg-12">
             <div className="section-title2 text-center">
-              <h2>Why Choose Us</h2>
+              <h2>PetPal</h2>
               <p>
-                Enjoy Your Holiday We Can Keep Them Happy{" "}
+                {/* Enjoy Your Holiday We Can Keep Them Happy{" "}
                 <a href="#">Your Pet Our Priority</a> Happy Pets, Happy Humans
                 We Are The Best Of This Country We Are Always Ready For your
-                pet.
+                pet. */}
+                Petpal là một nền tảng liên kết các nhà cung cấp dịch vụ thú
+                cưng với những khách hàng sở hữu thú cưng sống trong khu chung
+                cư.
+                <br /> Trên nền tảng này cung cấp các gói dịch vụ bao gồm nhiều
+                dịch vụ khác nhau như cho ăn, đi dạo, chải chuốt,... Khách
+                hàng sẽ là người sử dụng các dịch vụ do Đối tác cung cấp.
               </p>
             </div>
           </div>
         </div>
-        <div className="row justify-content-center pt-90 pb-90 g-4">
+        {/* <div className="row justify-content-center pt-90 pb-90 g-4">
           <div className="col-lg-3 col-md-4 col-sm-6 col-10">
             <div className="single-card">
               <div className="icon">
@@ -116,9 +122,9 @@ function Home2ChooseUs() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="partner-area">
+      <div className="partner-area mt-60">
         <div className="container">
           <div className="row">
             <Swiper {...partnarSlider} className="swiper h2-partner">

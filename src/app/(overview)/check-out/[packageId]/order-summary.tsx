@@ -4,7 +4,7 @@ import { PackageType } from "@/src/schemaValidations/package/package.schema";
 import React, { useEffect, useState } from "react";
 // import ProductPriceCount from "../../../components/shop/ProductPriceCount";
 
-function OrderSummary({ packageId }: { packageId: string }) {
+function OrderSummary({ packageId }: { packageId: string | undefined }) {
 
   const [packageDetail, setPackageDetail] = useState<PackageType>();
   
