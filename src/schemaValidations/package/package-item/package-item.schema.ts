@@ -6,10 +6,11 @@ import { IsSucceedRes } from "../../common.schema";
 // 1. định nghĩa object đó
 export const PackageItemSchema = z.object({
     Id: z.string().optional(),
-    packageId: z.string(),
-    serviceId: z.string(),
     currentPrice: z.string(),
     detail: z.string(),
+
+    packageId: z.string().optional(),
+    serviceId: z.string().optional(),
     status: z.string().optional(),
 
     createdAt: z.date().optional(),

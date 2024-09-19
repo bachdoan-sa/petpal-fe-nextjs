@@ -4,28 +4,30 @@ import Image from "next/image";
 import { DeleteButton, UpdateButton } from '@/src/components/admin/table/button';
 import ServiceApiRequest from "@/src/apiRequests/service";
 import { ServiceListPageBodyType, ServiceType } from "@/src/schemaValidations/service.schema";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import Pagination from "@/src/components/admin/table/pagination";
+
 export default function ServiceTable({ query, currentPage, sessionToken }) {
-    const body: ServiceListPageBodyType = {
 
-        page: currentPage,
-        size: 6
-
-    }
     const [list, setList] = useState<ServiceType[]>([]);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        const body: ServiceListPageBodyType = {
 
+            page: currentPage,
+            size: 6,
+            search: query ?? "",
+        }
         async function getList() {
             try {
                 setLoading(true);
                 console.log(loading);
                 console.log("lấy danh sách");
-                // const response = await UserApiRequest.getListPageUser({ body, sessionToken });
-                // setList(response.payload?.data?.list);
-                // setTotalPages(response.payload?.data?.paging?.maxPage);
+                const response = await ServiceApiRequest.getListService({ body, sessionToken });
+                setList(response.payload?.data?.list);
+                setTotalPages(response.payload?.data?.paging?.maxPage);
             } catch (error: any) {
                 console.log(error);
             } finally {
@@ -67,8 +69,8 @@ export default function ServiceTable({ query, currentPage, sessionToken }) {
                                                     {/* <td className="py-2 ps-0 text-left">{<Status status={service.status ?? ''} />}</td> */}
                                                     <td className="p-2 d-flex justify-content-end">
 
-                                                        <UpdateButton link={"/admin/partners/services/" + service.id + "/edit"} />
-                                                        <DeleteButton link={"/admin/partners/services"} id={service.id} />
+                                                        <UpdateButton link={"/partner/services/" + service.id + "/edit"} />
+                                                        <DeleteButton link={"/partner/services"} id={service.id} />
 
                                                     </td>
                                                 </tr>
@@ -101,7 +103,11 @@ export default function ServiceTable({ query, currentPage, sessionToken }) {
                     )
                 )
             }
-
+            <div className="mt-5 d-flex w-100 justify-content-center">
+                <Suspense>
+                    <Pagination totalPages={totalPages} />
+                </Suspense>
+            </div>
         </>
     );
 }

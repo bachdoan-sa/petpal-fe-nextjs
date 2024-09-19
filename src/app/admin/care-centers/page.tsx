@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import SearchBar from '@/src/components/admin/search';
 import { CreateButton } from '@/src/components/admin/table/button';
 import KCenterTable from '@/src/components/admin/table/kcenters/kcenterTable';
+import Breadcrumbs from '@/src/components/admin/breadcrumbs';
 export default function AdminManageKCenter({
     searchParams,
 }: {
@@ -17,13 +18,17 @@ export default function AdminManageKCenter({
     return (
         <>
             <div className="d-flex w-100 align-items-center justify-content-between">
-                <h2 className={`${lusitana.className}`}>Care Center</h2>
+                <Breadcrumbs
+                    breadcrumbs={[
+                        { label: 'Danh sách', href: '/admin/care-centers', active: true }
+                    ]}
+                />
             </div>
             <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
                 <Suspense>
                     <SearchBar placeholder="Search Pet Care center..." />
                 </Suspense>
-                <CreateButton link={"care-centers/create"} title="Create Center" />
+                <CreateButton link={"care-centers/create"} title="Tạo mới" />
             </div>
             <KCenterTable query={query} currentPage={currentPage} />
         </>

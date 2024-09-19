@@ -2,6 +2,8 @@ import { z } from "zod";
 import { PagingRes, PagingBody } from "../paging/paging.schema";
 import { IsSucceedRes } from "../common.schema";
 import { PetSchema } from "../pet.schema";
+import { PackageItemSchema } from "./package-item/package-item.schema";
+import exp from "node:constants";
 
 // Các bước định nghĩa 1 response
 // 1. định nghĩa object đó
@@ -15,13 +17,15 @@ export const PackageSchema = z.object({
     totalPrice: z.number().optional(),
 
     status: z.string().optional(),
-    items: z.string().array().optional(), //Đây là array Package Item nhưng chưa dùng nên chưa import
+
+    items: z.array(PackageItemSchema).default([]).optional(), //Đây là array Package Item nhưng chưa dùng nên chưa import
 
     createdAt: z.date().optional(),
     createdBy: z.string().optional(),
     updatedAt: z.date().optional(),
     updatedBy: z.string().optional()
-});
+}).strict();
+
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
 export const PackageRes = z.object({
     data: PackageSchema,
@@ -81,11 +85,25 @@ export type GetPackageByIdType = z.TypeOf<typeof GetPackageByIdSchema>;
 //Create Model
 export const CreatePackageBody = PackageSchema;
 export type CreatePackageBodyType = z.TypeOf<typeof CreatePackageBody>;
+
+export const CreatePackageWithItemsBody = z.object(
+    {
+        ...PackageSchema.shape,
+        packageItems: PackageSchema.shape.items
+    });
+export type CreatePackageWithItemsBodyType = z.TypeOf<typeof CreatePackageWithItemsBody>;
+
 export const CreatePackageRes = z.object({
     data: IsSucceedRes,
     message: z.string()
 });
+export const CreatePackageWithItemsRes = z.object({
+    data: z.coerce.string(),
+    message: z.string()
+});
 export type CreatePackageResType = z.TypeOf<typeof CreatePackageRes>;
+export type CreatePackageWithItemsResType = z.TypeOf<typeof CreatePackageWithItemsRes>;
+
 
 
 //Update Model
@@ -112,4 +130,4 @@ export const PackageWithPetListPageRes = z.object({
     data: PackageWithPetListPage,
     message: z.string()
 })
-export type PackageWithPetListPageResType = z.TypeOf<typeof PackageWithPetListPageRes >;
+export type PackageWithPetListPageResType = z.TypeOf<typeof PackageWithPetListPageRes>;

@@ -34,7 +34,7 @@ export default function PartnerManageService({
                 <Suspense>
                     <SearchBar placeholder="Search invoices..." />
                 </Suspense>
-                <CreateButton link={"services/create"} title="Create services" />
+                <CreateButton link={"services/create"} title="Tạo Mới" />
             </div>
             <ServiceTable query={query} currentPage={currentPage} sessionToken={sessionToken} />
 

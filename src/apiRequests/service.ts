@@ -4,13 +4,16 @@ import {
     ServiceListPageBodyType,
     CreateServiceBodyType,
     CreateServiceResType,
-    UpdateServiceResType
+    UpdateServiceResType,
+    UpdateServiceBodyType,
+    ServiceType,
+    ServiceResType
 } from '@/src/schemaValidations/service.schema'
 import { MessageResType } from '@/src/schemaValidations/common.schema'
 import { UpdatePackageBodyType } from '../schemaValidations/package/package.schema';
 
 const ServiceApiRequest = {
-    getListServiceForUser: ({ body, sessionToken }: { body: ServiceListPageBodyType; sessionToken?: string }) =>
+    getListService: ({ body, sessionToken }: { body: ServiceListPageBodyType; sessionToken?: string }) =>
         http.post<ServiceListPageResType>("/api/Service/get-list", body,
             {
                 headers: {
@@ -18,21 +21,21 @@ const ServiceApiRequest = {
                 }
             }),
     getServiceById: ({ serivceId, sessionToken }: { serivceId: string; sessionToken?: string }) =>
-        http.get<ServiceListPageResType>(`/api/Service/get-service/${serivceId}`,
+        http.get<ServiceResType>(`/api/Service/get-service/${serivceId}`,
             {
                 headers: {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
-    createService: ({ body, sessionToken }: { body: CreateServiceBodyType; sessionToken?: string }) =>
-        http.post<CreateServiceResType>('/api/Service/create-service', body,
+    createService: ({ body, sessionToken: sessionToken  }: { body: CreateServiceBodyType; sessionToken?: string }) =>
+        http.post<CreateServiceResType>('/api/Service/create', body,
             {
                 headers: {
                     Authorization: `Bearer ${sessionToken}`
                 }
             }),
-    updateService: ({ body, sessionToken }: { body: UpdatePackageBodyType; sessionToken?: string }) =>
-        http.post<UpdateServiceResType>('/api/Service/update-service', body,
+    updateService: ({ body, sessionToken }: { body: UpdateServiceBodyType; sessionToken?: string }) =>
+        http.post<UpdateServiceResType>('/api/Service/update', body,
             {
                 headers: {
                     Authorization: `Bearer ${sessionToken}`

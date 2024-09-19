@@ -27,7 +27,7 @@ export default function ManagerManageOrders({ searchParams }: { searchParams?: {
                 <Suspense>
                     <SearchBar placeholder="Search orders..." />
                 </Suspense>
-                <CreateButton link={"orders/create"} title="Create User" />
+                <CreateButton link={"orders/create"} title="Tạo Mới" />
             </div>
             <OrderTable query={query} currentPage={currentPage} sessionToken={sessionToken} />
         </>

@@ -19,10 +19,14 @@ const packageApiRequest = {
     ),
   getPackageById: (body: { id: string }) =>
     http.post<PackageResType>('/api/Package/get-by-id', body),
-  getListPagePackage: (body: PackageListPageBodyType) =>
-    http.post<PackageListPageResType>(
-      "/api/Package/get-list",
-      body
+
+  getListPagePackage: ({ body, sessionToken }: { body: PackageListPageBodyType; sessionToken?: string }) =>
+    http.post<PackageListPageResType>("/api/Package/get-list", body,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`
+        }
+      }
     ),
   createPackage: ({ body, sessionToken }: { body: CreatePackageBodyType; sessionToken?: string }) =>
     http.post<CreatePackageResType>('/api/Package/create-package', body,
@@ -32,13 +36,22 @@ const packageApiRequest = {
         }
       }
     ),
-    updatePackage: ({ body, sessionToken }: { body: UpdatePackageBodyType; sessionToken?: string }) =>
-      http.post<UpdatePackageResType>('/api/Package/update-package', body,
-        {
-          headers: {
-            Authorization: `Bearer ${sessionToken}`
-          }
+  updatePackage: ({ body, sessionToken }: { body: UpdatePackageBodyType; sessionToken?: string }) =>
+    http.post<UpdatePackageResType>('/api/Package/update-package', body,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`
         }
-      ),
+      }
+    ),
+  uploadPackageImage: ({ body, sessionToken }: { body: FormData; sessionToken?: string }) =>
+    http.post<CreatePackageResType>('/api/Package/upload-package-image', body,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`
+        }
+      }
+    ),
+
 };
 export default packageApiRequest;
