@@ -43,11 +43,11 @@ function Banner2() {
                     </h1>
                     <div className="btn-group">
                       <Link legacyBehavior href="/pet-care-centers">
-                        <a className="primary-btn2">Find a Pet Care Center</a>
+                        <a className="primary-btn2">Tìm kiếm trung tâm</a>
                       </Link>
-                      <Link legacyBehavior href="/about">
+                      {/* <Link legacyBehavior href="/about">
                         <a className="primary-btn3">About More</a>
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
                 </div>

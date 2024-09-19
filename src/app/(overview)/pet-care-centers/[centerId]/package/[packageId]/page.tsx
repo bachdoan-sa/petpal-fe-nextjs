@@ -31,7 +31,7 @@ export default function PackageDetail({
     }
     
   }, [packageId]);
-  console.log("Package data: hihi", packageDetail);
+  // console.log("Package data: hihi", packageDetail);
   return (
     <>
       {/* <Breadcrumb pageName="Shop Details" pageTitle="Shop Details" /> */}

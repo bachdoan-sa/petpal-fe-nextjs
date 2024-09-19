@@ -6,6 +6,7 @@ import Footer1 from "@/src/components/footer/Footer1";
 import Header2 from "@/src/components/header/Header2";
 import Home2Testimonial from "@/src/components/testimonial/Home2Testimonial";
 import WorkProcess from "@/src/components/workProcess/WorkProcess";
+import ChooseUs from "@/src/components/chooseUs/ChooseUs";
 
 function HomePage2() {
   return (
@@ -13,8 +14,8 @@ function HomePage2() {
       <Banner2 />
       <Home2ChooseUs />
       <WorkProcess />
-      <Home2Contact />
-      <Home2Testimonial />
+      {/* <Home2Contact /> */}
+      {/* <Home2Testimonial /> */}
     </>
   );
 }
