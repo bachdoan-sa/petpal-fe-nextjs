@@ -1,8 +1,5 @@
 // components/BootstrapMenu.js
 "use client";
-import React, { useState } from "react";
-import UserInfo from "../user/UserInfo";
-import PetInfo from "../user/PetInfo";
 import Link from "next/link";
 
 const BootstrapMenu = () => {
@@ -44,9 +41,9 @@ const BootstrapMenu = () => {
             </a>
           </li> */}
           <li>
-            <Link href={`order-history`}>
+            <Link href={`/order-history`}>
               <div className="nav-link px-0 align-middle">
-                <i className="fs-4 bi bi-gear"></i>
+                <i className="fs-4 bi bi-box"></i>
                 <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">
                   Gió Chăm sóc
                 </span>
@@ -55,7 +52,7 @@ const BootstrapMenu = () => {
           </li>
           <li>
             <a className="nav-link px-0 align-middle" href="#">
-              <i className="fs-4 bi bi-gear"></i>
+              <i className="fs-4 bi bi-bell"></i>
               <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">
                 Thông báo
               </span>
@@ -72,12 +69,12 @@ const BootstrapMenu = () => {
 
           <li>
             <Link href={`/logout`} legacyBehavior>
-              <a className="nav-link px-0 align-middle" href="/logout">
+              <div className="nav-link px-0 align-middle" >
                 <i className="fs-4 bi-box-arrow-right"></i>
                 <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">
                   Đăng Xuất
                 </span>
-              </a>
+              </div>
             </Link>
           </li>
         </ul>

@@ -1,10 +1,10 @@
 'use client'
 import packageApiRequest from "@/src/apiRequests/package";
 import OthersProduct from "@/src/components/shop/OthersProduct";
-import SingleProductDescription from "@/src/components/shop/SingleProductDescription";
 import React, { useEffect, useState } from "react";
 import PackageDetailComponent from"@/src/components/center/PackageDetail";
 import { PackageType } from "@/src/schemaValidations/package/package.schema";
+import SingleProductDescription from "@/src/components/shop/SingleProductDescription";
 
 export default function PackageDetail({
   params,
@@ -39,8 +39,8 @@ export default function PackageDetail({
         <div className="container">
 
           <PackageDetailComponent packageDetail={packageDetail} />
-          <SingleProductDescription />
-          <OthersProduct />
+          <SingleProductDescription packageDetail={packageDetail}/>
+          {/* <OthersProduct /> */}
         </div>
       </div>
     </>

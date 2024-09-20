@@ -1,10 +1,7 @@
-import orderApiRequest from "@/src/apiRequests/order";
+import SearchBar from "@/src/components/admin/search";
 import CardOrder from "@/src/components/card/CardOrder";
-import { OrderListPageBodyType } from "@/src/schemaValidations/order.schema";
+import Page401 from "@/src/components/error/Page401";
 import { cookies } from "next/headers";
-import React from "react";
-import page_404 from "@/src/components/error/page_404";
-import { useUserStore } from "@/src/store/user-store";
 
 export default function OrderHistory({
   searchParams,
@@ -17,26 +14,9 @@ export default function OrderHistory({
   if (sessionToken == undefined) {
     return (
       //khi het token se hien ra thong bao yeu cau dang nhap lai
-      <div className="page_404">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="col-sm-10 col-sm-offset-1 text-center">
-                <div className="404_bg">
-                  <h1 className="text-center">401</h1>
-                </div>
-                <div className="content_box_404">
-                  <h3 className="h2">Hình như đã hết thời hạn đăng nhập</h3>
-                  <p></p>
-                  <a href="login">Đăng nhập lại</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Page401/>
     );
-    // <page_404 />;
+    // <page_401 />;
   }
 
   const query = searchParams?.query || "";
@@ -69,11 +49,12 @@ export default function OrderHistory({
         </ul>
 
         <div className="mt-3">
-          <input
+          {/* <input
             type="text"
             className="form-control"
             placeholder="Bạn có thể tìm kiếm theo tên Shop, ID đơn hàng hoặc Tên Sản phẩm"
-          />
+          /> */}
+          <SearchBar placeholder={`Bạn có thể tìm kiếm theo tên gói`} /> 
         </div>
         <CardOrder
           query={query}

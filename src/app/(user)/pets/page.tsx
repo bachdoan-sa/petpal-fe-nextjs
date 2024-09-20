@@ -14,7 +14,7 @@ function PetInfo({
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   return (
-    <div className="h1-story-area  position-relative">
+    <div className="h1-story-area  ">
       <div className="container" style={{ maxWidth: "1270px" }}>
         <div className="d-flex justify-content-between mb-10 inner-page-banner">
           <h1>Danh sách thú cưng</h1>

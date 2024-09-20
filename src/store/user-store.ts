@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { PetType } from '../schemaValidations/pet.schema';
 import { UserType } from '../schemaValidations/user.schema';
 
 interface UserStore {
