@@ -9,16 +9,17 @@ export const PackageItemSchema = z.object({
     currentPrice: z.string(),
     detail: z.string(),
     serviceName: z.string().optional(),
-
-    // packageId: z.string().optional(),
-    // serviceId: z.string().optional(),
-    // status: z.string().optional(),
+    
+    packageId: z.string().optional(),
+    serviceId: z.string().optional(),
+    status: z.string().optional(),
 
     // createdAt: z.date().optional(),
     // createdBy: z.string().optional(),
     // updatedAt: z.date().optional(),
     // updatedBy: z.string().optional()
 });
+export type PackageItemType = z.TypeOf<typeof PackageItemSchema>
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
 export const PackageItemRes = z.object({
     data: PackageItemSchema,

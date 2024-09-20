@@ -2,6 +2,8 @@ import http from "@/src/lib/httpAxios";
 import {
   CreatePackageBodyType,
   CreatePackageResType,
+  CreatePackageWithItemsBodyType,
+  CreatePackageWithItemsResType,
   PackageBykCenterListPageBodyType,
   PackageListPageBodyType,
   PackageListPageResType,
@@ -28,8 +30,8 @@ const packageApiRequest = {
         }
       }
     ),
-  createPackage: ({ body, sessionToken }: { body: CreatePackageBodyType; sessionToken?: string }) =>
-    http.post<CreatePackageResType>('/api/Package/create-package', body,
+  createPackage: ({ body, sessionToken }: { body: CreatePackageWithItemsBodyType; sessionToken?: string }) =>
+    http.post<CreatePackageWithItemsResType>('/api/Package/create', body,
       {
         headers: {
           Authorization: `Bearer ${sessionToken}`
@@ -37,7 +39,7 @@ const packageApiRequest = {
       }
     ),
   updatePackage: ({ body, sessionToken }: { body: UpdatePackageBodyType; sessionToken?: string }) =>
-    http.post<UpdatePackageResType>('/api/Package/update-package', body,
+    http.post<UpdatePackageResType>('/api/Package/update', body,
       {
         headers: {
           Authorization: `Bearer ${sessionToken}`

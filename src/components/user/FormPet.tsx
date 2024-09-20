@@ -83,6 +83,7 @@ function PetForm({ pet, token }: { pet?: Pet; token: string }) {
   const [petPhoto, setPetPhoto] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
+    petPhoto && console.log(getObjectUrl(petPhoto))
     return () => {
       petPhoto && URL.revokeObjectURL(getObjectUrl(petPhoto));
     };
