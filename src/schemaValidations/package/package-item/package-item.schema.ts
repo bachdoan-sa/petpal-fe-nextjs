@@ -5,10 +5,11 @@ import { IsSucceedRes } from "../../common.schema";
 // Các bước định nghĩa 1 response
 // 1. định nghĩa object đó
 export const PackageItemSchema = z.object({
-    Id: z.string().optional(),
+    id: z.string().optional(),
     currentPrice: z.string(),
     detail: z.string(),
-
+    serviceName: z.string().optional(),
+    
     packageId: z.string().optional(),
     serviceId: z.string().optional(),
     status: z.string().optional(),
@@ -18,6 +19,7 @@ export const PackageItemSchema = z.object({
     updatedAt: z.date().optional(),
     updatedBy: z.string().optional()
 });
+export type PackageItemType = z.TypeOf<typeof PackageItemSchema>
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
 export const PackageItemRes = z.object({
     data: PackageItemSchema,

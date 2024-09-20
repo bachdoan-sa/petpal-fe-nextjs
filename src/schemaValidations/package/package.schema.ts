@@ -9,13 +9,13 @@ import exp from "node:constants";
 // 1. định nghĩa object đó
 export const PackageSchema = z.object({
     id: z.string().optional(),
-    image: z.string().optional().default(""),
+    image: z.string().optional(),
     description: z.string(),
     title: z.string().nullable().optional(),
-    duration: z.string(),
+    duration: z.string().optional(),
     type: z.string(),
-    totalPrice: z.number().optional(),
-
+    // totalPrice: z.number().optional(),
+    petTypeId: z.string(),
     status: z.string().optional(),
 
     items: z.array(PackageItemSchema).default([]).optional(), //Đây là array Package Item nhưng chưa dùng nên chưa import
@@ -98,7 +98,7 @@ export const CreatePackageRes = z.object({
     message: z.string()
 });
 export const CreatePackageWithItemsRes = z.object({
-    data: z.coerce.string(),
+    data: z.any(),
     message: z.string()
 });
 export type CreatePackageResType = z.TypeOf<typeof CreatePackageRes>;

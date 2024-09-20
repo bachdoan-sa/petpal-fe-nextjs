@@ -106,14 +106,11 @@ const request = async <Response>(
     };
 
     try {
-        console.log(axiosConfig);
         const response = await axios(axiosConfig);
         const payload: Response = await response.data.payload;
         const strstatus: string = response.data.status as string;
         const status: number = Number(strstatus.slice(0, 3));
-        console.log("response: ");
-        console.log(response);
-        console.log("----------");
+        
         const data = {
             status: status,
             payload
