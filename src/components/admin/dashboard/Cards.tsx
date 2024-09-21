@@ -2,6 +2,8 @@ import { Users, DollarSign, Clock, Inbox, Share2, Briefcase } from 'react-feathe
 
 import { inter, lusitana } from '@/src/fonts/fonts';
 import clsx from 'clsx';
+import adminDashboardApiRequest from '@/src/apiRequests/dashboard/admin';
+import { cookies } from 'next/headers';
 //   import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
@@ -14,25 +16,47 @@ const iconMap = {
 };
 
 export default async function CardWrapper() {
-    // const {
-    //   numberOfInvoices,
-    //   numberOfCustomers,
-    //   totalPaidInvoices,
-    //   totalPendingInvoices,
-    // } = await fetchCardData();
 
-    const numberOfInvoices = 0
-    const numberOfCustomers = 0
-    const totalPaidInvoices = 0
-    const totalPendingInvoices = 0
+    const store = cookies();
+    const cookieStore = cookies();
+    const sessionToken = cookieStore.get('sessionToken')?.value;
 
+    const {
+        totalOrder,
+        numberOfCustomers,
+        totalPartner,
+        totalPetCenter,
+    }: {
+        totalOrder: number,
+        numberOfCustomers: number,
+        totalPartner: number,
+        totalPetCenter: number,
+    } = await fletchCardData();
+    async function fletchCardData() {
+        if (sessionToken !== undefined) {
+            try {
+                const response = await adminDashboardApiRequest.getAdminCardData(sessionToken);
+                const card = response.payload.data;
+                return {
+                    totalOrder: card.invoices ?? 0,
+                    numberOfCustomers: card.users ?? 0,
+                    totalPartner: card.partners ?? 0,
+                    totalPetCenter: card.careCenters ?? 0
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        return { totalOrder: 0, numberOfCustomers: 0, totalPartner: 0, totalPetCenter: 0 };
+
+    }
     return (
         <>
             {/* NOTE: comment in this code when you get to this point in the course */}
             <Card title="Người dùng" value={numberOfCustomers} type="customers" />
-            <Card title="Đối tác" value={totalPaidInvoices} type="partner" />
-            <Card title="Trung tâm" value={totalPendingInvoices} type="kcenter" />
-            <Card title="Giao dịch" value={numberOfInvoices} type="invoices" />
+            <Card title="Đối tác" value={totalPartner} type="partner" />
+            <Card title="Trung tâm" value={totalPetCenter} type="kcenter" />
+            <Card title="Giao dịch" value={totalOrder} type="invoices" />
 
         </>
     );
@@ -60,10 +84,10 @@ export function Card({
                         </div>
                     )}
                 </div>
-                <p className={` m-0 rounded-3 bg-white px-3 text-xl-2 ${inter.className}`}>
+                <div className={` m-0 rounded-3 bg-white px-3 text-xl-2 ${inter.className}`}>
                     <h1 className="text-truncate fw-bold">{value}</h1>
                     <p className='m-0'>sub data</p>
-                </p>
+                </div>
             </div>
         </div>
     );
