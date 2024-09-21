@@ -12,8 +12,8 @@ export default function ManagerManageOrders({ searchParams }: { searchParams?: {
     if (sessionToken === undefined) {
         return;
     }
-    const query = searchParams?.query || '';
-    const currentPage = Number(searchParams?.page) || 1;
+    const query = searchParams?.query ?? "";
+    const currentPage = Number(searchParams?.page ?? 1);
     return (
         <>
             <div className="d-flex w-100 align-items-center justify-content-between">
@@ -25,9 +25,9 @@ export default function ManagerManageOrders({ searchParams }: { searchParams?: {
                 />
             </div>
             <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
-                <Suspense>
+                {/* <Suspense>
                     <SearchBar placeholder="Search orders..." />
-                </Suspense>
+                </Suspense> */}
                 {/* <CreateButton link={"orders/create"} title="Create User" /> */}
             </div>
             <PendingOrderTable query={query} currentPage={currentPage} sessionToken={sessionToken} />

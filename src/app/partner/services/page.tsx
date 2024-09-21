@@ -19,8 +19,8 @@ export default function PartnerManageService({
     const cookieStore = cookies();
     const sessionToken = cookieStore.get('sessionToken')?.value;
    
-    const query = searchParams?.query || '';
-    const currentPage = Number(searchParams?.page) || 1;
+    const query = searchParams?.query ?? '';
+    const currentPage = Number(searchParams?.page ?? 1);
     return (
         <>
             <div className="d-flex w-100 align-items-center justify-content-between">

@@ -43,7 +43,6 @@ export default function SideListService({ handleInputClick, packageItems, token,
         getServices();
     }, [searchParams]);
     const handleChange = (value: Service) => {
-
         handleInputClick(value.id, value.description, value.basePrice, value.name);
     };
     return (
@@ -88,9 +87,9 @@ export default function SideListService({ handleInputClick, packageItems, token,
                                                 {
                                                     (packageItems?.some((idx) => (idx.serviceId === item.id)))
                                                         ?
-                                                        (<button className="btn btn-success" >Đã chọn</button>)
+                                                        (<button type="button" className="btn btn-success" >Đã chọn</button>)
                                                         :
-                                                        (<button className="btn btn-primary" onClick={() => handleChange(item)}>Chọn</button>)
+                                                        (<button type="button" className="btn btn-primary" onClick={() => handleChange(item)}>Chọn</button>)
                                                 }
                                             </div>
                                         </li>

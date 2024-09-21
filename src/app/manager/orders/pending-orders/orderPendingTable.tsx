@@ -14,16 +14,17 @@ import PetDropdown from "../petDropdown"
 export default function PendingOrderTable({ query, currentPage, sessionToken }) {
     const [orders, setOrders] = useState<OrderType[]>([]);
     const [totalPages, setTotalPages] = useState(1);
-   
+
     useEffect(() => {
         const fetchAPI = async () => {
             try {
                 const body: OrderListPageBodyType = {
                     page: currentPage,
-                    size: 6
+                    size: 6,
+                    search: query
                 }
                 // nhớ sửa lại api
-                const response = await orderApiRequest.getListOrderForManager({ body, sessionToken });
+                const response = await orderApiRequest.getListPendingOrder({ body, sessionToken });
                 const data = response.payload?.data;
                 if (data == null) {
                     return (<>
@@ -32,15 +33,16 @@ export default function PendingOrderTable({ query, currentPage, sessionToken }) 
                         </h1>
                     </>);
                 }
+                console.log(data);
                 setTotalPages(response.payload?.data?.paging?.maxPage)
-                setOrders(response.payload?.data?.orders)
+                setOrders(response.payload?.data?.list);
             } catch (error: any) {
                 console.log(error);
             }
         }
         fetchAPI();
-    }, [currentPage,query])
-
+    }, [currentPage, query])
+    
     return (
         <>
             <div className="mt-6 d-flex flex-wrap">

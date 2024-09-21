@@ -13,7 +13,8 @@ export default async function PartnerTable({ query, currentPage }) {
     const body: UserListPageFilterRSBodyType = {
         listRequest: {
             page: currentPage,
-            size: 6
+            size: 6,
+            search: query
         },
         role: "PARTNER",
         status: "ACTIVE"
@@ -57,7 +58,7 @@ export default async function PartnerTable({ query, currentPage }) {
                                                 <td className="p-2 text-left">{user.email}</td>
                                                 <td className="p-2 text-left">{user.address}</td>
                                                 <td className="p-2 text-left">{user.phoneNumber}</td>
-                                                <td className="py-2 ps-0 text-left">{<Status status={user.status ?? 'ACTIVE' } />}</td>
+                                                <td className="py-2 ps-0 text-left">{<Status status={user.status ?? 'ACTIVE'} />}</td>
                                                 <td className="p-2 d-flex justify-content-end">
 
                                                     <DetailButton link={"/admin/partners/"} id={user.id} />

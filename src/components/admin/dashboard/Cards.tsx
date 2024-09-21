@@ -1,13 +1,16 @@
-import { Users, DollarSign, Clock, Inbox } from 'react-feather';
+import { Users, DollarSign, Clock, Inbox, Share2, Briefcase } from 'react-feather';
 
-import { lusitana } from '@/src/fonts/fonts';
+import { inter, lusitana } from '@/src/fonts/fonts';
+import clsx from 'clsx';
 //   import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
-    collected: DollarSign,
     customers: Users,
+    collected: DollarSign,
     pending: Clock,
     invoices: Inbox,
+    partner: Share2,
+    kcenter: Briefcase
 };
 
 export default async function CardWrapper() {
@@ -26,15 +29,11 @@ export default async function CardWrapper() {
     return (
         <>
             {/* NOTE: comment in this code when you get to this point in the course */}
+            <Card title="Người dùng" value={numberOfCustomers} type="customers" />
+            <Card title="Đối tác" value={totalPaidInvoices} type="partner" />
+            <Card title="Trung tâm" value={totalPendingInvoices} type="kcenter" />
+            <Card title="Giao dịch" value={numberOfInvoices} type="invoices" />
 
-            <Card title="Collected" value={totalPaidInvoices} type="collected" />
-            <Card title="Pending" value={totalPendingInvoices} type="pending" />
-            <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-            <Card
-                title="Total Customers"
-                value={numberOfCustomers}
-                type="customers"
-            />
         </>
     );
 }
@@ -46,19 +45,24 @@ export function Card({
 }: {
     title: string;
     value: number | string;
-    type: 'invoices' | 'customers' | 'pending' | 'collected';
+    type: 'invoices' | 'customers' | 'pending' | 'collected' | 'partner' | 'kcenter';
 }) {
     const Icon = iconMap[type];
 
     return (
         <div className="col">
-            <div className="rounded-3 bg-light p-2 shadow-sm">
-                <div className="d-flex p-4 align-content-center">
-                    {Icon && <Icon size={20} />}
-                    <h3 className="ms-2 my-0 fw-normal " style={{ fontSize: "0.875rem", lineHeight: "1.25rem" }}>{title}</h3>
+            <div className="rounded-3 bg-white p-2 shadow-sm">
+                <div className="d-flex p-2 align-items-center justify-content-between">
+                    <h3 className={clsx("ms-2 my-0 fw-normal text-md font-black fw-bold", inter.className)}>{title}</h3>
+                    {Icon && (
+                        <div className='icon-shape icon-md bg-light-primary text-primary rounded-2'>
+                            <Icon size={20} />
+                        </div>
+                    )}
                 </div>
-                <p className={`text-center rounded-3 bg-white px-3 py-5 text-xl-2 ${lusitana.className}`}>
-                    <span className="text-truncate">{value}</span>
+                <p className={` m-0 rounded-3 bg-white px-3 text-xl-2 ${inter.className}`}>
+                    <h1 className="text-truncate fw-bold">{value}</h1>
+                    <p className='m-0'>sub data</p>
                 </p>
             </div>
         </div>

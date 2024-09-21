@@ -20,8 +20,8 @@ export default function ManagerManagePackages({ searchParams }: { searchParams?:
   if (sessionToken === undefined) {
     return (<>Quen token roi ban oi</>);
   }
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
+  const query = searchParams?.query ?? "";
+  const currentPage = Number(searchParams?.page ?? 1);
   // const query = searchParams?.query || '';
   // const currentPage = Number(searchParams?.page) || 1;
   // const totalPages = 1; // await fetchInvoicesPages(query);
@@ -33,10 +33,10 @@ export default function ManagerManagePackages({ searchParams }: { searchParams?:
       </div>
       <div className="mt-4 d-flex align-items-center justify-content-between gap-2 md:mt-8">
         <Suspense>
-          <SearchBar placeholder="Search invoices..." />
+          <SearchBar placeholder="Tìm kiếm ..." />
         </Suspense>
 
-        <CreateButton link={"/manager/packages/create"} title={"Create Package"} />
+        <CreateButton link={"/manager/packages/create"} title={"Tạo gói dịch vụ"} />
       </div>
       <TablePackage query={query} currentPage={currentPage} sessionToken={sessionToken} />
     </>

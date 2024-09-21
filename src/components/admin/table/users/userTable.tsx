@@ -11,7 +11,8 @@ export default async function UserTable({ query, currentPage }) {
     const body: UserListPageFilterRSBodyType = {
         listRequest: {
             page: currentPage,
-            size: 6
+            size: 6,
+            search: query
         },
         role: "CUSTOMER",
         status: "ACTIVE"

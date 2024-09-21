@@ -12,7 +12,8 @@ export default async function PendingPartnerTable({ query, currentPage }) {
     const sessionToken = cookieStore.get('sessionToken')?.value;
     const body: UserListPageBodyType = {
         page: currentPage,
-        size: 6
+        size: 6,
+        search: query
     }
     let users: UserType[] = [];
     let totalPages: number = 1;

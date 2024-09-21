@@ -14,6 +14,8 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 import SideListService from "./ListService";
 import { PetTypeListPageBodyType, PetTypeListType } from "@/src/schemaValidations/pet-type.schema";
 import PetTypeApiRequest from "@/src/apiRequests/pet-type";
+import { toast } from "sonner";
+import { set } from "zod";
 
 type Package = PackageType;
 type Service = ServiceType;
@@ -70,6 +72,7 @@ export default function FormPackage({ packageModel, token, searchParams }: { pac
     });
     const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({ control, name: "packageItems" });
     const handleInputClick = (id, detail, price, name) => {
+        setLoading(true);
         if (fields.find(item => item.serviceId === id)) {
 
             // remove(fields.findIndex(item => item.serviceId === id));
@@ -81,6 +84,7 @@ export default function FormPackage({ packageModel, token, searchParams }: { pac
                 currentPrice: price,
                 serviceName: name
             });
+            setLoading(false)
         }
 
 
@@ -117,10 +121,12 @@ export default function FormPackage({ packageModel, token, searchParams }: { pac
             const createPackageRes = await packageApiRequest.createPackage({ body: value, sessionToken: token })
             const formbody = new FormData();
             formbody.append("packageId", createPackageRes.payload.data.packageId);
-            console.log(JSON.stringify(createPackageRes));
+            toast.success("Tạo gói dịch vụ thành công.");
+
             formbody.append("file", packageImage?.file as Blob);
             const uploadImageRes = await packageApiRequest.uploadPackageImage({ body: formbody, sessionToken: token })
-            console.log(JSON.stringify(uploadImageRes));
+            toast.success("Tải ảnh gói dịch vụ thành công.");
+
         } catch (error: any) {
             console.log(error)
             if (error instanceof HttpError) {
@@ -142,7 +148,7 @@ export default function FormPackage({ packageModel, token, searchParams }: { pac
     const updatePackage = async (value: any) => {
         setLoading(true);
         try {
-             const updatePackage = await packageApiRequest.updatePackage({ body: value, sessionToken: token })
+            const updatePackage = await packageApiRequest.updatePackage({ body: value, sessionToken: token })
         } catch (error: any) {
             console.log(error)
             if (error instanceof HttpError) {
@@ -299,7 +305,8 @@ export default function FormPackage({ packageModel, token, searchParams }: { pac
                                                 width={35}
                                                 height={35}
                                                 alt='preview'
-                                                className='w-32 h-32 object-cover'
+                                                className='w-32 h-32 object-cover bg-transparent'
+                                                
                                             />
                                             <button
                                                 type='button'
@@ -389,7 +396,21 @@ export default function FormPackage({ packageModel, token, searchParams }: { pac
                             >
                                 Cancel
                             </Link>
-                            <Button type="submit">Tạo gói dịch vụ</Button>
+
+                            <Button
+                                disabled={formState.isSubmitting || loading}
+                                className={(formState.isSubmitting || loading) ? "bg-black" : ""}
+                                type="submit">
+
+                                {(formState.isSubmitting || loading) ? (
+                                    <span className="">
+                                        Đang gửi yêu cầu
+                                        <Image width={20} height={20} alt="" src='\assets\spinner.svg' />
+                                    </span>
+
+                                ) : "Tạo gói dịch vụ"}
+
+                            </Button>
                         </div>
                     </div>
 

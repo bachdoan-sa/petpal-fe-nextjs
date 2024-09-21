@@ -20,8 +20,8 @@ export default function ManagerManageStaffs({
   //     { header: "Last", accessor: "last" },
   //     { header: "Handle", accessor: "handle" },
   //   ];
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const query = searchParams?.query ?? "";
+    const currentPage = Number(searchParams?.page ?? 1);
   const totalPages = getDataTestPages();
   return (
     <>

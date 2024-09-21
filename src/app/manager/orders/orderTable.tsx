@@ -15,7 +15,8 @@ export default function orderTable({ query, currentPage, sessionToken }) {
     const [totalPages, setTotalPages] = useState(1);
     const body: OrderListPageBodyType = {
         page: currentPage,
-        size: 6
+        size: 6,
+        search: query
     }
     console.log("render");
 
@@ -32,7 +33,7 @@ export default function orderTable({ query, currentPage, sessionToken }) {
                     </>);
                 }
                 setTotalPages(response.payload?.data?.paging?.maxPage)
-                setOrders(response.payload?.data?.orders)
+                setOrders(response.payload?.data?.list)
             } catch (error: any) {
                 console.log(error);
             }

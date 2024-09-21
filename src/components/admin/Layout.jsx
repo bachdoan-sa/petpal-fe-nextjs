@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }) {
 					onClick={(value) => setShowMenu(value)}
 				/>
 			</div>
-			<div id="page-content">
+			<div id="page-content" className=' bg-light'>
 				<div className="header">
 					<NavbarTop
 						data={{
@@ -32,9 +32,9 @@ export default function DashboardLayout({ children }) {
 						}}
 					/>
 				</div>
-				<div className="container-fluid px-6 py-4">
-					{children}
-				</div>
+
+				{children}
+
 
 			</div>
 		</div>

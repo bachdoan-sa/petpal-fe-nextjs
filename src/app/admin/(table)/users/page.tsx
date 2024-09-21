@@ -14,8 +14,8 @@ export default function AdminManageUsers({
         page?: string;
     };
 }) {
-    const query = searchParams?.query || '';
-    const currentPage = Number(searchParams?.page) || 1;
+    const query = searchParams?.query ?? "";
+    const currentPage = Number(searchParams?.page ?? 1);
     return (
         <>
             <div className="d-flex w-100 align-items-center justify-content-between">

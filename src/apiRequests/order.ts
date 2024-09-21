@@ -85,22 +85,21 @@ const orderApiRequest = {
       },
     }),
 
-  getListOrderForUser: ({
-    body,
-    sessionToken,
-  }: {
-    body: OrderListPageBodyType;
-    sessionToken?: string;
-  }) =>
+  getListOrderForUser: ({ body, sessionToken }: { body: OrderListPageBodyType; sessionToken?: string; }) =>
     http.post<OrderListPageResType>("/api/Order/get-order-request", body, {
       headers: {
         Authorization: `Bearer ${sessionToken}`,
       },
     }),
-
+  getListPendingOrder: ({ body, sessionToken }: { body: OrderListPageBodyType; sessionToken?: string; }) =>
+    http.post<OrderListPageResType>("/api/Order/get-pending-request", body, {
+      headers: {
+        Authorization: `Bearer ${sessionToken}`,
+      },
+    }),
   getOrderById: (id: string, sessionToken: string | undefined) =>
     http.get<OrderResType>(`/api/Order/get-order/${id}`, {
-      headers : {
+      headers: {
         Authorization: `Bearer ${sessionToken}`,
       }
     }),

@@ -16,8 +16,9 @@ export default function TablePackage({ query, currentPage, sessionToken }) {
         const body: PackageListPageBodyType = {
             page: currentPage,
             size: 6,
-            search: query ?? ""
+            search: query
         }
+        console.log(body);
         const fetchAPI = async () => {
             try {
                 const response = await packageApiRequest.getListPagePackage({ body, sessionToken });
@@ -42,7 +43,7 @@ export default function TablePackage({ query, currentPage, sessionToken }) {
         <>
             {(pageList?.length === 0 || pageList === undefined) ? (
                 <p>
-                    có gì đó sai sai? không data!? 
+                    có gì đó sai sai? không data!?
                     thatja ra api chua fix response model 17/09
                 </p>
             ) : (
@@ -76,7 +77,7 @@ export default function TablePackage({ query, currentPage, sessionToken }) {
                                                         className="rounded-full me-2"
                                                         alt={`${item.title}'s profile picture`}
                                                     />
-                                                    <p className="table-first-td">{item.title ?? "Chưa đặt tên"}</p>
+                                                    <span className="table-first-td">{item.title ?? "Chưa đặt tên"}</span>
                                                 </td>
 
                                                 <td className="p-2 text-left">{item.description}</td>

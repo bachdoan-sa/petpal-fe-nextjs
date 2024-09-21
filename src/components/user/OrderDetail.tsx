@@ -81,7 +81,7 @@ export default function OrderDetail({ sessionToken, id }) {
 
                   <li className="single-product d-flex justify-content-start">
                     {orderDetail?.package?.items?.map((item) => {
-                      return <h5>{item}</h5>;
+                      return <h5>{item.serviceName}</h5>;
                     })}
                   </li>
                 </ul>

@@ -11,8 +11,8 @@ function PetInfo({
 }) {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value ?? "";
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const query = searchParams?.query ?? "";
+    const currentPage = Number(searchParams?.page ?? 1);
   return (
     <div className="h1-story-area  position-relative">
       <div className="container" style={{ maxWidth: "1270px" }}>

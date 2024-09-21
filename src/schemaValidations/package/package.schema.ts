@@ -14,7 +14,7 @@ export const PackageSchema = z.object({
     title: z.string().nullable().optional(),
     duration: z.string().optional(),
     type: z.string(),
-    // totalPrice: z.number().optional(),
+    totalPrice: z.number().optional(),
     petTypeId: z.string(),
     status: z.string().optional(),
 

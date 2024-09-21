@@ -12,7 +12,8 @@ export default async function kcenterTable({ query, currentPage }) {
     const sessionToken = cookieStore.get('sessionToken')?.value;
     const body: PetCenterListPageBodyType = {
         page: currentPage,
-        size: 6
+        size: 6,
+        search: query
     }
     let kcenters: PetCenterType[] = [];
     let totalPages: number = 1;

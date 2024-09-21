@@ -1,11 +1,12 @@
 import { clsx } from 'clsx';
 import Link from 'next/link';
-import { lusitana } from '@/src/fonts/fonts';
+import { inter, lusitana } from '@/src/fonts/fonts';
 
 interface Breadcrumb {
   label: string;
   href: string;
   active?: boolean;
+  color?: string;
 }
 
 export default function Breadcrumbs({
@@ -15,13 +16,14 @@ export default function Breadcrumbs({
 }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-3 d-block">
-      <ol className={clsx(lusitana.className, 'd-flex text-2xl', 'ps-0')}>
+      <ol className={clsx(inter.className, 'd-flex text-2xl', 'ps-0')}>
         {breadcrumbs.map((breadcrumb, index) => (
-          <li 
+          <li
             key={breadcrumb.href}
             aria-current={breadcrumb.active}
             className={clsx(
-              (breadcrumb.active ? 'text-gray-900' : 'text-gray-500'), "list-style-none"
+              "list-style-none",
+              (breadcrumb.color === 'white' ? 'text-white' : (breadcrumb.active ? 'text-gray-900' : 'text-gray-500'))
             )}
           >
             <Link href={breadcrumb.href} className='text-reset'>{breadcrumb.label}</Link>

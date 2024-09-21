@@ -39,8 +39,8 @@ export default function OrderHistory({
     // <page_404 />;
   }
 
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const query = searchParams?.query ?? "";
+    const currentPage = Number(searchParams?.page ?? 1);
   return (
     <div>
       <div className="container mt-4">

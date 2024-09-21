@@ -12,14 +12,14 @@ export default function ManagerManageOrders({ searchParams }: { searchParams?: {
     if (sessionToken === undefined) {
         return;
     }
-    const query = searchParams?.query || '';
-    const currentPage = Number(searchParams?.page) || 1;
+    const query = searchParams?.query ?? "";
+    const currentPage = Number(searchParams?.page ?? 1);
     return (
         <>
             <div className="d-flex w-100 align-items-center justify-content-between">
                 <Breadcrumbs
                     breadcrumbs={[
-                        { label: 'Danh sách yêu cầu', href: '/manager/orders',active: true },
+                        { label: 'Danh sách yêu cầu', href: '/manager/orders', active: true },
                     ]}
                 />
             </div>
