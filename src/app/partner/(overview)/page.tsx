@@ -1,67 +1,43 @@
 import React from "react";
 
 import Link from 'next/link';
+import Breadcrumbs from "@/src/components/admin/breadcrumbs";
+import CardWrapper from "./components/Cards";
+import Charts from "./components/OrderChart";
 
 
 export default function partner() {
     return (
         <>
 
-            <div className="row">
-                <div className="col-12">
-                    <div className="text-center mb-7">
-                        <h1 className="display-4">Layouts</h1>
-                        <p>Customize your overview page layout. Choose the one that best fits your needs.</p>
+            <div className="bg-primary pt-5 pb-21"></div>
+            <div className="container-fluid px-6 py-4">
+                <div className="mt-n22 container-fluid">
+                    <div className="d-flex w-100 align-items-center justify-content-between">
+                        <Breadcrumbs
+                            breadcrumbs={[
+                                { label: 'Bảng thống kê trung tâm', href: '/admin', active: true, color: 'white' }
+                            ]}
+                        />
                     </div>
-                    <span className="divider fw-bold my-3">Demo layouts</span>
                 </div>
-            </div>
-            <div className="row justify-content-center">
-                <div className="col-lg-3 col-sm-6 my-4">
-                    <Link className="card" href="/admin">
+                <div className="container">
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-4">
+                        <CardWrapper />
+                    </div>
+                </div>
+                <div className="pt-5 container-fluid">
+                    <div className="row">
+                        <div className="col-8">
+                            <Charts />
+                        </div>
+                        <div className="col-4 d-flex flex-columns">
+                            <div className="card flex-1">
+                                ab
+                            </div>
+                        </div>
+                    </div>
 
-                        <div className="card-body text-center">
-                            <h5 className="mb-0">ADMIN</h5>
-                        </div>
-                    </Link>
-                </div>
-            </div>
-            <div className="accordion" id="accordionExample">
-                <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingOne">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Accordion Item #1
-                        </button>
-                    </h2>
-                    <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingTwo">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Accordion Item #2
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingThree">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
                 </div>
             </div>
 

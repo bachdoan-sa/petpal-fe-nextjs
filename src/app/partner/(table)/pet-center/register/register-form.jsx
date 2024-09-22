@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import ProgressSteps from "../../../../components/partner/ProgressSteps";
-import FormStep1 from "../../../../components/partner/steps/FormStep1";
-import FormStep2 from "../../../../components/partner/steps/FormStep2";
+import ProgressSteps from "@/src/components/partner/ProgressSteps";
+import FormStep1 from "@/src/components/partner/steps/FormStep1";
+import FormStep2 from "@/src/components/partner/steps/FormStep2";
 import { toast } from "sonner";
 import petCenterApiRequest from "@/src/apiRequests/pet-center";
 import { HttpError, isClient } from "@/src/lib/httpAxios";

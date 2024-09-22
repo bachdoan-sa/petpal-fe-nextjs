@@ -1,15 +1,13 @@
 import React from "react";
 import Link from 'next/link';
-import CardWrapper from "@/src/components/admin/dashboard/Cards";
+import CardWrapper from "./components/Cards";
 import Breadcrumbs from "@/src/components/admin/breadcrumbs";
-
+import OrderChart from "./components/OrderChart"
 export default function admin() {
     return (
         <>
             <div className="bg-primary pt-5 pb-21"></div>
             <div className="container-fluid px-6 py-4">
-
-
                 <div className="mt-n22 container-fluid">
                     <div className="d-flex w-100 align-items-center justify-content-between">
                         <Breadcrumbs
@@ -25,26 +23,18 @@ export default function admin() {
                     </div>
                 </div>
 
-                <div className="row">
-
-                    <div className="col-12">
-
-                        {/* <div className="text-center mb-7">
-                            <h1 className="display-4">Layouts</h1>
-                            <p>Customize your overview page layout. Choose the one that best fits your needs.</p>
+                <div className="pt-5 container-fluid">
+                    <div className="row">
+                        <div className="col-8">
+                            <OrderChart />
                         </div>
-                        <span className="divider fw-bold my-3">Demo layouts</span> */}
-                    </div>
-                </div>
-                <div className="row justify-content-center">
-                    <div className="col-lg-3 col-sm-6 my-4">
-                        <Link className="card" href="/admin">
-
-                            <div className="card-body text-center">
-                                <h5 className="mb-0">ADMIN</h5>
+                        <div className="col-4 d-flex flex-columns">
+                            <div className="card flex-1">
+                                ab
                             </div>
-                        </Link>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </>

@@ -1,8 +1,9 @@
 import '../../../styles/theme.scss';
-import Layout from "@/src/components/admin/Layout.jsx";
+import Layout from "@/src/components/dashboard/Layout";
+import AdminRouter from '@/src/routes/AdminRoutes';
 export default function AdminLayout({ children }: { children: React.ReactNode; }) {
     return (
-        <Layout>
+        <Layout menu={AdminRouter}>
             {children}
         </Layout>
     );

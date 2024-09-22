@@ -1,9 +1,10 @@
-import { Users, DollarSign, Clock, Inbox, Share2, Briefcase } from 'react-feather';
+import { Users, DollarSign, Clock, Inbox, Share2, Briefcase, ShoppingBag, Package } from 'react-feather';
 
 import { inter, lusitana } from '@/src/fonts/fonts';
 import clsx from 'clsx';
-import adminDashboardApiRequest from '@/src/apiRequests/dashboard/admin';
 import { cookies } from 'next/headers';
+import partnerDashboardApiRequest from '@/src/apiRequests/dashboard/partner';
+import { PartnerDashboardCardResType } from '@/src/schemaValidations/common.schema';
 //   import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
@@ -12,51 +13,38 @@ const iconMap = {
     pending: Clock,
     invoices: Inbox,
     partner: Share2,
-    kcenter: Briefcase
+    kcenter: Briefcase,
+    order: ShoppingBag,
+    usingPackage: Package,
 };
+type Cardata = PartnerDashboardCardResType['data'] | undefined;
 
 export default async function CardWrapper() {
 
-    const store = cookies();
     const cookieStore = cookies();
     const sessionToken = cookieStore.get('sessionToken')?.value;
 
-    const {
-        totalOrder,
-        numberOfCustomers,
-        totalPartner,
-        totalPetCenter,
-    }: {
-        totalOrder: number,
-        numberOfCustomers: number,
-        totalPartner: number,
-        totalPetCenter: number,
-    } = await fletchCardData();
+    const cardData: Cardata = await fletchCardData();
     async function fletchCardData() {
         if (sessionToken !== undefined) {
             try {
-                const response = await adminDashboardApiRequest.getAdminCardData(sessionToken);
-                const card = response.payload.data;
-                return {
-                    totalOrder: card.invoices ?? 0,
-                    numberOfCustomers: card.users ?? 0,
-                    totalPartner: card.partners ?? 0,
-                    totalPetCenter: card.careCenters ?? 0
-                }
+                const response = await partnerDashboardApiRequest.getDashboardCardData(sessionToken);
+                return response.payload.data;
             } catch (error) {
                 console.log(error);
             }
         }
-        return { totalOrder: 0, numberOfCustomers: 0, totalPartner: 0, totalPetCenter: 0 };
+
+        return undefined;
 
     }
     return (
         <>
             {/* NOTE: comment in this code when you get to this point in the course */}
-            <Card title="Người dùng" value={numberOfCustomers} type="customers" />
-            <Card title="Đối tác" value={totalPartner} type="partner" />
-            <Card title="Trung tâm" value={totalPetCenter} type="kcenter" />
-            <Card title="Giao dịch" value={totalOrder} type="invoices" />
+            <Card title="Trung tâm" value={cardData?.careCenters ?? 0} type="kcenter" />
+            <Card title="Người dùng" value={cardData?.customers ?? 0} type="customers" />
+            <Card title="Giao dịch" value={cardData?.orders ?? 0} type="order" />
+            <Card title="Gói được dùng" value={cardData?.usingPackages ?? 0} type="usingPackage" />
 
         </>
     );
@@ -69,7 +57,7 @@ export function Card({
 }: {
     title: string;
     value: number | string;
-    type: 'invoices' | 'customers' | 'pending' | 'collected' | 'partner' | 'kcenter';
+    type: 'customers' | 'kcenter' | 'order' | 'usingPackage';
 }) {
     const Icon = iconMap[type];
 

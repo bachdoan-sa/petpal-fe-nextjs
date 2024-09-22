@@ -23,11 +23,21 @@ export function middleware(request: NextRequest) {
     if (privatePaths.some((path) => pathname.startsWith(path))) {
       return NextResponse.redirect(new URL('/login', request.url));
     }
+  if (!sessionToken) {
+    // Chưa đăng nhập thì không cho vào private paths
+    if (privatePaths.some((path) => pathname.startsWith(path))) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
 
+  }
   }
 
   if (sessionToken) {
+  if (sessionToken) {
 
+    // Điều hướng và xác thực cho các yêu cầu vào trang admin
+    // Điều kiện này là không cần thiết vì đã khai báo ở dưới config, middleware sẽ không chạy nếu được truyền vào trang logout
+    // Để cho đẹp tí :v
     // Điều hướng và xác thực cho các yêu cầu vào trang admin
     // Điều kiện này là không cần thiết vì đã khai báo ở dưới config, middleware sẽ không chạy nếu được truyền vào trang logout
     // Để cho đẹp tí :v
@@ -98,6 +108,9 @@ export function middleware(request: NextRequest) {
           break;
         }
 
+      }
+    }
+  }
       }
     }
   }
