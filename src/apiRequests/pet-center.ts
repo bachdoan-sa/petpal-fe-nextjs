@@ -1,9 +1,8 @@
-import http from '@/src/lib/httpAxios'
+import http from '@/src/lib/httpAxios';
 import {
-  PetCenterListPageResType,
-  PetCenterListPageBodyType
-} from '@/src/schemaValidations/petcenter.schema'
-import { CommonResType, MessageResType } from '@/src/schemaValidations/common.schema'
+  PetCenterListPageBodyType,
+  PetCenterListPageResType
+} from '@/src/schemaValidations/petcenter.schema';
 import { CreateBlogResType } from '../schemaValidations/blog.schema';
 
 const petCenterApiRequest = {

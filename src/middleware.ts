@@ -74,16 +74,17 @@ export function middleware(request: NextRequest) {
           break;
         }
         case 'STAFF': {
-          // if (authPaths.some((path) => pathname.startsWith(path))) {
-          //   return NextResponse.redirect(new URL('/staff', request.url));
-          // }
-          // if (!pathname.startsWith('/staff') && pathname == '/') {
-          //   return NextResponse.redirect(new URL('/staff', request.url));
-          // }
-          // if (!pathname.startsWith('/staff') && pathname != '/') {
-          //   return NextResponse.redirect(new URL('/logout', request.url));
-          // }
-          // break;
+          if (authPaths.some((path) => pathname.startsWith(path))) {
+            return NextResponse.redirect(new URL('/staff', request.url));
+          }
+          if (!pathname.startsWith('/staff') && pathname == '/') {
+            return NextResponse.redirect(new URL('/staff', request.url));
+          }
+          if (!pathname.startsWith('/staff') && pathname != '/') {
+            return NextResponse.redirect(new URL('/logout', request.url));
+          }
+          break;
+
         }
         case 'CUSTOMER': {
           if (authPaths.some((path) => pathname.startsWith(path))) {
