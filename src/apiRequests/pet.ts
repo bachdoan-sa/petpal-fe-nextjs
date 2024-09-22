@@ -7,7 +7,7 @@ import {
     UpdatePetResType,
     PetResType
 } from '@/src/schemaValidations/pet.schema'
-import { MessageResType } from '@/src/schemaValidations/common.schema'
+import { CommonResType, MessageResType } from '@/src/schemaValidations/common.schema'
 import { UpdatePackageBodyType } from '../schemaValidations/package/package.schema';
 
 const PetApiRequest = {
@@ -41,6 +41,20 @@ const PetApiRequest = {
             }),
     updatePet: ({ body, sessionToken }: { body: FormData; sessionToken?: string }) =>
         http.post<UpdatePetResType>('/api/Pet/update-pet', body,
+            {
+                headers: {
+                    Authorization: `Bearer ${sessionToken}`
+                }
+            }),
+    checkIn: ({ params, body, sessionToken }: { params: { petId: string; isCheckIn: boolean }; body: FormData; sessionToken?: string }) =>
+        http.post<CommonResType>(`/api/Pet/check-in?petId=${params.petId}&isCheckIn=${params.isCheckIn}`, body,
+            {
+                headers: {
+                    Authorization: `Bearer ${sessionToken}`
+                }
+            }),
+    checkOut: ({params, body, sessionToken }: { params: { petId: string; isCheckOut: boolean }; body: FormData; sessionToken?: string }) =>
+        http.post<CommonResType>(`/api/Pet/check-out?petId=${params.petId}&isCheckOut=${params.isCheckOut}`, body,
             {
                 headers: {
                     Authorization: `Bearer ${sessionToken}`
