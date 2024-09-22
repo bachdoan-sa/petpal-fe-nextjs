@@ -391,7 +391,7 @@ export default function FormPackage({ packageModel, token, searchParams }: { pac
                         </div>
                         <div className="mt-6 d-flex justify-content-end gap-4">
                             <Link
-                                href="/admin/users"
+                                href="/partner/packages"
                                 className="d-flex h-10 align-items-center rounded-pill bg-gray-300 hover-for-bg-gray px-4 text-gray-600"
                             >
                                 Cancel

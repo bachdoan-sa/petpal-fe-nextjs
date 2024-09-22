@@ -1,8 +1,9 @@
 // cái này dành cho tất cả layout
 
-.flex-1{
+.flex-1 {
     flex: 1;
 }
+
 .text-xxl {
     font-size: 2rem;
     line-height: 2.5rem;
@@ -57,20 +58,30 @@
     right: 0;
     bottom: 0;
 }
+
 .be-box .be-full-x {
     position: absolute;
     left: 0;
     right: 0;
 }
+
 .be-box .be-full-y {
     position: absolute;
     top: 0;
     bottom: 0;
 }
 
-.card.card-optional{
+.card.card-optional {
     transition: all 0.3s;
 }
-.card.card-optional:hover{
+
+.card.card-optional:hover {
     transform: scale(1.10);
+}
+
+.text-2line-overflow {
+    font-size: 14px;
+    line-height: 1.5rem;
+    height: 3rem;
+    overflow: hidden;
 }

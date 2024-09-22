@@ -5,11 +5,14 @@ import { formatDateToLocal } from "@/src/lib/utils";
 import { OrderType } from "@/src/schemaValidations/order.schema";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
+import Link from "next/link";
+import { Button } from "@/src/components/admin/button";
+import Image from "next/image";
+import { inter } from "@/src/fonts/fonts";
 
 export default function OrderDetail({ sessionToken, id }) {
-
+    const [loading, setLoading] = useState<boolean>(false);
     const [orderDetail, setOrderDetail] = useState<OrderType>();
-
     useEffect(() => {
         if (id) {
             const fetchPackageById = async () => {
@@ -34,15 +37,65 @@ export default function OrderDetail({ sessionToken, id }) {
     };
     return (
 
-        <div className="checkout-section pt-10 pb-10">
+        <div className="checkout-section">
             <div className="container ">
+                <div className="row ">
+                    <div className="col-6">
+                        <div className="card card-optional mb-3 btn">
+                            <div className="row g-0">
+                                <div className="col-md-4 position-relative ">
+                                    <img
+                                        style={{ height: "100%", objectFit: "cover", width: "100%" }}
+                                        src={orderDetail?.pet?.profileImage}
+                                        className="img-fluid rounded-start"
+                                    />
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-header">
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <h4 className="card-title m-0 fw-bold">{orderDetail?.pet?.fullName}</h4>
+                                        </div>
+                                    </div>
+                                    <div className="card-body">
+                                        <div className="row">
+                                            <div className="col-4">
+                                                Tuổi: <br />
+                                                {(petBirthday === null) ? (calculateAge(petBirthday)) : "Chưa cập nhật"}
+                                            </div>
+                                            <div className="col-4">
+                                                Cân nặng: <br />
+                                                {orderDetail?.pet?.weight ?? "Chưa cập nhật"}
+                                            </div>
+                                            <div className="col-4">
+                                                Giới tính: <br />
+                                                {orderDetail?.pet?.gender ?? "Chưa cập nhật"}
+                                            </div>
+                                        </div>
+                                        <div className="row">
 
-                <div className="row pt-10">
-                    <div className="col-lg-6">
-                        {/* <OrderSummary packageId={orderDetail?.package?.id} /> */}
-                        <div className="added-product-summary mb-30">
+                                            <div className="col-4">
+                                                Giống Loài: <br />
+                                                {orderDetail?.pet?.breed ?? "Chưa cập nhật"}
+                                            </div>
+                                            <div className="col-4">
+                                                Triệt Sản: <br />
+                                                {orderDetail?.pet?.sterilise ?? "Chưa cập nhật"}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <p className="card-text">
+                                            <small className="text-muted">{orderDetail?.pet?.description}</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div className="added-product-summary mb-30 bg-white shadow-sm">
                             <h5 className="title-25 checkout-title">
-                                Package: {" "}
+                                Gói dịch vụ: {" "}
                                 {orderDetail?.package?.title || "No title"}
                             </h5>
                             <ul className="added-products">
@@ -72,94 +125,93 @@ export default function OrderDetail({ sessionToken, id }) {
                                     </div>
                                 </li>
 
-                                <li className="single-product d-flex justify-content-start">
-                                    <h5>
-                                        {orderDetail?.package?.description || "No Description"}
+                                <li className="d-flex justify-content-start">
+                                    <h5 className="text-2line-overflow">
+                                        {(orderDetail?.package?.description || orderDetail?.package?.description !== "") || "_Không có mô tả_"}
                                     </h5>
                                 </li>
 
-                                <li className="single-product d-flex justify-content-start">
-                                    {orderDetail?.package?.items?.map((item) => {
-                                        return <h5>{item.serviceName}</h5>;
+                                <li className="d-flex justify-content-start">
+                                    <h5>Số lượng dịch vụ kèm theo:  {orderDetail?.package?.items?.length ?? 0}</h5>
+                                    {orderDetail?.package?.items?.map((item, index) => {
+                                        if (index <= 3)
+                                            return <h5>{item.serviceName}</h5>;
+                                        else {
+                                            return <Link href={"#"}>{"xem thêm..."}</Link>;
+                                        }
                                     })}
                                 </li>
                             </ul>
                         </div>
                     </div>
+                    <div className="col-6 d-flex flex-column">
 
-                    <aside className="col-lg-6 ">
-                        {/* <div className=""> */}
-                        <div className="card card-optional mb-3 btn">
-                            <div className="row g-0">
-                                <div className="col-md-4 position-relative ">
-                                    <img
-                                        style={{ height: "100%", objectFit: "cover", width: "100%" }}
-                                        src={orderDetail?.pet?.profileImage}
-                                        className="img-fluid rounded-start"
-                                    />
-                                </div>
-                                <div className="col-md-8">
-                                    <div className="card-header">
-                                        <div className="d-flex justify-content-between align-items-center">
-                                            <h4 className="card-title fw-bold">{orderDetail?.pet?.fullName}</h4>
-                                        </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="row">
-                                            <div className="col-4">
-                                                <h4>Pet type</h4>
-                                            </div>
-                                            <div className="col-4">Tuổi: {calculateAge(petBirthday)}</div>
-                                            <div className="col-4">Weight: {orderDetail?.pet?.weight}</div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-4">Gender: {orderDetail?.pet?.gender}</div>
-                                            <div className="col-4">Breed :{orderDetail?.pet?.breed}</div>
-                                            <div className="col-4">Desexed : {orderDetail?.pet?.sterilise}</div>
-                                        </div>
-                                        <hr />
-                                        <p className="card-text">
-                                            <small className="text-muted">{orderDetail?.pet?.description}</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* card summary order */}
-                        <div className="added-product-summary mb-30">
-                            {/* <h5 className="title-25 checkout-title">
-                {" "}
-                {orderDetail?.package?.title || "No title"}
-              </h5> */}
+                        <div className="added-product-summary mb-30 bg-white shadow-sm" >
+                            <h4 className="mb-3">Thông tin dịch vụ đã đặt:</h4>
                             <ul className="added-products">
-                                <li className="single-product d-flex justify-content-start">
-                                    <h5>Detail: {orderDetail?.detail || "No Detail"}</h5>
-                                </li>
-                                <li className="single-product d-flex justify-content-start">
-                                    <h5>Price: {orderDetail?.currentPrice || "No Price"} vnđ</h5>
-                                </li>
-                                <li className="single-product d-flex justify-content-start">
+
+                                <li className="d-flex justify-content-start  mb-2">
                                     <h5>Ngày bắt đầu: <strong>{formatFromData}</strong></h5>
                                 </li>
-                                <li className="single-product d-flex justify-content-start">
+                                <li className="d-flex justify-content-start  mb-2">
                                     <h5>Ngày kết thúc: <strong>{formatToDate}</strong></h5>
                                 </li>
-                                <li className="single-product d-flex justify-content-start">
-                                    <h5>Trạng thái: {orderDetail?.status || "No Price"}</h5>
+                                <li className="d-flex justify-content-start  mb-2">
+                                    <h5>Giá: {orderDetail?.currentPrice || "Đang tải giá"} vnđ</h5>
+                                </li>
+                                <li className="d-flex justify-content-start  mb-2">
+                                    <h5>Trạng thái: {orderDetail?.status || "Đang tải trạng thái!"}</h5>
+                                </li>
+                                <li className="d-flex justify-content-start mb-2">
+                                    <h5>Ghi Chú: {orderDetail?.detail || "Không có gi chú nào."}</h5>
+                                </li>
+                                <li className="d-flex justify-content-start mb-2">
+                                    <h5>Ngày tạo đơn: {formatDateToLocal(orderDetail?.createdAt) || "NaN"}</h5>
                                 </li>
                             </ul>
                         </div>
 
-                        {/* </div> */}
-                        {/* {sessionToken ? null : (<p className="text-danger font-medium text-center">Bạn cần đăng nhập để sử dụng chức năng này!</p>)} */}
-                        {/* <div className="place-order-btn d-flex justify-content-center">
+                        <div className="added-product-summary mb-30 bg-white shadow-sm">
+                            <div className="d-flex justify-content-end gap-4">
+                                <Link
+                                    href="/manager/orders"
+                                    className={"d-flex align-items-center rounded-pill hover-for-bg-gray px-4 btn btn-sm btn-secondary " + inter.className}
+                                >
+                                    Trở về
+                                </Link>
 
-            <button disabled={isSubmitting || (sessionToken === undefined)} type="submit" className="primary-btn1 lg-btn">
-              {isSubmitting ? "loading" : "Đăng kí dịch vụ"}
-            </button>
+                                <Button
+                                    disabled={loading}
+                                    className={(loading) ? "btn-dark" : "btn-danger"}
+                                    type="submit">
 
-          </div> */}
-                    </aside>
+                                    {(loading) ? (
+                                        <span className="">
+                                            Đang gửi yêu cầu
+                                            <Image width={20} height={20} alt="" src='\assets\spinner.svg' />
+                                        </span>
+
+                                    ) : "Từ chối yêu cầu"}
+
+                                </Button>
+                                <Button
+                                    disabled={loading}
+                                    className={(loading) ? "btn-dark" : "btn-primary"}
+                                    type="submit">
+
+                                    {(loading) ? (
+                                        <span className="">
+                                            Đang gửi yêu cầu
+                                            <Image width={20} height={20} alt="" src='\assets\spinner.svg' />
+                                        </span>
+
+                                    ) : "Chấp nhận yêu cầu"}
+
+                                </Button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

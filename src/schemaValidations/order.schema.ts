@@ -20,6 +20,11 @@ export const OrderSchema = z.object({
     packageId: z.string(),
     package: PackageSchema.optional(),
     detail: z.string(),
+
+    createdAt: z.string().optional(),
+    createdBy: z.string().optional(),
+    updatedAt: z.string().optional(),
+    updatedBy: z.string().optional()
 });
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
 export const OrderRes = z.object({

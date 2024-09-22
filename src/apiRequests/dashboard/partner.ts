@@ -3,12 +3,12 @@ import http from "@/src/lib/httpAxios";
 import {
     CommonResType,
     MessageResType,
-    AdminDashboardCardResType
+    PartnerDashboardCardResType
 } from "@/src/schemaValidations/common.schema";
 
 const partnerDashboardApiRequest = {
     getDashboardCardData: (sessionToken?: string) =>
-        http.get<AdminDashboardCardResType>("/api/Dashboard/get-dashboard-partner", {
+        http.get<PartnerDashboardCardResType>("/api/Dashboard/get-dashboard-partner", {
             headers: {
                 Authorization: `Bearer ${sessionToken}`,
             },

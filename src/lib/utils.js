@@ -1,6 +1,9 @@
 import { EntityError } from "./httpAxios"
 import { toast } from 'sonner';
 export const formatDateToLocal = (dateStr, locale = "vi-VN") => {
+  if(dateStr === undefined){
+    return "NaN";
+  }
   const date = new Date(dateStr)
   const options = {
     day: "numeric",
