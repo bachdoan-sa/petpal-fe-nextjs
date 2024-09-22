@@ -3,6 +3,7 @@ import React from "react";
 import Link from 'next/link';
 import Breadcrumbs from "@/src/components/admin/breadcrumbs";
 import CardWrapper from "./components/Cards";
+import Charts from "./components/OrderChart";
 
 
 export default function partner() {
@@ -24,6 +25,19 @@ export default function partner() {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-4">
                         <CardWrapper />
                     </div>
+                </div>
+                <div className="pt-5 container-fluid">
+                    <div className="row">
+                        <div className="col-8">
+                            <Charts />
+                        </div>
+                        <div className="col-4 d-flex flex-columns">
+                            <div className="card flex-1">
+                                ab
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
