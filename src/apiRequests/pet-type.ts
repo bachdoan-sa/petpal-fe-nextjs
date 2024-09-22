@@ -1,13 +1,12 @@
-import http from '@/src/lib/httpAxios'
+import http from '@/src/lib/httpAxios';
 import {
-    PetTypeListPageResType,
-    PetTypeListPageBodyType,
     CreatePetTypeBodyType,
     CreatePetTypeResType,
-    UpdatePetTypeResType,
-    PetTypeListResType
-} from '@/src/schemaValidations/pet-type.schema'
-import { MessageResType } from '@/src/schemaValidations/common.schema'
+    PetTypeListPageBodyType,
+    PetTypeListPageResType,
+    PetTypeListResType,
+    UpdatePetTypeResType
+} from '@/src/schemaValidations/pet-type.schema';
 import { UpdatePackageBodyType } from '../schemaValidations/package/package.schema';
 
 const PetTypeApiRequest = {

@@ -14,7 +14,7 @@ export default function PetList({ query, currentPage, sessionToken }) {
   console.log(pets);
   const body: PetListPageBodyType = {
     page: currentPage,
-    size: 20,
+    size: 10,
   };
   useEffect(() => {
     const fetchApi = async () => {

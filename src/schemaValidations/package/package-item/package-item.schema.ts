@@ -14,10 +14,10 @@ export const PackageItemSchema = z.object({
     serviceId: z.string().optional(),
     status: z.string().optional(),
 
-    // createdAt: z.date().optional(),
-    // createdBy: z.string().optional(),
-    // updatedAt: z.date().optional(),
-    // updatedBy: z.string().optional()
+    createdAt: z.date().optional(),
+    createdBy: z.string().optional(),
+    updatedAt: z.date().optional(),
+    updatedBy: z.string().optional()
 });
 export type PackageItemType = z.TypeOf<typeof PackageItemSchema>
 // 2. định nghĩa cấu trúc trả về đơn lẻ của object
