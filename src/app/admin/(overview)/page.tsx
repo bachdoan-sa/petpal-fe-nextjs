@@ -1,6 +1,6 @@
 import React from "react";
 import Link from 'next/link';
-import CardWrapper from "@/src/components/admin/dashboard/Cards";
+import CardWrapper from "./components/Cards";
 import Breadcrumbs from "@/src/components/admin/breadcrumbs";
 import OrderChart from "./components/OrderChart"
 export default function admin() {
@@ -8,8 +8,6 @@ export default function admin() {
         <>
             <div className="bg-primary pt-5 pb-21"></div>
             <div className="container-fluid px-6 py-4">
-
-
                 <div className="mt-n22 container-fluid">
                     <div className="d-flex w-100 align-items-center justify-content-between">
                         <Breadcrumbs

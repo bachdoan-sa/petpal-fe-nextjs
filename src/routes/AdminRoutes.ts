@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import { DashboardMenuItem, DashboardRouter } from './route.schema';
 /**
  *  All Dashboard Routes
  *
@@ -23,7 +24,7 @@ import { v4 as uuid } from 'uuid';
  *
  */
 
-export const DashboardMenu = [
+export const AdminMenu: DashboardMenuItem[] = [
 	{
 		id: uuid(),
 		title: 'Bảng Thống Kê',
@@ -66,5 +67,9 @@ export const DashboardMenu = [
 	},
 
 ];
+export const AdminRouter: DashboardRouter = {
+	role: "admin",
+	route: AdminMenu,
+}
 
-export default DashboardMenu;
+export default AdminRouter;

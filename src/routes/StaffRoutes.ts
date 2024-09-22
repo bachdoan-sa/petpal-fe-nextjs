@@ -1,14 +1,15 @@
 import { v4 as uuid } from 'uuid';
+import { DashboardMenuItem } from './route.schema';
 
 
-export const StaffRoutes = [
+export const StaffRoutes: DashboardMenuItem[] = [
 	{
 		id: uuid(),
 		title: 'Dashboard',
 		icon: 'home',
 		link: '/staff'
-	},  
-	
+	},
+
 	// {
 	// 	id: uuid(),
 	// 	title: 'Package',
@@ -23,7 +24,7 @@ export const StaffRoutes = [
 			{ id: uuid(), link: '/staff/staffs', name: 'Staff' },
 			{ id: uuid(), link: '/staff/packages', name: 'Package' },
 		]
-	},	
+	},
 	{
 		id: uuid(),
 		title: 'Quản lý yêu cầu',
@@ -32,13 +33,13 @@ export const StaffRoutes = [
 			{ id: uuid(), link: '/staff/orders', name: 'Danh sách tổng' },
 			{ id: uuid(), link: '/staff/orders/pending-orders', name: 'Danh sách chờ duyệt' },
 		]
-	},	
+	},
 	{
 		id: uuid(),
 		title: 'Setting',
 		icon: 'settings',
 		link: '/staff'
-	},  
+	},
 ];
 
 export default StaffRoutes;

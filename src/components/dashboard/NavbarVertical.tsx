@@ -9,19 +9,16 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 
 // import routes file
-import { DashboardMenu } from '../../../routes/AdminRoutes';
 import clsx from 'clsx';
 import { inter, lusitana } from '@/src/fonts/fonts';
+import { DashboardMenuItem, DashboardRouter } from '../../routes/route.schema';
 
 
-function NavbarVertical(props) {
+function NavbarVertical({ showMenu, onClick, menu }: { showMenu: boolean; onClick: any; menu: DashboardRouter }) {
 	const location = usePathname();
 	const [position, setPosition] = useState();
-	const [menuList, setList] = useState();
-	useEffect(() => {
-		const initialList = DashboardMenu;
-		setList(initialList);
-	}, []);
+	// const [menuList, setList] = useState<DashboardMenuItem[]>();
+	const menuList = menu.route;
 
 	const CustomToggle = ({ children, icon, collapseKey }) => {
 		return (
@@ -54,7 +51,7 @@ function NavbarVertical(props) {
 					}`}
 				onClick={(e) => {
 					setPosition(local);
-					isMobile ? props.onClick(!props.showMenu) : props.showMenu
+					isMobile ? onClick(!showMenu) : showMenu
 				}
 				}>
 
@@ -81,11 +78,11 @@ function NavbarVertical(props) {
 		<Fragment>
 			<SimpleBar style={{ maxHeight: '100vh' }}>
 				<div className="nav-scroller">
-					<Link href="/admin" type='button' className="navbar-brand d-flex justify-content-center">
+					<Link href={`/${menu.role}`} type='button' className="navbar-brand d-flex justify-content-center">
 						<p className={clsx(
 							'text-xxl font-black m-0 text-white',
 							inter,
-						)}>Petpal <span className={clsx('text-xxl font-black m-0 text-orange', inter,)}> admin</span></p>
+						)}>Petpal <span className={clsx('text-xxl font-black m-0 text-orange', inter,)}> {menu.role}</span></p>
 
 					</Link>
 				</div>
@@ -135,7 +132,7 @@ function NavbarVertical(props) {
 								return (
 									<nav className="nav-item" key={index}>
 										{/* menu item without any childern items like Documentation and Changelog items*/}
-										<Link href={menu.link} className={`nav-link ${location === menu.link ? 'active' : ''} ${menu.title === 'Download' ? 'bg-primary text-white' : ''}`}>
+										<Link href={menu.link ?? "#"} className={`nav-link ${location === menu.link ? 'active' : ''} ${menu.title === 'Download' ? 'bg-primary text-white' : ''}`}>
 											{typeof menu.icon === 'string' ? (
 												<i className={`nav-icon fe fe-${menu.icon} me-2`}></i>
 											) : (menu.icon)}

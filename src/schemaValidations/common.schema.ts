@@ -30,3 +30,14 @@ export const AdminDashboardCardRes = z.object({
   })
 }).strict()
 export type AdminDashboardCardResType = z.TypeOf<typeof AdminDashboardCardRes>
+
+export const PartnerDashboardCardRes = z.object({
+  message: z.string(),
+  data: z.object({
+    careCenters: z.coerce.number(),
+    orders: z.coerce.number(),
+    customers: z.coerce.number(),
+    usingPackages: z.coerce.number(),
+  })
+}).strict()
+export type PartnerDashboardCardResType = z.TypeOf<typeof PartnerDashboardCardRes>
