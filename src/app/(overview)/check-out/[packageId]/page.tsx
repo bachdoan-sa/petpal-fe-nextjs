@@ -1,9 +1,10 @@
 import React from "react";
 import BillingDetails from "./billing-details";
 import { cookies } from "next/headers";
+import Page401 from "@/src/components/error/Page401";
 
 
-function checOutPage({ params }: { params: { packageId: string } }) {
+function checkOutPage({ params }: { params: { packageId: string } }) {
 
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value;
@@ -23,4 +24,4 @@ function checOutPage({ params }: { params: { packageId: string } }) {
   );
 }
 
-export default checOutPage;
+export default checkOutPage;

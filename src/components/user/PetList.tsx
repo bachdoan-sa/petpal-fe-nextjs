@@ -39,19 +39,18 @@ export default function PetList({ query, currentPage, sessionToken }) {
   }, [currentPage]);
 
   return (
-    <div className="row">
+    <div className="">
       {pets.map((pet) => (
         <div className="" key={pet.id}>
-          <div className="card mb-3" style={{ maxWidth: "860px" }}>
+          <div className="card mb-3" style={{ maxHeight: "200px" }}>
             <div className="row g-0">
-              <div className="col-md-4 position-relative ">
+              <div className="col-md-2 position-relative ">
                 <img
-                  style={{ height: "100%", objectFit: "cover", width: "100%" }}
                   src={pet.profileImage}
-                  className="img-fluid rounded-start"
+                  className="img-fluid rounded-start avatar-image"
                 />
               </div>
-              <div className="col-md-8">
+              <div className="col-md-10">
                 <div className="card-header">
                   <div className="d-flex justify-content-between align-items-center">
                     <h4 className="card-title fw-bold">{pet.fullName}</h4>

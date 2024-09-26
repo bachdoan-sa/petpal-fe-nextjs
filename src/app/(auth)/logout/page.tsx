@@ -9,7 +9,7 @@ import { Suspense, useEffect } from "react";
 function LogoutLogic() {
   const router = useRouter();
   const pathname = usePathname();
-  const { setUser } = useAppContext();
+  const { setUser, isAuthenticated } = useAppContext();
 
   const searchParams = useSearchParams();
   const sessionToken = searchParams?.get("sessionToken");
@@ -17,13 +17,17 @@ function LogoutLogic() {
     const controller = new AbortController();
     const signal = controller.signal;
     if (sessionToken === localStorage.getItem("sessionToken")) {
-      authApiRequest
-        .logoutFromNextClientToNextServer(true, signal)
-        .then((res) => {
-          setUser(null);
-          // router.push(`/login?redirectFrom=${pathname}`);
-          router.push(`/login`);
-        });
+      if (isAuthenticated) {
+        authApiRequest
+          .logoutFromNextClientToNextServer(true, signal)
+          .then((res) => {
+            setUser(null);
+            // router.push(`/login?redirectFrom=${pathname}`);
+            router.push(`/login`);
+          });
+      } else {
+        router.push(`/login`);
+      }
     }
     return () => {
       controller.abort();

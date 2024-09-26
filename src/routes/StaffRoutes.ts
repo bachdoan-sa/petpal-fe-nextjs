@@ -9,31 +9,42 @@ export const StaffRoutes: DashboardMenuItem[] = [
 		icon: 'home',
 		link: '/staff'
 	},
-
+	{
+		id: uuid(),
+		title: 'Check Attendance',
+		icon: 'settings',
+		link: '/staff/check-attendance'
+	},
+	{
+		id: uuid(),
+		title: 'Daily service',
+		icon: 'settings',
+		link: '/staff/daily-service'
+	},
 	// {
 	// 	id: uuid(),
 	// 	title: 'Package',
 	// 	icon: 'layers',
 	// 	link: '/package'
 	// },	
-	{
-		id: uuid(),
-		title: 'Tables',
-		icon: 'monitor',
-		children: [
-			{ id: uuid(), link: '/staff/staffs', name: 'Staff' },
-			{ id: uuid(), link: '/staff/packages', name: 'Package' },
-		]
-	},
-	{
-		id: uuid(),
-		title: 'Quản lý yêu cầu',
-		icon: 'package',
-		children: [
-			{ id: uuid(), link: '/staff/orders', name: 'Danh sách tổng' },
-			{ id: uuid(), link: '/staff/orders/pending-orders', name: 'Danh sách chờ duyệt' },
-		]
-	},
+	// {
+	// 	id: uuid(),
+	// 	title: 'Tables',
+	// 	icon: 'monitor',
+	// 	children: [
+	// 		{ id: uuid(), link: '/staff/staffs', name: 'Staff' },
+	// 		{ id: uuid(), link: '/staff/packages', name: 'Package' },
+	// 	]
+	// },
+	// {
+	// 	id: uuid(),
+	// 	title: 'Quản lý yêu cầu',
+	// 	icon: 'package',
+	// 	children: [
+	// 		{ id: uuid(), link: '/staff/orders', name: 'Danh sách tổng' },
+	// 		{ id: uuid(), link: '/staff/orders/pending-orders', name: 'Danh sách chờ duyệt' },
+	// 	]
+	// },
 	{
 		id: uuid(),
 		title: 'Setting',

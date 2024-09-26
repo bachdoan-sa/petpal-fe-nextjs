@@ -3,6 +3,7 @@ import BootstrapMenu from "@/src/components/header/Menu";
 import { cookies } from "next/headers";
 import userApiRequest from '@/src/apiRequests/user';
 import { UserType } from '../../../schemaValidations/user.schema';
+import Page401 from "@/src/components/error/Page401";
 
 async function AccountUser() {
   const cookieStore = cookies();
@@ -14,6 +15,13 @@ async function AccountUser() {
   // } catch(error){
   //   console.log(error)
   // }
+
+  if (sessionToken == undefined) {
+    return (
+      //khi het token se hien ra thong bao yeu cau dang nhap lai
+      <Page401/>
+    );
+  }
 
   console.log()
 

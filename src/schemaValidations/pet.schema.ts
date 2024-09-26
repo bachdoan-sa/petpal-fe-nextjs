@@ -63,22 +63,7 @@ export type PetListPageResType = z.TypeOf<typeof PetListPageRes>;
 export const PetListPageBody = PagingBody;
 export type PetListPageBodyType = z.TypeOf<typeof PetListPageBody>;
 
-export const PetListKcenterPage = z.object({
-  list: z.array(
-    z.object({
-      model: PackageSchema,
-      pet: z.array(PetSchema),
-    }),
-  ),
-  paging: PagingRes,
-});
 
-export const PetListKcenterPageRes = z.object({
-    data: PetListKcenterPage,
-    message: z.string(),
-  });
-
-export type PetListKcenterPageResType = z.TypeOf<typeof PetListKcenterPageRes>;
 
 //Create Model
 export const CreatePetBody = z.object({

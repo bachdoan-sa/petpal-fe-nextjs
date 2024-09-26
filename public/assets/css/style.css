@@ -14769,7 +14769,12 @@ footer.style2 .social-area ul li:hover a i {
 
 .card {
   border-radius: 10px;
+  transition: all 0.3s;
 }
+
+/* .card:hover {
+  transform: scale(1.05);
+} */
 
 .nav-tabs .nav-link.active {
   border-color: #ff5722 #ff5722 transparent;
@@ -14817,6 +14822,25 @@ footer.style2 .social-area ul li:hover a i {
   background-size: cover;
   background-position: center center;
 }
+
+/* page 401 */
+.page_401{ 
+  padding: 40px 0;
+}
+
+.page_401 img { 
+  width: 100%;
+}
+
+
+
+
+.avatar-image {
+  /* max-height: 200px;  */
+  width: auto;       
+  object-fit: cover; 
+}
+
 
 select#duration:focus {
   border: none;

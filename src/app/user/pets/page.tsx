@@ -1,4 +1,5 @@
 import Breadcrumb from "@/src/components/breadcrumb/Breadcrumb";
+import Page401 from "@/src/components/error/Page401";
 import PetList from "@/src/components/user/PetList";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -11,11 +12,19 @@ function PetInfo({
 }) {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value ?? "";
+
+  if (sessionToken == undefined) {
+    return (
+      //khi het token se hien ra thong bao yeu cau dang nhap lai
+      <Page401/>
+    );
+  }
+
   const query = searchParams?.query ?? "";
     const currentPage = Number(searchParams?.page ?? 1);
   return (
     <div className="h1-story-area  ">
-      <div className="container" style={{ maxWidth: "1270px" }}>
+      <div className="container" >
         <div className="d-flex justify-content-between mb-10 inner-page-banner">
           <h1>Danh sách thú cưng</h1>
           <div>

@@ -14,7 +14,7 @@ const BootstrapMenu = () => {
           id="menu"
         >
           <li className="nav-item">
-            <Link href={`/profile`}>
+            <Link href={`/user/profile`}>
               <div className="nav-link align-middle px-0">
                 <i className="fs-4 bi-person"></i>
                 <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">
@@ -24,7 +24,7 @@ const BootstrapMenu = () => {
             </Link>
           </li>
           <li>
-            <Link href={`/pets`}>
+            <Link href={`/user/pets`}>
               <div className="nav-link px-0 align-middle">
                 <i className="fs-4 bi-suit-heart"></i>
                 <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">
@@ -41,7 +41,7 @@ const BootstrapMenu = () => {
             </a>
           </li> */}
           <li>
-            <Link href={`/order-history`}>
+            <Link href={`/user/order-history`}>
               <div className="nav-link px-0 align-middle">
                 <i className="fs-4 bi bi-box"></i>
                 <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">
@@ -68,14 +68,14 @@ const BootstrapMenu = () => {
           </li>
 
           <li>
-            <Link href={`/logout`} legacyBehavior>
+            <a href="/  ">
               <div className="nav-link px-0 align-middle" >
                 <i className="fs-4 bi-box-arrow-right"></i>
                 <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">
                   Đăng Xuất
                 </span>
               </div>
-            </Link>
+            </a>
           </li>
         </ul>
         <hr />

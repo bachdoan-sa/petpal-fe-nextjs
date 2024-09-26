@@ -6,10 +6,9 @@ import {
   CreatePetResType,
   UpdatePetResType,
   PetResType,
-  PetListKcenterPageResType,
 } from "@/src/schemaValidations/pet.schema";
 import { CommonResType, MessageResType } from "@/src/schemaValidations/common.schema";
-import { UpdatePackageBodyType } from "../schemaValidations/package/package.schema";
+import { PetListKcenterPageResType, UpdatePackageBodyType } from "../schemaValidations/package/package.schema";
 
 const PetApiRequest = {
   getListPetForUser: ({
