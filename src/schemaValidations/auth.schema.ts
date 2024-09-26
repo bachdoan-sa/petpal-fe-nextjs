@@ -16,7 +16,7 @@ export const RegisterBody = z
       .string()
       .trim()
       .min(2)
-      .max(256)
+      .max(15)
       .default(() => ""),
     confirmPassword: z.string().min(6).max(100).optional(),
   })
@@ -56,8 +56,8 @@ export type RegisterResType = z.TypeOf<typeof RegisterRes>;
 
 export const LoginBody = z
   .object({
-    username: z.string({required_error:"Tài khoản không được để trống."}).max(20, "Tài khoản không dài quá 20 kí tự."),
-    password: z.string({required_error:"Mật khẩu không được để trống."}).max(20, "Mật khẩu không dài quá 20 kí tự."),
+    username: z.coerce.string({required_error:"Tài khoản không được để trống."}).min(1, "Tài khoản không được để trống.").max(20, "Tài khoản không dài quá 20 kí tự."),
+    password: z.coerce.string({required_error:"Mật khẩu không được để trống."}).min(1, "Mật khẩu không được để trống.").max(20, "Mật khẩu không dài quá 20 kí tự."),
   })
   .strict();
 

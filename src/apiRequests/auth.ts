@@ -19,7 +19,7 @@ const authApiRequest = {
     http.post('/api/auth', body, {
       baseUrl: ''
     }),
-  logoutFromNextServerToServer: (sessionToken: string) =>
+  logoutFromNextServerToServer: (sessionToken: string) => //Không dùng vì be ko có đăng xuất
     http.post<MessageResType>(
       '/auth/logout',
       {},
@@ -43,7 +43,7 @@ const authApiRequest = {
         signal
       }
     ),
-  slideSessionFromNextServerToServer: (sessionToken: string) =>
+  slideSessionFromNextServerToServer: (sessionToken: string) => //Không dùng vì be ko có chức năng kéo dài jwt
     http.post<SlideSessionResType>(
       '/auth/slide-session',
       {},
@@ -53,7 +53,7 @@ const authApiRequest = {
         }
       }
     ),
-  slideSessionFromNextClientToNextServer: () =>
+  slideSessionFromNextClientToNextServer: () => //Không dùng vì be ko có chức năng kéo dài jwt
     http.post<SlideSessionResType>(
       '/api/auth/slide-session',
       {},

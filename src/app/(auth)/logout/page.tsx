@@ -10,24 +10,23 @@ function LogoutLogic() {
   const router = useRouter();
   const pathname = usePathname();
   const { setUser, isAuthenticated } = useAppContext();
-
   const searchParams = useSearchParams();
   const sessionToken = searchParams?.get("sessionToken");
+
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
     if (sessionToken === localStorage.getItem("sessionToken")) {
-      if (isAuthenticated) {
-        authApiRequest
-          .logoutFromNextClientToNextServer(true, signal)
-          .then((res) => {
-            setUser(null);
-            // router.push(`/login?redirectFrom=${pathname}`);
+      authApiRequest.logoutFromNextClientToNextServer(true, signal)
+        .then((res) => {
+          setUser(null);
+          console.log(res);
+          // router.push(`/login?redirectFrom=${pathname}`);
+          router.refresh();
+          setTimeout(() => {
             router.push(`/login`);
-          });
-      } else {
-        router.push(`/login`);
-      }
+          }, 500)
+        });
     }
     return () => {
       controller.abort();
