@@ -9,20 +9,23 @@ import { Suspense, useEffect } from "react";
 function LogoutLogic() {
   const router = useRouter();
   const pathname = usePathname();
-  const { setUser } = useAppContext();
-
+  const { setUser, isAuthenticated } = useAppContext();
   const searchParams = useSearchParams();
   const sessionToken = searchParams?.get("sessionToken");
+
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
     if (sessionToken === localStorage.getItem("sessionToken")) {
-      authApiRequest
-        .logoutFromNextClientToNextServer(true, signal)
+      authApiRequest.logoutFromNextClientToNextServer(true, signal)
         .then((res) => {
           setUser(null);
+          console.log(res);
           // router.push(`/login?redirectFrom=${pathname}`);
-          router.push(`/login`);
+          router.refresh();
+          setTimeout(() => {
+            router.push(`/login`);
+          }, 500)
         });
     }
     return () => {

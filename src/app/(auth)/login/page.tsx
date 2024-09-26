@@ -14,7 +14,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 function loginPage() {
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginBodyType>({ resolver: zodResolver(LoginBody) });
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginBodyType>({
+    resolver: zodResolver(LoginBody),
+  });
 
   const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useAppContext();
@@ -27,7 +29,6 @@ function loginPage() {
 
   const onSubmit: SubmitHandler<LoginBodyType> = async (loginForm: LoginBodyType) => {
     if (isSubmitting) {
-      
       return;
     }
     try {
@@ -51,7 +52,7 @@ function loginPage() {
       if (error.code == "ERR_NETWORK") {
         toast.error("Lỗi đường truyền hoặc vấn đề máy chủ!");
       }
-      else if (error instanceof HttpError) { 
+      else if (error instanceof HttpError) {
         if (error.status == 404) {
           toast.error(error.payload.message);
         }
@@ -89,14 +90,14 @@ function loginPage() {
                     <div className="col-12">
                       <div className="form-inner">
                         <label>Tài khoản *</label>
-                        <input {...register("username")} type="text" placeholder="Enter Your Username" />
+                        <input {...register("username")} type="text" placeholder="Enter Your Username"  defaultValue={""}/>
                         {errors.username ? (<span className="text-danger font-medium">{errors.username.message}</span>) : null}
                       </div>
                     </div>
                     <div className="col-12">
                       <div className="form-inner">
                         <label>Mật khẩu *</label>
-                        <input {...register("password")} type={showPassword ? "text" : "password"} id="password" placeholder="Password" />
+                        <input {...register("password")} type={showPassword ? "text" : "password"} id="password" defaultValue={""} placeholder="Password" />
                         <i className={`bi ${showPassword ? "bi-eye" : "bi-eye-slash"}`}
                           id="togglePassword"
                           onClick={togglePasswordVisibility}
