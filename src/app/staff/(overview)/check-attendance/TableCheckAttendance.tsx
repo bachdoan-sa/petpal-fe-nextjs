@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { set } from "zod";
+import { useRouter } from "next/router";
 
 interface PetData {
   id: string | undefined;
@@ -26,8 +27,9 @@ export default function TableCheckAttendance({
   query,
 }) {
   const [pets, setPets] = useState<PetData[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
   const [petPhoto, setPetPhoto] = useState<File | null>(null);
+  const [selectedPetId, setSelectedPetId] = useState<string | undefined>("");
+  const [isCheckIn, setIsCheckIn] = useState<boolean | null>(null);
 
   const body: PetListPageBodyType = {
     page: currentPage,
@@ -41,7 +43,7 @@ export default function TableCheckAttendance({
       petPhoto && URL.revokeObjectURL(getObjectUrl(petPhoto));
     };
   }, [petPhoto]);
-  
+
   useEffect(() => {
     const fetchAPI = async () => {
       try {
@@ -75,17 +77,41 @@ export default function TableCheckAttendance({
       console.log("data: ", pets);
     };
     fetchAPI();
-  }, [currentPage, query]);
+  }, [currentPage, query, ]);
 
-  useEffect(() => {
-    const CheckAttendentApi = async () => {
-      try {
-        
-      } catch (error) {
-        
+  const handleConfirmCheckInOut = async () => {
+    if (!selectedPetId || petPhoto === null) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", petPhoto);
+
+    try {
+      if (isCheckIn) {
+        await PetApiRequest.checkIn({
+          params: { petId: selectedPetId, isCheckIn: true },
+          body: formData,
+          sessionToken,
+        });
+        alert("Check In thành công!");
+      } else {
+        await PetApiRequest.checkOut({
+          params: { petId: selectedPetId, isCheckOut: true },
+          body: formData,
+          sessionToken,
+        });
+        alert("Check Out thành công!");
       }
-    };
-  });
+    } catch (error) {
+      console.error("Lỗi khi gọi API:", error);
+      alert("Đã xảy ra lỗi, vui lòng thử lại.");
+    } finally {
+      setPetPhoto(null);
+      setSelectedPetId("");
+      setIsCheckIn(null);
+    }
+  };
 
   return (
     <div className="container">
@@ -149,17 +175,24 @@ export default function TableCheckAttendance({
                             className="btn btn-primary me-2"
                             data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop"
-                            data-bs-whatever={pet.fullName}
+                            onClick={() => {
+                              setSelectedPetId(pet.id); // Lưu ID của pet
+                              setIsCheckIn(true); // Đặt trạng thái là check-in
+                            }}
                           >
-                            {pet.isCheckIn ? "Đã Check In" : "Check In"}{" "}
+                            {pet.isCheckIn ? "Đã Check In" : "Check In"}
                           </button>
                           <button
                             type="button"
                             className="btn btn-secondary"
                             data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop"
+                            onClick={() => {
+                              setSelectedPetId(pet.id); // Lưu ID của pet
+                              setIsCheckIn(false); // Đặt trạng thái là check-out
+                            }}
                           >
-                            {pet.isCheckOut ? "Đã Check Out" : "Check Out"}{" "}
+                            {pet.isCheckOut ? "Đã Check Out" : "Check Out"}
                           </button>
                         </div>
                       </td>
@@ -184,7 +217,7 @@ export default function TableCheckAttendance({
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title 
+                {isCheckIn ? "Check In" : "Check Out"} cho thú cưng
               </h1>
               <button
                 type="button"
@@ -202,7 +235,6 @@ export default function TableCheckAttendance({
                       width={128}
                       height={128}
                       alt="preview"
-                      // className="w-32 h-32 object-cover"
                       className="img-fluid"
                       style={{ width: "200px", height: "200px", border: 5 }}
                     />
@@ -212,18 +244,14 @@ export default function TableCheckAttendance({
 
               <input
                 type="file"
-                name="frontImage"
                 accept="image/*"
-                className={`form-control`}
+                className="form-control"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
                     setPetPhoto(file);
                   } else {
                     setPetPhoto(null);
-                    // if (inputRef.current) {
-                    //   inputRef.current.value = "";
-                    // }
                   }
                 }}
               />
@@ -236,7 +264,11 @@ export default function TableCheckAttendance({
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleConfirmCheckInOut}
+              >
                 Confirm
               </button>
             </div>
