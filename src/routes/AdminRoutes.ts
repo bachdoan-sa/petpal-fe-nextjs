@@ -62,6 +62,7 @@ export const AdminMenu: DashboardMenuItem[] = [
 		icon: 'monitor',
 		children: [
 			{ id: uuid(), link: '/admin/care-centers', name: 'Danh sách trung tâm' },
+			{ id: uuid(), link: '/admin/care-centers/pending-centers', name: 'Danh sách chờ duyệt' },
 
 		]
 	},

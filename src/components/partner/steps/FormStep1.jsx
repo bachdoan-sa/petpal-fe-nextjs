@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 const FormStep1 = ({ onNext, formData, onInputChange }) => {
- 
+
 
   const [errors, setErrors] = useState({});
 
+  const inputRef = useRef(null);
+  const [carecenter_image, setCarecenter_image] = useState(null);
   const validate = () => {
     let tempErrors = {};
     if (!formData.careCenterName) tempErrors.careCenterName = 'Tên center là bắt buộc';
@@ -13,6 +15,7 @@ const FormStep1 = ({ onNext, formData, onInputChange }) => {
     if (!formData.district) tempErrors.district = 'Quận là bắt buộc';
     if (!formData.ward) tempErrors.ward = 'Phường là bắt buộc';
     if (!formData.street) tempErrors.street = 'Số nhà và Đường/Phố là bắt buộc';
+    if (!formData.carecenter_image) tempErrors.carecenter_image = 'Hình ảnh đại diện là bắt buộc';
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
@@ -29,7 +32,14 @@ const FormStep1 = ({ onNext, formData, onInputChange }) => {
       onNext();
     }
   };
-
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    onInputChange(name, files[0]);
+    console.log('ok khong' - name);
+  };
+  const handleImageRemove = (name) => {
+    onInputChange(name, null);
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
@@ -97,6 +107,54 @@ const FormStep1 = ({ onNext, formData, onInputChange }) => {
           onChange={handleChange}
         />
         {errors.street && <div className="invalid-feedback">{errors.street}</div>}
+      </div>
+      <div className="form-group">
+        <label>* Ảnh chụp CMND/CCCD/Hộ chiếu</label>
+        <div className="d-flex">
+          <div className="me-3">
+            <label>Mặt trước</label>
+            <input
+              type="file"
+              name="carecenter_image"
+              accept='image/*'
+              ref={carecenter_image}
+              className={`form-control ${errors.carecenter_image ? 'is-invalid' : ''}`}
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (file) {
+                  handleFileChange(e)
+                  setCarecenter_image(file)
+                }
+              }}
+            />
+            {errors.carecenter_image && <div className="invalid-feedback">{errors.carecenter_image}</div>}
+            {(carecenter_image) && (
+              <div>
+                <img
+                  src={URL.createObjectURL(carecenter_image)}
+                  width={128}
+                  height={128}
+                  alt='preview'
+                  className='w-32 h-32 object-cover'
+                />
+                <button type='button'
+                  className={'btn btn-danger shadow-sm d-inline-block rounded p-2 fs-6'}
+                  style={{ opacity: 0.9 }}
+                  onClick={() => {
+                    setCarecenter_image(null)
+                    handleImageRemove('carecenter_image')
+                    if (inputFrontRef.current) {
+                      inputFrontRef.current.value = ''
+                    }
+                  }}
+                >
+                  Xóa hình ảnh
+                </button>
+              </div>
+            )}
+          </div>
+
+        </div>
       </div>
       <div className="d-flex justify-content-end mt-4">
         {/* <button type="button" className="btn btn-secondary">

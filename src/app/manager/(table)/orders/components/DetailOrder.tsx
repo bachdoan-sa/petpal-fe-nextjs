@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Button } from "@/src/components/admin/button";
 import Image from "next/image";
 import { inter } from "@/src/fonts/fonts";
+import { toast } from "sonner";
 
 export default function OrderDetail({ sessionToken, id }) {
     const [loading, setLoading] = useState<boolean>(false);
@@ -35,6 +36,22 @@ export default function OrderDetail({ sessionToken, id }) {
         const birthDate = moment(birthday);
         return today.diff(birthDate, 'years');
     };
+    const approveRequest = async () => {
+        try {
+            const response = await orderApiRequest.approveRequest({ orderId: id, sessionToken });
+            toast.success("Chấp thuận yêu cầu thành công.");
+        } catch (error) {
+            toast.error("Chấp thuận yêu cầu thất bại.");
+        }
+    }
+    const rejectRequest = async () => {
+        try {
+            const response = await orderApiRequest.rejectRequest({ orderId: id, sessionToken });
+            toast.warning("Từ chối yêu cầu thành công.");
+        } catch (error) {
+            toast.error("Từ chối yêu cầu thất bại.");
+        }
+    }
     return (
 
         <div className="checkout-section">
@@ -179,35 +196,44 @@ export default function OrderDetail({ sessionToken, id }) {
                                 >
                                     Trở về
                                 </Link>
+                                {orderDetail?.status !== "CREATED" ? (
+                                    <>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Button
+                                            disabled={loading}
+                                            className={(loading) ? "btn-dark" : "btn-danger"}
+                                            onClick={() => rejectRequest()}
+                                            type="button">
 
-                                <Button
-                                    disabled={loading}
-                                    className={(loading) ? "btn-dark" : "btn-danger"}
-                                    type="submit">
+                                            {(loading) ? (
+                                                <span className="">
+                                                    Đang gửi yêu cầu
+                                                    <Image width={20} height={20} alt="" src='\assets\spinner.svg' />
+                                                </span>
 
-                                    {(loading) ? (
-                                        <span className="">
-                                            Đang gửi yêu cầu
-                                            <Image width={20} height={20} alt="" src='\assets\spinner.svg' />
-                                        </span>
+                                            ) : "Từ chối yêu cầu"}
 
-                                    ) : "Từ chối yêu cầu"}
+                                        </Button>
+                                        <Button
+                                            disabled={loading}
+                                            className={(loading) ? "btn-dark" : "btn-primary"}
+                                            onClick={() => approveRequest()}
+                                            type="button">
 
-                                </Button>
-                                <Button
-                                    disabled={loading}
-                                    className={(loading) ? "btn-dark" : "btn-primary"}
-                                    type="submit">
+                                            {(loading) ? (
+                                                <span className="">
+                                                    Đang gửi yêu cầu
+                                                    <Image width={20} height={20} alt="" src='\assets\spinner.svg' />
+                                                </span>
 
-                                    {(loading) ? (
-                                        <span className="">
-                                            Đang gửi yêu cầu
-                                            <Image width={20} height={20} alt="" src='\assets\spinner.svg' />
-                                        </span>
+                                            ) : "Chấp nhận yêu cầu"}
 
-                                    ) : "Chấp nhận yêu cầu"}
+                                        </Button>
+                                    </>
+                                )}
 
-                                </Button>
                             </div>
 
                         </div>

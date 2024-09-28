@@ -134,6 +134,6 @@ export function middleware(request: NextRequest) {
 // cái matcher này là dùng để khai báo những role nào sẽ được chạy middleware này
 // chuỗi kí tự khai báo dưới đây sẽ cho phép middleware này chạy ở tất cả page ngoại trừ cái đã được liệt kê bên trong
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|logout|assets).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|logout|assets).*)"],
   // matcher: ['/profile', '/login', '/register','/admin/:part*','/manager/:part*','/partner/:part*' ] //version 1
 };

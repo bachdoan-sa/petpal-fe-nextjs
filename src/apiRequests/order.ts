@@ -19,7 +19,7 @@ const orderApiRequest = {
     orderId: string;
     sessionToken?: string;
   }) =>
-    http.post<OrderResType>("/api/Order/approve-request", orderId, {
+    http.post<OrderResType>(`/api/Order/approve-request?orderId=${orderId}`, {
       headers: {
         Authorization: `Bearer ${sessionToken}`,
       },
@@ -31,7 +31,7 @@ const orderApiRequest = {
     orderId: string;
     sessionToken?: string;
   }) =>
-    http.post<OrderResType>("/api/Order/reject-request", orderId, {
+    http.post<OrderResType>(`/api/Order/reject-request?orderId=${orderId}`, {
       headers: {
         Authorization: `Bearer ${sessionToken}`,
       },

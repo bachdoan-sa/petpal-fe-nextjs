@@ -77,7 +77,7 @@ export default function PendingOrderTable({ query, currentPage, sessionToken }) 
                                         <td className="p-2 d-flex justify-content-end">
 
                                             <DetailButton link={"/manager/orders/"} id={order.id} />
-                                            <DeleteButton link={"/manager/orders/"} id={order.id} />
+                                            {/* <DeleteButton link={"/manager/orders/"} id={order.id} /> */}
 
                                         </td>
                                     </tr>

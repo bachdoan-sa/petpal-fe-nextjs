@@ -69,6 +69,7 @@ const BillingDetails = ({ packageId, sessionToken }: { packageId: string; sessio
         detail: data.detail,
         fromDate: fromDate,
         toDate: toDate,
+        totalWeek: data.weeks,
         receiveTime: data.receiveTime,
         returnTime: data.returnTime
       }

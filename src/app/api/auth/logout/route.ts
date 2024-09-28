@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 export async function POST(request: Request) {
   const res = await request.json();
   const force = res.force as boolean | undefined;
-  console.log(res)
+  console.log("logout: "+res)
   if (force) {
     return Response.json(
       {
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
       }
     );
   }
-  console.log("logout")
+  console.log("logout");
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken');
   if (!sessionToken) {

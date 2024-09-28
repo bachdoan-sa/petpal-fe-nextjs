@@ -1,8 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ProgressSteps from "@/src/components/partner/ProgressSteps";
-import FormStep1 from "@/src/components/partner/steps/FormStep1";
-import FormStep2 from "@/src/components/partner/steps/FormStep2";
+// import FormStep1 from "@/src/components/partner/steps/FormStep1";
+import FormStep1 from "./steps/FormStep1";
+
+// import FormStep2 from "@/src/components/partner/steps/FormStep2";
+import FormStep2 from "./steps/FormStep2";
 import { toast } from "sonner";
 import petCenterApiRequest from "@/src/apiRequests/pet-center";
 import { HttpError, isClient } from "@/src/lib/httpAxios";
@@ -13,7 +16,6 @@ export default function RegisterForm({ token }) {
     if (token == "" || token == undefined) {
         return (<>Tao chua lam author</>);
     }
-
 
     const [loading, setLoading] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
@@ -26,7 +28,8 @@ export default function RegisterForm({ token }) {
             city: "",
             district: "",
             ward: "",
-            street: ""
+            street: "",
+            careCenterImage: File || null,
         },
         step2: {
             username: "",
@@ -41,6 +44,7 @@ export default function RegisterForm({ token }) {
             issuePlace: "",
             frontImage: File || null,
             backImage: File || null,
+
         },
         // Thêm các trạng thái cho các bước tiếp theo nếu có
     });
@@ -65,6 +69,7 @@ export default function RegisterForm({ token }) {
 
     const handleSubmit = async () => {
         toast.warning("Đang xử lí lưu trữ");
+        console.log(formData.step1.careCenterImage);
         setLoading(true);
         const data = new FormData();
         data.append('CareCenter.CareCenterName', formData.step1.careCenterName);
@@ -81,12 +86,14 @@ export default function RegisterForm({ token }) {
         data.append('ManagerIdentity.CreatedLocation', formData.step2.issuePlace);
         // Check if frontImage is a File object
         if (formData.step2.frontImage instanceof File) {
-            data.append('front_identity', formData.step2.frontImage);         
+            data.append('front_identity', formData.step2.frontImage);
         }
-
         // Check if backImage is a File object
         if (formData.step2.backImage instanceof File) {
-            data.append('back_identity', formData.step2.backImage);    
+            data.append('back_identity', formData.step2.backImage);
+        }
+        if (formData.step2.backImage instanceof File) {
+            data.append('carecenter_image', formData.step1.careCenterImage);
         }
         try {
             const response = await petCenterApiRequest.createPetCenterWithManager({ body: data, sessionToken: token });

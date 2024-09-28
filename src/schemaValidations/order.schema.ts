@@ -97,6 +97,7 @@ export const CreateOrderBody = z.object({
     detail: z.coerce.string(),
     fromDate: z.coerce.date(),
     toDate: z.coerce.date(),
+    totalWeek: z.coerce.number(),
     receiveTime: z.coerce.string().time(),
     returnTime: z.coerce.string().time(),
 });

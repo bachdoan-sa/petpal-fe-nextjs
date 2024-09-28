@@ -193,7 +193,7 @@ const FormStep2 = ({ onNext, onBack, formData, onInputChange }) => {
                 type="file"
                 name="backImage"
                 accept='image/*'
-                ref={inputBackRef} //??? wtf sao cái remove méo chạy vậy
+                ref={inputBackRef} 
                 className={`form-control ${errors.backImage ? 'is-invalid' : ''}`}
                 onChange={(e) => {
                   const file = e.target.files?.[0];
