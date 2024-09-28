@@ -16,7 +16,6 @@ export default function OrderHistory({
       //khi het token se hien ra thong bao yeu cau dang nhap lai
       <Page401/>
     );
-    // <page_401 />;
   }
 
   const query = searchParams?.query ?? "";
@@ -52,7 +51,7 @@ export default function OrderHistory({
           {/* <input
             type="text"
             className="form-control"
-            placeholder="Bạn có thể tìm kiếm theo tên Shop, ID đơn hàng hoặc Tên Sản phẩm"
+            placeholder="Bạn có thể tìm kiếm theo tên gói"
           /> */}
           <SearchBar placeholder={`Bạn có thể tìm kiếm theo tên gói`} /> 
         </div>

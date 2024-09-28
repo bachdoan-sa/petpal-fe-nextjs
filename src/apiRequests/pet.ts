@@ -6,10 +6,15 @@ import {
   CreatePetResType,
   UpdatePetResType,
   PetResType,
-  PetListKcenterPageResType,
 } from "@/src/schemaValidations/pet.schema";
-import { CommonResType, MessageResType } from "@/src/schemaValidations/common.schema";
-import { UpdatePackageBodyType } from "../schemaValidations/package/package.schema";
+import {
+  CommonResType,
+  MessageResType,
+} from "@/src/schemaValidations/common.schema";
+import {
+  PetListKcenterPageResType,
+  UpdatePackageBodyType,
+} from "../schemaValidations/package/package.schema";
 
 const PetApiRequest = {
   getListPetForUser: ({
@@ -86,24 +91,56 @@ const PetApiRequest = {
     body: PetListPageBodyType;
     sessionToken?: string;
   }) =>
-    http.post<PetListKcenterPageResType>("/api/Pet/get-care-center-pet-list", body, {
+    http.post<PetListKcenterPageResType>(
+      "/api/Pet/get-care-center-pet-list",
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      }
+    ),
+  checkIn: ({
+    params,
+    body,
+    sessionToken,
+  }: {
+    params: { petId: string; isCheckIn: boolean };
+    body: FormData;
+    sessionToken?: string;
+  }) =>
+    http.post<CommonResType>(
+      `/api/Pet/check-in?petId=${params.petId}&isCheckIn=${params.isCheckIn}`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      }
+    ),
+  checkOut: ({
+    params,
+    body,
+    sessionToken,
+  }: {
+    params: { petId: string; isCheckOut: boolean };
+    body: FormData;
+    sessionToken?: string;
+  }) =>
+    http.post<CommonResType>(
+      `/api/Pet/check-out?petId=${params.petId}&isCheckOut=${params.isCheckOut}`,
+      body,
+      {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      }
+    ),
+  deletePet: ({ id, sessionToken }: { id: string; sessionToken?: string }) =>
+    http.delete<CommonResType>(`/api/Pet/delete-package?petId=${id}`, {
       headers: {
         Authorization: `Bearer ${sessionToken}`,
       },
     }),
-    checkIn: ({ params, body, sessionToken }: { params: { petId: string; isCheckIn: boolean }; body: FormData; sessionToken?: string }) =>
-      http.post<CommonResType>(`/api/Pet/check-in?petId=${params.petId}&isCheckIn=${params.isCheckIn}`, body,
-          {
-              headers: {
-                  Authorization: `Bearer ${sessionToken}`
-              }
-          }),
-  checkOut: ({params, body, sessionToken }: { params: { petId: string; isCheckOut: boolean }; body: FormData; sessionToken?: string }) =>
-      http.post<CommonResType>(`/api/Pet/check-out?petId=${params.petId}&isCheckOut=${params.isCheckOut}`, body,
-          {
-              headers: {
-                  Authorization: `Bearer ${sessionToken}`
-              }
-          }),
 };
 export default PetApiRequest;

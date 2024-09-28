@@ -63,43 +63,48 @@ export type PetListPageResType = z.TypeOf<typeof PetListPageRes>;
 export const PetListPageBody = PagingBody;
 export type PetListPageBodyType = z.TypeOf<typeof PetListPageBody>;
 
-export const PetListKcenterPage = z.object({
-  list: z.array(
-    z.object({
-      model: PackageSchema,
-      pet: z.array(PetSchema),
-    }),
-  ),
-  paging: PagingRes,
-});
-
-export const PetListKcenterPageRes = z.object({
-    data: PetListKcenterPage,
-    message: z.string(),
-  });
-
-export type PetListKcenterPageResType = z.TypeOf<typeof PetListKcenterPageRes>;
-
 //Create Model
 export const CreatePetBody = z.object({
   id: z.coerce.string().optional(),
   userId: z.string().optional(),
   petTypeId: z.coerce.string({ required_error: "Hãy chọn loại thú cưng!" }),
-  fullName: z.coerce.string({
-    required_error: "Tên thú cưng không được bỏ trống!",
-  }),
+  fullName: z.coerce
+    .string({
+      required_error: "Tên thú cưng không được bỏ trống!",
+    })
+    .min(1, "Tên thú cưng không được bỏ trống")
+    .max(20, "không được quá 20 ký tự"),
 
-  birthday: z
-    .string({ required_error: "Ngày sinh không được bỏ trống" })
+  birthday: z.coerce
+    .date({
+      errorMap: () => ({
+        message: "Ngày sinh không được bỏ trống",
+      }),
+    })
+    .refine((data) => data < new Date(), {
+      message: "Ngày bắt đầu không thể trong tương lai!",
+    })
+    .refine(
+      (data) => {
+        return ((new Date().getFullYear() - data.getFullYear()) <= 50);
+      },
+      {
+        message: "WWao, kir luc u net",
+      }
+    )
     .nullable(),
-  weight: z
-    .string({ required_error: "Cân nặng không được bỏ trống" })
+  weight: z.coerce
+    .number({ required_error: "Cân nặng không được bỏ trống" })
+    .min(0, "Cân năng không dưới không")
+    .max(100, "Beos phi a?")
     .nullable(),
   gender: z
     .string({ required_error: "Giới tính không được bỏ trống" })
     .nullable(),
   breed: z
     .string({ required_error: "Giống loài không được bỏ trống" })
+    .min(1, "Giống loài không được bỏ trống")
+    .max(20, "không được quá 20 ký tự")
     .nullable(),
   sterilise: z.boolean().nullable(),
 

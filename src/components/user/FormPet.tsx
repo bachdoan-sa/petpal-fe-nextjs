@@ -30,13 +30,10 @@ import Page401 from "../error/Page401";
 type Pet = PetResType["data"];
 
 function PetForm({ pet, token }: { pet?: Pet; token: string }) {
-  if (token == "" || token == undefined) {
-    return (
-      <>
-        <Page401 />
-      </>
-    );
-  }
+
+  const [isNotAllow, setIsNotAllow] = useState<boolean>(() => {
+    return pet !== undefined ? true : false;
+  });
   const [petTypes, setPetTypes] = useState<PetTypeListType>([]);
   useEffect(() => {
     const getPetType = async () => {
@@ -83,7 +80,7 @@ function PetForm({ pet, token }: { pet?: Pet; token: string }) {
   const [petPhoto, setPetPhoto] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
-    petPhoto && console.log(getObjectUrl(petPhoto))
+    petPhoto && console.log(getObjectUrl(petPhoto));
     return () => {
       petPhoto && URL.revokeObjectURL(getObjectUrl(petPhoto));
     };
@@ -222,7 +219,7 @@ function PetForm({ pet, token }: { pet?: Pet; token: string }) {
               <label htmlFor="petName" className="form-label">
                 Tên thú cưng
               </label>
-              <input
+              <input disabled={isNotAllow}
                 {...form.register("fullName")}
                 type="text"
                 className="form-control"
@@ -272,38 +269,38 @@ function PetForm({ pet, token }: { pet?: Pet; token: string }) {
             </div>
           </div>
           <div className="row">
-          <div className="form-group mb-4 col-8">
-            <label htmlFor="birthYear" className="form-label">
-              Ngày sinh
-            </label>
-            <input
-              className={`form-control `}
-              type="date"
-              {...form.register("birthday")}
-              placeholder=""
-            />
-            {form.formState.errors.birthday ? (
-              <span className="text-danger font-medium">
-                {form.formState.errors.birthday.message}
-              </span>
-            ) : null}
+            <div className="form-group mb-4 col-8">
+              <label htmlFor="birthYear" className="form-label">
+                Ngày sinh
+              </label>
+              <input
+                className={`form-control `}
+                type="date"
+                {...form.register("birthday")}
+                placeholder=""
+              />
+              {form.formState.errors.birthday ? (
+                <span className="text-danger font-medium">
+                  {form.formState.errors.birthday.message}
+                </span>
+              ) : null}
+            </div>
+            <div className="mb-4 col-4">
+              <label htmlFor="gender" className="form-label">
+                Giới tính
+              </label>
+              <select className="form-select" {...form.register("gender")}>
+                <option value="MALE">Đực</option>
+                <option value="FEMALE">Cái</option>
+              </select>
+              {form.formState.errors.gender ? (
+                <span className="text-danger font-medium">
+                  {form.formState.errors.gender.message}
+                </span>
+              ) : null}
+            </div>
           </div>
-          <div className="mb-4 col-4">
-            <label htmlFor="gender" className="form-label">
-              Giới tính
-            </label>
-            <select className="form-select" {...form.register("gender")}>
-              <option value="MALE">Đực</option>
-              <option value="FEMALE">Cái</option>
-            </select>
-            {form.formState.errors.gender ? (
-              <span className="text-danger font-medium">
-                {form.formState.errors.gender.message}
-              </span>
-            ) : null}
-          </div>
-          </div>
-         
+
           <div className="mb-4">
             <label htmlFor="breed" className="form-label">
               Chủng loại:
@@ -386,7 +383,7 @@ function PetForm({ pet, token }: { pet?: Pet; token: string }) {
           </div>
 
           <button type="submit" className="btn btn-primary">
-            Submit
+            Thêm thông tin thú cưng
           </button>
         </div>
       </div>

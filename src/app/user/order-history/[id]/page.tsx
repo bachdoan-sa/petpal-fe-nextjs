@@ -1,6 +1,7 @@
 import orderApiRequest from "@/src/apiRequests/order";
 import packageApiRequest from "@/src/apiRequests/package";
 import OrderSummary from "@/src/app/(overview)/check-out/[packageId]/order-summary";
+import Page401 from "@/src/components/error/Page401";
 import OrderDetail from "@/src/components/user/OrderDetail";
 import { formatDateToLocal } from "@/src/lib/utils";
 import { OrderType } from "@/src/schemaValidations/order.schema";
@@ -14,6 +15,13 @@ const OrderDetailPage = ({ params }: { params: { id: string } }) => {
   const id = params.id; // cai nay lay id tu url truyen tu trang order-history
   const cookieStore = cookies();
   const sessionToken = cookieStore.get("sessionToken")?.value;
+
+  if (sessionToken == undefined) {
+    return (
+      //khi het token se hien ra thong bao yeu cau dang nhap lai
+      <Page401/>
+    );
+  }
   // const {sessionToken} = useUserStore();
   // const { orders } = useOrderStore(); // cai nay lay order tu store ra
 

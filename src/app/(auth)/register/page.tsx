@@ -28,16 +28,16 @@ function signUpPage() {
     const password = formData.get("password") as string;
     const confirmPassword = formData.get("confirm-password") as string;
     const username = formData.get("username") as string;
-    const address = formData.get("address") as string;
-    const phoneNumber = formData.get("phone-number") as string;
+    // const address = formData.get("address") as string;
+    // const phoneNumber = formData.get("phone-number") as string;
     const email = formData.get("email") as string;
     // const body = JSON.stringify({ username, password });
     const registerForm: RegisterBodyType = {
       username: username,
       fullname: first + " " + last,
       email: email,
-      address: address ? address : "",
-      phoneNumber: phoneNumber ? phoneNumber : "",
+      // address: address ? address : "",
+      // phoneNumber: phoneNumber ? phoneNumber : "",
       password: password,
       confirmPassword: confirmPassword,
     };
@@ -132,7 +132,7 @@ function signUpPage() {
                         />
                       </div>
                     </div>
-                    <div className="col-md-12">
+                    {/* <div className="col-md-12">
                       <div className="form-inner">
                         <label>Nhập địa chỉ của bạn *</label>
                         <input
@@ -141,8 +141,8 @@ function signUpPage() {
                           name="address"
                         />
                       </div>
-                    </div>
-                    <div className="col-md-12">
+                    </div> */}
+                    {/* <div className="col-md-12">
                       <div className="form-inner">
                         <label>Nhập số điện thoại của bạn *</label>
                         <input
@@ -151,7 +151,7 @@ function signUpPage() {
                           name="phone-number"
                         />
                       </div>
-                    </div>
+                    </div> */}
                     <div className="col-md-12">
                       <div className="form-inner">
                         <label>Tạo Mật khẩu *</label>
@@ -205,7 +205,7 @@ function signUpPage() {
                     Tạo tài khoản
                   </button>
                 </form>
-                <div className="alternate-signup-box">
+                {/* <div className="alternate-signup-box">
                   <h6>Hoặc đăng nhập VỚI</h6>
                   <div className="btn-group gap-4">
                     <a
@@ -216,7 +216,7 @@ function signUpPage() {
                       <span>Tài khoản Google</span>
                     </a>
                   </div>
-                </div>
+                </div> */}
                 <div className="form-poicy-area">
                   <p>
                     Bằng cách nhấp vào nút "Tạo tài khoản", bạn sẽ tạo một tài khoản

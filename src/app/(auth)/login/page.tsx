@@ -108,7 +108,7 @@ function loginPage() {
                     </div>
                     <div className="col-12">
                       <div className="form-agreement form-inner d-flex justify-content-end ">
-                        <a href="#" className="forgot-pass">
+                        <a href="/forgot-password" className="forgot-pass">
                           Quên mật khẩu?
                         </a>
                       </div>
@@ -120,7 +120,7 @@ function loginPage() {
                     </button>
                   </a>
                 </form>
-                <div className="alternate-signup-box">
+                {/* <div className="alternate-signup-box">
                   <h6>Hoặc</h6>
                   <div className="btn-group gap-4">
                     <a
@@ -131,7 +131,7 @@ function loginPage() {
                       <span>Đăng nhập bằng Google</span>
                     </a>
                   </div>
-                </div>
+                </div> */}
 
                 {/* <div className="form-poicy-area">
                   <p>
@@ -141,7 +141,7 @@ function loginPage() {
                     <a href="#">Privacy Policy.</a>
                   </p>
                 </div> */}
-                <div className="form-title">
+                <div className="form-title pt-10">
                   <p>
                     Trở thành đối tác của PetPal?{" "}
                     <Link legacyBehavior href="/register-partner">
