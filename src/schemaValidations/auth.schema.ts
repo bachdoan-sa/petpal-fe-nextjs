@@ -7,18 +7,18 @@ export const RegisterBody = z
     email: z.string().email(),
     password: z.string().min(6).max(100),
     fullname: z.string().trim().min(2).max(256),
-    // address: z
-    //   .string()
-    //   .trim()
-    //   .min(2)
-    //   .max(256)
-    //   .default(() => ""),
-    // phoneNumber: z
-    //   .string()
-    //   .trim()
-    //   .min(2)
-    //   .max(15)
-    //   .default(() => ""),
+    address: z
+      .string()
+      .trim()
+      .min(2)
+      .max(256)
+      .optional(),
+    phoneNumber: z
+      .string()
+      .trim()
+      .min(2)
+      .max(15)
+      .optional(),
     confirmPassword: z.string().min(6).max(100).optional(),
   })
   .strict()
