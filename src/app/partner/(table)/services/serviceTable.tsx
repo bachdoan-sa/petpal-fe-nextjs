@@ -1,5 +1,4 @@
 'use client'
-import Image from "next/image";
 
 import { DeleteButton, UpdateButton } from '@/src/components/admin/table/button';
 import ServiceApiRequest from "@/src/apiRequests/service";
@@ -21,16 +20,17 @@ export default function ServiceTable({ query, currentPage, sessionToken }) {
             search: query ?? "",
         }
         async function getList() {
-            try {
+            const loading = setTimeout(() => {
                 setLoading(true);
-                console.log(loading);
-                console.log("lấy danh sách");
+            }, 300)
+            try {
                 const response = await ServiceApiRequest.getListService({ body, sessionToken });
                 setList(response.payload?.data?.list);
                 setTotalPages(response.payload?.data?.paging?.maxPage);
             } catch (error: any) {
                 console.log(error);
             } finally {
+                clearTimeout(loading);
                 setLoading(false);
             }
         }

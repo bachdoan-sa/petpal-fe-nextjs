@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import BootstrapClient from "../components/bootstrapClient";
 import AppProvider from "./app-provider";
 import { Toaster } from "sonner";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: 'Petpal',
@@ -23,10 +25,18 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <BootstrapClient />
-        <AppProvider>
-          {children}
-        </AppProvider>
-        <Toaster richColors position="bottom-left"/>
+        <Suspense fallback={<Loading />}>
+
+
+          <AppProvider>
+
+            {children}
+
+          </AppProvider>
+
+
+        </Suspense >
+        <Toaster richColors position="bottom-left" />
       </body>
       {/* <body className={`${inter.className} antialiased`}>{children}</body> */}
     </html>
