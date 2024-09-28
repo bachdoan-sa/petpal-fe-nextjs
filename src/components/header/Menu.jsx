@@ -68,7 +68,7 @@ const BootstrapMenu = () => {
           </li>
 
           <li>
-            <a href="/  ">
+            <a href="/logout">
               <div className="nav-link px-0 align-middle" >
                 <i className="fs-4 bi-box-arrow-right"></i>
                 <span className="mx-2 d-none d-sm-inline text-uppercase fw-bold">

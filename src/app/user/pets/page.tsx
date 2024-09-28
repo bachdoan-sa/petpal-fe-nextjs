@@ -13,12 +13,6 @@ function PetInfo({
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value ?? "";
 
-  if (sessionToken == undefined) {
-    return (
-      //khi het token se hien ra thong bao yeu cau dang nhap lai
-      <Page401/>
-    );
-  }
 
   const query = searchParams?.query ?? "";
     const currentPage = Number(searchParams?.page ?? 1);
@@ -28,7 +22,7 @@ function PetInfo({
         <div className="d-flex justify-content-between mb-10 inner-page-banner">
           <h1>Danh sách thú cưng</h1>
           <div>
-            <Link legacyBehavior href="/pet">
+            <Link legacyBehavior href="/user/pet">
               <button
                 className="btn btn-outline-primary"
                 style={{

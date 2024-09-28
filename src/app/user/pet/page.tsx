@@ -9,12 +9,6 @@ export default function petProfile() {
   const cookieStore = cookies();
   const sessionToken = cookieStore.get('sessionToken')?.value ?? "";
 
-  if (sessionToken == undefined) {
-    return (
-      //khi het token se hien ra thong bao yeu cau dang nhap lai
-      <Page401/>
-    );
-  }
   return (
     <div>
       <CreatePetForm token={sessionToken}/>

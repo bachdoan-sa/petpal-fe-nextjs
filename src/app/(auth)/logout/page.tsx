@@ -25,7 +25,7 @@ function LogoutLogic() {
           router.refresh();
           setTimeout(() => {
             router.push(`/login`);
-          }, 500)
+          }, 300)
         });
     }
     return () => {

@@ -6,6 +6,7 @@ import {
   PetType,
 } from "@/src/schemaValidations/pet.schema";
 import { usePetStore } from "@/src/store/pet-store";
+import Link from "next/link";
 import React, { useEffect } from "react";
 
 export default function PetList({ query, currentPage, sessionToken }) {
@@ -40,6 +41,7 @@ export default function PetList({ query, currentPage, sessionToken }) {
 
   return (
     <div className="">
+   
       {pets.map((pet) => (
         <div className="" key={pet.id}>
           <div className="card mb-3" style={{ maxHeight: "200px" }}>
@@ -54,7 +56,7 @@ export default function PetList({ query, currentPage, sessionToken }) {
                 <div className="card-header">
                   <div className="d-flex justify-content-between align-items-center">
                     <h4 className="card-title fw-bold">{pet.fullName}</h4>
-                    <a>Edit Profile</a>
+                    <Link className="btn btn-dark" href={`/user/pets/${pet.id}/edit`}>Edit Profile</Link>
                   </div>
                 </div>
                 <div className="card-body">
