@@ -46,10 +46,11 @@ export default function CardOrder({ query, currentPage, sessionToken }) {
     };
     fetchAPI();
   }, [currentPage, query]);
+
   return (
     <div>
       {orders?.map((order) => (
-        <Link href={`/order-history/${order.id}`}>
+        <Link href={`/user/order-history/${order.id}`}>
           <div className="card mt-4">
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-2">
@@ -101,9 +102,9 @@ export default function CardOrder({ query, currentPage, sessionToken }) {
                   <strong>{formatDateToLocal(order.toDate)}</strong>
                 </div>
                 <div className="mt-3">
-                  <button className="btn btn-outline-primary me-2">
+                  <a href="#" className="btn btn-outline-primary me-2">
                     Đánh Giá
-                  </button>
+                  </a>
                   <button className="btn btn-outline-danger me-2">
                     Hủy gói
                   </button>

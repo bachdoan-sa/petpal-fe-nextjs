@@ -33,9 +33,9 @@ export default function partner() {
                         </div>
                         <div className="col-4 d-flex flex-columns">
                             <div className="card flex-1">
-                                ab
+                                
                             </div>
-                        </div>
+                        </div>  
                     </div>
 
                 </div>

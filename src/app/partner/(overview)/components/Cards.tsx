@@ -41,7 +41,7 @@ export default async function CardWrapper() {
     return (
         <>
             {/* NOTE: comment in this code when you get to this point in the course */}
-            <Card title="Trung tâm" value={cardData?.careCenters ?? 0} type="kcenter" />
+            <Card title="Số trung tâm" value={cardData?.careCenters ?? 0} type="kcenter" />
             <Card title="Người dùng" value={cardData?.customers ?? 0} type="customers" />
             <Card title="Giao dịch" value={cardData?.orders ?? 0} type="order" />
             <Card title="Gói được dùng" value={cardData?.usingPackages ?? 0} type="usingPackage" />
@@ -74,7 +74,7 @@ export function Card({
                 </div>
                 <div className={` m-0 rounded-3 bg-white px-3 text-xl-2 ${inter.className}`}>
                     <h1 className="text-truncate fw-bold">{value}</h1>
-                    <p className='m-0'>sub data</p>
+                    {/* <p className='m-0'>sub data</p> */}
                 </div>
             </div>
         </div>

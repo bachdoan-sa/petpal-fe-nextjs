@@ -103,5 +103,11 @@ const orderApiRequest = {
         Authorization: `Bearer ${sessionToken}`,
       }
     }),
+  getTransactionStatusVnpay: (id: string, sessionToken: string | undefined) => 
+    http.get<CommonResType>(`/api/Order/get-transaction-status-vnpay?orderId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${sessionToken}`,
+      }
+    }),
 };
 export default orderApiRequest;
